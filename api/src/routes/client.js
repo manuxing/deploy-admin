@@ -35,7 +35,8 @@ router.post('/', async(req, res, next) => {
         act.cId = hacer.id;
         let activi = await Activity.create(act);
         await hacer.addActivity(activi);
-        return res.json(hacer);
+        let respuesta = await Client.findAll();
+        return res.json(respuesta);
     } catch (e){
         return next({status: "500", message: 'Error en router Client Post'});
     };
