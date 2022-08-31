@@ -19,7 +19,7 @@ import EntrepriseLayout from "./components/Layout/EnterpriseLayout";
 // Actions
 import { authenticateAction } from "./redux/auth/authActions";
 import EditUser from "./pages/EditUser";
-import CommunityLayout from "./components/Layout/CommunityLayout";
+import CommunityLayout from "./components/Layout/Commun ityLayout";
 
 function App() {
   const dispatch = useDispatch();

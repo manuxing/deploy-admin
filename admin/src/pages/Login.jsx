@@ -7,15 +7,15 @@ import { loginAction } from "../redux/auth/authActions";
 const Login = () => {
   const dispatch = useDispatch();
 
-  const { error } = useSelector((state) => state.authReducer);
+  const { error } = useSelector((state) => state.error);
 
   const [user, setUser] = useState({
-    email: "",
+    name: "",
     password: "",
   });
 
   const [errorForm, setErrorForm] = useState({
-    emailError: false,
+    nameError: false,
     passwordError: false,
   });
 
@@ -31,35 +31,34 @@ const Login = () => {
   const navigate = useHistory();
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (email === "" && password === "") {
       setErrorForm({
-        emailError: true,
+        nameError: true,
         passwordError: true,
       });
       return;
     } else if (email === "") {
       setErrorForm({
-        emailError: true,
+        nameError: true,
         passwordError: false,
       });
       return;
     } else if (password === "") {
       setErrorForm({
-        emailError: false,
+        nameError: false,
         passwordError: true,
       });
       return;
     }
 
     setErrorForm({
-      emailError: false,
+      nameError: false,
       passwordError: false,
     });
 
     const error = await dispatch(loginAction(user));
 
-    if (!error) {
+    if(!error) {
       navigate.push("/dashboard");
     }
   };
@@ -135,14 +134,6 @@ const Login = () => {
                 <span className="font-medium">Password is required</span>
               </p>
             )}
-          </div>
-          <div className="flex items-start">
-            <Link
-              to="forgot-password"
-              className="ml-auto text-sm text-blue-700 hover:underline "
-            >
-              Forgot password?
-            </Link>
           </div>
           <button
             type="submit"

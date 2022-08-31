@@ -205,14 +205,6 @@ export function orderByR (n){
     return { type:type.ORDER_N, payload:n };
 };
 
-export function filterGenre(payload) {
-    return { type: 'FILTER_GENRE', payload };
-};
-
-export function filterCreated(payload) {
-    return { type: 'FILTER_CREATED', payload };
-};
-
 export function search(payload) {
     return { type: 'SEARCH', payload };
 };

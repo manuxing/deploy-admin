@@ -2,6 +2,7 @@ import { type } from "../actions/types";
 
 const initialState = {
     actual:{},
+    actualG:{},
     solicitudes: [],
     clientes: [],
     actividades: [],
@@ -72,12 +73,11 @@ export default function rootReducer(state=initialState, action){
                 reviews: [action.payload]
             };
         }
-        case 'ERROR': {
+        case type.ERROR:
             return {
-                ...state,
-                error: action.payload
-            };
-        }
+              ...state,
+              error: action.payload,
+            }
         default:
             return {...state};
     };

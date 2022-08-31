@@ -11,8 +11,6 @@ import GradingIcon from "@mui/icons-material/Grading";
 import { handleMenu } from "../redux/ui/uiActions";
 
 const SideBar = () => {
-  let { profile } = useSelector((state) => state.authReducer);
-  let { menu } = useSelector((state) => state.uiReducer);
 
   let url = useLocation().pathname
   
@@ -25,19 +23,15 @@ const SideBar = () => {
   return (
     <div
       className={
-        menu
-          ? "bg-white sm:w-60 lg:w-64 w-screen min-h-screen overflow-y-auto block shadow relative animation"
-          : "bg-white w-64 min-h-screen overflow-y-auto hidden lg:block shadow relative animation"
+          "bg-white sm:w-60 lg:w-64 w-screen min-h-screen overflow-y-auto block shadow relative animation"
       }
     >
       <div className="flex items-center px-6 py-3 h-16 sm:mt-4 lg:mt-2">
         <div className="text-xl font-bold tracking-tight text-gray-800 flex justify-between w-full">
           <Link to="/dashboard">Dashboard Admin</Link>
-          {menu && (
-            <span className="sm:hidden" onClick={() => dispatch(handleMenu())}>
-              X
+            <span className="sm:hidden">
+              Bodega RP
             </span>
-          )}
         </div>
       </div>
 
@@ -47,72 +41,54 @@ const SideBar = () => {
             <Link
               to="/dashboard"
               className={url === "/dashboard" ? activeStyle : linksStyle}
-              onClick={() => {
-                dispatch(handleMenu());
-              }}
             >
               <GridViewIcon className="mr-4 opacity-50" />
               Dashboard
             </Link>
           </li>
-
-          {profile?.authorization !== "Enterprise-Admin" && (
             <>
               <li>
                 <Link
-                  to="/users"
-                  className={url === "/users" ? activeStyle : linksStyle}
-                  onClick={() => {
-                    dispatch(handleMenu());
-                  }}
+                  to="/clientes"
+                  className={url === "/clientes" ? activeStyle : linksStyle}
                 >
                   <PersonIcon className="mr-4 opacity-50" />
-                  Users
+                  Clientes
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/games"
-                  className={url === "/games" ? activeStyle : linksStyle}
-                  onClick={() => {
-                    dispatch(handleMenu());
-                  }}
+                  to="/solicitudes"
+                  className={url === "/solicitudes" ? activeStyle : linksStyle}
                 >
-                  <SportsEsportsIcon className="mr-4 opacity-50" />
-                  Games
+                  Solicitudes
                 </Link>
               </li>
             </>
-          )}
-          {profile?.authorization !== "Community-Admin" && (
             <li>
               <Link
-                to="/pays"
-                className={url === "/pays" ? activeStyle : linksStyle}
-                onClick={() => {
-                  dispatch(handleMenu());
-                }}
+                to="/reseñas"
+                className={url === "/reseñas" ? activeStyle : linksStyle}
               >
-                <PaidIcon className="mr-4 opacity-50" />
-                Payments
+                Reseñas
               </Link>
             </li>
-          )}
-
-          {profile?.authorization !== "Enterprise-Admin" && (
             <li>
               <Link
-                to="/reviews"
-                className={url === "/reviews" ? activeStyle : linksStyle}
-                onClick={() => {
-                  dispatch(handleMenu());
-                }}
+                to="/actividades"
+                className={url === "/actividades" ? activeStyle : linksStyle}
               >
-                <GradingIcon className="mr-4 opacity-50" />
-                Reviews
+                Actividades
               </Link>
             </li>
-          )}
+            <li>
+              <Link
+                to="/servicios"
+                className={url === "/servicios" ? activeStyle : linksStyle}
+              >
+                Servicios
+              </Link>
+            </li>
         </ul>
       </div>
     </div>

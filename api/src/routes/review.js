@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Client, Service, Review } = require('../db.js');
+const { Client, Review } = require('../db.js');
 const router = Router();
 
 router.get('/', async(req, res, next) =>{
@@ -8,7 +8,7 @@ router.get('/', async(req, res, next) =>{
 
     if(!id){
         try {
-            let peticionDB = await Review.findAll();
+            let peticionDB = await Review.findAll({include: Client});
             return res.json(peticionDB);
         }catch(e){
             return next({status: "500", message: 'Error en router Review P'});
@@ -16,7 +16,7 @@ router.get('/', async(req, res, next) =>{
     } 
 
     try {
-        let peticionDB = await Review.findByPk(id,{include: Client, Service})
+        let peticionDB = await Review.findByPk(id,{include: Client})
         return res.json(peticionDB);
     }catch(e){
         return next({status: "500", message: 'Error en router Review I'});

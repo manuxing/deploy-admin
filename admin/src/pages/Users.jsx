@@ -36,8 +36,6 @@ const Users = () => {
   let actualUser = JSON.parse(localStorage.getItem("profile"));
   const [filter, setFilter] = useState(false);
 
-  //console.log("chee", actualUser)
-
   let allUsers = useSelector((state) => state.userReducer.filterUsers);
   const navigate = useHistory();
   let orderCountries = [];
@@ -56,7 +54,6 @@ const Users = () => {
     dispatch(deactivateUser(id))
       .then((result) => {
         alert(result.Request);
-        // dispatch(getAllUsers())
         dispatch(getByFilter(inputFilter));
       })
       .catch((result) => alert(result.Error));

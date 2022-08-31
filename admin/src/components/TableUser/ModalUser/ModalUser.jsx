@@ -3,20 +3,6 @@ import React from "react";
 // Icons
 import CloseIcon from "@mui/icons-material/Close";
 
-// {
-//   "id": 4,
-//   "name": "FER",
-//   "username": "fers",
-//   "password": "8735202216849030",
-//   "country": "Mexico",
-//   "email": "",
-//   "points": 1,
-//   "state": true,
-//   "authorization": false,
-//   "games": [],
-//   "averageScore": 0
-// }
-
 const ModalUser = ({ setModalUser, userInfo }) => {
   return (
     <div
