@@ -5,16 +5,17 @@ import { useSelector } from "react-redux";
 const Activity = () => {
 
   let actual = useSelector((state) => state.actual);
-  let allActivitys = useSelector((state) => state.Actividades);
+  let allClients = useSelector((state) => state.clientes);
+  let client = allClients.find (p => p.id = actual.clientId);
 
-  return (  
+  return (
     <tr className="focus-within:bg-gray-200 overflow-hidden hover:bg-gray-100 ">
-        {/* <td className="border-t">
+        <td className="border-t">
         <span className="text-gray-700 px-7 py-4 flex items-center font-semibold">
-          Cliente
+          Cliente:
         </span>
-              {actual.clients[0].name}
-      </td> */}
+              {client.name}
+      </td>
       <td className="border-t">
         <span className="text-gray-700 px-7 py-4 flex items-center font-semibold">
           Descripcion

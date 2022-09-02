@@ -7,9 +7,6 @@ export function createClient(data){
         .then((res) => {
             return {type: type.GET_CLIENTES, payload: res};
         })
-        .then(p => {
-            dispatch(p);
-        })
         .catch(e => {
             console.log(e);
             dispatch({ type: 'ERROR', payload: e });
@@ -193,6 +190,30 @@ export function getServicio(id){
             axios.get(`http://localhost:3001/service/`)
             .then((res) => {
                     dispatch({ type: type.GET_SERVICIOS, payload: res });
+                }).catch(e => {
+                    console.log(e);
+                    dispatch({ type: 'ERROR', payload: e });
+            });
+        };
+    }; 
+};
+
+export function statChange(x){
+    if(x.type === "Review"){
+        return function(dispatch){
+            axios.put(`http://localhost:3001/review/`, x.pack)
+            .then((res) => {
+                    console.log(res);
+                }).catch(e => {
+                    console.log(e);
+                    dispatch({ type: 'ERROR', payload: e });
+            });
+        };
+    } else {
+        return function(dispatch){
+            axios.put(`http://localhost:3001/request/`, x.pack)
+            .then((res) => {
+                    console.log(res);
                 }).catch(e => {
                     console.log(e);
                     dispatch({ type: 'ERROR', payload: e });

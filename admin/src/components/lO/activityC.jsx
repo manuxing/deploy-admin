@@ -5,7 +5,7 @@ const activityC = ({id}) => {
 
     // buscar actividades porque no van a venir enteras
     const activitys = useSelector((state) => state.actividades);
-    const activity = activitys.filter(p => p.clientId === id)
+    const activity = activitys.find(p => p.clientId === id)
 
   return (
     <tr className="focus-within:bg-gray-200 overflow-hidden hover:bg-gray-100 ">

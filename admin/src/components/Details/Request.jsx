@@ -1,15 +1,38 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, {useState} from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { statChange } from "../../redux/actions";
+
 // agregar name de cliente aunque no sea cliente a la solicitud
-//cambiar estado
+// cambiar estado
 
 const Request = () => {
 
-  let actual = useSelector((state) => state.actual);
-  let allRequests = useSelector((state) => state.solicitudes);
+  const dispatch = useDispatch();
+  const actual = useSelector((state) => state.actual);
+  const [_stat, setStat] = useState(actual.stat);
+  
+
+  const handleChange = () => {  
+    let x = {
+      type : "Request ",
+      pack: {
+        id: actual.id,
+        stat: !_stat,
+      }
+    }
+    setStat(!_stat);
+    dispatch(statChange(x));
+  }
 
   return (
     <tr className="focus-within:bg-gray-200 overflow-hidden hover:bg-gray-100 ">
+      <td className="border-t">
+        <span className="text-gray-700 px-7 py-4 flex items-center font-semibold">
+        Estado:
+            {_stat === true ? "Leida" : "Por ver"}
+          </span>
+          <button onClick={handleChange()}>change</button>
+      </td>
         <td className="border-t">
         <span className="text-gray-700 px-7 py-4 flex items-center font-semibold">
           Solicitante
@@ -68,12 +91,7 @@ const Request = () => {
           </span>
               {actual.dateP}
       </td>
-      <td className="border-t">
-        <span className="text-gray-700 px-7 py-4 flex items-center font-semibold">
-          Estado
-          </span>
-              {actual.stat}
-      </td>
+      
     </tr>
   );
 };

@@ -5,37 +5,19 @@ import { useHistory } from "react-router-dom";
 //utils
 // import validateAdd from "../utils/ValidateAdd";
 //Actions
-import { createClient } from "../redux/actions/";
+import { createActivity } from "../redux/actions/";
 
-const AddClient = () => {
+const AddActivity = () => {
   
   // let history = useHistory();
   let dispatch = useDispatch();
   let services = useSelector(state => state.servicios);
-  let [input, setInput] = useState({
-    name: "",
-    email: "",
-    telefono:""
-  });
   let [inputAct, setAct] = useState({
-    name: input.name,
+    name: "",
     date: "",
     persons:[],
     sId: "",
   });
-
-  useEffect(() => {
-    dispatch(getAllCountries());
-  }, [dispatch]);
-
-  function handleChange(event) {
-    setInput((previus) => {
-      return {
-        ...previus,
-        [event.target.name]: event.target.value,
-      };
-    });
-  }
 
   function handleChangeAct(event) {
     setAct((previus) => {
@@ -54,25 +36,19 @@ const AddClient = () => {
         }
       }
     )
-    }
+  }
   
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let pack = {name: input.name, contact: [input.telefono, input.email], act: inputAct}
-    dispatch(createClient(pack))
+    dispatch(createActivity(inputAct))
       .then((res) => {
         alert("Client created");
         // history.push("/");
       })
       .catch((err) => {
-        alert(`Error on creating user, verify credentials`);
+        alert(`Error on creating Activity, verify credentials`);
       });
-    setInput({
-      name: "",
-      email: "",
-      telefono: ""
-    });
     setAct({
       name: "",
       date: "",
@@ -105,10 +81,10 @@ const AddClient = () => {
                 <input
                   className="mt-2 border-2 border-gray-200 px-3 py-2 block w-full rounded-lg text-base text-gray-900 focus:outline-none "
                   type="text"
-                  value={input.name}
+                  value={inputAct.name}
                   name="name"
                   placeholder="Name"
-                  onChange={handleChange}
+                  onChange={handleChangeAct}
                 />
                 {/* {error.name && (
                   <span className="px-2 rounded-full text-sm uppercase tracking-wide font-semibold bg-red-200 text-red-800">
@@ -116,32 +92,6 @@ const AddClient = () => {
                     {error.name}
                   </span>
                 )} */}
-              </div>
-              <div className="p-2">
-                <label htmlFor="name" className="text-sm text-gray-600">
-                  * Email
-                </label>
-                <input
-                  className="mt-2 border-2 border-gray-200 px-3 py-2 block w-full rounded-lg text-base text-gray-900 focus:outline-none "
-                  type="text"
-                  value={input.email}
-                  name="email"
-                  placeholder="example@correo.com"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="p-2">
-                <label htmlFor="email" className="text-sm text-gray-600">
-                  * Telefono
-                </label>
-                <input
-                  className="mt-2 border-2 border-gray-200 px-3 py-2 block w-full rounded-lg text-base text-gray-900 focus:outline-none "
-                  type="password"
-                  value={input.telefono}
-                  name="telefono"
-                  placeholder="1234567"
-                  onChange={handleChange}
-                />
               </div>
               <div className="p-2">
                 <label htmlFor="email" className="text-sm text-gray-600">
@@ -211,4 +161,4 @@ const AddClient = () => {
   );
 };
 
-export default AddClient;
+export default AddActivity;

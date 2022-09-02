@@ -2,43 +2,25 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-//utils
-// import validateAdd from "../utils/ValidateAdd";
 //Actions
-import { createClient } from "../redux/actions/";
+import { createSolicitud } from "../redux/actions";
 
-const AddClient = () => {
+const AddRequest = () => {
   
   // let history = useHistory();
   let dispatch = useDispatch();
   let services = useSelector(state => state.servicios);
   let [input, setInput] = useState({
-    name: "",
+    thg: "",
+    telefono: "",
     email: "",
-    telefono:""
-  });
-  let [inputAct, setAct] = useState({
-    name: input.name,
-    date: "",
-    persons:[],
+    dateP: "",
+    dateR: "",
     sId: "",
   });
 
-  useEffect(() => {
-    dispatch(getAllCountries());
-  }, [dispatch]);
-
-  function handleChange(event) {
-    setInput((previus) => {
-      return {
-        ...previus,
-        [event.target.name]: event.target.value,
-      };
-    });
-  }
-
   function handleChangeAct(event) {
-    setAct((previus) => {
+    setInput((previus) => {
       return {
         ...previus,
         [event.target.name]: event.target.value,
@@ -47,37 +29,34 @@ const AddClient = () => {
   }
   
   function handleSelectService(event){
-    setAct((previus) => {
+    setInput((previus) => {
       return {
         ...previus,
         sId: event.target.value
         }
       }
     )
-    }
+  }
   
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let pack = {name: input.name, contact: [input.telefono, input.email], act: inputAct}
-    dispatch(createClient(pack))
+    let pack = input. email ? {...input, contact: [input.telefono, input.email]} : input
+    dispatch(createSolicitud(pack))
       .then((res) => {
         alert("Client created");
         // history.push("/");
       })
       .catch((err) => {
-        alert(`Error on creating user, verify credentials`);
+        alert(`Error on creating Activity, verify credentials`);
       });
     setInput({
-      name: "",
-      email: "",
-      telefono: ""
-    });
-    setAct({
-      name: "",
-      date: "",
-      persons:[],
-      sId: "",
+        thg: "",
+        telefono: "",
+        email: "",
+        dateP: "",
+        dateR: "",
+        sId: "",
     });
   };
 
@@ -99,13 +78,13 @@ const AddClient = () => {
             <div className="md:w-2/3 w-full px-2 py-4 justify-center m-auto">
               <h2 className="text-center font-bold text-3xl">New User</h2>
               <div className="p-2 w-2/2 block">
-                <label htmlFor="name" className="text-sm text-gray-600">
-                  * Nombre
+                <label htmlFor="medio" className="text-sm text-gray-600">
+                  * Medio
                 </label>
                 <input
                   className="mt-2 border-2 border-gray-200 px-3 py-2 block w-full rounded-lg text-base text-gray-900 focus:outline-none "
                   type="text"
-                  value={input.name}
+                  value={input.thg}
                   name="name"
                   placeholder="Name"
                   onChange={handleChange}
@@ -118,39 +97,52 @@ const AddClient = () => {
                 )} */}
               </div>
               <div className="p-2">
-                <label htmlFor="name" className="text-sm text-gray-600">
-                  * Email
-                </label>
-                <input
-                  className="mt-2 border-2 border-gray-200 px-3 py-2 block w-full rounded-lg text-base text-gray-900 focus:outline-none "
-                  type="text"
-                  value={input.email}
-                  name="email"
-                  placeholder="example@correo.com"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="p-2">
-                <label htmlFor="email" className="text-sm text-gray-600">
+                <label htmlFor="telefono" className="text-sm text-gray-600">
                   * Telefono
                 </label>
                 <input
                   className="mt-2 border-2 border-gray-200 px-3 py-2 block w-full rounded-lg text-base text-gray-900 focus:outline-none "
-                  type="password"
+                  type="text"
                   value={input.telefono}
-                  name="telefono"
+                  name="date"
                   placeholder="1234567"
                   onChange={handleChange}
                 />
               </div>
               <div className="p-2">
                 <label htmlFor="email" className="text-sm text-gray-600">
-                  * Date
+                  Email
+                </label>
+                <input
+                  className="mt-2 border-2 border-gray-200 px-3 py-2 block w-full rounded-lg text-base text-gray-900 focus:outline-none "
+                  type="text"
+                  value={input.email}
+                  name="date"
+                  placeholder="1234567"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="p-2">
+                <label htmlFor="fecha de solicitud" className="text-sm text-gray-600">
+                  * Fecha de solicitud
                 </label>
                 <input
                   className="mt-2 border-2 border-gray-200 px-3 py-2 block w-full rounded-lg text-base text-gray-900 focus:outline-none "
                   type="date"
-                  value={inputAct.date}
+                  value={input.dateP}
+                  name="date"
+                  placeholder="1234567"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="p-2">
+                <label htmlFor="fecha solicitada" className="text-sm text-gray-600">
+                  * Fecha solicitada
+                </label>
+                <input
+                  className="mt-2 border-2 border-gray-200 px-3 py-2 block w-full rounded-lg text-base text-gray-900 focus:outline-none "
+                  type="date"
+                  value={input.dateR}
                   name="date"
                   placeholder="1234567"
                   onChange={handleChange}
@@ -211,4 +203,4 @@ const AddClient = () => {
   );
 };
 
-export default AddClient;
+export default AddActivity;
