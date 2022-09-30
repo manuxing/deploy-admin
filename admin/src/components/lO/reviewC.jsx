@@ -1,10 +1,11 @@
 import React, {useState} from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { statChange } from "../../redux/actions";
 
-const reviewC = ({review}) => {
+const ReviewC = ({review}) => {
   
   const dispatch = useDispatch();
+  const actual = useSelector((state) => state.actual);
   const [_stat, setStat] = useState(review.stat);
   
   const handleChange = () => {
@@ -62,4 +63,4 @@ const reviewC = ({review}) => {
   );
 };
 
-export default reviewC;
+export default ReviewC;

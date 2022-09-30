@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const activityC = ({id}) => {
+const ActivityC = ({id}) => {
 
     // buscar actividades porque no van a venir enteras
     const activitys = useSelector((state) => state.actividades);
@@ -43,4 +43,4 @@ const activityC = ({id}) => {
   );
 };
 
-export default activityC;
+export default ActivityC;

@@ -1,4 +1,5 @@
 import React from "react";
+import SearchBar from "./searchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -14,10 +15,13 @@ const NavBar = () => {
   //   navigate.push("");
   // };
 
+  const style = {
+    backgroundColor: 'red',
+  }
   return (
     <>
-      <div className="px-4 md:px-8 py-2 h-16 flex justify-between items-center shadow-sm bg-white">
-        <searchBar/>
+      <div style={style}>
+        <SearchBar/>
       </div>
     </>
   );

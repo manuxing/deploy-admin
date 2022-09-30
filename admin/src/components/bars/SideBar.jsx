@@ -8,7 +8,6 @@ import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import PaidIcon from "@mui/icons-material/Paid";
 import { useDispatch, useSelector } from "react-redux";
 import GradingIcon from "@mui/icons-material/Grading";
-import { handleMenu } from "../redux/ui/uiActions";
 
 const SideBar = () => {
 

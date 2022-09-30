@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Alerta from "../components/Alerta";
-import { loginAction } from "../redux/auth/authActions";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -56,7 +55,7 @@ const Login = () => {
       passwordError: false,
     });
 
-    const error = await dispatch(loginAction(user));
+    // const error = await dispatch(loginAction(user));
 
     if(!error) {
       navigate.push("/dashboard");

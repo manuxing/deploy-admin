@@ -5,11 +5,11 @@ import { useHistory } from "react-router-dom";
 //utils
 // import validateAdd from "../utils/ValidateAdd";
 //Actions
-import { createClient } from "../redux/actions/";
+import { createClient } from "../redux/actions";
 
 const AddClient = () => {
   
-  // let history = useHistory();
+  let history = useHistory();
   let dispatch = useDispatch();
   let services = useSelector(state => state.servicios);
   let [input, setInput] = useState({
@@ -63,7 +63,7 @@ const AddClient = () => {
     dispatch(createClient(pack))
       .then((res) => {
         alert("Client created");
-        // history.push("/");
+        history.push("/");
       })
       .catch((err) => {
         alert(`Error on creating user, verify credentials`);

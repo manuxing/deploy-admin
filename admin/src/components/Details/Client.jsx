@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import reviewC from "../reviewC";
-import activityC from "../activityC";
+import reviewC from "../lO/reviewC"
+import activityC from "../lO/activityC"
 
 const Cliente = () => {
 

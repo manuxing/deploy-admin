@@ -9,7 +9,7 @@ import { createActivity } from "../redux/actions/";
 
 const AddActivity = () => {
   
-  // let history = useHistory();
+  let history = useHistory();
   let dispatch = useDispatch();
   let services = useSelector(state => state.servicios);
   let [inputAct, setAct] = useState({
@@ -44,7 +44,7 @@ const AddActivity = () => {
     dispatch(createActivity(inputAct))
       .then((res) => {
         alert("Client created");
-        // history.push("/");
+        history.push("/");
       })
       .catch((err) => {
         alert(`Error on creating Activity, verify credentials`);

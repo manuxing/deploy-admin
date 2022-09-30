@@ -7,7 +7,7 @@ import { createSolicitud } from "../redux/actions";
 
 const AddRequest = () => {
   
-  // let history = useHistory();
+  let history = useHistory();
   let dispatch = useDispatch();
   let services = useSelector(state => state.servicios);
   let [input, setInput] = useState({
