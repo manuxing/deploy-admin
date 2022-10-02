@@ -1,0 +1,32 @@
+.topbar{
+    width: 99.4%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0px 5px 5px;
+}
+
+.topWrapper{
+    height: 100%;
+    width: 90%;
+    padding: 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.topRight{
+    display: flex;
+    align-items: center;
+    height: 80%;
+    width: 20%;
+    justify-content: space-around;
+}
+
+.logo{
+    font-weight: bold;
+    font-size: 35px;
+    color: darkblue;
+    cursor: pointer;
+}

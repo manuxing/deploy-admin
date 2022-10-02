@@ -1,9 +1,9 @@
 import React from "react";
-import SearchBar from "./searchBar";
+import SearchBar from "../searchBar/index";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-
-// Helper
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import "../navBar/navbar.css"
 
 const NavBar = () => {
 
@@ -15,13 +15,16 @@ const NavBar = () => {
   //   navigate.push("");
   // };
 
-  const style = {
-    backgroundColor: 'red',
-  }
   return (
     <>
-      <div style={style}>
-        <SearchBar/>
+      <div className="topbar">
+          <div className="logo">Administrador</div>
+        <div className="topWrapper">
+          <div className="topRight">
+              <NotificationsIcon/>
+              <SearchBar/>
+            </div>
+        </div>
       </div>
     </>
   );
