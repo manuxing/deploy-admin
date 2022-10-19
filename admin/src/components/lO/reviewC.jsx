@@ -1,28 +1,34 @@
-import React, {useState} from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import Spinner from '../Spinner';
 import { statChange } from "../../redux/actions";
 
 const ReviewC = ({review}) => {
-  
+  const reviews = useSelector((state) => state.reviews);
+  // const review = reviews.find(p => p.id === id);
+  console.log("reviews",reviews)
   const dispatch = useDispatch();
-  const actual = useSelector((state) => state.actual);
+  useEffect(()=>{
+      console.log("rev",review)
+  },[dispatch,review])
   const [_stat, setStat] = useState(review.stat);
   
   const handleChange = () => {
     let x = {
       type : "Review",
       pack: {
-        id: actual.id,
+        id: review.id,
         stat: !_stat,
       }
     }
     setStat(!_stat);
+    console.log("x",x)
     dispatch(statChange(x));
   }
 
   return (
+    review && review.id ?
         <div>
-
           <div  className="content_rewC">
             <div  className="div_rewC">
               <span className="span_rexC">
@@ -41,7 +47,7 @@ const ReviewC = ({review}) => {
               Estado:
               </span>
               {_stat === true ? "Leida" : "Por ver"}
-              <button onClick={handleChange()}>change</button>
+              <button onClick={handleChange}>change</button>
             </div>
             <div  className="div_rewC">
               <span className="span_rexC">
@@ -62,7 +68,10 @@ const ReviewC = ({review}) => {
               {review.dateP}
             </div>
           </div>
-        </div>
+        </div>:
+      <div>
+        <Spinner/>
+      </div>
   );
 };
 

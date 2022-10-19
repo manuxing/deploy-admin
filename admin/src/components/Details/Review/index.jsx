@@ -1,44 +1,71 @@
-import React, {useState} from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { statChange } from "../../../redux/actions";
+import React, {useState, useEffect} from "react";
+import { useSelector, useDispatch} from "react-redux";
+import { useParams, NavLink } from "react-router-dom";
+import { getReviews, statChange, setActual, getClient } from "../../../redux/actions";
+import Spinner from '../../Spinner'
 import NavBar from "../../bars/navBar";
 import SideBar from "../../bars/sideBar";
 import "./review.css"
 
-// agregar name de cliente aunque no sea cliente a la solicitud
 
 const Review = () => {
 
+  const {id} = useParams();
   const dispatch = useDispatch();
   const actual = useSelector((state) => state.actual);
-  const [_stat, setStat] = useState(actual.stat);
-  const client = actual?.clients;//[0]
-  
+  const [_stat, setStat] = useState(false);
+  let [loading, setLoading] = useState(true);
 
-  const handleChange = () => {
+    useEffect(()=>{
+      dispatch(getReviews(id))
+    },[dispatch])
+    
+    useEffect(()=>{
+      if(actual && actual !== 1 && actual?.stat !== null){
+        setStat(actual?.stat)
+        setLoading(false)
+      }else{
+        setLoading(true)
+      }
+      console.log("act",actual)
+    },[loading,actual])
+
+    useEffect(() => {
+      return () => dispatch(setActual())
+    }, []);
+
+  const handleChange = () => {  
     let x = {
       type : "Review",
       pack: {
-        id: actual.id,
+        id: parseInt(id),
         stat: !_stat,
       }
     }
+    console.log("x",x)
     setStat(!_stat);
     dispatch(statChange(x));
   }
-
+  
   return (
+    loading === true ?
+    <div>
+      <Spinner/>
+    </div> :
     <div>
       <NavBar/>
       <div className="review_d">
         <SideBar/>
         <div className="content_Review">
+          {actual && actual.clients && actual.clients.length > 0 ?
           <div  className="div_rev">
             <span className="span_rev">
               Cliente
             </span>
-                  {client?.name ? client?.name : "name"}
-          </div>
+                <NavLink  className="link" to={`/client/${actual?.clients[0].id}`}>
+                  {actual?.clients[0].name ? actual?.clients[0].name : "name"}
+                </NavLink>
+          </div> : <></>}
           <div  className="div_rev">
             <span className="span_rev">
               Descripcion
@@ -53,7 +80,9 @@ const Review = () => {
                   {
                     actual?.services ? actual?.services.map(p => { 
                       return (
-                      <span>{p.name}</span>
+                      <NavLink  className="link" to={`/service/${p.id}`}>
+                        <span key={p.name}>{p.name}</span>
+                      </NavLink>
                     ) 
                   }) : "services"
                   }
@@ -71,10 +100,10 @@ const Review = () => {
             </span>
             <div>
                   {
-                    client?.contact ? client?.contact.map(p => { 
+                    actual.client?.contact ? actual.client?.contact.map(p => { 
                       return (
                       <span>{p}</span>
-                    ) 
+                      ) 
                   }) : "contacto"
                   }
             </div>
@@ -90,6 +119,13 @@ const Review = () => {
               fecha de reseña
               </span>
                   {actual?.dateP ? actual.dateP : "fecha de reseña"}
+          </div>
+          <div className="item_requestD">
+            <span className="span_request">
+              Estado:
+                {_stat === true ? "Leida" : "Por ver"}
+            </span>
+              <button onClick={() => handleChange()}>change</button>
           </div>
         </div>
       </div>

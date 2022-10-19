@@ -1,16 +1,40 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { NavLink, useParams } from "react-router-dom"
+import { getActividades,setActual } from '../../../redux/actions'
+import Spinner from '../../Spinner'
 import NavBar from "../../bars/navBar";
 import SideBar from "../../bars/sideBar";
 import "./Activity_d.css"
 
 const Activity = () => {
 
+  const {id} = useParams();
+  let dispatch = useDispatch();
+  let [loading, setLoading] = useState(true);
   let actual = useSelector((state) => state.actual);
-  let allClients = useSelector((state) => state.clientes);
-  let client = allClients.find (p => p.id = actual.clientId);
+
+    useEffect(()=>{
+        dispatch(getActividades(id))
+    },[dispatch])
+
+    useEffect(()=>{
+        if(typeof actual !== "number"){
+            setLoading(false)
+        }else{
+          setLoading(true)
+        }
+    },[loading,actual])
+
+    useEffect(() => {
+      return () => dispatch(setActual())
+    }, []);
 
   return (
+     loading === true ?
+    <div>
+      <Spinner/>
+    </div> :
     <div>
       <NavBar/>
       <div className="Activity_d">
@@ -20,13 +44,9 @@ const Activity = () => {
             <span className="_span_act">
               Cliente:
             </span>
-                  {client?.name ? client?.name : "name"}
-          </div>
-          <div  className="div_act">
-            <span className="_span_act">
-              Descripcion
-            </span>
-                  {actual?.description ? actual.description: "description"}
+                <NavLink  className="link" to={`/client/${actual?.client?.id}`}>
+                  {actual?.client?.name ? actual?.client?.name : "name"}
+                </NavLink>
           </div>
           <div  className="div_act">
             <span className="_span_act">
@@ -36,7 +56,9 @@ const Activity = () => {
                   {
                     actual?.services ? actual.services.map(p => { 
                       return (
-                      <span>{p.name}</span>
+                        <NavLink  className="link" to={`/service/${p.id}`}>
+                          <span key={p.name}>{p.name}</span>
+                        </NavLink>
                     ) 
                   }) : "services"
                   }
@@ -52,18 +74,19 @@ const Activity = () => {
             <span className="_span_act">
                 Personas:
             </span>
-                {actual?.persons ? actual?.persons.length : "0"}
+                {actual?.people ? actual?.people.length : "0"}
                 <div>
+                  <ul>
                   {
-                  actual?.persons ? actual?.persons.map(p => { 
+                  actual?.people ? actual?.people.map(p => { 
                     return (
-                    <>
-                        <span>{p.sex}</span> 
-                        <span>{p.ageR}</span> 
-                    </>
+                    <li key={p.id}>
+                        <span>{p.sex}          {p.ageR}</span> 
+                    </li>
                     ) 
                   }) : "persons"
                   }
+                  </ul>
             </div>
           </div>
         </div>

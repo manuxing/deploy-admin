@@ -33,7 +33,7 @@ const SideBar = () => {
           </li>
             <li className="item">
                 <Link
-                  to="/clientes"
+                  to="/clients"
                   className="_link"
                 >
                   <PersonIcon className="mr-4 opacity-50" />
@@ -42,7 +42,7 @@ const SideBar = () => {
               </li>
               <li className="item">
                 <Link
-                  to="/solicitudes"
+                  to="/requests"
                   className="_link"
                 >
                   <SportsEsportsIcon className="mr-4 opacity-50" />
@@ -51,7 +51,7 @@ const SideBar = () => {
               </li>
             <li className="item">
               <Link
-                to="/reseñas"
+                to="/reviews"
                 className="_link"
               >
                 <SportsEsportsIcon className="mr-4 opacity-50" />
@@ -60,7 +60,7 @@ const SideBar = () => {
             </li>
             <li className="item">
               <Link
-                to="/actividades"
+                to="/activitys/"
                 className="_link"
               >
                 <SportsEsportsIcon className="mr-4 opacity-50" />
@@ -69,7 +69,7 @@ const SideBar = () => {
             </li>
             <li className="item">
               <Link
-                to="/servicios"
+                to="/services"
                 className="_link"
               >
                 <SportsEsportsIcon className="mr-4 opacity-50" />

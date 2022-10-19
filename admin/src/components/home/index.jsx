@@ -13,6 +13,8 @@ const Home = () => {
         <div className="content">
           <h1>Home</h1>
         </div>
+        cuadros con info general de cadad cosa 
+        ultimas 10 cosass
       </div>
       </div>
     );

@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const {DB_USER, DB_PASSWORD, DB_HOST} = process.env;
 
-const sequelize = new Sequelize(`postgres://postgres:f3nrir2o,,@localhost:5432/bodega`, {
+const sequelize = new Sequelize(`postgres://postgres:f3nrir2o,,@localhost:5434/bodega`, {
   logging: false, 
   native: false, 
 });

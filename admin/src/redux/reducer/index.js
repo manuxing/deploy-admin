@@ -1,7 +1,7 @@
 import { type } from "../actions/types";
 
 const initialState = {
-    actual:{},
+    actual:1,
     actualG:{},
     solicitudes: [],
     clientes: [],
@@ -12,11 +12,19 @@ const initialState = {
 };
 
 export default function rootReducer(state=initialState, action){
+    console.log("mira",action.type,action.payload)
     switch (action.type) {
+        case type.SET_ACTUAL: {
+            if(action.payload.data.length)action.payload.data = action.payload.data[0]
+            return {
+                ...state,
+                actual: action.payload === 1 ? action.payload : action.payload.data
+            };
+        }
         case type.GET_CLIENTES: {
             return {
                 ...state,
-                clientes: [action.payload]
+                clientes: action.payload.data
             };
         }
         case type.GET_CLIENTE: {
@@ -34,7 +42,7 @@ export default function rootReducer(state=initialState, action){
         case type.GET_SOLICITUDES: {
             return {
                 ...state,
-                solicitudes: [action.payload]
+                solicitudes: action.payload.data
             };
         }
         case type.GET_ACTIVIDAD: {
@@ -46,7 +54,7 @@ export default function rootReducer(state=initialState, action){
         case type.GET_ACTIVIDADES: {
             return {
                 ...state,
-                actividades: [action.payload]
+                actividades: action.payload.data
             };
         }
         case type.GET_REVIEW: {
@@ -58,7 +66,7 @@ export default function rootReducer(state=initialState, action){
         case type.GET_REVIEWS: {
             return {
                 ...state,
-                reviews: [action.payload]
+                reviews: action.payload.data
             };
         }
         case type.GET_SERVICIO: {
@@ -70,9 +78,21 @@ export default function rootReducer(state=initialState, action){
         case type.GET_SERVICIOS: {
             return {
                 ...state,
-                reviews: [action.payload]
+                servicios: action.payload.data
             };
         }
+        case type.CLEAR_ALL:
+            return {
+              ...state,
+                actual:1,
+                actualG:{},
+                solicitudes: [],
+                clientes: [],
+                actividades: [],
+                reviews: [],
+                servicios: [],
+                error:{},
+            }
         case type.ERROR:
             return {
               ...state,

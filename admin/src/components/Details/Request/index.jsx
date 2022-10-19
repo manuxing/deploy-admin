@@ -1,28 +1,51 @@
-import React, {useState} from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { statChange } from "../../../redux/actions";
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from "react-router-dom"
+import { statChange, setActual,getSolicitudes } from "../../../redux/actions";
 import NavBar from "../../bars/navBar";
 import SideBar from "../../bars/sideBar";
-import "./Request.css"
+// import "./Request.css"
 
 // agregar name de cliente aunque no sea cliente a la solicitud
 // cambiar estado
 
 const Request = () => {
 
+  const {idR} = useParams();
   const dispatch = useDispatch();
   const actual = useSelector((state) => state.actual);
+  console.log(actual)
   const [_stat, setStat] = useState(actual.stat);
-  
+  let [loading, setLoading] = useState(true);
+
+    useEffect(()=>{
+      console.log("act",actual)
+      dispatch(getSolicitudes(idR))
+    },[dispatch])
+    
+    useEffect(()=>{
+        if(typeof actual !== "number"){
+            setStat(actual.stat)
+            setLoading(false)
+        }else{
+          setLoading(true)
+        }
+    },[loading,actual])
+
+    useEffect(() => {
+      return () => dispatch(setActual())
+    }, []);
 
   const handleChange = () => {  
+    console.log(idR)
     let x = {
-      type : "Request ",
+      type : "Request",
       pack: {
-        id: actual.id,
+        id: parseInt(idR),
         stat: !_stat,
       }
     }
+    console.log("x",x)
     setStat(!_stat);
     dispatch(statChange(x));
   }
@@ -40,12 +63,12 @@ const Request = () => {
             </span>
               <button onClick={() => handleChange()}>change</button>
           </div>
-          <div className="item_requestD">
+          {/* <div className="item_requestD">
             <span className="span_request">
               Solicitante
             </span>
                   {actual?.name ? actual?.name : "name"}
-          </div>
+          </div> */}
           <div className="item_requestD">
             <span className="span_request">
               Tipo
@@ -72,11 +95,7 @@ const Request = () => {
             </span>
             <div>
                   {
-                  actual?.contact ? actual?.contact.map(p => { 
-                    return (
-                        <span>{p}</span> 
-                    ) 
-                  }) : "contact"
+                  actual?.contact ? actual?.contact : "contact"
                   }
             </div>
           </div>

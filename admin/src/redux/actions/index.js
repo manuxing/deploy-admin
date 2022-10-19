@@ -5,7 +5,7 @@ export function createClient(data){
     return function(dispatch){
         axios.post('http://localhost:3001/client/', data)
         .then((res) => {
-            return {type: type.GET_CLIENTES, payload: res};
+            dispatch({ type: type.SET_ACTUAL, payload: res });
         })
         .catch(e => {
             console.log(e);
@@ -17,9 +17,9 @@ export function createClient(data){
 export function getClient(id){
     if(id){
         return function(dispatch){
-            axios.get(`http://localhost:3001/cient/`, id)
+            axios.get(`http://localhost:3001/client/${id}`)
             .then((res) => {
-                    dispatch({ type: type.GET_CLIENTE, payload: res });
+                    dispatch({ type: type.SET_ACTUAL, payload: res });
                 }).catch(e => {
                     console.log(e);
                     dispatch({ type: 'ERROR', payload: e });
@@ -27,7 +27,7 @@ export function getClient(id){
         };
     } else {
         return function(dispatch){
-            axios.get(`http://localhost:3001/cient/`)
+            axios.get(`http://localhost:3001/client/`)
             .then((res) => {
                     dispatch({ type: type.GET_CLIENTES, payload: res });
                 }).catch(e => {
@@ -42,7 +42,7 @@ export function createSolicitud(data){
     return function(dispatch){
         axios.post('http://localhost:3001/request/', data)
         .then((res) => {
-            return {type: type.GET_SOLICITUDES, payload: res};
+            return {type: type.SET_ACTUAL, payload: res};
         })
         .then(p => {
             dispatch(p);
@@ -57,9 +57,10 @@ export function createSolicitud(data){
 export function getSolicitudes(id){
     if(id){
         return function(dispatch){
-            axios.get(`http://localhost:3001/request/`, id)
+            axios.get(`http://localhost:3001/request/${id}`)
             .then((res) => {
-                    dispatch({ type: type.GET_SOLICITUD, payload: res });
+                console.log("res",res)
+                    dispatch({ type: type.SET_ACTUAL, payload: res });
                 }).catch(e => {
                     console.log(e);
                     dispatch({ type: 'ERROR', payload: e });
@@ -82,7 +83,8 @@ export function createActividades(data){
     return function(dispatch){
         axios.post('http://localhost:3001/activity/', data)
         .then((res) => {
-            return {type: type.GET_ACTIVIDADES, payload: res};
+            console.log(res);
+            return {type: type.SET_ACTUAL, payload: res};
         })
         .then(p => {
             dispatch(p);
@@ -97,9 +99,9 @@ export function createActividades(data){
 export function getActividades(id){
     if(id){
         return function(dispatch){
-            axios.get(`http://localhost:3001/activity/`, id)
+            axios.get(`http://localhost:3001/activity/${id}`)
             .then((res) => {
-                    dispatch({ type: type.GET_ACTIVIDAD, payload: res });
+                    dispatch({ type: type.SET_ACTUAL, payload: res });
                 }).catch(e => {
                     console.log(e);
                     dispatch({ type: 'ERROR', payload: e });
@@ -109,6 +111,7 @@ export function getActividades(id){
         return function(dispatch){
             axios.get(`http://localhost:3001/activity/`)
             .then((res) => {
+                    console.log(res);
                     dispatch({ type: type.GET_ACTIVIDADES, payload: res });
                 }).catch(e => {
                     console.log(e);
@@ -122,7 +125,8 @@ export function createReviews(data){
     return function(dispatch){
         axios.post('http://localhost:3001/review/', data)
         .then((res) => {
-            return {type: type.GET_REVIEWS, payload: res};
+            console.log(res);
+            return {type: type.SET_ACTUAL, payload: res};
         })
         .then(p => {
             dispatch(p);
@@ -137,9 +141,9 @@ export function createReviews(data){
 export function getReviews(id){
     if(id){
         return function(dispatch){
-            axios.get(`http://localhost:3001/review/`, id)
+            axios.get(`http://localhost:3001/review/${id}`)
             .then((res) => {
-                    dispatch({ type: type.GET_REVIEW, payload: res });
+                    dispatch({ type: type.SET_ACTUAL, payload: res });
                 }).catch(e => {
                     console.log(e);
                     dispatch({ type: 'ERROR', payload: e });
@@ -147,7 +151,7 @@ export function getReviews(id){
         };
     } else {
         return function(dispatch){
-            axios.get(`http://localhost:3001/activity/`)
+            axios.get(`http://localhost:3001/review/`)
             .then((res) => {
                     dispatch({ type: type.GET_REVIEWS, payload: res });
                 }).catch(e => {
@@ -176,19 +180,19 @@ export function createServicio(data){
 
 export function getServicio(id){
     if(id){
-        return function(dispatch){
-            axios.get(`http://localhost:3001/service/`, id)
-            .then((res) => {
-                    dispatch({ type: type.GET_SERVICIO, payload: res });
+            return function(dispatch){
+                axios.get(`http://localhost:3001/service/${id}`)
+                .then((res) => {
+                    dispatch({ type: type.SET_ACTUAL, payload: res });
                 }).catch(e => {
                     console.log(e);
                     dispatch({ type: 'ERROR', payload: e });
-            });
-        };
-    } else {
-        return function(dispatch){
-            axios.get(`http://localhost:3001/service/`)
-            .then((res) => {
+                });
+            };
+        } else {
+            return function(dispatch){
+                axios.get(`http://localhost:3001/service/`)
+                .then((res) => {
                     dispatch({ type: type.GET_SERVICIOS, payload: res });
                 }).catch(e => {
                     console.log(e);
@@ -220,6 +224,14 @@ export function statChange(x){
             });
         };
     }; 
+};
+
+export function setActual (){
+    return { type:type.SET_ACTUAL, payload:1 };
+};
+
+export function clear (){
+    return { type:type.CLEAR_ALL };
 };
 
 export function orderByR (n){

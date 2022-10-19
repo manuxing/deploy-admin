@@ -1,17 +1,44 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams, NavLink } from "react-router-dom"
+import { getClient, getActividades, setActual } from '../../../redux/actions'
+import Spinner from '../../Spinner'
 import NavBar from "../../bars/navBar";
 import SideBar from "../../bars/sideBar";
-import reviewC from "../../lO/reviewC"
-import activityC from "../../lO/activityC"
+import ReviewC from "../../lO/reviewC"
+import ActivityC from "../../lO/activityC"
 import "./client.css"
 
 const Cliente = () => {
 
+  const {id} = useParams();
+  let dispatch = useDispatch();
+  let [loading, setLoading] = useState(true);
   let actual = useSelector((state) => state.actual);
-  let allClients = useSelector((state) => state.clientes);
+
+    useEffect(()=>{
+        dispatch(getClient(id))
+        dispatch(getActividades())
+    },[dispatch])
+
+    useEffect(()=>{
+        if(typeof actual !== "number"){
+            setLoading(false)
+        }else{
+          setLoading(true)
+        }
+
+    },[loading,actual])
+
+    useEffect(() => {
+      return () => dispatch(setActual())
+    }, []);
 
   return (
+     loading === true ?
+    <div>
+      <Spinner/>
+    </div> :
     <div>
       <NavBar/>
       <div className="client_d">
@@ -30,7 +57,7 @@ const Cliente = () => {
                   {
                   actual?.contact ? actual?.contact.map(p => { 
                     return (
-                        <span>{p}</span> 
+                        <span key={p}>{p}</span> 
                     ) 
                   }) : "contacto"
                   }
@@ -44,7 +71,10 @@ const Cliente = () => {
                   {
                   actual?.activities ? actual?.activities.map(p => { 
                     return (
-                      <activityC id = {actual.id}/>
+                      <NavLink  className="link" to={`/activity/${p.id}`}>
+                        <ActivityC key={p.id} id={p.id}/>
+                      </NavLink>
+                        
                     ) 
                   }) : "actividades realizadas"
                   }
@@ -58,7 +88,9 @@ const Cliente = () => {
                   {
                     actual?.reviews ? actual?.reviews.map(p => { 
                       return (
-                      <reviewC review = {p}/>
+                        <NavLink  className="link" to={`/review/${p.id}`}>
+                          <ReviewC key={p} review = {p}/>
+                        </NavLink>
                     ) 
                   }) : "Reviews"
                   }

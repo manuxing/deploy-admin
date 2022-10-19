@@ -5,7 +5,6 @@ import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // Components
-import CardsDashboard from "../components/CardsDashboard";
 
 const Dashboard = () => {
   let dispatch = useDispatch();
@@ -26,7 +25,6 @@ const Dashboard = () => {
               Add User
             </Link>
         </div>
-        <CardsDashboard />
       </div>
     </>
   );

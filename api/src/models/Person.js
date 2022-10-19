@@ -11,15 +11,10 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false 
         },
-        //     type: DataTypes.TEXT,
-        //     allowNull: false
-        // },
         ageR:{
             type: DataTypes.TEXT,
             allowNull: false 
         }
-        //     type: DataTypes.ENUM(["Niño","Adolescente","Adulto","Adulto Mayor"]),
-        //     allowNull: false 
     },{
         timestamps: false,
      });
