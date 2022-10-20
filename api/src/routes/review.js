@@ -27,9 +27,9 @@ router.get('/', async(req, res, next) =>{
 }); 
 
 router.post('/', async(req, res, next) => {
-    const { description, thg, contact, cName, sId } = req.body.senr;
+    const { description, thg, cName, sId } = req.body.senr;
     console.log(req.body.senr)
-    if(!description||!thg||!contact||!cName||!sId){
+    if(!description||!thg||!cName||!sId){
         return next({status: 400, message: 'Ingrese los datos correctos'})
     }
     try{   

@@ -74,6 +74,21 @@ const tools = {
             res.err = errs;
             return res;
         },
+        agregarMedio: (con) => {
+            let res = {status: true};
+            let errs = [];
+            let medios = ["telefono","email","presencial","pagina","booking", "otro"];
+            if(medios.includes(con.value) === false){
+                let err = {
+                    message:"rango de edad invalido",
+                    ubic: "thg"
+                }
+                errs.push(err);
+                res.status = false;
+            }
+            res.err = errs;
+            return res;
+        },
         agregarPersona_field: (field) => {
             let res = {status: true, ubic:field.target.name};
             let errs = [];
@@ -252,6 +267,7 @@ const tools = {
         reviewForm_field: (evento) => {
             let errs = [];
             let res = {status: true, ubic: evento.target.name}
+            let medios = ["telefono","email","presencial","pagina","booking", "otro"];
             let nameR = new RegExp(/[a-zA-Z ]$/);
             let dateR = new RegExp(/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/);
             switch (evento.target.name) {
@@ -305,6 +321,17 @@ const tools = {
                         errs.push(err);
                     }
                 break
+                case "thg":
+                    console.log("valida");
+                if(medios.includes(evento.target.value) === false){
+                    let err = {
+                    message:"rango de edad invalido",
+                    ubic: "thg"
+                    }
+                    errs.push(err);
+                    res.status = false;
+                }
+                break
                 case "sId":
                     if(Number(evento.target.value) !== parseInt(evento.target.value) || parseInt(evento.target.value) > 6){
                         let err = {
@@ -324,7 +351,8 @@ const tools = {
         },
         reviewForm: (review) => {
             let errs = [];
-            let res = {status: true, ubic: ""}
+            let res = {status: true, ubic: ""};
+            let medios = ["telefono","email","presencial","pagina","booking", "otro"];
             let nameR = new RegExp(/[a-zA-Z ]$/);
             let dateR = new RegExp(/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/);
             let x = review.dateR.split("-").reverse().join("-");
@@ -367,6 +395,15 @@ const tools = {
                     }
                     res.status = false;
                     errs.push(err);
+            }
+            if(medios.includes(review.thg) === false){
+                console.log("review entera");
+                let err = {
+                message:"rango de edad invalido",
+                ubic: "thg"
+                }
+                errs.push(err);
+                res.status = false;
             }
             if(Number(review.sId) !== parseInt(review.sId) || parseInt(review.sId) > 6){
                 let err = {

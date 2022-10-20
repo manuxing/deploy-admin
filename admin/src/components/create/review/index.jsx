@@ -7,7 +7,6 @@ import tools from "../../../tools";
 import NavBar from "../../bars/navBar";
 import SideBar from "../../bars/sideBar";
 import AgregarContacto from "./agregarContacto";
-import ContactCard from "./contactCard";
 
 const ReviewR = () => {
     const history = useHistory();
@@ -16,14 +15,12 @@ const ReviewR = () => {
     let actual = useSelector(state => state.actual);
     let services = useSelector(state => state.servicios);
     let[thg] = useState(["telefono","email","presencial","pagina","booking", "otro"]);
-    let[input, setInputA] = useState({ description:"",dateR:"", dateP:"" , thg:"", contact:"", sId:0,  cName:"" });
-    let[contacts, setContacts] = useState({cant:0, cont:[]});
-    let[warningA, setWarningA] = useState({ description:"",dateR:"", dateP:"" , thg:"", contact:"", sId:0,  cName:"" });
+    let[input, setInputA] = useState({ description:"",dateR:"", dateP:"" , thg:"", sId:0,  cName:"" });
+    let[warningA, setWarningA] = useState({ description:"",dateR:"", dateP:"" , thg:"", sId:0,  cName:"" });
     
     let sub = () => {
         let senr = input;
-        senr.contact = contacts.cont;
-        senr.thg = contacts.cont[0].type;
+        senr.thg = input.thg;
         let x = validate.reviewForm(senr);
         if(x.status === false){
             errHan(x);
@@ -69,12 +66,11 @@ const ReviewR = () => {
     useEffect(() => {
         if(actual !== 1 && input.dateR === actual.dateR){
             console.log("submited rew");
-            setInputA({ description:"",dateR:"", dateP:"" , thg:"", contact:"", sId:0,  cName:"" }); 
-            setWarningA({ description:"",dateR:"", dateP:"" , thg:"", contact:"", sId:"",  cName:"" });
+            setInputA({ description:"",dateR:"", dateP:"" , thg:"", sId:0,  cName:"" }); 
+            setWarningA({ description:"",dateR:"", dateP:"" , thg:"", sId:"",  cName:"" });
             history.push(`/review/${actual.id}`)
         }
     }, [actual, input]);
-
 
     let handleSubmit = (e,inp) =>{
         e.preventDefault();     
@@ -122,14 +118,15 @@ const ReviewR = () => {
                         {warningA.description}
                     </div>
                 </div>
-                <AgregarContacto contactsThg={thg} setContacts={setContacts} _contacts={contacts}/>               
                 <div>
-                    {contacts.cont.map(p => {
-                        console.log(p)
-                            return (
-                                <ContactCard key={contacts.cant + `${Math.random() * (Math.random() * 300)}`}contact={p}/>
-                            )
-                    })}
+                    <select className="selectcontact" name = {'thg'} onChange={e => {handleSelect(e)}}>
+                            <option  hidden >medio de contacto</option>
+                                {thg.map(p => {
+                                    return (
+                                        <option  value={p} key={p}>{p}</option>
+                                        )
+                                })}
+                    </select>
                 </div>
                 <div>
                     <label>Servicios</label>
