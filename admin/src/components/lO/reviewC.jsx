@@ -4,14 +4,12 @@ import Spinner from '../Spinner';
 import { statChange } from "../../redux/actions";
 
 const ReviewC = ({review}) => {
-  const reviews = useSelector((state) => state.reviews);
-  // const review = reviews.find(p => p.id === id);
-  console.log("reviews",reviews)
   const dispatch = useDispatch();
+  const [_stat, setStat] = useState(review.stat);
+  
   useEffect(()=>{
       console.log("rev",review)
   },[dispatch,review])
-  const [_stat, setStat] = useState(review.stat);
   
   const handleChange = () => {
     let x = {

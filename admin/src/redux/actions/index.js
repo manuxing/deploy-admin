@@ -3,8 +3,10 @@ import axios from "axios";
 
 export function createClient(data){
     return function(dispatch){
+        console.log(data);
         axios.post('http://localhost:3001/client/', data)
         .then((res) => {
+            console.log(res);
             dispatch({ type: type.SET_ACTUAL, payload: res });
         })
         .catch(e => {
@@ -81,6 +83,7 @@ export function getSolicitudes(id){
 
 export function createActividades(data){
     return function(dispatch){
+        console.log("por enviar",data);
         axios.post('http://localhost:3001/activity/', data)
         .then((res) => {
             console.log(res);
@@ -163,10 +166,12 @@ export function getReviews(id){
 };
 
 export function createServicio(data){
+    console.log("antes de enviar", data);
     return function(dispatch){
-        axios.post('http://localhost:3001/servicio/', data)
+        axios.post('http://localhost:3001/service/', data)
         .then((res) => {
-            return {type: type.GET_SERVICIOS, payload: res};
+            console.log("res", res);
+            return {type: type.SET_ACTUAL, payload: res};
         })
         .then(p => {
             dispatch(p);

@@ -1,7 +1,6 @@
 import React from "react";
 
 const ContactCard = ({contact}) => {
-    console.log(contact)
     return (
         <div className="contact_card_createClient">
                     <h2>{contact.type}</h2>

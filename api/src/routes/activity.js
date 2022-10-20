@@ -9,7 +9,7 @@ router.get('/:id', async(req, res, next) =>{
             where:{
                 id: id
             },
-            include: [Client, Service, Person]
+            include: [Client, Service]
         });
         let r = peticionDB[0].dataValues;
         return res.json(peticionDB[0].dataValues);
@@ -20,7 +20,7 @@ router.get('/:id', async(req, res, next) =>{
 
 router.get('/', async(req, res, next) =>{
     try {
-        let peticionDB = await Activity.findAll({include: [Client, Service, Person]});
+        let peticionDB = await Activity.findAll({include: [Client, Service]});
         console.log("aca", peticionDB)
         return res.json(peticionDB);
     }catch(e){
@@ -29,25 +29,24 @@ router.get('/', async(req, res, next) =>{
 });
 
 router.post('/', async(req, res, next) => {
-    const { date , persons, name, cId, sId } = req.body.senr;
-    console.log(req.body.senr)
+    const { date, persons, name, cId, sId } = req.body;
+    console.log(req.body)
     if(!date||!persons||!sId){
         return next({status: 400, message: 'Ingrese los datos correctos'})
     }
     try{   
-        let hacer = await Activity.create(req.body.senr);
-        console.log("wwww ", date);
+        let y = req.body;
+        y.persons = persons.map(p => `${p.ageR}, Sexo: ${p.sexo}`);        
+        let hacer = await Activity.create(y);
+        console.log("secreo activity");
         let servic = await Service.findAll({
             where :{
                 id: sId
             }
         });
-        console.log("service: ",servic);
         await hacer.addService(servic);
-        console.log("todo ok antes de c");
+        console.log("service");
         let x;
-        // let promesas_ = persons.map(p => new Promise(async(resolve) => {let a = await Person.create(p); await hacer.addPerson(a);}));
-        // Promise.all(promesas_);
         if(cId){
             x = await Client.findAll({
                 where: {
@@ -62,9 +61,8 @@ router.post('/', async(req, res, next) => {
             });
         }
         x = x[0]
-        console.log(x, hacer)
-        console.log("todo ok antes de seteat");
         await hacer.setClient(x);
+        console.log("se agrego client",x, hacer)
         await x.addActivity(hacer);
         return res.json(hacer);
     } catch (e){

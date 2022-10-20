@@ -16,22 +16,23 @@ const ActivityR = () => {
     let actual = useSelector(state => state.actual);
     let services = useSelector(state => state.servicios);
     let ageR = ["Adulto Mayor", "Adulto", "Adolecente", "niño"];
-    let[persons, setPersons] = useState({cant:0, cont: []});
     let[input, setInputA] = useState({name:'', date: '', persons:[], sId:1000});
     let[warningA, setWarningA] = useState({name:'', date: '', persons:'', sId:'', general:''});
     
     let sub = () => {
         let senr = input;
-        senr.persons = persons.cont;
         let x = validate.activity_clientForm(senr);
         if(x.status === false){
+            console.log(x);
             errHan(x);
         } else {
-            dispatch(createActividades({senr}));
+            console.log("antes de enviar",senr);
+            dispatch(createActividades(senr));
         }
     };
     
     let errHan = (err) =>{
+        console.log(err);
         let id = err.ubic === "service" ? "service" : ""
         if(id === "service"){
             let x = document.getElementById(id);
@@ -42,6 +43,7 @@ const ActivityR = () => {
     }
     
     let notErrHan = (evento) =>{
+        console.log(evento);
         setInputA({...input, [evento.target.name]:evento.target.value})
         setWarningA({...warningA, [evento.target.name]:""});
     }
@@ -61,13 +63,12 @@ const ActivityR = () => {
     }, [dispatch]);
     
     useEffect(() => {
+        console.log(input.persons)
         if(actual !== 1 && input.date === actual.date){
             history.push(`/activity/${actual.id}`)
             console.log("submited act");
-            //redirigir
             setInputA({date: '', persons:[], sId:1000}); 
             setWarningA({date: '', persons:'', sId:''});
-            setPersons({cant:0, cont: []});
         }
     }, [actual, input]);
 
@@ -84,7 +85,7 @@ const ActivityR = () => {
             <div className="create_cli">
                <SideBar/>
             <div className="content_act">
-             Cliente:
+             Actividad:
             <form className="form" onSubmit={(e) => handleSubmit(e,input)}>
                 <div>
                     <label>Fecha de la actividad</label>
@@ -102,11 +103,11 @@ const ActivityR = () => {
                         {warningA.name}
                     </div>
                 </div>
-                <AgregarPersona ageR={ageR} setPersons={setPersons} _persons={persons}/>               
+                <AgregarPersona ageR={ageR} setPersons={setInputA} _persons={input}/>               
                 <div>
-                    {persons.cont.map(p => {
+                    {input.persons.map(p => {
                             return (
-                                <PersonCard key={persons.cant + `${Math.random() * (Math.random() * 300)}`}person={p}/>
+                                <PersonCard key={input.persons.cant + `${Math.random() * (Math.random() * 300)}`}person={p}/>
                             )
                     })}
                 </div>

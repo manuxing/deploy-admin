@@ -83,7 +83,7 @@ const Request = () => {
                   {
                     actual?.services ? actual?.services.map(p => { 
                       return (
-                      <span>{p.name}</span>
+                      <span key={p.name}>{p.name}</span>
                     ) 
                   }) : "services"
                   }

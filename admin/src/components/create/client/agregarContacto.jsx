@@ -9,6 +9,7 @@ const AgregarContacto = ({contactsThg, setContacts, _contacts}) => {
     let validate = tools.validate;
 
     let handleSelect = (evento) => {
+        console.log(evento.target.value)
         setContact({...contact, type:evento.target.value});
         setWarning({contacto:""})
     };
@@ -36,7 +37,9 @@ const AgregarContacto = ({contactsThg, setContacts, _contacts}) => {
 
     let sub = ()=>{
         setWarning({contact: ''});
-        setContacts({cant: _contacts.cant++, cont:[..._contacts.cont, contact]});
+        if(contact.value === "")contact.value = contact.type;
+        if(contact.type === "")contact.type = contact.value;
+        setContacts({..._contacts, contact: [..._contacts.contact,contact]});
         setContact({type:"", value:""})
     }
 
@@ -50,7 +53,7 @@ const AgregarContacto = ({contactsThg, setContacts, _contacts}) => {
         <div className="addcontact">
                  <div className="addcontact_form">
                         <label>Contacto</label>
-                        <select className="selectcontact" name = {'contact'} onSelect={(e) => handleSelect(e)}>
+                        <select className="selectcontact" name = {'contact'} onChange={(e) => handleSelect(e)}>
                             <option  hidden >medio de contacto</option>
                                 {contactsThg.map(p => {
                                     return (

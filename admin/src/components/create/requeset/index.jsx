@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom";
-import { getServicio, createReviews, createSolicitud } from "../../../redux/actions";
+import { getServicio, createSolicitud } from "../../../redux/actions";
 import { useEffect } from "react";
 import tools from "../../../tools";
 import NavBar from "../../bars/navBar";
@@ -16,14 +16,12 @@ const RequestR = () => {
     let actual = useSelector(state => state.actual);
     let services = useSelector(state => state.servicios);
     let[thg] = useState(["telefono","email","presencial","pagina","booking", "otro"]);
-    let[input, setInputA] = useState({ dateR:"", dateP:"" , thg:"", contact:"", sId:0});
-    let[contacts, setContacts] = useState({cant:0, cont:[]});
-    let[warningA, setWarningA] = useState({ dateR:"", dateP:"" , thg:"", contact:"", sId:0});
+    let[input, setInputA] = useState({ dateR:"", dateP:"" , thg:"", contact:[], sId:0});
+    let[warningA, setWarningA] = useState({ dateR:"", dateP:"" , thg:"", contact:"", sId:""});
     
     let sub = () => {
         let senr = input;
-        senr.contact = contacts.cont;
-        senr.thg = contacts.cont[0].type;
+        senr.thg = input.contact[0].type;
         let x = validate.requestForm(senr);
         if(x.status === false){
             errHan(x);
@@ -106,12 +104,12 @@ const RequestR = () => {
                         {warningA.dateP}
                     </div>
                 </div>
-                <AgregarContacto contactsThg={thg} setContacts={setContacts} _contacts={contacts}/>               
+                <AgregarContacto contactsThg={thg} setContacts={setInputA} _contacts={input}/>               
                 <div>
-                    {contacts.cont.map(p => {
+                    {input.contact.map(p => {
                         console.log(p)
                             return (
-                                <ContactCard key={contacts.cant + `${Math.random() * (Math.random() * 300)}`}contact={p}/>
+                                <ContactCard key={input.contact.length}contact={p}/>
                             )
                     })}
                 </div>

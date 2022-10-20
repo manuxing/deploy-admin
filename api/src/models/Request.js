@@ -20,12 +20,12 @@ module.exports = (sequelize) => {
             allowNull: false 
         },
         contact: {
-            type: DataTypes.TEXT,
+            type: DataTypes.ARRAY(DataTypes.TEXT),
             allowNull: false 
         },
         thg:{
             type: DataTypes.TEXT,
-            // allowNull: false 
+            allowNull: false 
         },
         ant: {
             type: DataTypes.BOOLEAN,

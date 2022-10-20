@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import tools from "../../../tools";
 
-
 const AgregarPersona = ({ageR, setPersons, _persons}) => {
     
     let[person, setPerson] = useState({ageR:"", sexo:""});
@@ -29,7 +28,7 @@ const AgregarPersona = ({ageR, setPersons, _persons}) => {
     
     let sub = ()=>{
         setPerson({ageR:"", sexo:""})
-        setPersons({cant: _persons.cant++, cont:[..._persons.cont, person]});
+        setPersons({..._persons, persons: [..._persons.persons, person]});
         setWarning({ageR:"", sexo:"", general:""});
         let x = document.getElementById("def1");
         let x1 = document.getElementById("def2");

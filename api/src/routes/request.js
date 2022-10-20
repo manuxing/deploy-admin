@@ -18,6 +18,7 @@ router.get('/:idR', async(req, res, next) =>{
     }
 
 });
+
 router.get('/', async(req, res, next) =>{
     try {
         let peticionDB = await Request.findAll();
@@ -30,21 +31,20 @@ router.get('/', async(req, res, next) =>{
 
 router.post('/', async(req, res, next) => {
     const { dateR, dateP , thg, contact, sId } = req.body.senr;
+    console.log(dateR, dateP , thg, contact, sId);
     if(!dateR||!dateP||!contact||!sId){
-        return res.next({status: "400", message: 'Ingrese los datos correctos'})
+        return next({status: "400", message: 'Ingrese los datos correctos'})
     }
     try{   
         let x = req.body.senr;
-        x.thg = contact[0].type === "" ? contact[0].value : contact[0].type
-        x.contact = contact[0].value;
-        console.log(req.body.senr);
-        let hacer = await Request.create(req.body.senr);
+        x.thg === contact[0].type;
+        x.contact = contact.map(p => `${p.type}: ${p.value}`);
+        let hacer = await Request.create(x);
         let servicc = await Service.findAll({
             where :{
                 id: parseInt(sId)
             }
         })
-        //hacer un map para todos los servicios
         await hacer.addService(servicc);
         console.log(hacer);
         res.json(hacer);

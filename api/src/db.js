@@ -42,9 +42,6 @@ Request.belongsToMany(Service, {through:'Service_request'});
 Service.belongsToMany(Activity, {through:'service_activity'});
 Activity.belongsToMany(Service, {through:'service_activity'});
 
-Person.hasOne(Activity);
-Activity.hasMany(Person);
-
 module.exports = {
   ...sequelize.models,
   conn: sequelize,     

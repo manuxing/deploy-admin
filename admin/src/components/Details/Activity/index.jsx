@@ -20,7 +20,8 @@ const Activity = () => {
 
     useEffect(()=>{
         if(typeof actual !== "number"){
-            setLoading(false)
+            setLoading(false);
+            console.log(actual)
         }else{
           setLoading(true)
         }
@@ -74,14 +75,14 @@ const Activity = () => {
             <span className="_span_act">
                 Personas:
             </span>
-                {actual?.people ? actual?.people.length : "0"}
+                {actual?.persons ? actual?.persons.length : "0"}
                 <div>
                   <ul>
                   {
-                  actual?.people ? actual?.people.map(p => { 
+                  actual?.persons ? actual?.persons.map(p => { 
                     return (
-                    <li key={p.id}>
-                        <span>{p.sex}          {p.ageR}</span> 
+                    <li key={p}>
+                        <span>-  {p}</span> 
                     </li>
                     ) 
                   }) : "persons"

@@ -72,7 +72,7 @@ const Cliente = () => {
                   actual?.activities ? actual?.activities.map(p => { 
                     return (
                       <NavLink  className="link" to={`/activity/${p.id}`}>
-                        <ActivityC key={p.id} id={p.id}/>
+                        <ActivityC key={p.id} activity={p}/>
                       </NavLink>
                         
                     ) 

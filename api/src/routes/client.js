@@ -35,14 +35,15 @@ router.post('/', async(req, res, next) => {
     }
     try{   
         let {act} = req.body;
+        let x = req.body;
+        x.contact = contact.map(p => `${p.type}: ${p.value}`);        
         let hacer = await Client.create(req.body);
         act.cId = hacer.id;
-        let activi = await Activity.create(act.senr);
+        let activi = await Activity.create(act);
         await hacer.addActivity(activi);
         let respuesta = await Client.findAll({where:{
             id:hacer.id
         }});
-        console.log(respuesta)
         return res.json(respuesta);
     } catch (e){
         return next({status: "500", message: 'Error en router Client Post'});

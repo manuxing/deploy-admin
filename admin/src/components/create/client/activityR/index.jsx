@@ -12,21 +12,18 @@ const ActivityR = ({pressed, setPressed, act, setAct}) => {
     let validate = tools.validate;
     let services = useSelector(state => state.servicios);
     let ageR = ["Adulto Mayor", "Adulto", "Adolecente", "niño"];
-    let[persons, setPersons] = useState({cant:0, cont: []});
     let[input, setInputA] = useState({date: '', persons:[], sId:1000});
     let[warningA, setWarningA] = useState({date: '', persons:'', sId:'', general:''});
     
     let sub = () => {
         let senr = input;
-        senr.persons = persons.cont;
         let x = validate.activity_clientForm(senr);
         if(x.status === false){
             setWarningA({...warningA, general:'todos los campos son obligatorios, completelos'});
         } else {
-            setAct({senr});
+            setAct({...act, act:senr});
             setInputA({date: '', persons:[], sId:1000}); 
             setWarningA({date: '', persons:'', sId:''});
-            setPersons({cant:0, cont: []});
         }
     };
     
@@ -77,11 +74,11 @@ const ActivityR = ({pressed, setPressed, act, setAct}) => {
                         {warningA.date}
                     </div>
                 </div>
-                <AgregarPersona ageR={ageR} setPersons={setPersons} _persons={persons}/>               
+                <AgregarPersona ageR={ageR} setPersons={setInputA} _persons={input}/>               
                 <div>
-                    {persons.cont.map(p => {
+                    {input.persons.map(p => {
                             return (
-                                <PersonCard key={persons.cant++}person={p}/>
+                                <PersonCard key={input.persons.length}person={p}/>
                             )
                     })}
                 </div>

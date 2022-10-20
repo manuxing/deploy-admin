@@ -1,14 +1,11 @@
 import React, { useEffect  } from 'react'
-import { useSelector } from 'react-redux'
 import Spinner from '../Spinner';
 
-const ActivityC = ({id}) => {
-    const activitys = useSelector((state) => state.actividades);
-    const activity = activitys.find(p => p.id === id)
-    console.log("actividades",activitys)
+const ActivityC = ({activity}) => {
+
     useEffect(()=>{
-      console.log("act",activity)
-  },[activitys])
+      console.log("act",activity);
+    },[activity])
 
   return (
     activity && activity.id ?

@@ -61,7 +61,7 @@ const tools = {
                 default:{
                     console.log(con)
                     let values = ["presencial","booking","pagina"]
-                    if(values.includes(con.value) === false){
+                    if(values.includes(con.value) === false && values.includes(con.type) === false){
                         let err = {
                             message:"contacto invalido",
                             ubic:"contacto"
@@ -261,6 +261,96 @@ const tools = {
                 res.status = false;
                 errs.push(err);
             }
+            res.err = errs;
+            return res;
+        },
+        serviceField: (evento) => {
+            let errs = [];
+            let res = {status: true, ubic: evento.target.name}
+            let nameR = new RegExp(/[a-zA-Z ]$/);
+            switch (evento.target.name) {
+                case "name":
+                    if(nameR.test(evento.target.value) === false){
+                        let err = {
+                            message: "ingrese un nombre valido",
+                            ubic: evento.target.name
+                        }
+                        errs.push(err);
+                        res.status = false;
+                    }
+                break
+                case "tR":
+                    // if(evento.target.value.length < 5||nameR.test(evento.target.value) === false){
+                    //     let err = {
+                    //         message: "ingrese un nombre valido",
+                    //         ubic: "cName"
+                    //     }
+                    //     res.status = false;
+                    //     errs.push(err);
+                    // }
+                break
+                case "description":
+                    console.log("2",typeof evento.target.value)
+                    if(typeof evento.target.value !== "string"){
+                        let err = {
+                            message: "ingrese una descripcion valida",
+                            ubic: "description"
+                        }
+                        res.status = false;
+                        errs.push(err);
+                    } else if(evento.target.value.length < 15){
+                        let err = {
+                            message: "minimo 15 caracteres",
+                            ubic: "description"
+                        }
+                        res.status = false;
+                        errs.push(err);
+                    }
+                break
+                default:{
+                }
+            }
+            res.err = errs;
+            return res;
+        },
+        serviceForm: (service) => {
+            let errs = [];
+            let res = {status: true, ubic: ""};
+            let medios = ["telefono","email","presencial","pagina","booking", "otro"];
+            let nameR = new RegExp(/[a-zA-Z ]$/);
+            if(service.name.length < 5||nameR.test(service.name) === false){
+                let err = {
+                    message: "ingrese un nombre valido",
+                    ubic: "name"
+                }
+                res.status = false;
+                errs.push(err);
+            }
+            if(typeof service.description !== "string"){
+                    let err = {
+                        message: "ingrese una descripcion valida",
+                        ubic: "description"
+                    }
+                    res.status = false;
+                    errs.push(err);
+            } else if(service.description.length < 15){
+                    let err = {
+                        message: "minimo 15 caracteres",
+                        ubic: "description"
+                    }
+                    res.status = false;
+                    errs.push(err);
+            }
+            // hacer tR
+            // if(medios.includes(review.thg) === false){
+            //     console.log("review entera");
+            //     let err = {
+            //     message:"rango de edad invalido",
+            //     ubic: "thg"
+            //     }
+            //     errs.push(err);
+            //     res.status = false;
+            // }
             res.err = errs;
             return res;
         },

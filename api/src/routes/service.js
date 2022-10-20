@@ -27,6 +27,7 @@ router.get('/', async(req, res, next) =>{
 });
 
 router.post('/', async(req, res, next) => {
+    console.log(req.body);
     const { name, description, tR } = req.body;
     if(!name||!description||!tR){
         return next({status: "400", message: 'Ingrese los datos correctos'})

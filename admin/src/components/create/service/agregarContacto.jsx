@@ -4,15 +4,25 @@ import tools from "../../../tools";
 
 const AgregarContacto = ({contactsThg, setContacts, _contacts}) => {
     
-    let[contact, setContact] = useState({value:""});
+    let[contact, setContact] = useState({type:"", value:""});
     let[warning, setWarning] = useState({contacto: ''});
     let validate = tools.validate;
 
-    
     let handleSelect = (evento) => {
         console.log(evento.target.value)
-        setContact({...contact, value:evento.target.value});
+        setContact({...contact, type:evento.target.value});
         setWarning({contacto:""})
+    };
+    
+    let chooseType = (t) =>{
+        if (t === "telefono")return "number";
+        if (t === "presencial"||t === "otro")return "text"
+        if (t === "email")return "email";
+    };
+    
+    let handleChange = (p,data) => {
+        p.preventDefault();
+        setContact({...contact, value:p.target.value})
     };
 
     let errHan = (err) =>{
@@ -23,19 +33,19 @@ const AgregarContacto = ({contactsThg, setContacts, _contacts}) => {
     let notErrHan = (evento) =>{
         setWarning({...warning, [evento.target.name]:""});
         sub();
-        let x = document.getElementById("id");
-        x.selected = true
     }
 
     let sub = ()=>{
         setWarning({contact: ''});
-        setContacts({..._contacts, thg:contact.value});
-        setContact({value:""})
+        if(contact.value === "")contact.value = contact.type;
+        if(contact.type === "")contact.type = contact.value;
+        setContacts({..._contacts, contact: [..._contacts.contact,contact]});
+        setContact({type:"", value:""})
     }
 
     let handleSubmit = (p, data) => {
         p.preventDefault();
-        let val = validate.agregarMedio(contact);
+        let val = validate.agregarContacto(data);
         val.status === false ? errHan(val) : notErrHan(p)
     };
 
@@ -43,7 +53,7 @@ const AgregarContacto = ({contactsThg, setContacts, _contacts}) => {
         <div className="addcontact">
                  <div className="addcontact_form">
                         <label>Contacto</label>
-                        <select className="selectcontact" name = {'contact'} onChange={e => {handleSelect(e)}}>
+                        <select className="selectcontact" name = {'contact'} onChange={(e) => handleSelect(e)}>
                             <option  hidden >medio de contacto</option>
                                 {contactsThg.map(p => {
                                     return (
@@ -51,6 +61,9 @@ const AgregarContacto = ({contactsThg, setContacts, _contacts}) => {
                                         )
                                     })}
                         </select>
+                        {contact.type === "pagina" || contact.type === "booking" || contact.type === "presencial" || contact.type === "" ? 
+                            <></> : <input className="inputcontact" type = {chooseType(contact.type)} name = {'value'} value = {contact.value}
+                            onChange = {(p => {handleChange(p)})}/>}
                         <div className="warning_acs">
                             {warning.contacto}
                         </div>

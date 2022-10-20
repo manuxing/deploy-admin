@@ -11,10 +11,11 @@ const AgregarContacto = ({contactsThg, setContacts, _contacts}) => {
 
     
     let handleSelect = (evento) => {
-        console.log(evento.target.name)
-        setContact({...contact, type:evento.target.value});
+        let va = evento.target.value;
         if(evento.target.value === "presencial" ||evento.target.value === "pagina" ||evento.target.value === "booking"){
-            setContact({...contact, value:evento.target.value});
+            setContact({type:va, value:va});
+        } else{
+            setContact({...contact, type:va});
         }
         setWarning({contacto:""})
         console.log(contact)
@@ -44,7 +45,7 @@ const AgregarContacto = ({contactsThg, setContacts, _contacts}) => {
 
     let sub = ()=>{
         setWarning({contact: ''});
-        setContacts({cant: _contacts.cant++, cont:[..._contacts.cont, contact]});
+        setContacts({..._contacts, contact: [..._contacts.contact,contact]});
         setContact({type:"", value:""});
         setTrigger(true);
     }
@@ -64,7 +65,7 @@ const AgregarContacto = ({contactsThg, setContacts, _contacts}) => {
                             <option  hidden >medio de contacto</option>
                                 {contactsThg.map(p => {
                                     return (
-                                        <option  value={p} key={p}>{p}</option>
+                                        <option name={p}  value={p} key={p}>{p}</option>
                                         )
                                     })}
                         </select>

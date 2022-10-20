@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import tools from "../../../tools";
 import NavBar from "../../bars/navBar";
 import SideBar from "../../bars/sideBar";
-import AgregarContacto from "./agregarContacto";
 
 const ReviewR = () => {
     const history = useHistory();
@@ -65,12 +64,11 @@ const ReviewR = () => {
     
     useEffect(() => {
         if(actual !== 1 && input.dateR === actual.dateR){
-            console.log("submited rew");
             setInputA({ description:"",dateR:"", dateP:"" , thg:"", sId:0,  cName:"" }); 
             setWarningA({ description:"",dateR:"", dateP:"" , thg:"", sId:"",  cName:"" });
             history.push(`/review/${actual.id}`)
         }
-    }, [actual, input]);
+    }, [actual]);
 
     let handleSubmit = (e,inp) =>{
         e.preventDefault();     
