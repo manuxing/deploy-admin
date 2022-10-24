@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { getServicio, createReviews } from "../../../redux/actions";
-import { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { getServicio, createReviews, getReviews, setActual } from "../../../redux/actions";
 import tools from "../../../tools";
-import NavBar from "../../bars/navBar";
-import SideBar from "../../bars/sideBar";
 
-const ReviewR = () => {
+const ReviewR = ({setP}) => {
     const history = useHistory();
     let dispatch = useDispatch();
     let validate = tools.validate;
@@ -15,7 +12,7 @@ const ReviewR = () => {
     let services = useSelector(state => state.servicios);
     let[thg] = useState(["telefono","email","presencial","pagina","booking", "otro"]);
     let[input, setInputA] = useState({ description:"",dateR:"", dateP:"" , thg:"", sId:0,  cName:"" });
-    let[warningA, setWarningA] = useState({ description:"",dateR:"", dateP:"" , thg:"", sId:0,  cName:"" });
+    let[warningA, setWarningA] = useState({ description:"",dateR:"", dateP:"" , thg:"", sId:"",  cName:"" });
     
     let sub = () => {
         let senr = input;
@@ -64,9 +61,13 @@ const ReviewR = () => {
     
     useEffect(() => {
         if(actual !== 1 && input.dateR === actual.dateR){
+            tools.alert("reseña", `/review/${actual.id}`, history, dispatch, getReviews, setP, setActual);
+            let x = document.getElementById("service");
+            x.selected = true;
+            let y = document.getElementById("s");
+            y.selected = true;
             setInputA({ description:"",dateR:"", dateP:"" , thg:"", sId:0,  cName:"" }); 
             setWarningA({ description:"",dateR:"", dateP:"" , thg:"", sId:"",  cName:"" });
-            history.push(`/review/${actual.id}`)
         }
     }, [actual]);
 
@@ -78,9 +79,6 @@ const ReviewR = () => {
 
     return (
         <div>
-            <NavBar/>
-            <div className="create_cli">
-               <SideBar/>
             <div className="content_act">
              Reseña:
             <form className="form" onSubmit={(e) => handleSubmit(e,input)}>
@@ -118,7 +116,7 @@ const ReviewR = () => {
                 </div>
                 <div>
                     <select className="selectcontact" name = {'thg'} onChange={e => {handleSelect(e)}}>
-                            <option  hidden >medio de contacto</option>
+                            <option id="s" hidden >medio de contacto</option>
                                 {thg.map(p => {
                                     return (
                                         <option  value={p} key={p}>{p}</option>
@@ -147,7 +145,9 @@ const ReviewR = () => {
                     <input className="input" type = {'submit'} name = {'submit'} 
                     />
                 </form>
-        </div>
+                <button onClick={()=>setP(false)}>
+                    cerrar
+                </button>
         </div>
         </div>
     );

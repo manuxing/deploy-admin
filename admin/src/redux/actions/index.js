@@ -40,6 +40,18 @@ export function getClient(id){
     };
 };
 
+export function getNot(id){
+        return function(dispatch){
+            axios.get(`http://localhost:3001/notif/`)
+            .then((res) => {
+                    dispatch({ type: type.GET_NOT, payload: res });
+                }).catch(e => {
+                    console.log(e);
+                    dispatch({ type: 'ERROR', payload: e });
+            });
+        };
+};
+
 export function createSolicitud(data){
     return function(dispatch){
         axios.post('http://localhost:3001/request/', data)
@@ -170,7 +182,6 @@ export function createServicio(data){
     return function(dispatch){
         axios.post('http://localhost:3001/service/', data)
         .then((res) => {
-            console.log("res", res);
             return {type: type.SET_ACTUAL, payload: res};
         })
         .then(p => {

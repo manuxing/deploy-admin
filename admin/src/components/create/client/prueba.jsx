@@ -1,27 +1,29 @@
-import React, { useState } from "react";
-import tools from "../../../tools";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import {createClient} from "../../../redux/actions/index.js";
-import { useEffect } from "react";
+import {createClient, getClient, setActual} from "../../../redux/actions/index.js";
 import AgregarContacto from "./agregarContacto.jsx";
-import NavBar from "../../bars/navBar";
-import SideBar from "../../bars/sideBar";
 import ContactCard from "./contactCard.jsx";
 import ActivityR from "./activityR";
-import { useDispatch, useSelector } from "react-redux";
+import tools from "../../../tools";
 // import "./Form.css";
 
+const Form = ({setP}) => {
 
-const Form = () => {
     let validate = tools.validate;
     let dispatch = useDispatch();
     let actual = useSelector(state => state.actual);
-    let[input, setInput] = useState({ name:'', contact:[], act:"no"});
     let[submited, setSubmited] = useState(false);
     let[pressed, setPressed] = useState(false);
+    let[input, setInput] = useState({ name:'', contact:[], act:"no"});
     let[warning, setWarning] = useState({name: '', contact: '', activity:'', general:''});
     let[contactsThg] = useState(["telefono","email","presencial","pagina","booking", "otro"]);
     const history = useHistory();
+    
+    let handleChange = (evento) => {
+        let val = validate.clientForm_field(evento);
+        val.status === true ? notErrHan(evento) : errHan(evento,val)
+    }
 
     let errHan = (evento,err) =>{
         if(evento){setInput({...input, [evento.target.name]:evento.target.value})}
@@ -33,11 +35,6 @@ const Form = () => {
         setWarning({...warning, [evento.target.name]:""});
     }
 
-    let handleChange = (evento) => {
-        let val = validate.clientForm_field(evento);
-        val.status === true ? notErrHan(evento) : errHan(evento,val)
-    };
-    
     let sub = () => {
         let send = input;
         let x = validate.clientForm(send);
@@ -49,12 +46,12 @@ const Form = () => {
             setInput({name: '', contact:[], act:"no"}); 
             setWarning({name: '', contact: '', activity:'', general:''});
         }
-    };
+    }
 
     let handleSubmit = (p) => {
         p.preventDefault();
         setPressed(true);
-    };
+    }
 
     useEffect(() => {
         if(input.act !== "no"){
@@ -65,18 +62,15 @@ const Form = () => {
     useEffect(() => {
         if(submited === true){
             if(typeof actual !== "number"){
-                history.push(`/client/${actual.id}`)
+                tools.alert("cliente", `/client/${actual.id}`, history, dispatch, getClient, setP, setActual);
+                setSubmited(false);
             }
-            console.log("submited, actual no");
         }
     }, [submited, actual]);
 
     return (
-           <div>
-             <NavBar/>
-             <div className="create_cli">
-               <SideBar/>
-            <div className="content_act">
+        <div>
+           <div className="content_act">
              Cliente:
             <form className="form" onSubmit={(e) => handleSubmit(e,input)}>
                 <div>
@@ -94,17 +88,18 @@ const Form = () => {
                                 <ContactCard key={p.value}contact={p}/>
                             )
                     })}
-                </div>
-                <div className="warning">
-                        {warning.contact}
+                    <div className="warning">
+                            {warning.contact}
                     </div>
-                    <ActivityR pressed={pressed} setPressed={setPressed} act={input} setAct={setInput}/>
-                <input className="input" type = {'submit'} name = {'submit'} 
-                    />
+                </div>
+                <ActivityR pressed={pressed} setPressed={setPressed} act={input} setAct={setInput}/>
+                <input className="input" type = {'submit'} name = {'submit'} />
             </form>
+            <button onClick={()=>setP(false)}>
+                cerrar
+            </button>
         </div>
-        </div>
-        </div>
+    </div>
     );
 };
 

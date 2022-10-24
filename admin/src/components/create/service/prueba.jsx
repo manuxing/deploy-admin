@@ -1,15 +1,12 @@
-import React, { useState } from "react";
-import tools from "../../../tools";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import {createServicio} from "../../../redux/actions/index.js";
-import { useEffect } from "react";
-import NavBar from "../../bars/navBar";
-import SideBar from "../../bars/sideBar";
 import { useDispatch, useSelector } from "react-redux";
+import {createServicio, setActual, getServicio} from "../../../redux/actions/index.js";
+import tools from "../../../tools";
 // import "./Form.css";
 
-
-const AgregarServicio = () => {
+const AgregarServicio = ({setP}) => {
+    
     let validate = tools.validate;
     let dispatch = useDispatch();
     let actual = useSelector(state => state.actual);
@@ -41,8 +38,6 @@ const AgregarServicio = () => {
         } else {
             setSubmited(true);
             dispatch(createServicio(send));
-            setInput({ name:'', description:"", tR:""}); 
-            setWarning({ name:'', description:"", tR:""});
         }
     };
 
@@ -55,17 +50,15 @@ const AgregarServicio = () => {
     useEffect(() => {
         if(submited === true){
             if(typeof actual !== "number"){
-                history.push(`/service/${actual.id}`)
+                tools.alert("servicio", `/service/${actual.id}`, history, dispatch, getServicio, setP, setActual);
+                setInput({ name:'', description:"", tR:""}); 
+                setWarning({ name:'', description:"", tR:""});
             }
-            console.log("submited, actual no", actual);
         }
     }, [submited, actual]);
 
     return (
            <div>
-             <NavBar/>
-             <div className="create_cli">
-               <SideBar/>
             <div className="content_act">
              Servicio:
             <form className="form" onSubmit={(e) => handleSubmit(e,input)}>
@@ -96,7 +89,9 @@ const AgregarServicio = () => {
                 <input className="input" type = {'submit'} name = {'submit'} 
                     />
             </form>
-        </div>
+            <button onClick={()=>setP(false)}>
+                    cerrar
+            </button>
         </div>
         </div>
     );

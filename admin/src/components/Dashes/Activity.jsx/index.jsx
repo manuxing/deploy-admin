@@ -6,7 +6,7 @@ import tools from "../../../tools";
 
 
 
-const Dash = ({id, back, client, services, people, date})=> { 
+const Dash = ({id, back, client, services, persons, date})=> { 
     return (
         <div className="dash_act"> 
                 <NavLink className="link" to={`/activity/${id}`}>
@@ -24,7 +24,7 @@ const Dash = ({id, back, client, services, people, date})=> {
                     </div>
                     <div className="punto_fdato">
                         <h2>Participantes</h2>
-                        <h3> {people.length} </h3>
+                        <h3> {persons.length} </h3>
                     </div>
                     <div className="punto_fdato">
                         <h2>Servicios</h2>

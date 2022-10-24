@@ -8,6 +8,7 @@ const initialState = {
     actividades: [],
     reviews: [],
     servicios: [],
+    not: [],
     error:{},
 };
 
@@ -15,10 +16,17 @@ export default function rootReducer(state=initialState, action){
     console.log("mira",action.type,action.payload)
     switch (action.type) {
         case type.SET_ACTUAL: {
-            if(action.payload.data.length)action.payload.data = action.payload.data[0]
+            if(action.payload !== 1 && action.payload.data.length)action.payload.data = action.payload.data[0]
             return {
                 ...state,
                 actual: action.payload === 1 ? action.payload : action.payload.data
+            };
+        }
+        case type.GET_NOT: {
+            console.log(action.payload);
+            return {
+                ...state,
+                not: action.payload.data
             };
         }
         case type.GET_CLIENTES: {

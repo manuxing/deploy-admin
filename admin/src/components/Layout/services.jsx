@@ -1,11 +1,11 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getServicio, setActual } from '../../redux/actions'
 import NavBar from '../bars/navBar'
 import SideBar from '../bars/sideBar'
 import Spinner from "../Spinner.jsx"
 import Dash from '../Dashes/Service'
+import AgregarServicio from '../create/service/prueba'
 
 const ServiceLayout = () => {
 
@@ -13,6 +13,7 @@ const ServiceLayout = () => {
     let dispatch = useDispatch();
     let [cards, setCards] = useState([]);
     let [loading, setLoading] = useState(true);
+    let [pressed, setPressed] = useState(false);
 
     useEffect(()=>{
         dispatch(getServicio())
@@ -23,7 +24,6 @@ const ServiceLayout = () => {
             setCards(todas)
         }
         if(cards && cards.length > 0)setLoading(false)
-        console.log(todas)
     },[todas,cards])
 
     useEffect(() => {
@@ -36,12 +36,19 @@ const ServiceLayout = () => {
       <div className="client_l">
         <SideBar/>
         <div className="content_cli_l">
+                <div>{
+                    pressed === false ? 
+                    <button onClick={()=>setPressed(true)}>
+                        agregar
+                    </button>:
+                    < AgregarServicio setP={setPressed}/>
+                }
+                </div>
                 {loading === false ?
                     <div className="cont">
                         <div className="cards">
                         {
                             cards && cards?.map(p =>{ 
-                            console.log(p);
                             return (<Dash 
                                     key = {p.id}
                                     id = {p.id}

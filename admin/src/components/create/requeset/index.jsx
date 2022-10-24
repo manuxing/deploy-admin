@@ -1,15 +1,13 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { getServicio, createSolicitud } from "../../../redux/actions";
-import { useEffect } from "react";
-import tools from "../../../tools";
-import NavBar from "../../bars/navBar";
-import SideBar from "../../bars/sideBar";
+import { useSelector, useDispatch } from 'react-redux'
+import { getServicio, createSolicitud, getSolicitudes, setActual } from "../../../redux/actions";
 import AgregarContacto from "./agregarContacto";
 import ContactCard from "./contactCard";
+import tools from "../../../tools";
 
-const RequestR = () => {
+const RequestR = ({setP}) => {
+
     const history = useHistory();
     let dispatch = useDispatch();
     let validate = tools.validate;
@@ -31,7 +29,6 @@ const RequestR = () => {
     };
     
     let errHan = (err, evento) =>{
-        console.log("err",err);
         if(evento){
             setInputA({...input, [evento.target.name]:evento.target.value})
         }
@@ -45,7 +42,6 @@ const RequestR = () => {
     }
     
     let notErrHan = (evento) =>{
-        console.log("evento",evento);
         setInputA({...input, [evento.target.name]:evento.target.value})
         setWarningA({...warningA, [evento.target.name]:""});
     }
@@ -66,10 +62,11 @@ const RequestR = () => {
     
     useEffect(() => {
         if(actual !== 1){
-            console.log("submited rew");
-            setInputA({ dateR:"", dateP:"" , thg:"", contact:"", sId:0}); 
+            tools.alert("solicitud", `/request/${actual.id}`, history, dispatch, getSolicitudes, setP, setActual);
+            setInputA({ dateR:"", dateP:"" , thg:"", contact:[], sId:0}); 
             setWarningA({ dateR:"", dateP:"" , thg:"", contact:"", sId:""});
-            history.push(`/request/${actual.id}`)
+            let x = document.getElementById("service");
+            x.selected = true;
         }
     }, [actual, input]);
 
@@ -82,9 +79,6 @@ const RequestR = () => {
 
     return (
         <div>
-            <NavBar/>
-            <div className="create_cli">
-               <SideBar/>
             <div className="content_act">
              solicitud:
             <form className="form" onSubmit={(e) => handleSubmit(e,input)}>
@@ -107,7 +101,6 @@ const RequestR = () => {
                 <AgregarContacto contactsThg={thg} setContacts={setInputA} _contacts={input}/>               
                 <div>
                     {input.contact.map(p => {
-                        console.log(p)
                             return (
                                 <ContactCard key={input.contact.length}contact={p}/>
                             )
@@ -131,10 +124,11 @@ const RequestR = () => {
                 <div className="warning">
                         {warningA.general}
                 </div>
-                    <input className="input" type = {'submit'} name = {'submit'} 
-                    />
+                <input className="input" type = {'submit'} name = {'submit'}/>
                 </form>
-        </div>
+                <button onClick={()=>setP(false)}>
+                    cerrar
+                </button>
         </div>
         </div>
     );
