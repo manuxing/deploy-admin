@@ -1,0 +1,9 @@
+.client_d{
+    display: flex;
+    height: 600px;
+}
+
+.div_cli{
+    margin: 20px;
+    font-size: 24px;
+}

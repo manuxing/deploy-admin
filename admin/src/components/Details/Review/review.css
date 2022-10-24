@@ -1,0 +1,9 @@
+.review_d{
+    display: flex;
+    height: 600px;
+}
+
+.div_rev{
+    margin: 20px;
+    font-size: 24px;
+}

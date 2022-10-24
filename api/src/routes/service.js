@@ -2,34 +2,32 @@ const { Router } = require('express');
 const { Service } = require('../db.js');
 const router = Router();
 
-router.get('/', async(req, res, next) =>{
-    
-    const {sName} = req.body;
-    
-    console.log(req.body)
-    if(!sName){
-        try {
-            let peticionDB = await Service.findAll();
-            return res.json(peticionDB);
-        }catch(e){
-            return next({status: "500", message: 'Error en router service get p'});
-        }
-    } 
-
+router.get('/:id', async(req, res, next) =>{
+    const {id} = req.params
     try {
         let peticionDB = await Service.findAll({
             where:{
-                name: sName
-            }
+                id: id
+            },
         });
         return res.json(peticionDB);
     }catch(e){
         return next({status: "500", message: 'Error en router service get i'});
     }
+});
 
+router.get('/', async(req, res, next) =>{
+        try {
+            let peticionDB = await Service.findAll();
+            return res.json(peticionDB);
+        }catch(e){
+            console.log(req.body)
+            return next({status: "500", message: 'Error en router service get p'});
+        }
 });
 
 router.post('/', async(req, res, next) => {
+    console.log(req.body);
     const { name, description, tR } = req.body;
     if(!name||!description||!tR){
         return next({status: "400", message: 'Ingrese los datos correctos'})

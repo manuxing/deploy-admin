@@ -19,13 +19,14 @@ module.exports = (sequelize) => {
             type: DataTypes.DATE,
             allowNull: false 
         },
+        contact: {
+            type: DataTypes.ARRAY(DataTypes.TEXT),
+            allowNull: false 
+        },
         thg:{
             type: DataTypes.TEXT,
             allowNull: false 
         },
-        contact: {
-            type: DataTypes.ARRAY(DataTypes.TEXT),
-          },
         ant: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,

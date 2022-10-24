@@ -13,6 +13,7 @@ module.exports = (sequelize) => {
     },
     contact: {
       type: DataTypes.ARRAY(DataTypes.TEXT),
+      allowNull: false,
     },
   },{
     timestamps: false,
