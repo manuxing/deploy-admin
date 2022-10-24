@@ -1,27 +1,25 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { getNot } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 // import { useHistory } from "react-router-dom";
 import SearchBar from "../searchBar/index";
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import "../navBar/navbar.css"
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import "../navBar/navbar.css";
 
 const NavBar = () => {
-
   let dispatch = useDispatch();
-  let not = useSelector(state => state.not);
+  let not = useSelector((state) => state.not);
   let [l, setL] = useState(0);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getNot());
-  },[dispatch])
+  }, [dispatch]);
 
-  useEffect(()=>{
-    if(l !== not.length){
+  useEffect(() => {
+    if (l !== not.length) {
       setL(not.length);
     }
-  },[not])
-  
+  }, [not]);
 
   // const { profile } = useSelector((state) => state.authReducer);
 
@@ -34,13 +32,13 @@ const NavBar = () => {
   return (
     <>
       <div className="topbar">
-          <div className="logo">Administrador</div>
+        <div className="logo">Administrador</div>
         <div className="topWrapper">
           {not.length > 0 ? not.length : ""}
           <div className="topRight">
-              <NotificationsIcon/>
-              <SearchBar/>
-            </div>
+            <NotificationsIcon />
+            <SearchBar />
+          </div>
         </div>
       </div>
     </>
