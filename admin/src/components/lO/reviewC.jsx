@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Spinner from '../Spinner';
 import { statChange } from "../../redux/actions";
 
@@ -20,7 +20,6 @@ const ReviewC = ({review}) => {
       }
     }
     setStat(!_stat);
-    console.log("x",x)
     dispatch(statChange(x));
   }
 

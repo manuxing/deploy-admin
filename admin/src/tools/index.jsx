@@ -384,7 +384,7 @@ const tools = {
                     }
                 break
                 case "cName":
-                    if(evento.target.value.length < 5||nameR.test(evento.target.value) === false){
+                    if(evento.target.value.length < 3||nameR.test(evento.target.value) === false){
                         let err = {
                             message: "ingrese un nombre valido",
                             ubic: "cName"
@@ -463,7 +463,7 @@ const tools = {
                 errs.push(err);
                 res.status = false;
             }
-            if(review.cName.length < 5||nameR.test(review.cName) === false){
+            if(review.cName.length < 3||nameR.test(review.cName) === false){
                 let err = {
                     message: "ingrese un nombre valido",
                     ubic: "name"
@@ -544,7 +544,19 @@ const tools = {
         field: () => {
 
         },
-    }
+    },
+    alert : (art, url, cb, cb2, cb3,cb4,cb5) =>{
+        let fem = ["reseña", "solicitud", "actividad"];
+        let f = fem.includes(art) ? "a" : "o"
+        let sign = prompt(`su ${art} fue cread${f} exitosamente, desea quedarse en la lista o ser redirigidx al detalle`);
+        if (sign.length > 0) {
+            cb.push(`${url}`);
+            cb4(false);
+        } else {
+            cb2(cb3());
+            cb2(cb5());
+        }
+    }   
 }
 
 export default tools

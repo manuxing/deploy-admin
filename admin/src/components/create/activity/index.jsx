@@ -1,15 +1,12 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { getServicio, createActividades } from "../../../redux/actions";
-import { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { getServicio, createActividades, getActividades, setActual } from "../../../redux/actions";
 import tools from "../../../tools";
 import PersonCard from "./personaCard";
-import NavBar from "../../bars/navBar";
-import SideBar from "../../bars/sideBar";
 import AgregarPersona from "./agregarPersona";
 
-const ActivityR = () => {
+const ActivityR = ({setP}) => {
     const history = useHistory();
     let dispatch = useDispatch();
     let validate = tools.validate;
@@ -23,16 +20,13 @@ const ActivityR = () => {
         let senr = input;
         let x = validate.activity_clientForm(senr);
         if(x.status === false){
-            console.log(x);
             errHan(x);
         } else {
-            console.log("antes de enviar",senr);
             dispatch(createActividades(senr));
         }
     };
     
     let errHan = (err) =>{
-        console.log(err);
         let id = err.ubic === "service" ? "service" : ""
         if(id === "service"){
             let x = document.getElementById(id);
@@ -43,7 +37,6 @@ const ActivityR = () => {
     }
     
     let notErrHan = (evento) =>{
-        console.log(evento);
         setInputA({...input, [evento.target.name]:evento.target.value})
         setWarningA({...warningA, [evento.target.name]:""});
     }
@@ -63,12 +56,12 @@ const ActivityR = () => {
     }, [dispatch]);
     
     useEffect(() => {
-        console.log(input.persons)
         if(actual !== 1 && input.date === actual.date){
-            history.push(`/activity/${actual.id}`)
-            console.log("submited act");
-            setInputA({date: '', persons:[], sId:1000}); 
-            setWarningA({date: '', persons:'', sId:''});
+            tools.alert("actividad", `/activity/${actual.id}`, history, dispatch, getActividades, setP, setActual);
+            setInputA({name:'', date: '', persons:[], sId:1000}); 
+            setWarningA({name:'', date: '', persons:'', sId:''});
+            let x = document.getElementById("service");
+            x.selected = true;
         }
     }, [actual, input]);
 
@@ -81,15 +74,12 @@ const ActivityR = () => {
 
     return (
         <div>
-            <NavBar/>
-            <div className="create_cli">
-               <SideBar/>
             <div className="content_act">
              Actividad:
             <form className="form" onSubmit={(e) => handleSubmit(e,input)}>
                 <div>
                     <label>Fecha de la actividad</label>
-                    <input className="input" type = {'date'} placeholder="date" name = {'date'} value = {input.dame}
+                    <input className="input" type = {'date'} placeholder="date" name = {'date'} value = {input.date}
                     onChange = {(p => handleChange(p))}/>
                     <div className="warning">
                         {warningA.date}
@@ -128,13 +118,14 @@ const ActivityR = () => {
                 </div>
                 <div className="warning">
                         {warningA.general}
-                    </div>
-                    <input className="input" type = {'submit'} name = {'submit'} 
-                    />
-                    </form>
+                </div>
+                <input className="input" type = {'submit'} name = {'submit'}/>
+            </form>
+            <button onClick={()=>setP(false)}>
+                cerrar
+            </button>
         </div>
-        </div>
-        </div>
+    </div>
     );
 };
 

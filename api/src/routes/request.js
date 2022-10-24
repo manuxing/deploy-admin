@@ -31,7 +31,6 @@ router.get('/', async(req, res, next) =>{
 
 router.post('/', async(req, res, next) => {
     const { dateR, dateP , thg, contact, sId } = req.body.senr;
-    console.log(dateR, dateP , thg, contact, sId);
     if(!dateR||!dateP||!contact||!sId){
         return next({status: "400", message: 'Ingrese los datos correctos'})
     }

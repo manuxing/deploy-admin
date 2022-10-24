@@ -1,11 +1,11 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getReviews, setActual } from '../../redux/actions'
 import NavBar from '../bars/navBar'
 import SideBar from '../bars/sideBar'
 import Spinner from "../Spinner.jsx"
 import Dash from '../Dashes/Review'
+import ReviewR from '../create/review'
 
 const ReviewLayout = () => {
 
@@ -13,13 +13,13 @@ const ReviewLayout = () => {
     let dispatch = useDispatch();
     let [cards, setCards] = useState([]);
     let [loading, setLoading] = useState(true);
+    let [pressed, setPressed] = useState(false);
 
     useEffect(()=>{
         dispatch(getReviews())
     },[dispatch])
 
     useEffect(()=>{
-        console.log(cards)
         if(todas.length > 0){
             setCards(todas)
         }
@@ -36,12 +36,19 @@ const ReviewLayout = () => {
       <div className="client_l">
         <SideBar/>
         <div className="content_cli_l">
+            <div>{
+                    pressed === false ? 
+                    <button onClick={()=>setPressed(true)}>
+                        agregar
+                    </button>:
+                    < ReviewR setP={setPressed}/>
+            }
+            </div>
                 {loading === false ?
                     <div className="cont">
                         <div className="cards">
                         {
                             cards && cards?.map(p =>{ 
-                                console.log("p",p);
                              return (<Dash 
                                     key = {p.id}
                                     id = {p.id}
@@ -59,13 +66,12 @@ const ReviewLayout = () => {
                         </div>
                     </div> : 
                     <div>
-                        eeeeeeee
                         <Spinner/>
                     </div>
                     }
-                </div>
-                </div>
-                </div>
+            </div>
+        </div>
+    </div>
                 )
 }
 

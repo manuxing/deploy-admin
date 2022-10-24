@@ -24,6 +24,8 @@ const ActivityR = ({pressed, setPressed, act, setAct}) => {
             setAct({...act, act:senr});
             setInputA({date: '', persons:[], sId:1000}); 
             setWarningA({date: '', persons:'', sId:''});
+            let x = document.getElementById("service");
+            x.selected = true;
         }
     };
     
@@ -58,7 +60,6 @@ const ActivityR = ({pressed, setPressed, act, setAct}) => {
     
     useEffect(() => {
         if(pressed === true){
-            console.log("pressed true")
             sub();
             setPressed(false);
         }
@@ -68,7 +69,7 @@ const ActivityR = ({pressed, setPressed, act, setAct}) => {
         <div>
                 <div>
                     <label>Fecha de la actividad</label>
-                    <input className="input" type = {'date'} placeholder="date" name = {'date'} value = {input.name}
+                    <input className="input" type = {'date'} placeholder="date" name = {'date'} value = {input.date}
                     onChange = {(p => handleChange(p))}/>
                     <div className="warning">
                         {warningA.date}

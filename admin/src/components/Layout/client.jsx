@@ -1,15 +1,16 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getActividades, getClient, setActual } from '../../redux/actions'
+import { getClient, setActual } from '../../redux/actions'
 import NavBar from '../bars/navBar'
 import SideBar from '../bars/sideBar'
 import Spinner from "../Spinner.jsx"
 import Dash from '../Dashes/Client'
+import Form from '../create/client/prueba'
 
 const ClientLayout = () => {
 
     let todas = useSelector(state => state.clientes)
+    let [pressed, setPressed] = useState(false);
     let dispatch = useDispatch();
     let [cards, setCards] = useState([]);
     let [loading, setLoading] = useState(true);
@@ -19,7 +20,6 @@ const ClientLayout = () => {
     },[dispatch])
 
     useEffect(()=>{
-        console.log(cards)
         if(todas.length > 0){
             setCards(todas)
         }
@@ -36,12 +36,19 @@ const ClientLayout = () => {
       <div className="client_l">
         <SideBar/>
         <div className="content_cli_l">
+            <div>{
+                pressed === false ? 
+                    <button onClick={()=>setPressed(true)}>
+                        agregar
+                    </button>:
+                    < Form setP ={setPressed}/>
+            }
+            </div>
                 {loading === false ?
                     <div className="cont">
                         <div className="cards">
                         {
                             cards && cards?.map(p =>{ 
-                                console.log(p);
                              return (<Dash 
                                     key = {p.id}
                                     id = {p.id}
@@ -57,13 +64,12 @@ const ClientLayout = () => {
                         </div>
                     </div> : 
                     <div>
-                        eeeeeeee
                         <Spinner/>
                     </div>
                     }
-                </div>
-                </div>
-                </div>
+            </div>
+        </div>
+    </div>
                 )
 }
 
