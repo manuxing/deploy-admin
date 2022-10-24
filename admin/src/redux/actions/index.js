@@ -242,6 +242,18 @@ export function statChange(x){
     }; 
 };
 
+export function setAll (){
+    return function(dispatch){
+        axios.get(`http://localhost:3001/stats/`)
+        .then((res) => {
+            dispatch({ type:type.SET_ALL , payload: res });
+        }).catch(e => {
+            console.log(e);
+            dispatch({ type: 'ERROR', payload: e });
+        });
+    }
+};
+
 export function setActual (){
     return { type:type.SET_ACTUAL, payload:1 };
 };
@@ -250,8 +262,14 @@ export function clear (){
     return { type:type.CLEAR_ALL };
 };
 
-export function orderByR (n){
+export function orderByN (n){
+    //logica
     return { type:type.ORDER_N, payload:n };
+};
+
+export function orderByV (n){
+    //logica
+    return { type:type.ORDER_A, payload:n };
 };
 
 export function search(payload) {

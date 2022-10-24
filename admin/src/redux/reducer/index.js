@@ -3,6 +3,7 @@ import { type } from "../actions/types";
 const initialState = {
     actual:1,
     actualG:{},
+    all:[],
     solicitudes: [],
     clientes: [],
     actividades: [],
@@ -20,6 +21,12 @@ export default function rootReducer(state=initialState, action){
             return {
                 ...state,
                 actual: action.payload === 1 ? action.payload : action.payload.data
+            };
+        }
+        case type.SET_ALL: {
+            return {
+                ...state,
+                actual: action.payload.data,
             };
         }
         case type.GET_NOT: {

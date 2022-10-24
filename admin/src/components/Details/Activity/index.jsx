@@ -14,86 +14,86 @@ const Activity = () => {
   let [loading, setLoading] = useState(true);
   let actual = useSelector((state) => state.actual);
 
-    useEffect(()=>{
-        dispatch(getActividades(id))
-    },[dispatch])
+  useEffect(()=>{
+    dispatch(getActividades(id))
+  },[dispatch]);
 
-    useEffect(()=>{
-        if(typeof actual !== "number"){
-            setLoading(false);
-            console.log(actual)
-        }else{
-          setLoading(true)
-        }
-    },[loading,actual])
+  useEffect(()=>{
+    if(typeof actual !== "number"){
+      setLoading(false);
+    }else{
+      setLoading(true)
+    }
+  },[loading,actual]);
 
-    useEffect(() => {
-      return () => dispatch(setActual())
-    }, []);
+  useEffect(() => {
+    return () => dispatch(setActual())
+  }, []);
 
   return (
-     loading === true ?
-    <div>
-      <Spinner/>
-    </div> :
-    <div>
-      <NavBar/>
-      <div className="Activity_d">
-        <SideBar/>
-        <div className="content_act">
-          <div  className="div_act">
-            <span className="_span_act">
-              Cliente:
-            </span>
+    loading === true ?
+      <div>
+        <Spinner/>
+        </div> 
+        :
+        <div>
+          <NavBar/>
+          <div className="Activity_d">
+            <SideBar/>
+            <div className="content_act">
+              <div  className="div_act">
+                <span className="_span_act">
+                  Cliente:
+                </span>
                 <NavLink  className="link" to={`/client/${actual?.client?.id}`}>
                   {actual?.client?.name ? actual?.client?.name : "name"}
                 </NavLink>
-          </div>
-          <div  className="div_act">
-            <span className="_span_act">
-                Servicios
-            </span>
-            <div>
+              </div>
+              <div  className="div_act">
+                <span className="_span_act">
+                  Servicios
+                </span>
+                <div>
                   {
                     actual?.services ? actual.services.map(p => { 
                       return (
                         <NavLink  className="link" to={`/service/${p.id}`}>
                           <span key={p.name}>{p.name}</span>
                         </NavLink>
-                    ) 
-                  }) : "services"
+                      ) 
+                    }) : "services"
                   }
-            </div>
-          </div>  
-          <div  className="div_act">
-            <span className="_span_act">
-              fecha de actividad
-              </span>
+                </div>
+              </div>  
+              <div  className="div_act">
+                <span className="_span_act">
+                  fecha de actividad
+                </span>
                   {actual?.date ? actual?.date : "date"}
-          </div>
-          <div  className="div_act">
-            <span className="_span_act">
-                Personas:
-            </span>
+              </div>
+              <div  className="div_act">
+                <span className="_span_act">
+                  Personas:
+                </span>
                 {actual?.persons ? actual?.persons.length : "0"}
                 <div>
                   <ul>
-                  {
-                  actual?.persons ? actual?.persons.map(p => { 
-                    return (
-                    <li key={p}>
-                        <span>-  {p}</span> 
-                    </li>
-                    ) 
-                  }) : "persons"
-                  }
+                    {
+                    actual?.persons ? actual?.persons.map(p => { 
+                      return (
+                        <li key={p}>
+                          <span>-  {p}</span> 
+                        </li>
+                      ) 
+                    }) : "persons"
+                    }
                   </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Activity;

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch} from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 // Pages
 import Home from "./components/home";
 import Activity from "./components/Details/Activity";
@@ -11,7 +11,7 @@ import ServiceLayout from "./components/Layout/services";
 import Client from "./components/Details/Client";
 import Request from "./components/Details/Request";
 import Review from "./components/Details/Review";
-import "../src/App.css"
+import "../src/App.css";
 import Service from "./components/Details/Service";
 import Form from "./components/create/client/prueba";
 import ReviewR from "./components/create/review";
@@ -25,51 +25,50 @@ function App() {
   //   if (redirect === "redirect") {
   //     navigate.push("/");
   //   }
-  // }, []); 
+  // }, []);
 
   return (
     <div className="App">
-        
       <BrowserRouter>
         <Switch>
-          <Route exact path="/"component={Home} />
+          <Route exact path="/" component={Home} />
           <Route path="/activity/:id">
-            <Activity/>
+            <Activity />
           </Route>
           <Route path="/activitys/">
-            <ActivityLayout/>
+            <ActivityLayout />
           </Route>
           <Route path="/createcl">
-            <Form/>
+            <Form />
             {/* <ActivityR/> */}
           </Route>
           <Route path="/createact">
-            <ActivityR/>
+            <ActivityR />
           </Route>
           <Route path="/createrev">
-            <ReviewR/>
+            <ReviewR />
           </Route>
           <Route path="/createreq">
-            <RequestR/>
+            <RequestR />
           </Route>
           <Route path="/createser">
-            <AgregarServicio/>
+            <AgregarServicio />
           </Route>
           <Route path="/client/:id" component={Client} />
           <Route path="/clients/">
-            <ClientLayout/>
+            <ClientLayout />
           </Route>
-          <Route path="/request/:idR"component={Request} />
+          <Route path="/request/:idR" component={Request} />
           <Route path="/requests/">
-            <RequestLayout/>
+            <RequestLayout />
           </Route>
           <Route path="/review/:id" component={Review} />
           <Route path="/reviews">
-            <ReviewLayout/>
+            <ReviewLayout />
           </Route>
           <Route path="/service/:id" component={Service} />
           <Route path="/services">
-            <ServiceLayout/>
+            <ServiceLayout />
           </Route>
         </Switch>
       </BrowserRouter>
