@@ -5,6 +5,20 @@ const axios = require('axios').default;
 
 let pre = {};
 
+//     Client: client,
+//     Request: request,
+//     Review: review,
+//     Service: service,
+
+pre.setDisplayModels = (p) => {
+    let res = {
+                url:`/${p.toLowerCase()}s/`,
+                src:`../icons/${p}.png`,
+                to:p
+            }
+    return res;
+}
+
 let queryCleaner = (query) => {
      let res = query.split(/([0-9]+)/);
      return res.map(p => {if(Number(p) || p === '0') return p}).join('').split(Boolean)[0];

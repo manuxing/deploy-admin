@@ -7,6 +7,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import "../navBar/navbar.css";
 
 const NavBar = () => {
+  
   let dispatch = useDispatch();
   let not = useSelector((state) => state.not);
   let [l, setL] = useState(0);
@@ -19,10 +20,9 @@ const NavBar = () => {
     if (l !== not.length) {
       setL(not.length);
     }
-  }, [not]);
+  }, [not, l]);
 
   // const { profile } = useSelector((state) => state.authReducer);
-
   // const logout = () => {
   //   localStorage.removeItem("profile");
   //   dispatch(logoutUser());
@@ -30,7 +30,6 @@ const NavBar = () => {
   // };
 
   return (
-    <>
       <div className="topbar">
         <div className="logo">Administrador</div>
         <div className="topWrapper">
@@ -41,7 +40,6 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-    </>
   );
 };
 

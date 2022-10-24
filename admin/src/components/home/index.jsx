@@ -7,7 +7,7 @@ import Stat from "../stats/Activity.jsx";
 import "./home.css";
 
 const Home = () => {
-  let all = useSelector((state) => state.all);
+  let all = useSelector((state) => state.all.stats);
 
   let dispatch = useDispatch();
 
@@ -21,8 +21,8 @@ const Home = () => {
       <div className="home">
         <SideBar />
         <div className="content">
-          {all[0]?.cant &&
-            all.map((p) => {
+          {all?.stats &&
+            all.stats.map((p) => {
               return <Stat obj={p} />;
             })}
         </div>

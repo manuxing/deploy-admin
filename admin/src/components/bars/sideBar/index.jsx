@@ -1,60 +1,39 @@
-import React from "react";
-import { NavLink, Link, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import { setAll } from "../../../redux/actions";
 import "../sideBar/sideBar.css";
-
+import LinkWIcon from "../../../mod/linksWLogo";
 // Icons
-import GridViewIcon from "@mui/icons-material/GridView";
-import PersonIcon from "@mui/icons-material/Person";
-import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
-import PaidIcon from "@mui/icons-material/Paid";
-import GradingIcon from "@mui/icons-material/Grading";
+// import PersonIcon from "@mui/icons-material/Person";
+// import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
+// import GridViewIcon from "@mui/icons-material/GridView";
+// import PaidIcon from "@mui/icons-material/Paid";
+// import GradingIcon from "@mui/icons-material/Grading";
 
 const SideBar = () => {
-  let url = useLocation().pathname;
-
-  const dispatch = useDispatch();
+  
+  let all = useSelector(state => state.all.display);
+  let dispatch = useDispatch();
+  
+  useEffect(()=>{
+    if(all.length === 0){
+      dispatch(setAll());
+    }
+  },[dispatch, all]);
 
   return (
     <div className="side">
       <div className="items">
         <ul>
-          <li className="item">
-            <Link to="/dashboard" className="_link">
-              <GridViewIcon className="mr-4 opacity-50" />
-              <span>Dashboard</span>
-            </Link>
-          </li>
-          <li className="item">
-            <Link to="/clients" className="_link">
-              <PersonIcon className="mr-4 opacity-50" />
-              <span>Clientes</span>
-            </Link>
-          </li>
-          <li className="item">
-            <Link to="/requests" className="_link">
-              <SportsEsportsIcon className="mr-4 opacity-50" />
-              <span>Solicitudes</span>
-            </Link>
-          </li>
-          <li className="item">
-            <Link to="/reviews" className="_link">
-              <SportsEsportsIcon className="mr-4 opacity-50" />
-              <span>Reseñas</span>
-            </Link>
-          </li>
-          <li className="item">
-            <Link to="/activitys/" className="_link">
-              <SportsEsportsIcon className="mr-4 opacity-50" />
-              <span>Actividades</span>
-            </Link>
-          </li>
-          <li className="item">
-            <Link to="/services" className="_link">
-              <SportsEsportsIcon className="mr-4 opacity-50" />
-              <span>Servicios</span>
-            </Link>
-          </li>
+          {
+            all.length > 0 && all.map(p =>{
+              return(
+                  <li className="item">
+                    <LinkWIcon p={p}/>
+                  </li>
+                );
+            })
+          }
         </ul>
       </div>
     </div>

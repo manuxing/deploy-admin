@@ -1,5 +1,6 @@
 const { Router } = require('express');
-const { Activity, Service, Client, Person } = require('../db.js');
+const { Activity, Service, Client } = require('../db.js');
+const db = require('../db.js');
 const router = Router();
 
 router.get('/:id', async(req, res, next) =>{
@@ -21,6 +22,7 @@ router.get('/:id', async(req, res, next) =>{
 
 router.get('/', async(req, res, next) =>{
     //validate cosas de la pagina
+    console.log(db);
     try {
         let peticionDB = await Activity.findAll({include: [Client, Service]});
         return res.json(peticionDB);

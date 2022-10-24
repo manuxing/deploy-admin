@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 //traer, hacer search, ademas hacer la ruta para que traiga del back
 import "../searchBar/searchBar.css";
 
 const SearchBar = () => {
-  const dispatch = useDispatch();
+
+  // const dispatch = useDispatch();
   let [name, setName] = useState("");
 
   let handleChange = (evento) => {
@@ -14,7 +15,6 @@ const SearchBar = () => {
   let handleSubmit = (evento) => {
     evento.preventDefault();
     // dispatch(search(name));
-    setName("");
   };
 
   return (
