@@ -35,18 +35,19 @@ const Form = ({ setP }) => {
   ]);
   const history = useHistory();
 
-  let handleChange = (evento) => {
-    let val = validate.clientForm_field(evento);
-    val.status === true ? notErrHan(evento) : errHan(evento, val);
-  };
-
+  
   let errHan = (evento, err) => {
     if (evento) {
       setInput({ ...input, [evento.target.name]: evento.target.value });
     }
     err.err.map((p) => setWarning({ ...warning, [p.ubic]: p.message }));
   };
-
+  
+  let handleChange = (evento) => {
+    let val = validate.clientForm_field(evento);
+    val.status === true ? notErrHan(evento) : errHan(evento, val);
+  };
+  
   let notErrHan = (evento) => {
     setInput({ ...input, [evento.target.name]: evento.target.value });
     setWarning({ ...warning, [evento.target.name]: "" });
@@ -63,8 +64,9 @@ const Form = ({ setP }) => {
     }
   };
 
-  let handleSubmit = (p) => {
+  let handleSubmit = (p, input) => {
     p.preventDefault();
+    console.log("aca", p, input);
     setPressed(true);
   };
 
@@ -97,7 +99,7 @@ const Form = ({ setP }) => {
     <div>
       <div className="content_act">
         Cliente:
-        <form className="form" onSubmit={(e) => handleSubmit(e, input)}>
+        <form className="form" >
           <div>
             <label>Nombre</label>
             <input
@@ -127,7 +129,7 @@ const Form = ({ setP }) => {
             act={input}
             setAct={setInput}
           />
-          <input className="input" type={"submit"} name={"submit"} />
+          <button onClick={(e) => handleSubmit(e, input)}/>
         </form>
         <button onClick={() => setP(false)}>cerrar</button>
       </div>

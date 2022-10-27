@@ -9,10 +9,10 @@ const AgregarPersona = ({ ageR, setPersons, _persons }) => {
 
   let errHan = (err) => {
     let id = err.ubic === "ageR" ? "def1" : "def2";
-    setPerson({ ...person, [err.ubic]: "" });
-    err.err.map((p) => setWarning({ ...warning, [p.ubic]: p.message }));
     let x = document.getElementById(id);
     x.selected = true;
+    setPerson({ ...person, [err.ubic]: "" });
+    err.err.map((p) => setWarning({ ...warning, [p.ubic]: p.message }));
   };
 
   let notErrHan = (evento) => {
@@ -26,8 +26,8 @@ const AgregarPersona = ({ ageR, setPersons, _persons }) => {
   };
 
   let sub = () => {
-    setPerson({ ageR: "", sexo: "" });
     setPersons({ ..._persons, persons: [..._persons.persons, person] });
+    setPerson({ ageR: "", sexo: "" });
     setWarning({ ageR: "", sexo: "", general: "" });
     let x = document.getElementById("def1");
     let x1 = document.getElementById("def2");
@@ -37,7 +37,7 @@ const AgregarPersona = ({ ageR, setPersons, _persons }) => {
 
   let handleSubmit = (p) => {
     p.preventDefault();
-    let val = validate.agregarPersona(person, validate.agregarPersona_field);
+    let val = validate.agregarPersona(person);
     val.status === false
       ? setWarning({ ...warning, general: "Advertencia, revise los campos" })
       : sub();

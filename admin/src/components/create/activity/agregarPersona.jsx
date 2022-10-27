@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import tools from "../../../tools";
 
 const AgregarPersona = ({ ageR, setPersons, _persons }) => {
+  
   let [person, setPerson] = useState({ ageR: "", sexo: "" });
   let [warning, setWarning] = useState({ ageR: "", sexo: "", general: "" });
   let validate = tools.validate;

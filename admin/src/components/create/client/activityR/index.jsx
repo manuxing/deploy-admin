@@ -1,36 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import tools from "../../../../tools";
-import AgregarPersona from "./agregarPersona";
+import SubForm from "../../../../mod/subForm";
 import { getServicio } from "../../../../redux/actions";
-import { useEffect } from "react";
 import PersonCard from "./personaCard";
+import herenciaAddPersona from "./herencaAddPerson";
 
 const ActivityR = ({ pressed, setPressed, act, setAct }) => {
   let dispatch = useDispatch();
   let validate = tools.validate;
   let services = useSelector((state) => state.servicios);
-  let ageR = ["Adulto Mayor", "Adulto", "Adolecente", "niño"];
-  let [input, setInputA] = useState({ date: "", persons: [], sId: 1000 });
-  let [warningA, setWarningA] = useState({
+  let [input, setInput] = useState({ date: "", persons: [], sId: 1000 });
+  let [warning, setWarning] = useState({
     date: "",
     persons: "",
     sId: "",
     general: "",
   });
 
+  let herenciaAddP = herenciaAddPersona(setInput, input, document);
+
   let sub = () => {
     let senr = input;
     let x = validate.activity_clientForm(senr);
     if (x.status === false) {
-      setWarningA({
-        ...warningA,
+      setWarning({
+        ...warning,
         general: "todos los campos son obligatorios, completelos",
       });
     } else {
       setAct({ ...act, act: senr });
-      setInputA({ date: "", persons: [], sId: 1000 });
-      setWarningA({ date: "", persons: "", sId: "" });
+      setInput({ date: "", persons: [], sId: 1000 });
+      setWarning({ date: "", persons: "", sId: "", general:""});
       let x = document.getElementById("service");
       x.selected = true;
     }
@@ -41,14 +42,14 @@ const ActivityR = ({ pressed, setPressed, act, setAct }) => {
     if (id === "service") {
       let x = document.getElementById(id);
       x.selected = true;
-      setInputA({ ...input, sId: "" });
+      setInput({ ...input, sId: "" });
     }
-    err.err.map((p) => setWarningA({ ...warningA, [p.ubic]: p.message }));
+    err.err.map((p) => setWarning({ ...warning, [p.ubic]: p.message }));
   };
 
   let notErrHan = (evento) => {
-    setInputA({ ...input, [evento.target.name]: evento.target.value });
-    setWarningA({ ...warningA, [evento.target.name]: "" });
+    setInput({ ...input, [evento.target.name]: evento.target.value });
+    setWarning({ ...warning, [evento.target.name]: "" });
   };
 
   let handleSelect = (evento) => {
@@ -70,7 +71,7 @@ const ActivityR = ({ pressed, setPressed, act, setAct }) => {
       sub();
       setPressed(false);
     }
-  }, [pressed]);
+  }, [pressed, input]);
 
   return (
     <div>
@@ -84,9 +85,9 @@ const ActivityR = ({ pressed, setPressed, act, setAct }) => {
           value={input.date}
           onChange={(p) => handleChange(p)}
         />
-        <div className="warning">{warningA.date}</div>
+        <div className="warning">{warning.date}</div>
       </div>
-      <AgregarPersona ageR={ageR} setPersons={setInputA} _persons={input} />
+      <SubForm herencia={herenciaAddP} />
       <div>
         {input.persons.map((p) => {
           return <PersonCard key={input.persons.length} person={p} />;
@@ -112,9 +113,9 @@ const ActivityR = ({ pressed, setPressed, act, setAct }) => {
             );
           })}
         </select>
-        <div className="warning">{warningA.sId}</div>
+        <div className="warning">{warning.sId}</div>
       </div>
-      <div className="warning">{warningA.general}</div>
+      <div className="warning">{warning.general}</div>
     </div>
   );
 };

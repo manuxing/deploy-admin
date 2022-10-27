@@ -101,6 +101,7 @@ const tools = {
       return res;
     },
     agregarPersona_field: (field) => {
+      field= field.p;
       let res = { status: true, ubic: field.target.name };
       let errs = [];
       let sexos = ["Femenino", "Masculino", "otro"];
@@ -108,6 +109,7 @@ const tools = {
       switch (field.target.name) {
         case "ageR":
           if (ageR.includes(field.target.value) === false) {
+            console.log(field.target.value)
             let err = {
               message: "rango de edad invalido",
               ubic: "ageR",
@@ -131,27 +133,33 @@ const tools = {
         }
       }
       res.err = errs;
+      console.log(res)
       return res;
     },
-    agregarPersona: (persona, cb) => {
+    agregarPersona: function(persona, cb) {
       let res = { status: true };
       let resX = [];
       let obj = {
-        target: {
-          name: "ageR",
-          value: persona.ageR,
-        },
+        p:{
+          target: {
+            name: "ageR",
+            value: persona.ageR,
+          },
+        }
       };
       let checkA = cb(obj);
       resX.push(checkA);
-      obj.target.name = "sexo";
-      obj.target.value = persona.sexo;
+      obj.p.target.name = "sexo";
+      obj.p.target.value = persona.sexo;
       let checkS = cb(obj);
       resX.push(checkS);
       res.res = resX;
       res.errs = resX.map((p) => {
-        if (p.status === false) res.status = false;
-        return p.err;
+        if (p.status === false)
+        {
+          res.status = false;
+          return p.err;
+        } 
       });
       return res;
     },
@@ -624,6 +632,49 @@ const tools = {
     },
     field: () => {},
   },
+  formActions:{
+    subL: {
+      errHandler: function (force, err, input, setInput, warning, setWarning) {
+        if(force){
+          force.map(p => p.id=== err.ubic ? p.selected = true: console.log("no"));
+          setInput({ ...input, [err.ubic]: '' })
+        }
+        err.err.map((p) => setWarning({ ...warning, [p.ubic]: p.message }))
+      },
+      notErrHandler: function ( input, setInput, evento, warning, setWarning )  {
+        let prepare_notErr = (input, evento, warning)=>{
+          let res;
+          input ?
+            res = { ...input, [evento.target.name]: evento.target.value } :
+            res = { ...warning, [evento.target.name]: '' }
+            return res
+        }
+        setInput(prepare_notErr(input, evento, null));
+        setWarning(prepare_notErr(null, evento, warning));
+      },
+      handleChange: function (evento) {
+        let { validate, force, warning, input, setInput, setWarning } = evento.vals;
+        let { errHandler, notErrHandler} = evento;
+        let val = validate.agregarPersona_field(evento);
+        val.status === true ? notErrHandler(input, setInput, evento.p, warning, setWarning) : errHandler(force, val, input, setInput, warning, setWarning);
+      },
+      sub: (set, clear, _in) => {
+        set.forEach(p =>{
+          let res =p.val(_in)
+          p.cb(res)
+        });
+        clear.forEach(p => p.cb(p.val));
+      },
+      handleSub: function(p, sub){
+        p.preventDefault();
+        let {validate, cbValidate, input, cb, warning, seteo} = sub;
+        let val = validate(input, cbValidate);
+        val.status === false
+          ? seteo.vals.setWarning({ ...warning, general: "Advertencia, revise los campos" })
+          : cb(seteo.vals.set, seteo.vals.clear, seteo.vals.input);  
+      },
+    },
+  },
   alert: (art, url, cb, cb2, cb3, cb4, cb5) => {
     let fem = ["reseña", "solicitud", "actividad"];
     let f = fem.includes(art) ? "a" : "o";
@@ -637,6 +688,9 @@ const tools = {
       cb2(cb3());
       cb2(cb5());
     }
+  },
+  ver:function () {
+    return Object.keys(this.formActions_subL);
   },
 };
 

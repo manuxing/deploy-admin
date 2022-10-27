@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import tools from "../../../tools";
 
 const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
+  
   let [contact, setContact] = useState({ type: "", value: "" });
   let [warning, setWarning] = useState({ contacto: "" });
   let validate = tools.validate;
@@ -32,10 +33,10 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   };
 
   let sub = () => {
-    setWarning({ contact: "" });
-    if (contact.value === "") contact.value = contact.type;
-    if (contact.type === "") contact.type = contact.value;
+    if (contact.value === ""&&contact.type.length > 0) contact.value = contact.type;
+    if (contact.type === ""&&contact.value.length > 0) contact.type = contact.value;
     setContacts({ ..._contacts, contact: [..._contacts.contact, contact] });
+    setWarning({ contact: "" });
     setContact({ type: "", value: "" });
   };
 
