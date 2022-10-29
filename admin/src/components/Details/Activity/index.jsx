@@ -57,8 +57,8 @@ const Activity = () => {
                   {
                     actual?.services ? actual.services.map(p => { 
                       return (
-                        <NavLink  className="link" to={`/service/${p.id}`}>
-                          <span key={p.name}>{p.name}</span>
+                        <NavLink key={p.name} className="link" to={`/service/${p.id}`}>
+                          <span >{p.name}</span>
                         </NavLink>
                       ) 
                     }) : "services"

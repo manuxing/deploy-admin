@@ -21,13 +21,13 @@ const Review = () => {
   },[dispatch])
     
   useEffect(()=>{
+    console.log(actual)
     if(actual && actual !== 1 && actual?.stat !== null){
       setStat(actual?.stat)
       setLoading(false)
     }else{
       setLoading(true)
     }
-    console.log("act",actual)
   },[loading,actual])
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const Review = () => {
                   {
                     actual?.services ? actual?.services.map(p => { 
                       return (
-                      <NavLink  className="link" to={`/service/${p.id}`}>
+                      <NavLink key={`${p.id}`}  className="link" to={`/service/${p.id}`}>
                         <span key={p.name}>{p.name}</span>
                       </NavLink>
                     ) 
@@ -96,20 +96,6 @@ const Review = () => {
               Medio
             </span>
             {actual?.thg ? actual?.thg : "medio"}
-          </div>
-          <div  className="div_rev">
-            <span className="span_rev">
-              Contacto
-            </span>
-            <div>
-              {
-                actual.client?.contact ? actual.client?.contact.map(p => { 
-                  return (
-                    <span>{p}</span>
-                  ) 
-                }) : "contacto"
-              }
-            </div>
           </div>
           <div  className="div_rev">
             <span className="span_rev">

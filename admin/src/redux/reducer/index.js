@@ -27,9 +27,10 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.SET_ALL: {
+            let {display} = action.payload.data;
             return {
                 ...state,
-                all: action.payload.data,
+                all: {...state.all, display},
             };
         }
         case type.GET_NOT: {
@@ -41,9 +42,8 @@ export default function rootReducer(state=initialState, action){
         case type.GET_CLIENTES: {
             let stat = action.payload.data.pop();
             let data = action.payload.data;
-            let stats = state.all;
-            stats = {...state.all, [stat.name]:stat.vals};
-            console.log(stat, data[data.length-1]);
+            let stats = state.all.stats;
+            stats = {...stats, [stat.name]:stat.vals};
             return {
                 ...state,
                 clientes: data,
@@ -51,27 +51,47 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.GET_SOLICITUDES: {
+            let stat = action.payload.data.pop();
+            let data = action.payload.data;
+            let stats = state.all.stats;
+            stats = {...stats, [stat.name]:stat.vals};
             return {
                 ...state,
-                solicitudes: action.payload.data
+                solicitudes: data,
+                all:{...state.all, stats},
             };
         }
         case type.GET_ACTIVIDADES: {
+            let stat = action.payload.data.pop();
+            let data = action.payload.data;
+            let stats = state.all.stats;
+            stats = {...stats, [stat.name]:stat.vals};
             return {
                 ...state,
-                actividades: action.payload.data
+                actividades: data,
+                all:{...state.all, stats},
             };
         }
         case type.GET_REVIEWS: {
+            let stat = action.payload.data.pop();
+            let data = action.payload.data;
+            let stats = state.all.stats;
+            stats = {...stats, [stat.name]:stat.vals};
             return {
                 ...state,
-                reviews: action.payload.data
+                reviews: data,
+                all:{...state.all, stats},
             };
         }
         case type.GET_SERVICIOS: {
+            let stat = action.payload.data.pop();
+            let data = action.payload.data;
+            let stats = state.all.stats;
+            stats = {...stats, [stat.name]:stat.vals};
             return {
                 ...state,
-                servicios: action.payload.data
+                servicios: data,
+                all:{...state.all, stats},
             };
         }
         case type.CLEAR_ALL:

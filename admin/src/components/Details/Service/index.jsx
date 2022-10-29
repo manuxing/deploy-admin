@@ -63,7 +63,7 @@ const Service = () => {
               Descripcion
             </span>
             <div>
-              {actual?.description ? actual?.description : "contacto"}
+              {actual?.description ? actual?.description : "descripcion"}
             </div>
           </div>
           <div className="div_srv">
@@ -71,7 +71,7 @@ const Service = () => {
               Horarios
             </span>
             <div>
-              {actual?.tR ? actual?.description : "descricion"}
+              {actual?.tR ? actual?.tR : "rango Horario"}
             </div>
           </div>
           {loadingR === true ? <></>
@@ -85,7 +85,7 @@ const Service = () => {
               {
                 reviews ? reviews.map(p => { 
                   return (
-                    <NavLink  className="link" to={`/review/${p.id}`}>
+                    <NavLink key={`${p.id}`} className="link" to={`/review/${p.id}`}>
                       {p.clients[0].name}:
                       "{p.description}"
                     </NavLink>

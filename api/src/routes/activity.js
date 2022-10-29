@@ -25,6 +25,7 @@ router.get('/', async(req, res, next) =>{
     console.log(db);
     try {
         let peticionDB = await Activity.findAll({include: [Client, Service]});
+        peticionDB.push({name:'activitys', vals:{size:peticionDB.length}});
         return res.json(peticionDB);
     }catch(e){
         return next({status: "500", message: 'Error en router Activity get P'});

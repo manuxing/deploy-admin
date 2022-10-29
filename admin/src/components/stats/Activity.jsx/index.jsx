@@ -4,7 +4,8 @@ import { NavLink } from "react-router-dom";
 import tools from "../../../tools";
 // import  icon  from "../../../img/star.png";
 
-const Stat = ({ cant, last15Days, top3S }) => {
+const Stat = ({p}) => {
+  let {size} = p;
   return (
     <div className="dash_act">
       <NavLink className="link" to={`/activits/`}>
@@ -14,16 +15,16 @@ const Stat = ({ cant, last15Days, top3S }) => {
         <div className="info_act_d">
           <div className="punto_fdato">
             <h2> Total</h2>
-            <h3>{cant}</h3>
+            <h3>{size}</h3>
           </div>
-          <div className="punto_fdato">
+          {/* <div className="punto_fdato">
             <h2>actividades en los ultimos x dias</h2>
             <h3> {last15Days} </h3>
           </div>
           <div className="punto_fdato">
             <h2>Top Servicios</h2>
             <h3> {tools.display.activity.dash(top3S)} </h3>
-          </div>
+          </div> */}
         </div>
       </NavLink>
     </div>

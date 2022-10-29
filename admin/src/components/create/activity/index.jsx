@@ -151,8 +151,9 @@ const ActivityR = ({ setP }) => {
                 seleccione
               </option>
               {services.map((p) => {
+                console.log(p)
                 return (
-                  <option value={p.id} key={p.id}>
+                  <option key={`${p.id}`} value={p.id}>
                     {p.name}
                   </option>
                 );

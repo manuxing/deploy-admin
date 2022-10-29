@@ -16,6 +16,7 @@ const SideBar = () => {
   let dispatch = useDispatch();
   
   useEffect(()=>{
+    console.log(all)
     if(all.length === 0){
       dispatch(setAll());
     }
@@ -28,7 +29,7 @@ const SideBar = () => {
           {
             all.length > 0 && all.map(p =>{
               return(
-                  <li className="item">
+                  <li key ={p.url} className="item">
                     <LinkWIcon p={p}/>
                   </li>
                 );

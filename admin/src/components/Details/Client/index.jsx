@@ -71,7 +71,7 @@ const Cliente = () => {
                 {
                   actual?.activities ? actual?.activities.map(p => { 
                     return (
-                      <NavLink  className="link" to={`/activity/${p.id}`}>
+                      <NavLink key={`${p.id}`} className="link" to={`/activity/${p.id}`}>
                         <ActivityC key={p.id} activity={p}/>
                       </NavLink>
                     ) 
@@ -87,7 +87,7 @@ const Cliente = () => {
                 {
                   actual?.reviews ? actual?.reviews.map(p => { 
                     return (
-                      <NavLink  className="link" to={`/review/${p.id}`}>
+                      <NavLink key={`${p.id}`} className="link" to={`/review/${p.id}`}>
                         <ReviewC key={p} review = {p}/>
                       </NavLink>
                     ) 

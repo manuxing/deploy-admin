@@ -695,6 +695,15 @@ const tools = {
       cb2(cb5());
     }
   },
+  build: async (cb, actions) => {
+    
+    let hacer = actions.map(async p =>{
+      console.log(p)
+      new Promise(async(resolve)=>await cb(p()));
+    })
+    await Promise.all(hacer);
+    return 0
+  },
 };
 
 export default tools;
