@@ -1,7 +1,6 @@
 import React from "react";
 import './Client.css';
 import { NavLink } from "react-router-dom";
-import tools from "../../../tools";
 // import  icon  from "../../../img/star.png"; 
 
 

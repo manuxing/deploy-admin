@@ -51,7 +51,6 @@ const ActivityLayout = () => {
           {loading === false ? (
             <div className="cont">
               <div className="cards">
-                aaaaaaaaaaaa
                 {cards &&
                   cards?.map((p) => {
                     return (

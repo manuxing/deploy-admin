@@ -2,11 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const LinkWIcon = (p) => {
-
   let {url, src, to} = p.p;
               
-  console.log(p.p.src)
-
   return (
     <div className="sideBI">
       <NavLink to={`${url}`} className="LinkSideB">

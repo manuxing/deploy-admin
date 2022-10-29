@@ -2,9 +2,12 @@ import React from "react";
 import tools from "../../../../tools";
 
 const Select = (p) => {
+
     let {cN, name, options, onChange } = p.p;
     let {vals} = p
     let {notErrHandler, errHandler} = tools.formActions.subL
+    let id;
+    let nameI;
 
     return (
         <select
@@ -16,9 +19,11 @@ const Select = (p) => {
                 seleccione
               </option>
               {options.map((p) => {
+                id = p.id ? p.id : p
+                nameI = p.name ? p.name : p
                 return (
-                  <option value={p} key={p}>
-                    {p}
+                  <option value={id} key={id}>
+                    {nameI}
                   </option>
                 );
               })}

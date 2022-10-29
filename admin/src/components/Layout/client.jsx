@@ -51,21 +51,24 @@ const ClientLayout = () => {
               <div className="cards">
                 {cards &&
                   cards?.map((p) => {
-                    return (
-                      <Dash
-                        key={p.id}
-                        id={p.id}
-                        back={
-                          p.back
-                            ? p.back
-                            : "https://e7.pngegg.com/pngimages/779/957/png-clipart-video-games-video-game-consoles-red-dead-redemption-video-game-developer-cool-gaming-logos-blue-game-logo.png"
-                        }
-                        name={p.name}
-                        contact={p.contact}
-                        act={p.activities}
-                        rev={p.reviews}
-                      />
-                    );
+                    //borrar
+                    if(p.id !== undefined){
+                      return (
+                        <Dash
+                          key={p.id}
+                          id={p.id}
+                          back={
+                            p.back
+                              ? p.back
+                              : "https://e7.pngegg.com/pngimages/779/957/png-clipart-video-games-video-game-consoles-red-dead-redemption-video-game-developer-cool-gaming-logos-blue-game-logo.png"
+                          }
+                          name={p.name}
+                          contact={p.contact}
+                          act={p.activities}
+                          rev={p.reviews}
+                        />
+                      );
+                    }
                   })}
               </div>
             </div>

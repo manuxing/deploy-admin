@@ -5,7 +5,6 @@ import Select from "../cElement/Elementos/select";
 import DataList from "../cElement/Elementos/dataList";
 
 const CElement = (p, vals) => {
-
   let {fT} = p.p;
   let text = ["input", "textarea"];
 

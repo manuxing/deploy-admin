@@ -5,7 +5,7 @@ const initialState = {
     actualG:{},
     all:{
         display:[],
-        stats:[],
+        stats:{},
     },
     solicitudes: [],
     clientes: [],
@@ -27,35 +27,27 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.SET_ALL: {
-            console.log(action.payload.data)
             return {
                 ...state,
                 all: action.payload.data,
             };
         }
         case type.GET_NOT: {
-            console.log(action.payload);
             return {
                 ...state,
                 not: action.payload.data
             };
         }
         case type.GET_CLIENTES: {
+            let stat = action.payload.data.pop();
+            let data = action.payload.data;
+            let stats = state.all;
+            stats = {...state.all, [stat.name]:stat.vals};
+            console.log(stat, data[data.length-1]);
             return {
                 ...state,
-                clientes: action.payload.data
-            };
-        }
-        case type.GET_CLIENTE: {
-            return {
-                ...state,
-                actual: [action.payload]
-            };
-        }
-        case type.GET_SOLICITUD: {
-            return {
-                ...state,
-                actual: [action.payload]
+                clientes: data,
+                all:{...state.all, stats},
             };
         }
         case type.GET_SOLICITUDES: {
@@ -64,34 +56,16 @@ export default function rootReducer(state=initialState, action){
                 solicitudes: action.payload.data
             };
         }
-        case type.GET_ACTIVIDAD: {
-            return {
-                ...state,
-                actual: [action.payload]
-            };
-        }
         case type.GET_ACTIVIDADES: {
             return {
                 ...state,
                 actividades: action.payload.data
             };
         }
-        case type.GET_REVIEW: {
-            return {
-                ...state,
-                actual: [action.payload]
-            };
-        }
         case type.GET_REVIEWS: {
             return {
                 ...state,
                 reviews: action.payload.data
-            };
-        }
-        case type.GET_SERVICIO: {
-            return {
-                ...state,
-                actual: [action.payload]
             };
         }
         case type.GET_SERVICIOS: {

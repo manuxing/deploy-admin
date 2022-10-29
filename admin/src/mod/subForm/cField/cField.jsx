@@ -2,6 +2,9 @@ import React from "react";
 import CElement from "../cElement";
 
 const CField = (p) => {
+  if(p.vals === undefined){
+    p = p.p;
+  }
   let{warning} = p.vals;
   let {name}= p.p.fV;
   

@@ -101,7 +101,7 @@ const tools = {
       return res;
     },
     agregarPersona_field: (field) => {
-      field= field.p;
+      field.p ? field = field.p : console.log(field)
       let res = { status: true, ubic: field.target.name };
       let errs = [];
       let sexos = ["Femenino", "Masculino", "otro"];
@@ -211,13 +211,18 @@ const tools = {
         /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/
       );
       let x = act.date.split("-").reverse().join("-");
-      if (
-        dateR.test(x) === false ||
-        parseInt(x.split("-")[x.split("-").length - 1]) < 2000
-      ) {
+      if (dateR.test(x) === false || parseInt(x.split("-")[x.split("-").length - 1]) < 2000) {
         let err = {
           message: "ingrese una fecha valida",
           ubic: "date",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+      if (typeof act.name !== "object") {
+        let err = {
+          message: "ingrese un nombre valido",
+          ubic: "name",
         };
         errs.push(err);
         res.status = false;
@@ -240,6 +245,7 @@ const tools = {
         res.ubic = "service";
       }
       res.err = errs;
+      console.log(res.err)
       return res;
     },
     clientForm_field: (evento) => {
@@ -655,7 +661,7 @@ const tools = {
       handleChange: function (evento) {
         let { validate, force, warning, input, setInput, setWarning } = evento.vals;
         let { errHandler, notErrHandler} = evento;
-        let val = validate.agregarPersona_field(evento);
+        let val = validate(evento);
         val.status === true ? notErrHandler(input, setInput, evento.p, warning, setWarning) : errHandler(force, val, input, setInput, warning, setWarning);
       },
       sub: (set, clear, _in) => {
@@ -688,9 +694,6 @@ const tools = {
       cb2(cb3());
       cb2(cb5());
     }
-  },
-  ver:function () {
-    return Object.keys(this.formActions_subL);
   },
 };
 

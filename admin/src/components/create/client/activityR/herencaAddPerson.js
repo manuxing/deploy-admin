@@ -31,7 +31,7 @@ let herenciaAddPersona = (setInput, input, document )=>{
           }
           ],
           vals: {
-            validate,
+            validate: validate.agregarPersona_field,
             force: [
               document.getElementById("ageR"),
               document.getElementById("sexo"),

@@ -4,11 +4,10 @@ import { NavLink } from "react-router-dom";
 import tools from "../../../tools";
 // import  icon  from "../../../img/star.png"; 
 
-
-
 const Dash = ({id, back, client, services, persons, date})=> { 
     return (
-        <div className="dash_act"> 
+        id === undefined ? <></>:
+        <div key={id} className="dash_act"> 
                 <NavLink className="link" to={`/activity/${id}`}>
                     <div className="container img_act_d">
                         <img src={back} alt='Activity icon'/>

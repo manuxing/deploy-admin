@@ -19,6 +19,13 @@ pre.setDisplayModels = (p) => {
     return res;
 }
 
+pre.getDateXDaysAgo =(numOfDays, date = new Date()) =>{
+const daysAgo = new Date(date.getTime());
+        daysAgo.setDate(date.getDate() - numOfDays);
+        console.log(daysAgo)
+        return daysAgo;
+    }
+
 let queryCleaner = (query) => {
      let res = query.split(/([0-9]+)/);
      return res.map(p => {if(Number(p) || p === '0') return p}).join('').split(Boolean)[0];
