@@ -411,16 +411,11 @@ const tools = {
         "otro",
       ];
       let nameR = new RegExp(/[a-zA-Z ]$/);
-      let dateR = new RegExp(
-        /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/
-      );
+      let dateR = new RegExp(/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/);
       switch (evento.target.name) {
         case "dateR":
           let x = evento.target.value.split("-").reverse().join("-");
-          if (
-            dateR.test(x) === false ||
-            parseInt(x.split("-")[x.split("-").length - 1]) < 2000
-          ) {
+          if (dateR.test(x) === false || parseInt(x.split("-")[x.split("-").length - 1]) < 2000) {
             let err = {
               message: "ingrese una fecha valida",
               ubic: evento.target.name,
@@ -431,10 +426,7 @@ const tools = {
           break;
         case "dateP":
           let y = evento.target.value.split("-").reverse().join("-");
-          if (
-            dateR.test(y) === false ||
-            parseInt(y.split("-")[y.split("-").length - 1]) < 2000
-          ) {
+          if ( dateR.test(y) === false || parseInt(y.split("-")[y.split("-").length - 1]) < 2000 ) {
             let err = {
               message: "ingrese una fecha valida",
               ubic: evento.target.name,
@@ -444,10 +436,7 @@ const tools = {
           }
           break;
         case "cName":
-          if (
-            evento.target.value.length < 3 ||
-            nameR.test(evento.target.value) === false
-          ) {
+          if (evento.target.value.length < 3 || nameR.test(evento.target.value) === false ) {
             let err = {
               message: "ingrese un nombre valido",
               ubic: "cName",
@@ -506,6 +495,7 @@ const tools = {
       return res;
     },
     reviewForm: (review) => {
+      console.log(review)
       let errs = [];
       let res = { status: true, ubic: "" };
       let medios = [
@@ -522,10 +512,7 @@ const tools = {
       );
       let x = review.dateR.split("-").reverse().join("-");
       let y = review.dateP.split("-").reverse().join("-");
-      if (
-        dateR.test(x) === false ||
-        parseInt(x.split("-")[x.split("-").length - 1]) < 2000
-      ) {
+      if (dateR.test(x) === false || parseInt(x.split("-")[x.split("-").length - 1]) < 2000 ) {
         let err = {
           message: "ingrese una fecha valida",
           ubic: "dateR",
@@ -533,10 +520,7 @@ const tools = {
         errs.push(err);
         res.status = false;
       }
-      if (
-        dateR.test(y) === false ||
-        parseInt(y.split("-")[y.split("-").length - 1]) < 2000
-      ) {
+      if ( dateR.test(y) === false ||parseInt(y.split("-")[y.split("-").length - 1]) < 2000) {
         let err = {
           message: "ingrese una fecha valida",
           ubic: "dateP",
@@ -547,7 +531,7 @@ const tools = {
       if (review.cName.length < 3 || nameR.test(review.cName) === false) {
         let err = {
           message: "ingrese un nombre valido",
-          ubic: "name",
+          ubic: "cName",
         };
         res.status = false;
         errs.push(err);
@@ -576,10 +560,7 @@ const tools = {
         errs.push(err);
         res.status = false;
       }
-      if (
-        Number(review.sId) !== parseInt(review.sId) ||
-        parseInt(review.sId) > 6
-      ) {
+      if ( Number(review.sId) !== parseInt(review.sId) ||parseInt(review.sId) > 6 ) {
         let err = {
           message: "ingrese un servicio correcto",
           ubic: "sId",
@@ -589,6 +570,7 @@ const tools = {
         res.ubic = "service";
       }
       res.err = errs;
+      console.log(res.err)
       return res;
     },
     requestForm: (review) => {
@@ -599,10 +581,7 @@ const tools = {
       );
       let x = review.dateR.split("-").reverse().join("-");
       let y = review.dateP.split("-").reverse().join("-");
-      if (
-        dateR.test(x) === false ||
-        parseInt(x.split("-")[x.split("-").length - 1]) < 2000
-      ) {
+      if (dateR.test(x) === false || parseInt(x.split("-")[x.split("-").length - 1]) < 2000 ) {
         let err = {
           message: "ingrese una fecha valida",
           ubic: "dateR",
@@ -610,10 +589,7 @@ const tools = {
         errs.push(err);
         res.status = false;
       }
-      if (
-        dateR.test(y) === false ||
-        parseInt(y.split("-")[y.split("-").length - 1]) < 2000
-      ) {
+      if (dateR.test(y) === false || parseInt(y.split("-")[y.split("-").length - 1]) < 2000 ) {
         let err = {
           message: "ingrese una fecha valida",
           ubic: "dateP",
@@ -621,10 +597,7 @@ const tools = {
         errs.push(err);
         res.status = false;
       }
-      if (
-        Number(review.sId) !== parseInt(review.sId) ||
-        parseInt(review.sId) > 6
-      ) {
+      if (Number(review.sId) !== parseInt(review.sId) || parseInt(review.sId) > 6 ) {
         let err = {
           message: "ingrese un servicio correcto",
           ubic: "sId",

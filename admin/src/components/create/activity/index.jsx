@@ -49,7 +49,9 @@ const ActivityR = ({ setP }) => {
       x.selected = true;
       setInputA({ ...input, sId: "" });
     }
-    err.err.map((p) => setWarningA({ ...warningA, [p.ubic]: p.message }));
+    let copy = warningA;
+    err.err.forEach((p) => copy = { ...copy, [p.ubic]: p.message });
+    setWarningA(copy);
   };
 
   let notErrHan = (evento) => {
