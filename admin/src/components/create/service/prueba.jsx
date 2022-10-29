@@ -22,7 +22,10 @@ const AgregarServicio = ({ setP }) => {
     if (evento) {
       setInput({ ...input, [evento.target.name]: evento.target.value });
     }
-    err.err.map((p) => setWarning({ ...warning, [p.ubic]: p.message }));
+    let copy = warning;
+    err.err.forEach((p) => copy = { ...copy, [p.ubic]: p.message });
+    console.log(copy)
+    setWarning(copy);
   };
 
   let notErrHan = (evento) => {
