@@ -64,7 +64,6 @@ const ReviewR = ({ setP }) => {
     }
     let copy = warningA;
     err.err.forEach((p) => copy = { ...copy, [p.ubic]: p.message });
-    console.log(copy)
     setWarningA(copy);
   };
 
