@@ -22,7 +22,7 @@ router.get('/:idR', async(req, res, next) =>{
 router.get('/', async(req, res, next) =>{
     try {
         let peticionDB = await Request.findAll();
-        peticionDB.push({name:'requests', vals:{size:peticionDB.length}});
+        peticionDB.push({name:'Solicitudes', url:'requests', vals:[{key:"size",value:peticionDB.length}]});
         return res.json(peticionDB);
     }catch(e){
         return next({status: 500, message: 'Error en router Request get p'});

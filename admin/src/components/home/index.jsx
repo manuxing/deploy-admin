@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getActividades, getClient, getReviews, getServicio, getSolicitudes, setAll } from "../../redux/actions";
+import { clearAll, getActividades, getClient, getReviews, getServicio, getSolicitudes, setAll } from "../../redux/actions";
 import NavBar from "../bars/navBar";
 import SideBar from "../bars/sideBar";
 import Stat from "../stats/Activity.jsx";
@@ -14,17 +14,24 @@ const Home = () => {
   let dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setAll());
     let actions = [getActividades, getClient, getServicio, getSolicitudes, getReviews];
+    if (all.display.length === 0){
+      dispatch(setAll());
+    }
     tools.build(dispatch, actions);
   }, [dispatch]);
+  
   useEffect(() => {
-    if(all.stats && Object.keys(all.stats).length === all.display.length){
+    if(all.stats && all.stats.length === all.display.length){
       setLoading(false);
     } else {
       setLoading(true);
     }
   }, [all]);
+
+  useEffect(() => {
+    return () => dispatch(clearAll())
+  }, []);
 
   return (
     <div>
@@ -33,8 +40,8 @@ const Home = () => {
         <SideBar />
         <div className="content">
         {loading === false ? 
-            Object.values(all.stats).map((p) => {
-              return <Stat key={p} p={p} />;
+            all?.stats.map((p) => {
+              return <Stat key={p.url} p={p} />;
             }) :
             <></>
         }

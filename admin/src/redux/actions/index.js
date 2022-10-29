@@ -142,7 +142,6 @@ export function getActividades(id) {
       axios
         .get(`http://localhost:3001/activity/`)
         .then((res) => {
-          console.log(res);
           dispatch({ type: type.GET_ACTIVIDADES, payload: res });
         })
         .catch((e) => {
@@ -291,7 +290,7 @@ export function setActual() {
   return { type: type.SET_ACTUAL, payload: 1 };
 }
 
-export function clear() {
+export function clearAll() {
   return { type: type.CLEAR_ALL };
 }
 

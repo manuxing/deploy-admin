@@ -1,30 +1,25 @@
 import React from "react";
-import "./Activiti.css";
+import ValorStat from "./valor";
 import { NavLink } from "react-router-dom";
-import tools from "../../../tools";
-// import  icon  from "../../../img/star.png";
+import "./Activiti.css";
 
 const Stat = ({p}) => {
-  let {size} = p;
+  let {name, url} = p;
   return (
     <div className="dash_act">
-      <NavLink className="link" to={`/activits/`}>
+      <NavLink className="link" to={`/${url}/`}>
         <div className="container img_act_d">
           {/* <img src={back} alt='Activity icon'/> */}
         </div>
         <div className="info_act_d">
-          <div className="punto_fdato">
-            <h2> Total</h2>
-            <h3>{size}</h3>
-          </div>
-          {/* <div className="punto_fdato">
-            <h2>actividades en los ultimos x dias</h2>
-            <h3> {last15Days} </h3>
-          </div>
-          <div className="punto_fdato">
-            <h2>Top Servicios</h2>
-            <h3> {tools.display.activity.dash(top3S)} </h3>
-          </div> */}
+          <h1>{name}</h1>
+          {
+            p.vals.map(p=>{
+              return(
+                <ValorStat key={p.key}p={p}/>
+              );
+            })            
+          }
         </div>
       </NavLink>
     </div>
