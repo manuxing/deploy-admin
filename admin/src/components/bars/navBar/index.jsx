@@ -1,30 +1,29 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { getNot } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-// import { useHistory } from "react-router-dom";
 import SearchBar from "../searchBar/index";
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import "../navBar/navbar.css"
+import { NavLink } from "react-router-dom";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import "../navBar/navbar.css";
 
 const NavBar = () => {
-
+  
   let dispatch = useDispatch();
-  let not = useSelector(state => state.not);
-  let [l, setL] = useState(0);
+  let not = useSelector((state) => state.not);
+  let [l, setL] = useState("");
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getNot());
-  },[dispatch])
+  }, [dispatch]);
 
-  useEffect(()=>{
-    if(l !== not.length){
+  useEffect(() => {
+    if (not.length > 0 && l !==not.length) {
       setL(not.length);
     }
-  },[not])
-  
+  }, [not, l]);
 
   // const { profile } = useSelector((state) => state.authReducer);
-
   // const logout = () => {
   //   localStorage.removeItem("profile");
   //   dispatch(logoutUser());
@@ -32,18 +31,23 @@ const NavBar = () => {
   // };
 
   return (
-    <>
+    l !== "" ?
       <div className="topbar">
-          <div className="logo">Administrador</div>
+      <NavLink to={"/"} className="LinkSideB">
+        <div className="logo">Administrador</div>
+      </NavLink>
         <div className="topWrapper">
-          {not.length > 0 ? not.length : ""}
           <div className="topRight">
-              <NotificationsIcon/>
-              <SearchBar/>
-            </div>
+            {
+            l > 0 ?
+            <NotificationsActiveIcon/>:
+            <NotificationsIcon/> 
+            }
+            {l}
+            <SearchBar />
+          </div>
         </div>
-      </div>
-    </>
+      </div> : <></>
   );
 };
 

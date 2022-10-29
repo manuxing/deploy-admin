@@ -20,6 +20,7 @@ router.get('/:id', async(req, res, next) =>{
 router.get('/', async(req, res, next) =>{
         try {
             let peticionDB = await Review.findAll({include: [Client, Service]});
+            peticionDB.push({name:'reviews', vals:{size:peticionDB.length}});
             return res.json(peticionDB);
         }catch(e){
             return next({status: "500", message: 'Error en router Review P'});

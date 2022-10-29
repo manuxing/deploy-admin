@@ -22,12 +22,12 @@ router.get('/:idR', async(req, res, next) =>{
 router.get('/', async(req, res, next) =>{
     try {
         let peticionDB = await Request.findAll();
+        peticionDB.push({name:'requests', vals:{size:peticionDB.length}});
         return res.json(peticionDB);
     }catch(e){
         return next({status: 500, message: 'Error en router Request get p'});
     }
 });
-
 
 router.post('/', async(req, res, next) => {
     const { dateR, dateP , thg, contact, sId } = req.body.senr;

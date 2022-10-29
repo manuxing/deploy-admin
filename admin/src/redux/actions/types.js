@@ -18,6 +18,7 @@ export const type = {
     CREATE_SERVICIO: "CREATE_SERVICIO",
     STAT_CHANGE: "STAT_CHANGE",
     SET_ACTUAL: "SET_ACTUAL",
+    SET_ALL: "SET_ALL",
     CLEAR_ALL: "CLEAR_ALL",
     ERROR: "ERROR",
     ORDER_N: "ORDER_N",

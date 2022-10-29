@@ -4,10 +4,6 @@ import { useParams } from "react-router-dom"
 import { statChange, setActual,getSolicitudes } from "../../../redux/actions";
 import NavBar from "../../bars/navBar";
 import SideBar from "../../bars/sideBar";
-// import "./Request.css"
-
-// agregar name de cliente aunque no sea cliente a la solicitud
-// cambiar estado
 
 const Request = () => {
 
@@ -18,26 +14,25 @@ const Request = () => {
   const [_stat, setStat] = useState(actual.stat);
   let [loading, setLoading] = useState(true);
 
-    useEffect(()=>{
-      console.log("act",actual)
-      dispatch(getSolicitudes(idR))
-    },[dispatch])
+  useEffect(()=>{
+    console.log("act",actual)
+    dispatch(getSolicitudes(idR))
+  },[dispatch])
     
-    useEffect(()=>{
-        if(typeof actual !== "number"){
-            setStat(actual.stat)
-            setLoading(false)
-        }else{
-          setLoading(true)
-        }
-    },[loading,actual])
+  useEffect(()=>{
+    if(typeof actual !== "number"){
+      setStat(actual.stat)
+      setLoading(false)
+    }else{
+      setLoading(true)
+    }
+  },[loading,actual])
 
-    useEffect(() => {
-      return () => dispatch(setActual())
-    }, []);
+  useEffect(() => {
+    return () => dispatch(setActual())
+  }, []);
 
   const handleChange = () => {  
-    console.log(idR)
     let x = {
       type : "Request",
       pack: {
@@ -45,7 +40,6 @@ const Request = () => {
         stat: !_stat,
       }
     }
-    console.log("x",x)
     setStat(!_stat);
     dispatch(statChange(x));
   }
@@ -59,21 +53,15 @@ const Request = () => {
           <div className="item_requestD">
             <span className="span_request">
               Estado:
-                {_stat === true ? "Leida" : "Por ver"}
+              {_stat === true ? "Leida" : "Por ver"}
             </span>
-              <button onClick={() => handleChange()}>change</button>
+            <button onClick={() => handleChange()}>change</button>
           </div>
-          {/* <div className="item_requestD">
-            <span className="span_request">
-              Solicitante
-            </span>
-                  {actual?.name ? actual?.name : "name"}
-          </div> */}
           <div className="item_requestD">
             <span className="span_request">
               Tipo
             </span>
-                  { actual?.ant ? (actual?.ant === false ? "Solcitada" : "Espontanea") : "aticipada"}
+            { actual?.ant ? (actual?.ant === false ? "Solcitada" : "Espontanea") : "aticipada"}
           </div>
           <div className="item_requestD">
             <span className="span_request">
@@ -103,19 +91,19 @@ const Request = () => {
             <span className="span_request">
               Medio
             </span>
-                  {actual?.thg ? actual?.thg : "medio"}
+            {actual?.thg ? actual?.thg : "medio"}
           </div>
           <div className="item_requestD">
             <span className="span_request">
               fecha de solicitud
-              </span>
-                  {actual?.dateR ? actual?.dateR : "fecha de solicitud"}
+            </span>
+            {actual?.dateR ? actual?.dateR : "fecha de solicitud"}
           </div>
           <div className="item_requestD">
             <span className="span_request">
               fecha solicitada
-              </span>
-              {actual?.dateP ? actual?.dateP : "fecha solicitada"}
+            </span>
+            {actual?.dateP ? actual?.dateP : "fecha solicitada"}
           </div>
         </div>
       </div>

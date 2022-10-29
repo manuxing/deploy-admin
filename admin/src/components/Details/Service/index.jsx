@@ -16,32 +16,33 @@ const Service = () => {
   let actual = useSelector((state) => state.actual);
   let reviews = useSelector((state) => state.reviews);
 
-    useEffect(()=>{
-        dispatch(getReviews())
-        dispatch(getServicio(id))
-    },[dispatch])
+  useEffect(()=>{
+    dispatch(getReviews())
+    dispatch(getServicio(id))
+  },[dispatch])
 
-    useEffect(()=>{
-      if(typeof actual !== "number"){
-        setLoading(false)
-      }else{
-        setLoading(true)
-      }
-      if(reviews.length > 0){
-        reviews = reviews.filter(p => parseInt(p.services[0].id) === parseInt(id));
-        reviews.length > 0 ? setLoadingR(false) : setLoadingR(true)
-      }
-    },[loading, actual, reviews])
+  useEffect(()=>{
+    if(typeof actual !== "number"){
+      setLoading(false)
+    }else{
+      setLoading(true)
+    }
+    if(reviews.length > 0){
+      reviews = reviews.filter(p => parseInt(p.services[0].id) === parseInt(id));
+      reviews.length > 0 ? setLoadingR(false) : setLoadingR(true)
+    }
+  },[loading, actual, reviews])
 
-    useEffect(() => {
-      return () => dispatch(clear())
-    }, []);
+  useEffect(() => {
+    return () => dispatch(clear())
+  }, []);
    
   return (
-     loading === true ?
+    loading === true ?
     <div>
       <Spinner/>
-    </div> :
+    </div> 
+    :
     <div>
       <NavBar/>
       <div className="service_d">
@@ -49,12 +50,12 @@ const Service = () => {
         <div className="content_srv">
           <div className="div_srv">
             <span className="span_srv">
-                imagenes
+              imagenes
             </span>
           </div>
           <div className="div_srv">
             <span className="span_srv">
-                {actual?.name ? actual?.name : "name"}
+              {actual?.name ? actual?.name : "name"}
             </span>
           </div>
           <div className="div_srv">
@@ -62,39 +63,38 @@ const Service = () => {
               Descripcion
             </span>
             <div>
-                  {
-                  actual?.description ? actual?.description : "contacto"
-                  }
+              {actual?.description ? actual?.description : "descripcion"}
             </div>
           </div>
           <div className="div_srv">
-          <span className="span_srv">
+            <span className="span_srv">
               Horarios
             </span>
             <div>
-                  {actual?.tR ? actual?.description : "descricion"}
+              {actual?.tR ? actual?.tR : "rango Horario"}
             </div>
           </div>
-          { loadingR === true ? <></>:
-            <div className="div_srv">
-              <span className="span_srv">
-                Reviews
-              </span>
-              {reviews.length}
-              <div>
-                    {
-                      reviews ? reviews.map(p => { 
-                        return (
-                          <NavLink  className="link" to={`/review/${p.id}`}>
-                            {p.clients[0].name}:
-                            {/* {p.rat} */}
-                            "{p.description}"
-                          </NavLink>
-                        ) 
-                      }) : "Reviews"
-                    }
-              </div>
-            </div>}
+          {loadingR === true ? <></>
+          :
+          <div className="div_srv">
+            <span className="span_srv">
+              Reviews
+            </span>
+            {reviews.length}
+            <div>
+              {
+                reviews ? reviews.map(p => { 
+                  return (
+                    <NavLink key={`${p.id}`} className="link" to={`/review/${p.id}`}>
+                      {p.clients[0].name}:
+                      "{p.description}"
+                    </NavLink>
+                  ) 
+                }) : "Reviews"
+              }
+            </div>
+          </div>
+          }
         </div>
       </div>
     </div>

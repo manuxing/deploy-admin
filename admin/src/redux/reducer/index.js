@@ -3,6 +3,10 @@ import { type } from "../actions/types";
 const initialState = {
     actual:1,
     actualG:{},
+    all:{
+        display:[],
+        stats:{},
+    },
     solicitudes: [],
     clientes: [],
     actividades: [],
@@ -22,71 +26,72 @@ export default function rootReducer(state=initialState, action){
                 actual: action.payload === 1 ? action.payload : action.payload.data
             };
         }
+        case type.SET_ALL: {
+            let {display} = action.payload.data;
+            return {
+                ...state,
+                all: {...state.all, display},
+            };
+        }
         case type.GET_NOT: {
-            console.log(action.payload);
             return {
                 ...state,
                 not: action.payload.data
             };
         }
         case type.GET_CLIENTES: {
+            let stat = action.payload.data.pop();
+            let data = action.payload.data;
+            let stats = state.all.stats;
+            stats = {...stats, [stat.name]:stat.vals};
             return {
                 ...state,
-                clientes: action.payload.data
-            };
-        }
-        case type.GET_CLIENTE: {
-            return {
-                ...state,
-                actual: [action.payload]
-            };
-        }
-        case type.GET_SOLICITUD: {
-            return {
-                ...state,
-                actual: [action.payload]
+                clientes: data,
+                all:{...state.all, stats},
             };
         }
         case type.GET_SOLICITUDES: {
+            let stat = action.payload.data.pop();
+            let data = action.payload.data;
+            let stats = state.all.stats;
+            stats = {...stats, [stat.name]:stat.vals};
             return {
                 ...state,
-                solicitudes: action.payload.data
-            };
-        }
-        case type.GET_ACTIVIDAD: {
-            return {
-                ...state,
-                actual: [action.payload]
+                solicitudes: data,
+                all:{...state.all, stats},
             };
         }
         case type.GET_ACTIVIDADES: {
+            let stat = action.payload.data.pop();
+            let data = action.payload.data;
+            let stats = state.all.stats;
+            stats = {...stats, [stat.name]:stat.vals};
             return {
                 ...state,
-                actividades: action.payload.data
-            };
-        }
-        case type.GET_REVIEW: {
-            return {
-                ...state,
-                actual: [action.payload]
+                actividades: data,
+                all:{...state.all, stats},
             };
         }
         case type.GET_REVIEWS: {
+            let stat = action.payload.data.pop();
+            let data = action.payload.data;
+            let stats = state.all.stats;
+            stats = {...stats, [stat.name]:stat.vals};
             return {
                 ...state,
-                reviews: action.payload.data
-            };
-        }
-        case type.GET_SERVICIO: {
-            return {
-                ...state,
-                actual: [action.payload]
+                reviews: data,
+                all:{...state.all, stats},
             };
         }
         case type.GET_SERVICIOS: {
+            let stat = action.payload.data.pop();
+            let data = action.payload.data;
+            let stats = state.all.stats;
+            stats = {...stats, [stat.name]:stat.vals};
             return {
                 ...state,
-                servicios: action.payload.data
+                servicios: data,
+                all:{...state.all, stats},
             };
         }
         case type.CLEAR_ALL:
