@@ -219,14 +219,14 @@ const tools = {
         errs.push(err);
         res.status = false;
       }
-      if (typeof act.name !== "object") {
-        let err = {
-          message: "ingrese un nombre valido",
-          ubic: "name",
-        };
-        errs.push(err);
-        res.status = false;
-      }
+      // if (typeof act.name !== "string") {
+      //   let err = {
+      //     message: "ingrese un nombre valido",
+      //     ubic: "name",
+      //   };
+      //   errs.push(err);
+      //   res.status = false;
+      // }
       if (typeof act.persons !== "object") {
         let err = {
           message: "revise el campo personas, no deberia cambiar de array",
@@ -594,15 +594,13 @@ const tools = {
     requestForm: (review) => {
       let errs = [];
       let res = { status: true, ubic: "" };
+      console.log(review)
       let dateR = new RegExp(
         /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/
       );
       let x = review.dateR.split("-").reverse().join("-");
       let y = review.dateP.split("-").reverse().join("-");
-      if (
-        dateR.test(x) === false ||
-        parseInt(x.split("-")[x.split("-").length - 1]) < 2000
-      ) {
+      if (dateR.test(x) === false || parseInt(x.split("-")[x.split("-").length - 1]) < 2000) {
         let err = {
           message: "ingrese una fecha valida",
           ubic: "dateR",
@@ -610,10 +608,7 @@ const tools = {
         errs.push(err);
         res.status = false;
       }
-      if (
-        dateR.test(y) === false ||
-        parseInt(y.split("-")[y.split("-").length - 1]) < 2000
-      ) {
+      if (dateR.test(y) === false || parseInt(y.split("-")[y.split("-").length - 1]) < 2000 ) {
         let err = {
           message: "ingrese una fecha valida",
           ubic: "dateP",
@@ -621,19 +616,17 @@ const tools = {
         errs.push(err);
         res.status = false;
       }
-      if (
-        Number(review.sId) !== parseInt(review.sId) ||
-        parseInt(review.sId) > 6
-      ) {
+      if (typeof review.sId !== "number"||parseInt(review.sId) > 7 ) {
         let err = {
           message: "ingrese un servicio correcto",
           ubic: "sId",
         };
-        errs.push(err);
-        res.status = false;
-        res.ubic = "service";
+        // errs.push(err);
+        // res.status = false;
+        // res.ubic = "service";
       }
       res.err = errs;
+      console.log(res.err)
       return res;
     },
     field: () => {},
@@ -696,14 +689,19 @@ const tools = {
     }
   },
   build: async (cb, actions) => {
-    
     let hacer = actions.map(async p =>{
-      console.log(p)
       new Promise(async(resolve)=>await cb(p()));
     })
     await Promise.all(hacer);
     return 0
   },
+  getSetter: (data, state) => {
+    let stat = data.pop();
+    let stats =  state.all.stats.filter(p=> p.name !== stat.name)
+    stats.push(stat);
+    return {data, stats};
+  },
+  
 };
 
 export default tools;

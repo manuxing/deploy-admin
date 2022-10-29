@@ -1,11 +1,12 @@
 import { type } from "../actions/types";
+import tools from "../../tools";
 
 const initialState = {
     actual:1,
     actualG:{},
     all:{
         display:[],
-        stats:{},
+        stats:[],
     },
     solicitudes: [],
     clientes: [],
@@ -40,10 +41,7 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.GET_CLIENTES: {
-            let stat = action.payload.data.pop();
-            let data = action.payload.data;
-            let stats = state.all.stats;
-            stats = {...stats, [stat.name]:stat.vals};
+            let {data, stats} = tools.getSetter(action.payload.data, state)
             return {
                 ...state,
                 clientes: data,
@@ -51,10 +49,7 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.GET_SOLICITUDES: {
-            let stat = action.payload.data.pop();
-            let data = action.payload.data;
-            let stats = state.all.stats;
-            stats = {...stats, [stat.name]:stat.vals};
+            let {data, stats} = tools.getSetter(action.payload.data, state)
             return {
                 ...state,
                 solicitudes: data,
@@ -62,10 +57,7 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.GET_ACTIVIDADES: {
-            let stat = action.payload.data.pop();
-            let data = action.payload.data;
-            let stats = state.all.stats;
-            stats = {...stats, [stat.name]:stat.vals};
+            let {data, stats} = tools.getSetter(action.payload.data, state)
             return {
                 ...state,
                 actividades: data,
@@ -73,10 +65,7 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.GET_REVIEWS: {
-            let stat = action.payload.data.pop();
-            let data = action.payload.data;
-            let stats = state.all.stats;
-            stats = {...stats, [stat.name]:stat.vals};
+            let {data, stats} = tools.getSetter(action.payload.data, state)
             return {
                 ...state,
                 reviews: data,
@@ -84,10 +73,7 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.GET_SERVICIOS: {
-            let stat = action.payload.data.pop();
-            let data = action.payload.data;
-            let stats = state.all.stats;
-            stats = {...stats, [stat.name]:stat.vals};
+            let {data, stats} = tools.getSetter(action.payload.data, state)
             return {
                 ...state,
                 servicios: data,
@@ -96,14 +82,18 @@ export default function rootReducer(state=initialState, action){
         }
         case type.CLEAR_ALL:
             return {
-              ...state,
                 actual:1,
                 actualG:{},
+                all:{
+                    display:[],
+                    stats:[],
+                },
                 solicitudes: [],
                 clientes: [],
                 actividades: [],
                 reviews: [],
                 servicios: [],
+                not: [],
                 error:{},
             }
         case type.ERROR:
