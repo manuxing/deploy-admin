@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, NavLink } from "react-router-dom"
-import { getServicio, getReviews, clear } from '../../../redux/actions'
+import { getServicio, getReviews, clearAll } from '../../../redux/actions'
 import Spinner from '../../Spinner'
 import NavBar from "../../bars/navBar";
 import SideBar from "../../bars/sideBar";
@@ -34,7 +34,7 @@ const Service = () => {
   },[loading, actual, reviews])
 
   useEffect(() => {
-    return () => dispatch(clear())
+    return () => dispatch(clearAll())
   }, []);
    
   return (

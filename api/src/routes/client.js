@@ -4,7 +4,7 @@ const router = Router();
 
 router.get('/', async(req, res, next) =>{
     let all = await Client.findAll({include: [Activity, Review]});
-    all.push({name:'clients', vals:{size:all.length}});
+    all.push({name:'Clientes', url:'clients', vals:[{key:"size",value:all.length}]});
     try {
         return res.json(all);
     }catch(e){

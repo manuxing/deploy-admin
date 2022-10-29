@@ -19,7 +19,7 @@ router.get('/:id', async(req, res, next) =>{
 router.get('/', async(req, res, next) =>{
         try {
             let peticionDB = await Service.findAll();
-            peticionDB.push({name:'services', vals:{size:peticionDB.length}});
+            peticionDB.push({name:'Servicios', url:'services',  vals:[{key:"size",value:peticionDB.length}]});
             return res.json(peticionDB);
         }catch(e){
             console.log(req.body)
