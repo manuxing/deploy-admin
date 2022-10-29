@@ -40,6 +40,7 @@ const Form = ({ setP }) => {
     if (evento) {
       setInput({ ...input, [evento.target.name]: evento.target.value });
     }
+    console.log(err.err)
     let copy = warning;
     err.err.forEach((p) => copy = { ...copy, [p.ubic]: p.message });
     setWarning(copy);
@@ -68,7 +69,6 @@ const Form = ({ setP }) => {
 
   let handleSubmit = (p, input) => {
     p.preventDefault();
-    console.log("aca", p, input);
     setPressed(true);
   };
 
@@ -126,6 +126,7 @@ const Form = ({ setP }) => {
             <div className="warning">{warning.contact}</div>
           </div>
           <ActivityR
+            sub={submited}
             pressed={pressed}
             setPressed={setPressed}
             act={input}

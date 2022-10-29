@@ -17,6 +17,7 @@ const RequestR = ({ setP }) => {
   let validate = tools.validate;
   let actual = useSelector((state) => state.actual);
   let services = useSelector((state) => state.servicios);
+  
   let [thg] = useState([
     "telefono",
     "email",
@@ -25,6 +26,7 @@ const RequestR = ({ setP }) => {
     "booking",
     "otro",
   ]);
+
   let [input, setInputA] = useState({
     dateR: "",
     dateP: "",
@@ -32,6 +34,7 @@ const RequestR = ({ setP }) => {
     contact: [],
     sId: 0,
   });
+
   let [warningA, setWarningA] = useState({
     dateR: "",
     dateP: "",

@@ -16,7 +16,6 @@ const SideBar = () => {
   let dispatch = useDispatch();
   
   useEffect(()=>{
-    console.log(all)
     if(all.length === 0){
       dispatch(setAll());
     }

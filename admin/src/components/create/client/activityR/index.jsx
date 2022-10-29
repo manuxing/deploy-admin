@@ -6,7 +6,7 @@ import { getServicio } from "../../../../redux/actions";
 import PersonCard from "./personaCard";
 import herenciaAddPersona from "./herencaAddPerson";
 
-const ActivityR = ({ pressed, setPressed, act, setAct }) => {
+const ActivityR = ({ submitted, pressed, setPressed, act, setAct }) => {
   let dispatch = useDispatch();
   let validate = tools.validate;
   let services = useSelector((state) => state.servicios);
@@ -30,10 +30,6 @@ const ActivityR = ({ pressed, setPressed, act, setAct }) => {
       });
     } else {
       setAct({ ...act, act: senr });
-      setInput({ date: "", persons: [], sId: 1000 });
-      setWarning({ date: "", persons: "", sId: "", general:""});
-      let x = document.getElementById("service");
-      x.selected = true;
     }
   };
 
@@ -67,6 +63,15 @@ const ActivityR = ({ pressed, setPressed, act, setAct }) => {
   useEffect(() => {
     dispatch(getServicio());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (submitted === true) {
+      setInput({ date: "", persons: [], sId: 1000 });
+      setWarning({ date: "", persons: "", sId: "", general:""});
+      let x = document.getElementById("service");
+      x.selected = true;
+    }
+  }, [submitted]);
 
   useEffect(() => {
     if (pressed === true) {

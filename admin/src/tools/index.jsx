@@ -133,7 +133,6 @@ const tools = {
         }
       }
       res.err = errs;
-      console.log(res)
       return res;
     },
     agregarPersona: function(persona, cb) {
@@ -245,6 +244,48 @@ const tools = {
         res.ubic = "service";
       }
       res.err = errs;
+      return res;
+    },
+    activityForm: (act) => {
+      let errs = [];
+      let res = { status: true, ubic: "activityForm" };
+      let dateR = new RegExp(/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/);
+      let x = act.date.split("-").reverse().join("-");
+      if (dateR.test(x) === false || parseInt(x.split("-")[x.split("-").length - 1]) < 2000) {
+        let err = {
+          message: "ingrese una fecha valida",
+          ubic: "date",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+      console.log(act.name.length)
+      if (typeof act.name !== "string"|| act.name.length === 0) {
+        let err = {
+          message: "ingrese un nombre valido",
+          ubic: "name",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+      if (typeof act.persons !== "object") {
+        let err = {
+          message: "revise el campo personas, no deberia cambiar de array",
+          ubic: "persons",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+      if (Number(act.sId) !== parseInt(act.sId) || parseInt(act.sId) > 6) {
+        let err = {
+          message: "ingrese un servicio correcto",
+          ubic: "sId",
+        };
+        errs.push(err);
+        res.status = false;
+        res.ubic = "service";
+      }
+      res.err = errs;
       console.log(res.err)
       return res;
     },
@@ -286,7 +327,7 @@ const tools = {
       if (nameR.test(client.name) === false) {
         let err = {
           message: "ingrese un nombre valido",
-          ubic: "client_name",
+          ubic: "name",
         };
         res.status = false;
         errs.push(err);
@@ -294,7 +335,7 @@ const tools = {
       if (typeof client.contact !== "object" || client.contact.length < 1) {
         let err = {
           message: "revise los contactos, no deberia cambiar de array",
-          ubic: "client_contacts",
+          ubic: "contact",
         };
         res.status = false;
         errs.push(err);

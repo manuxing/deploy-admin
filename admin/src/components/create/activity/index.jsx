@@ -10,6 +10,9 @@ import {
 import tools from "../../../tools";
 import PersonCard from "./personaCard";
 import AgregarPersona from "./agregarPersona";
+//hacer datadisplay para los nombres 
+//validar con los nombres del estado
+// validar con los servicios del estado
 
 const ActivityR = ({ setP }) => {
   const history = useHistory();
@@ -93,7 +96,7 @@ const ActivityR = ({ setP }) => {
 
   let handleSubmit = (e, inp) => {
     e.preventDefault();
-    let x = validate.activity_clientForm(inp);
+    let x = validate.activityForm(inp);
     x.status === false ? errHan(x) : sub();
   };
 
@@ -153,7 +156,6 @@ const ActivityR = ({ setP }) => {
                 seleccione
               </option>
               {services.map((p) => {
-                console.log(p)
                 return (
                   <option key={`${p.id}`} value={p.id}>
                     {p.name}
