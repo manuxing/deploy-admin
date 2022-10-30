@@ -60,12 +60,8 @@ const tools = {
           }
           break;
         default: {
-          console.log(con);
           let values = ["presencial", "booking", "pagina"];
-          if (
-            values.includes(con.value) === false &&
-            values.includes(con.type) === false
-          ) {
+          if (values.includes(con.value) === false && values.includes(con.type) === false ) {
             let err = {
               message: "contacto invalido",
               ubic: "contacto",
@@ -109,7 +105,6 @@ const tools = {
       switch (field.target.name) {
         case "ageR":
           if (ageR.includes(field.target.value) === false) {
-            console.log(field.target.value)
             let err = {
               message: "rango de edad invalido",
               ubic: "ageR",
@@ -133,7 +128,6 @@ const tools = {
         }
       }
       res.err = errs;
-      console.log(res)
       return res;
     },
     agregarPersona: function(persona, cb) {
@@ -172,10 +166,7 @@ const tools = {
       switch (p.target.name) {
         case "date":
           let x = p.target.value.split("-").reverse().join("-");
-          if (
-            dateR.test(x) === false ||
-            parseInt(x.split("-")[x.split("-").length - 1]) < 2000
-          ) {
+          if ( dateR.test(x) === false || parseInt(x.split("-")[x.split("-").length - 1]) < 2000) {
             let err = {
               message: "ingrese una fecha valida",
               ubic: "date",
@@ -184,12 +175,18 @@ const tools = {
             res.status = false;
           }
           break;
+          case "name":
+          if (typeof p.target.value !== "string"|| p.target.value.length === 0) {
+            let err = {
+              message: "ingrese un nombre valido",
+              ubic: "name",
+            };
+            errs.push(err);
+            res.status = false;
+          }
+          break;
         case "sId":
-          if (
-            Number(p.target.value) !== parseInt(p.target.value) ||
-            parseInt(p.target.value) > 6
-          ) {
-            console.log(Number(p.target.value), p.target.value);
+          if ( Number(p.target.value) !== parseInt(p.target.value) || parseInt(p.target.value) > 6) {
             let err = {
               message: "ingrese un servicio correcto",
               ubic: "sId",
@@ -219,14 +216,6 @@ const tools = {
         errs.push(err);
         res.status = false;
       }
-      // if (typeof act.name !== "string") {
-      //   let err = {
-      //     message: "ingrese un nombre valido",
-      //     ubic: "name",
-      //   };
-      //   errs.push(err);
-      //   res.status = false;
-      // }
       if (typeof act.persons !== "object") {
         let err = {
           message: "revise el campo personas, no deberia cambiar de array",
@@ -245,7 +234,47 @@ const tools = {
         res.ubic = "service";
       }
       res.err = errs;
-      console.log(res.err)
+      return res;
+    },
+    activityForm: (act) => {
+      let errs = [];
+      let res = { status: true, ubic: "activityForm" };
+      let dateR = new RegExp(/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/);
+      let x = act.date.split("-").reverse().join("-");
+      if (dateR.test(x) === false || parseInt(x.split("-")[x.split("-").length - 1]) < 2000) {
+        let err = {
+          message: "ingrese una fecha valida",
+          ubic: "date",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+      if (typeof act.name !== "string"|| act.name.length === 0) {
+        let err = {
+          message: "ingrese un nombre valido",
+          ubic: "name",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+      if (typeof act.persons !== "object"|| act.persons.length < 1) {
+        let err = {
+          message: "revise el campo personas, no deberia cambiar de array",
+          ubic: "persons",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+      if (Number(act.sId) !== parseInt(act.sId) || parseInt(act.sId) > 7|| parseInt(act.sId) < 1) {
+        let err = {
+          message: "ingrese un servicio correcto",
+          ubic: "sId",
+        };
+        errs.push(err);
+        res.status = false;
+        res.ubic = "service";
+      }
+      res.err = errs;
       return res;
     },
     clientForm_field: (evento) => {
@@ -286,7 +315,7 @@ const tools = {
       if (nameR.test(client.name) === false) {
         let err = {
           message: "ingrese un nombre valido",
-          ubic: "client_name",
+          ubic: "name",
         };
         res.status = false;
         errs.push(err);
@@ -294,7 +323,7 @@ const tools = {
       if (typeof client.contact !== "object" || client.contact.length < 1) {
         let err = {
           message: "revise los contactos, no deberia cambiar de array",
-          ubic: "client_contacts",
+          ubic: "contact",
         };
         res.status = false;
         errs.push(err);
@@ -328,7 +357,6 @@ const tools = {
           // }
           break;
         case "description":
-          console.log("2", typeof evento.target.value);
           if (typeof evento.target.value !== "string") {
             let err = {
               message: "ingrese una descripcion valida",
@@ -446,7 +474,6 @@ const tools = {
           }
           break;
         case "description":
-          console.log("2", typeof evento.target.value);
           if (typeof evento.target.value !== "string") {
             let err = {
               message: "ingrese una descripcion valida",
@@ -464,7 +491,6 @@ const tools = {
           }
           break;
         case "thg":
-          console.log("valida");
           if (medios.includes(evento.target.value) === false) {
             let err = {
               message: "rango de edad invalido",
@@ -495,7 +521,6 @@ const tools = {
       return res;
     },
     reviewForm: (review) => {
-      console.log(review)
       let errs = [];
       let res = { status: true, ubic: "" };
       let medios = [
@@ -552,7 +577,6 @@ const tools = {
         errs.push(err);
       }
       if (medios.includes(review.thg) === false) {
-        console.log("review entera");
         let err = {
           message: "rango de edad invalido",
           ubic: "thg",
@@ -560,7 +584,7 @@ const tools = {
         errs.push(err);
         res.status = false;
       }
-      if ( Number(review.sId) !== parseInt(review.sId) ||parseInt(review.sId) > 6 ) {
+      if (Number(review.sId) !== parseInt(review.sId) || parseInt(review.sId) > 7 || parseInt(review.sId) < 1) {
         let err = {
           message: "ingrese un servicio correcto",
           ubic: "sId",
@@ -570,13 +594,55 @@ const tools = {
         res.ubic = "service";
       }
       res.err = errs;
-      console.log(res.err)
+      return res;
+    },
+    requestForm_field: (evento) => {
+      let errs = [];
+      let res = { status: true, ubic: "" };
+      let dateR = new RegExp(/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/);
+      switch (evento.target.name) {
+        case "dateR":
+          let x = evento.target.value.split("-").reverse().join("-");
+          if (dateR.test(x) === false || parseInt(x.split("-")[x.split("-").length - 1]) < 2000) {
+            let err = {
+              message: "ingrese una fecha valida",
+              ubic: evento.target.name,
+            };
+            errs.push(err);
+            res.status = false;
+          }
+          break;
+        case "dateP":
+          let y = evento.target.value.split("-").reverse().join("-");
+          if ( dateR.test(y) === false || parseInt(y.split("-")[y.split("-").length - 1]) < 2000 ) {
+            let err = {
+              message: "ingrese una fecha valida",
+              ubic: evento.target.name,
+            };
+            errs.push(err);
+            res.status = false;
+          }
+          break;
+        case "sId":
+          if (Number(evento.target.value) !== parseInt(evento.target.value) || parseInt(evento.target.value) > 6) {
+            let err = {
+              message: "ingrese un servicio correcto",
+              ubic: "sId",
+            };
+            errs.push(err);
+            res.status = false;
+            res.ubic = "service";
+          }
+          break;
+        default: {
+        }
+      }
+      res.err = errs;
       return res;
     },
     requestForm: (review) => {
       let errs = [];
       let res = { status: true, ubic: "" };
-      console.log(review)
       let dateR = new RegExp(
         /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/
       );
@@ -598,17 +664,25 @@ const tools = {
         errs.push(err);
         res.status = false;
       }
-      if (typeof review.sId !== "number"||parseInt(review.sId) > 7 ) {
+      if (review.contact.length < 1|| review.contact.length > 1 || typeof review.contact !== "object") {
+        let err = {
+          message: "ingrese un contacto correcto",
+          ubic: "contact",
+        };
+        errs.push(err);
+        res.status = false;
+        res.ubic = "service";
+      }
+      if (parseInt(review.sId) > 7 || parseInt(review.sId) < 1) {
         let err = {
           message: "ingrese un servicio correcto",
           ubic: "sId",
         };
-        // errs.push(err);
-        // res.status = false;
-        // res.ubic = "service";
+        errs.push(err);
+        res.status = false;
+        res.ubic = "service";
       }
       res.err = errs;
-      console.log(res.err)
       return res;
     },
     field: () => {},

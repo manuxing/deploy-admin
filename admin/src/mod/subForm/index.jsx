@@ -8,6 +8,7 @@ function SubForm({ herencia }) {
   let [warning, setWarning] = useState({ ageR: "", sexo: "", general: "" });
   let { handleSub, sub } = tools.formActions.subL;
   let {seteo} = herencia;
+  let k = 0;
   
   seteo.vals.warning = warning;
   seteo.vals.input = input;
@@ -20,7 +21,7 @@ function SubForm({ herencia }) {
     <div className="addperson">
         {seteo.campos.map((p) => {
           return (
-            <CField p={p} vals={seteo.vals} />
+            <CField key={`${k++}`}p={p} vals={seteo.vals} />
           );
         })}
       <button onClick={(e)=>handleSub(e ,

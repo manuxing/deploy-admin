@@ -52,7 +52,6 @@ const ReviewR = ({ setP }) => {
   };
 
   let errHan = (err, evento) => {
-    console.log("err", err);
     if (evento) {
       setInputA({ ...input, [evento.target.name]: evento.target.value });
     }
@@ -68,7 +67,6 @@ const ReviewR = ({ setP }) => {
   };
 
   let notErrHan = (evento) => {
-    console.log("evento", evento);
     setInputA({ ...input, [evento.target.name]: evento.target.value });
     setWarningA({ ...warningA, [evento.target.name]: "" });
   };
@@ -199,6 +197,7 @@ const ReviewR = ({ setP }) => {
                 );
               })}
             </select>
+            <div className="warning">{warningA.thg}</div>
           </div>
           <div>
             <label>Servicios</label>

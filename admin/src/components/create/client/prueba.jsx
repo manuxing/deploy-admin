@@ -34,7 +34,6 @@ const Form = ({ setP }) => {
     "otro",
   ]);
   const history = useHistory();
-
   
   let errHan = (evento, err) => {
     if (evento) {
@@ -68,7 +67,6 @@ const Form = ({ setP }) => {
 
   let handleSubmit = (p, input) => {
     p.preventDefault();
-    console.log("aca", p, input);
     setPressed(true);
   };
 
@@ -126,6 +124,7 @@ const Form = ({ setP }) => {
             <div className="warning">{warning.contact}</div>
           </div>
           <ActivityR
+            submitted={submited}
             pressed={pressed}
             setPressed={setPressed}
             act={input}
