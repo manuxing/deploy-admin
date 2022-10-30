@@ -22,12 +22,22 @@ const Review = () => {
     
   useEffect(()=>{
     if(actual && actual !== 1 && actual?.stat !== null){
-      setStat(actual?.stat)
-      setLoading(false)
+      if(actual.stat === false){
+        dispatch(statChange({
+          type : "Review",
+          pack: {
+            id: parseInt(id),
+            stat: !actual.stat,
+          }
+        }));
+        setStat(!actual?.stat);
+      } else {
+        setStat(actual?.stat);
+      }
+      setLoading(false);
     }else{
       setLoading(true)
     }
-    console.log("act",actual)
   },[loading,actual])
 
   useEffect(() => {
