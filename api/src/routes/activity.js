@@ -22,7 +22,6 @@ router.get('/:id', async(req, res, next) =>{
 
 router.get('/', async(req, res, next) =>{
     //validate cosas de la pagina
-    console.log(db);
     try {
         let peticionDB = await Activity.findAll({include: [Client, Service]});
         return res.json(peticionDB);

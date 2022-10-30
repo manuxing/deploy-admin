@@ -11,7 +11,6 @@ router.get('/:idR', async(req, res, next) =>{
             },
             include: Service
         });
-        console.log(peticionDB)
         return res.json(peticionDB);
     }catch(e){
         return next({status: "500", message: 'Error en router Request get I'});
@@ -56,7 +55,6 @@ router.post('/', async(req, res, next) => {
 router.put('/', async(req, res, next) => {
     const {id, stat} = req.body;
     if(!id){
-        console.log(req.body)
         return next({status:400, message:"ingrese los datos correctos"})
     }
     try {

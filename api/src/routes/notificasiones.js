@@ -14,8 +14,10 @@ router.get('/', async(req, res, next) =>{
                 stat: false
             }
         });
-        peticionRequest = [...peticionRequest, peticionReview]
+        peticionReview = peticionReview.map(p => p.dataValues);
         peticionRequest = peticionRequest.map(p => p.dataValues)
+        peticionRequest = peticionRequest.concat(peticionReview);
+        console.log(peticionRequest);
         return res.json(peticionRequest);
     }catch(e){
         return next({status: 500, message: 'Error en router Request get p'});
