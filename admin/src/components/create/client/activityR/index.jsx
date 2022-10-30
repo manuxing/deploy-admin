@@ -29,6 +29,10 @@ const ActivityR = ({ submitted, pressed, setPressed, act, setAct }) => {
         general: "todos los campos son obligatorios, completelos",
       });
     } else {
+      setWarning({
+        ...warning,
+        general: "",
+      });
       setAct({ ...act, act: senr });
     }
   };
@@ -65,6 +69,7 @@ const ActivityR = ({ submitted, pressed, setPressed, act, setAct }) => {
   }, [dispatch]);
 
   useEffect(() => {
+    console.log(submitted)
     if (submitted === true) {
       setInput({ date: "", persons: [], sId: 1000 });
       setWarning({ date: "", persons: "", sId: "", general:""});

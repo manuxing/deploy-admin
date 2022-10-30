@@ -75,7 +75,7 @@ const RequestR = ({ setP }) => {
   };
 
   let handleSelect = (evento) => {
-    let err = validate.reviewForm_field(evento);
+    let err = validate.requestForm_field(evento);
     err.status === true ? notErrHan(evento) : errHan(err);
   };
 
@@ -141,16 +141,19 @@ const RequestR = ({ setP }) => {
             />
             <div className="warning">{warningA.dateP}</div>
           </div>
-          <AgregarContacto
-            contactsThg={thg}
-            setContacts={setInputA}
-            _contacts={input}
-          />
+          <div>
+            <AgregarContacto
+              contactsThg={thg}
+              setContacts={setInputA}
+              _contacts={input}
+            />
+          </div>
           <div>
             {input.contact.map((p) => {
               return <ContactCard key={input.contact.length} contact={p} />;
             })}
           </div>
+          <div className="warning">{input.contact.length > 0 ? "":warningA.contact}</div>
           <div>
             <label>Servicios</label>
             <select
@@ -165,7 +168,7 @@ const RequestR = ({ setP }) => {
               </option>
               {services.map((p) => {
                 return (
-                  <option value={p.id} key={p.id}>
+                  <option value={parseInt(p.id)} key={p.id}>
                     {p.name}
                   </option>
                 );

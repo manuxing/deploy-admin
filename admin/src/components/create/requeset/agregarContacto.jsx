@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import tools from "../../../tools";
 
 const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
@@ -19,7 +19,6 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
       setContact({ ...contact, type: va });
     }
     setWarning({ contacto: "" });
-    console.log(contact);
   };
 
   let chooseType = (t) => {
@@ -34,7 +33,6 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   };
 
   let errHan = (err) => {
-    console.log(err);
     err.err.map((p) => setWarning({ ...warning, [p.ubic]: p.message }));
   };
 
@@ -52,10 +50,13 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
 
   let handleSubmit = (p, data) => {
     p.preventDefault();
-    console.log(data);
     let val = validate.agregarContacto(data);
     val.status === false ? errHan(val) : notErrHan(p);
   };
+
+  useEffect(() => {
+    if(_contacts.contact.length === 0)setTrigger(false)
+  }, [_contacts]);
 
   return trigger === true ? (
     <></>

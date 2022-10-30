@@ -37,7 +37,7 @@ const ActivityR = ({ setP }) => {
 
   let sub = () => {
     let senr = input;
-    let x = validate.activity_clientForm(senr);
+    let x = validate.activityForm(senr);
     if (x.status === false) {
       errHan(x);
     } else {

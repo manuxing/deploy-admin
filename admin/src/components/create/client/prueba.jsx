@@ -34,13 +34,11 @@ const Form = ({ setP }) => {
     "otro",
   ]);
   const history = useHistory();
-
   
   let errHan = (evento, err) => {
     if (evento) {
       setInput({ ...input, [evento.target.name]: evento.target.value });
     }
-    console.log(err.err)
     let copy = warning;
     err.err.forEach((p) => copy = { ...copy, [p.ubic]: p.message });
     setWarning(copy);
@@ -126,7 +124,7 @@ const Form = ({ setP }) => {
             <div className="warning">{warning.contact}</div>
           </div>
           <ActivityR
-            sub={submited}
+            submitted={submited}
             pressed={pressed}
             setPressed={setPressed}
             act={input}
