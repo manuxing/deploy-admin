@@ -6,12 +6,14 @@ import { NavLink } from "react-router-dom";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import "../navBar/navbar.css";
+import Drop from "./drop";
 
 const NavBar = () => {
   
   let dispatch = useDispatch();
   let not = useSelector((state) => state.not);
   let [l, setL] = useState("");
+  let [pressed, setPressed] = useState(false);
 
   useEffect(() => {
     dispatch(getNot());
@@ -38,12 +40,17 @@ const NavBar = () => {
       </NavLink>
         <div className="topWrapper">
           <div className="topRight">
-            {
-            l > 0 ?
-            <NotificationsActiveIcon/>:
-            <NotificationsIcon/> 
-            }
+              {
+                l > 0 ?
+                <button onClick={()=>setPressed(!pressed)}>
+                  <NotificationsActiveIcon/>
+                </button>:
+                <NotificationsIcon/> 
+              }
             {l}
+            {pressed === true ? 
+              <Drop not={not} l={l}/> : <></>
+            }
             <SearchBar />
           </div>
         </div>
