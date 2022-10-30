@@ -20,9 +20,20 @@ const Request = () => {
   },[dispatch])
     
   useEffect(()=>{
-    if(typeof actual !== "number"){
-      setStat(actual.stat)
-      setLoading(false)
+    if(actual && actual !== 1 && actual?.stat !== null){
+      if(actual.stat === false){
+        dispatch(statChange({
+          type : "Request",
+          pack: {
+            id: parseInt(idR),
+            stat: !actual.stat,
+          }
+        }));
+        setStat(!actual?.stat);
+      } else {
+        setStat(actual?.stat);
+      }
+      setLoading(false);
     }else{
       setLoading(true)
     }
