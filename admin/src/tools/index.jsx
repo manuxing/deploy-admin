@@ -238,7 +238,7 @@ const tools = {
       res.err = errs;
       return res;
     },
-    activityForm: (act, servicesIds) => {
+    activityForm: (act, servicesIds, clientsNames) => {
       let errs = [];
       let res = { status: true, ubic: "activityForm" };
       let dateR = new RegExp(/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/);
@@ -251,7 +251,7 @@ const tools = {
         errs.push(err);
         res.status = false;
       }
-      if (typeof act.name !== "string"|| act.name.length === 0) {
+      if (!clientsNames.includes(act.name)) {
         let err = {
           message: "ingrese un nombre valido",
           ubic: "name",
@@ -283,6 +283,7 @@ const tools = {
       let errs = [];
       let res = { status: true, ubic: evento.target.name };
       let nameR = new RegExp(/[a-zA-Z ]$/);
+      console.log("clienteformfield", evento.target.name, evento.target.value)
       switch (evento.target.name) {
         case "name":
           if (nameR.test(evento.target.value) === false) {
@@ -294,7 +295,7 @@ const tools = {
             errs.push(err);
           }
           break;
-        case "sId":
+        case "contact":
           if (typeof evento.target.value !== "object") {
             let err = {
               message: "revise los contactos, no deberia cambiar de array",
@@ -429,7 +430,7 @@ const tools = {
       res.err = errs;
       return res;
     },
-    reviewForm_field: (evento) => {
+    reviewForm_field: (evento, servicesIds) => {
       let errs = [];
       let res = { status: true, ubic: evento.target.name };
       let medios = [
@@ -440,7 +441,6 @@ const tools = {
         "booking",
         "otro",
       ];
-      let nameR = new RegExp(/[a-zA-Z ]$/);
       let dateR = new RegExp(/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/);
       switch (evento.target.name) {
         case "dateR":
@@ -463,16 +463,6 @@ const tools = {
             };
             errs.push(err);
             res.status = false;
-          }
-          break;
-        case "cName":
-          if (evento.target.value.length < 3 || nameR.test(evento.target.value) === false ) {
-            let err = {
-              message: "ingrese un nombre valido",
-              ubic: "cName",
-            };
-            res.status = false;
-            errs.push(err);
           }
           break;
         case "description":
@@ -503,26 +493,24 @@ const tools = {
           }
           break;
         case "sId":
-          if (
-            Number(evento.target.value) !== parseInt(evento.target.value) ||
-            parseInt(evento.target.value) > 6
-          ) {
-            let err = {
-              message: "ingrese un servicio correcto",
-              ubic: "sId",
-            };
-            errs.push(err);
-            res.status = false;
-            res.ubic = "service";
-          }
-          break;
+            if (evento.target.value.length > 2 ||!servicesIds.includes(parseInt(evento.target.value))) {
+              console.log(evento.target.value.length>2, servicesIds)
+              let err = {
+                message: "ingrese un servicio correcto",
+                ubic: "sId",
+              };
+              errs.push(err);
+              res.status = false;
+              res.ubic = "service";
+            }
+            break;
         default: {
         }
       }
       res.err = errs;
       return res;
     },
-    reviewForm: (review) => {
+    reviewForm: (review, servicesIds, clientsNames) => {
       let errs = [];
       let res = { status: true, ubic: "" };
       let medios = [
@@ -533,7 +521,6 @@ const tools = {
         "booking",
         "otro",
       ];
-      let nameR = new RegExp(/[a-zA-Z ]$/);
       let dateR = new RegExp(
         /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/
       );
@@ -555,13 +542,14 @@ const tools = {
         errs.push(err);
         res.status = false;
       }
-      if (review.cName.length < 3 || nameR.test(review.cName) === false) {
+      if (!clientsNames.includes(review.cName)) {
+        console.log(review.cName)
         let err = {
           message: "ingrese un nombre valido",
           ubic: "cName",
         };
-        res.status = false;
         errs.push(err);
+        res.status = false;
       }
       if (typeof review.description !== "string") {
         let err = {
@@ -586,7 +574,7 @@ const tools = {
         errs.push(err);
         res.status = false;
       }
-      if (Number(review.sId) !== parseInt(review.sId) || parseInt(review.sId) > 7 || parseInt(review.sId) < 1) {
+      if (review.sId.length > 2 ||!servicesIds.includes(parseInt(review.sId))) {
         let err = {
           message: "ingrese un servicio correcto",
           ubic: "sId",
@@ -598,7 +586,7 @@ const tools = {
       res.err = errs;
       return res;
     },
-    requestForm_field: (evento) => {
+    requestForm_field: (evento, servicesIds) => {
       let errs = [];
       let res = { status: true, ubic: "" };
       let dateR = new RegExp(/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/);
@@ -625,17 +613,17 @@ const tools = {
             res.status = false;
           }
           break;
-        case "sId":
-          if (Number(evento.target.value) !== parseInt(evento.target.value) || parseInt(evento.target.value) > 6) {
-            let err = {
-              message: "ingrese un servicio correcto",
-              ubic: "sId",
-            };
-            errs.push(err);
-            res.status = false;
-            res.ubic = "service";
-          }
-          break;
+          case "sId":
+            if (evento.target.value.length > 2 ||!servicesIds.includes(parseInt(evento.target.value))) {
+              let err = {
+                message: "ingrese un servicio correcto",
+                ubic: "sId",
+              };
+              errs.push(err);
+              res.status = false;
+              res.ubic = "service";
+            }
+            break;
         default: {
         }
       }

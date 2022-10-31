@@ -6,6 +6,7 @@ import {
   createReviews,
   getReviews,
   setActual,
+  getClient,
 } from "../../../redux/actions";
 import tools from "../../../tools";
 
@@ -15,6 +16,9 @@ const ReviewR = ({ setP }) => {
   let validate = tools.validate;
   let actual = useSelector((state) => state.actual);
   let services = useSelector((state) => state.servicios);
+  let servicesIds = services.map(p=> p.id);
+  let clientes = useSelector((state) => state.clientes);
+  let clientsNames = clientes.map(p=> p.name);
   let [thg] = useState([
     "telefono",
     "email",
@@ -43,7 +47,7 @@ const ReviewR = ({ setP }) => {
   let sub = () => {
     let senr = input;
     senr.thg = input.thg;
-    let x = validate.reviewForm(senr);
+    let x = validate.reviewForm(senr, servicesIds,clientsNames);
     if (x.status === false) {
       errHan(x);
     } else {
@@ -72,17 +76,18 @@ const ReviewR = ({ setP }) => {
   };
 
   let handleSelect = (evento) => {
-    let err = validate.reviewForm_field(evento);
+    let err = validate.reviewForm_field(evento, servicesIds);
     err.status === true ? notErrHan(evento) : errHan(err);
   };
 
   let handleChange = (evento) => {
-    let val = validate.reviewForm_field(evento);
+    let val = validate.reviewForm_field(evento, servicesIds);
     val.status === true ? notErrHan(evento) : errHan(val, evento);
   };
 
   useEffect(() => {
     dispatch(getServicio());
+    dispatch(getClient());
   }, [dispatch]);
 
   useEffect(() => {
@@ -121,7 +126,7 @@ const ReviewR = ({ setP }) => {
 
   let handleSubmit = (e, inp) => {
     e.preventDefault();
-    let x = validate.reviewForm(inp);
+    let x = validate.reviewForm(inp, servicesIds, clientsNames);
     x.status === false ? errHan(x) : sub();
   };
 
@@ -155,15 +160,24 @@ const ReviewR = ({ setP }) => {
             <div className="warning">{warningA.dateP}</div>
           </div>
           <div>
-            <label>Cliente</label>
-            <input
-              className="input"
-              type={"text"}
-              placeholder="Nombre"
-              name={"cName"}
-              value={input.cName}
-              onChange={(p) => handleChange(p)}
-            />
+          <label>Cliente</label>
+              <input list="clients"
+                className="input"
+                type={"text"}
+                placeholder="Nombre"
+                name={"cName"}
+                value={input.cName}
+                onChange={(p) => handleChange(p)}
+              />
+                <datalist id="clients">
+                  {
+                    clientsNames && clientsNames.map(p=>{
+                      return(
+                        <option value={p}/>
+                      )
+                    })
+                  }
+                </datalist>
             <div className="warning">{warningA.cName}</div>
           </div>
           <div>
