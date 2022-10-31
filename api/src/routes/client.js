@@ -15,7 +15,7 @@ router.get('/', async(req, res, next) =>{
 
 router.post('/', async(req, res, next) => {
     let {body} = req;
-    await validatePost(body, next, Service)
+    await validatePost(body, next, Service);
     body.contact = typeof body.contact === "object" ? body.contact.map(p => `${p.type}: ${p.value}`) : 0
     return postClient(body, res, next, Client, Activity, [Activity, Review]);
 });

@@ -630,7 +630,7 @@ const tools = {
       res.err = errs;
       return res;
     },
-    requestForm: (review) => {
+    requestForm: (review, servicesIds) => {
       let errs = [];
       let res = { status: true, ubic: "" };
       let dateR = new RegExp(
@@ -663,7 +663,7 @@ const tools = {
         res.status = false;
         res.ubic = "service";
       }
-      if (parseInt(review.sId) > 7 || parseInt(review.sId) < 1) {
+      if (review.sId.length > 2 ||!servicesIds.includes(parseInt(review.sId))) {
         let err = {
           message: "ingrese un servicio correcto",
           ubic: "sId",

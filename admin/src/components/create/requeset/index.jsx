@@ -17,6 +17,7 @@ const RequestR = ({ setP }) => {
   let validate = tools.validate;
   let actual = useSelector((state) => state.actual);
   let services = useSelector((state) => state.servicios);
+  let servicesIds = services.map(p=> p.id);
   
   let [thg] = useState([
     "telefono",
@@ -46,7 +47,7 @@ const RequestR = ({ setP }) => {
   let sub = () => {
     let senr = input;
     senr.thg = input.contact[0].type;
-    let x = validate.requestForm(senr);
+    let x = validate.requestForm(senr, servicesIds);
     if (x.status === false) {
       errHan(x);
     } else {
@@ -75,12 +76,12 @@ const RequestR = ({ setP }) => {
   };
 
   let handleSelect = (evento) => {
-    let err = validate.requestForm_field(evento);
+    let err = validate.requestForm_field(evento, servicesIds);
     err.status === true ? notErrHan(evento) : errHan(err);
   };
 
   let handleChange = (evento) => {
-    let val = validate.reviewForm_field(evento);
+    let val = validate.reviewForm_field(evento, servicesIds);
     val.status === true ? notErrHan(evento) : errHan(val, evento);
   };
 
@@ -108,7 +109,7 @@ const RequestR = ({ setP }) => {
 
   let handleSubmit = (e, inp) => {
     e.preventDefault();
-    let x = validate.requestForm(inp);
+    let x = validate.requestForm(inp, servicesIds);
     x.status === false ? errHan(x) : sub();
   };
 

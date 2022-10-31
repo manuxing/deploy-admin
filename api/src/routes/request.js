@@ -1,75 +1,30 @@
 const { Router } = require('express');
 const { Request, Service } = require('../db.js');
+const {getRequests, getRequest, postRequest, putRequest} = require("../controllers/request.js");
+const {validatePost, validatePut} = require("../cValidations/request.js");
 const router = Router();
 
 router.get('/:idR', async(req, res, next) =>{
     const {idR} = req.params
-    try {
-        let peticionDB = await Request.findAll({
-            where:{
-                id: idR
-            },
-            include: Service
-        });
-        return res.json(peticionDB);
-    }catch(e){
-        return next({status: "500", message: 'Error en router Request get I'});
-    }
-
+    return getRequest(res, next, Request, [Service], idR);
 });
 
 router.get('/', async(req, res, next) =>{
-    try {
-        let peticionDB = await Request.findAll();
-        peticionDB.push({name:'Solicitudes', url:'requests', vals:[{key:"size",value:peticionDB.length}]});
-        return res.json(peticionDB);
-    }catch(e){
-        return next({status: 500, message: 'Error en router Request get p'});
-    }
+    return getRequests(res, next, Request, [Service]);
 });
 
 router.post('/', async(req, res, next) => {
-    const { dateR, dateP , thg, contact, sId } = req.body.senr;
-    if(!dateR||!dateP||!contact||!sId){
-        return next({status: "400", message: 'Ingrese los datos correctos'})
-    }
-    try{   
-        let x = req.body.senr;
-        x.thg === contact[0].type;
-        x.contact = contact.map(p => `${p.type}: ${p.value}`);
-        let hacer = await Request.create(x);
-        let servicc = await Service.findAll({
-            where :{
-                id: parseInt(sId)
-            }
-        })
-        await hacer.addService(servicc);
-        console.log(hacer);
-        res.json(hacer);
-    } catch (e){
-        return next({status: "500", message: 'Error en router Request Post', e});
-    };
+    let body = req.body.senr;
+    body.thg = body.contact[0].type;
+    await validatePost(body, next, Service);
+    body.contact = typeof body.contact === "object" ? body.contact.map(p => `${p.type}: ${p.value}`) : 0
+    return postRequest(body, res, next, Request, Service);
 });
-
 
 router.put('/', async(req, res, next) => {
-    const {id, stat} = req.body;
-    if(!id){
-        return next({status:400, message:"ingrese los datos correctos"})
-    }
-    try {
-        let up = await Request.update({
-            stat: stat,
-        }, {
-            where: {
-                id: id,
-            }
-        });
-        return res.json(up);
-    }catch(e){
-        return next({status: "500", message: 'Error en router Request put'});
-    }
+    const {body} = req;
+    await validatePut(body, next, Request);
+    return putRequest(body, res, next, Request)
 });
-
 
 module.exports = router;

@@ -20,11 +20,11 @@ const getClient = async( res, next, model, related, id) => {
         .catch(err => next({status: "500", message: 'could not find model values or related models'}));
         return res.json(peticionDB.dataValues);
     }catch(e){
-        return next({status: "500", message: 'Error en router Activity get Individual'});
+        return next({status: "500", message: 'Error en router Request get Individual'});
     }
 };
 
-const postClient = async(body, res, next, model, Activity, related) => {
+const postClient = async(body, res, next, model, Activity) => {
     try{   
         let client = await model.create(body)
             .catch(err => next({status: "500", message: 'could not create Client model'}));
