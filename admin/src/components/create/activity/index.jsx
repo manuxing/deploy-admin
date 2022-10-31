@@ -6,6 +6,7 @@ import {
   createActividades,
   getActividades,
   setActual,
+  getClient,
 } from "../../../redux/actions";
 import tools from "../../../tools";
 import PersonCard from "./personaCard";
@@ -20,6 +21,8 @@ const ActivityR = ({ setP }) => {
   let validate = tools.validate;
   let actual = useSelector((state) => state.actual);
   let services = useSelector((state) => state.servicios);
+  let clientes = useSelector((state) => state.clientes);
+  let clientsNames = clientes.map(p=> p.name);
   let servicesIds = services.map(p=> p.id);
   let ageR = ["Adulto Mayor", "Adulto", "Adolecente", "niño"];
   let [input, setInputA] = useState({
@@ -38,7 +41,7 @@ const ActivityR = ({ setP }) => {
 
   let sub = () => {
     let senr = input;
-    let x = validate.activityForm(senr, servicesIds);
+    let x = validate.activityForm(senr, servicesIds, clientsNames);
     if (x.status === false) {
       errHan(x);
     } else {
@@ -64,17 +67,18 @@ const ActivityR = ({ setP }) => {
   };
 
   let handleSelect = (evento) => {
-    let err = validate.activity_client_field(evento, servicesIds);
+    let err = validate.activity_client_field(evento, servicesIds, clientsNames);
     err.status === true ? notErrHan(evento) : errHan(err);
   };
 
   let handleChange = (evento) => {
-    let val = validate.activity_client_field(evento, servicesIds);
+    let val = validate.activity_client_field(evento, servicesIds, clientsNames);
     val.status === true ? notErrHan(evento) : errHan(val);
   };
 
   useEffect(() => {
     dispatch(getServicio());
+    dispatch(getClient());
   }, [dispatch]);
 
   useEffect(() => {
@@ -97,7 +101,7 @@ const ActivityR = ({ setP }) => {
 
   let handleSubmit = (e, inp) => {
     e.preventDefault();
-    let x = validate.activityForm(inp, servicesIds);
+    let x = validate.activityForm(inp, servicesIds, clientsNames);
     x.status === false ? errHan(x) : sub();
   };
 
@@ -120,14 +124,23 @@ const ActivityR = ({ setP }) => {
           </div>
           <div>
             <label>Cliente</label>
-            <input
-              className="input"
-              type={"text"}
-              placeholder="Nombre"
-              name={"name"}
-              value={input.name}
-              onChange={(p) => handleChange(p)}
-            />
+              <input list="clients"
+                className="input"
+                type={"text"}
+                placeholder="Nombre"
+                name={"name"}
+                value={input.name}
+                onChange={(p) => handleChange(p)}
+              />
+                <datalist id="clients">
+                  {
+                    clientsNames && clientsNames.map(p=>{
+                      return(
+                        <option value={p}/>
+                      )
+                    })
+                  }
+                </datalist>
             <div className="warning">{warningA.name}</div>
           </div>
           <AgregarPersona ageR={ageR} setPersons={setInputA} _persons={input} />
