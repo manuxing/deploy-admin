@@ -10,6 +10,7 @@ const ActivityR = ({ submitted, pressed, setPressed, act, setAct }) => {
   let dispatch = useDispatch();
   let validate = tools.validate;
   let services = useSelector((state) => state.servicios);
+  let servicesIds = services.map(p=> p.id);
   let [input, setInput] = useState({ date: "", persons: [], sId: 1000 });
   let [warning, setWarning] = useState({
     date: "",
@@ -22,7 +23,7 @@ const ActivityR = ({ submitted, pressed, setPressed, act, setAct }) => {
 
   let sub = () => {
     let senr = input;
-    let x = validate.activity_clientForm(senr);
+    let x = validate.activity_clientForm(senr, servicesIds);
     if (x.status === false) {
       setWarning({
         ...warning,
@@ -43,6 +44,7 @@ const ActivityR = ({ submitted, pressed, setPressed, act, setAct }) => {
       let x = document.getElementById(id);
       x.selected = true;
       setInput({ ...input, sId: "" });
+      console.log(id)
     }
     let copy = warning;
     err.err.forEach((p) => copy = { ...copy, [p.ubic]: p.message });
@@ -55,12 +57,13 @@ const ActivityR = ({ submitted, pressed, setPressed, act, setAct }) => {
   };
 
   let handleSelect = (evento) => {
-    let err = validate.activity_client_field(evento);
+    console.log(evento.target.value)
+    let err = validate.activity_client_field(evento, servicesIds);
     err.status === true ? notErrHan(evento) : errHan(err);
   };
 
   let handleChange = (evento) => {
-    let val = validate.activity_client_field(evento);
+    let val = validate.activity_client_field(evento, servicesIds);
     val.status === true ? notErrHan(evento) : errHan(val);
   };
 
@@ -69,7 +72,6 @@ const ActivityR = ({ submitted, pressed, setPressed, act, setAct }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(submitted)
     if (submitted === true) {
       setInput({ date: "", persons: [], sId: 1000 });
       setWarning({ date: "", persons: "", sId: "", general:""});

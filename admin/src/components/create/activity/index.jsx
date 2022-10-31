@@ -20,6 +20,7 @@ const ActivityR = ({ setP }) => {
   let validate = tools.validate;
   let actual = useSelector((state) => state.actual);
   let services = useSelector((state) => state.servicios);
+  let servicesIds = services.map(p=> p.id);
   let ageR = ["Adulto Mayor", "Adulto", "Adolecente", "niño"];
   let [input, setInputA] = useState({
     name: "",
@@ -37,7 +38,7 @@ const ActivityR = ({ setP }) => {
 
   let sub = () => {
     let senr = input;
-    let x = validate.activityForm(senr);
+    let x = validate.activityForm(senr, servicesIds);
     if (x.status === false) {
       errHan(x);
     } else {
@@ -50,7 +51,7 @@ const ActivityR = ({ setP }) => {
     if (id === "service") {
       let x = document.getElementById(id);
       x.selected = true;
-      setInputA({ ...input, sId: "" });
+      setInputA({ ...input, sId: 1000 });
     }
     let copy = warningA;
     err.err.forEach((p) => copy = { ...copy, [p.ubic]: p.message });
@@ -63,12 +64,12 @@ const ActivityR = ({ setP }) => {
   };
 
   let handleSelect = (evento) => {
-    let err = validate.activity_client_field(evento);
+    let err = validate.activity_client_field(evento, servicesIds);
     err.status === true ? notErrHan(evento) : errHan(err);
   };
 
   let handleChange = (evento) => {
-    let val = validate.activity_client_field(evento);
+    let val = validate.activity_client_field(evento, servicesIds);
     val.status === true ? notErrHan(evento) : errHan(val);
   };
 
@@ -96,7 +97,7 @@ const ActivityR = ({ setP }) => {
 
   let handleSubmit = (e, inp) => {
     e.preventDefault();
-    let x = validate.activityForm(inp);
+    let x = validate.activityForm(inp, servicesIds);
     x.status === false ? errHan(x) : sub();
   };
 
