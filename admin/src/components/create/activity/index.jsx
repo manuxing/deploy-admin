@@ -11,9 +11,6 @@ import {
 import tools from "../../../tools";
 import PersonCard from "./personaCard";
 import AgregarPersona from "./agregarPersona";
-//hacer datadisplay para los nombres 
-//validar con los nombres del estado
-// validar con los servicios del estado
 
 const ActivityR = ({ setP }) => {
   const history = useHistory();
@@ -72,6 +69,7 @@ const ActivityR = ({ setP }) => {
   };
 
   let handleChange = (evento) => {
+    console.log(input);
     let val = validate.activity_client_field(evento, servicesIds, clientsNames);
     val.status === true ? notErrHan(evento) : errHan(val);
   };

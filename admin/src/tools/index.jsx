@@ -175,7 +175,7 @@ const tools = {
             res.status = false;
           }
           break;
-          case "name":
+        case "name":
           if (typeof p.target.value !== "string"|| p.target.value.length === 0) {
             let err = {
               message: "ingrese un nombre valido",
