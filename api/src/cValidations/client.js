@@ -1,5 +1,4 @@
 const validatePost = async(body, next, Service) => {
-    console.log(typeof body.contact);
     if(Object.values(body).includes(undefined)||Object.values(body).includes(null))return next({status: 400, message:"missing values"})
 
     let nameReg = new RegExp("^(?=.{4,50}$)(?=.+[a-zA-Z])[a-zA-Z]+$");
