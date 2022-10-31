@@ -6,7 +6,6 @@ const { validatePost } = require("../cValidations/activity.js");
 const router = Router();
 
 router.get('/:id', async(req, res, next) =>{
-    //validate cosas de la pagina
     let {id} = req.params;
     return getActivity(res, next, Activity, [Client, Service], id);
 });
@@ -23,8 +22,8 @@ router.post('/', async(req, res, next) => {
     } else {
         copia = {cId, date, sId, persons};
     }
-    validatePost(copia, next, Client, Service);
-    persons = persons.map(p => `${p.ageR}, Sexo: ${p.sexo}`);   
+    await validatePost(copia, next, Client, Service);
+    req.body.persons =  typeof req.body.persons === "object" ? req.body.persons.map(p => `${p.ageR}, Sexo: ${p.sexo}`) : 0  
     return postActivity(req.body, res, next, Activity, Service, Client);
 });
 
