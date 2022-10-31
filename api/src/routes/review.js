@@ -1,90 +1,43 @@
 const { Router } = require('express');
 const { Client, Review, Service } = require('../db.js');
+const {getReviews, getReview, postReview, putReview} = require("../controllers/review.js");
+const {validatePost, validatePut} = require("../cValidations/review.js");
 const router = Router();
 
 router.get('/:id', async(req, res, next) =>{
     const {id} = req.params;
-    try {
-        let peticionDB = await Review.findAll({
-            where:{
-                id: id
-            },
-            include: [Client, Service]
-        });
-        return res.json(peticionDB);
-    }catch(e){
-        return next({status: "500", message: 'Error en router Review I'});
-    }
+    return getReview(res, next, Review, [Client, Service], id);
 });
 
 router.get('/', async(req, res, next) =>{
-        try {
-            let peticionDB = await Review.findAll({include: [Client, Service]});
-            peticionDB.push({name:'Reseñas', url:'reviews',  vals:[{key:"size",value:peticionDB.length}]});
-            return res.json(peticionDB);
-        }catch(e){
-            return next({status: "500", message: 'Error en router Review P'});
-        }
+    return getReviews(res, next, Review, [Client, Service]);
 }); 
 
 router.post('/', async(req, res, next) => {
-    const { description, thg, cName, sId } = req.body.senr;
-    console.log(req.body.senr)
-    if(!description||!thg||!cName||!sId){
-        return next({status: 400, message: 'Ingrese los datos correctos'})
-    }
-    try{   
-        let hacer = await Review.create(req.body.senr);
-        let servicc = await Service.findAll({
-            where :{
-                id: sId
-            }
-        })
-        await hacer.addService(servicc);
-        let x = await Client.findAll({
-            where: {
-                name: cName
-            }
-        });
-        await hacer.addClient(x);
-        res.json(hacer)
-    } catch (e){
-        return next({status: "500", message: 'Error en router Review post'});
-    };
+    let body = req.body.senr;
+    validatePost(body, next, Service, Client)
+    return postReview(body, res, next, Review, Service, Client);
 });
 
 router.put('/', async(req, res, next) => {
-    const {id, stat} = req.body;
-    if(!id){
-        return next({status:400, message:"ingrese los datos correctos"})
-    }
-    try {
-        let up = await Review.update({
-            stat: stat,
-        }, {
-            where: {
-                id: id,
-            }
-        });
-        return res.json(up);
-    }catch(e){
-        return next({status: "500", message: 'Error en router Review put'});
-    }
+    const {body} = req;
+    await validatePut(body, next, Review);
+    return putReview(body, res, next, Review);
 });
 
-router.delete('/:id', async(req, res, next) =>{
-    const {id} = req.params;
-    try {
-        let peticionDB = await Review.destroy({
-            where:{
-                id: id
-            },
-        });
-        return res.json(peticionDB);
-    }catch(e){
-        return next({status: "500", message: 'Error en router Review I'});
-    }
-});
+// router.delete('/:id', async(req, res, next) =>{
+//     const {id} = req.params;
+//     try {
+//         let peticionDB = await Review.destroy({
+//             where:{
+//                 id: id
+//             },
+//         });
+//         return res.json(peticionDB);
+//     }catch(e){
+//         return next({status: "500", message: 'Error en router Review I'});
+//     }
+// });
 
 
 module.exports = router;

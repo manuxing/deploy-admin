@@ -39,6 +39,9 @@ const postRequest = async(body, res, next, model, Service) => {
         await request.addService(service)
             .catch(err => next({status: "500", message: 'could not relate Client to Service'}));
 
+        // await service.addService(request)
+        //     .catch(err => next({status: "500", message: 'could not relate Client to Service'}));
+
         res.json(request);
     } catch (e){
         return next({status: "500", message: 'Error en router Request Post'});
