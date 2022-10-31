@@ -1,6 +1,6 @@
-
 const validatePost = async(body, next, Client, Service) => {
     if(Object.values(body).includes(undefined)||Object.values(body).includes(null))return next({status: 400, message:"missing values"})
+
     if(body.name){
         let client = await Client.findOne({ where: { name: body.name}})
         .catch(err => next({status:400, message:"no se encontro el cliente validando"}));
@@ -10,8 +10,10 @@ const validatePost = async(body, next, Client, Service) => {
         .catch(err => next({status:400, message:"no se encontro el cliente validando"}));
         if(client === null) return next({status: 400, message:"client dont exist"});
     }
+
     let dateReg = new RegExp("^(19[0-9]{2}|2[0-9]{3})-(0[1-9]|1[012])-([123]0|[012][1-9]|31)$");
     if(!dateReg.test(body.date)) return next({status: 400, message:"invalid date"});
+    
     if(typeof body.persons !== "object") return next({status: 400, message:"persons should be an array"});
     if(body.persons.length < 1) return next({status: 400, message:"cannot post without persons"});
 
