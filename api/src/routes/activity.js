@@ -1,72 +1,31 @@
 const { Router } = require('express');
 const { Activity, Service, Client } = require('../db.js');
 const db = require('../db.js');
+const {getActivitys, getActivity, postActivity} = require("../controllers/activity.js");
+const { validatePost } = require("../cValidations/activity.js");
 const router = Router();
 
 router.get('/:id', async(req, res, next) =>{
     //validate cosas de la pagina
-    const {id} = req.params;
-    try {
-        let peticionDB = await Activity.findAll({
-            where:{
-                id: id
-            },
-            include: [Client, Service]
-        });
-        let r = peticionDB[0].dataValues;
-        return res.json(peticionDB[0].dataValues);
-    }catch(e){
-        return next({status: "500", message: 'Error en router Activity get I'});
-    }
+    let {id} = req.params;
+    return getActivity(res, next, Activity, [Client, Service], id);
 });
 
 router.get('/', async(req, res, next) =>{
-    //validate cosas de la pagina
-    try {
-        let peticionDB = await Activity.findAll({include: [Client, Service]});
-        peticionDB.push({name:'Actividades', url:'activitys', vals:[{key:"size",value:peticionDB.length}]});
-        return res.json(peticionDB);
-    }catch(e){
-        return next({status: "500", message: 'Error en router Activity get P'});
-    }
+    return getActivitys(res, next, Activity, [Client, Service]);
 });
 
 router.post('/', async(req, res, next) => {
-    const { date, persons, name, cId, sId } = req.body;
-    if(!date||!persons||!sId){
-        return next({status: 400, message: 'Ingrese los datos correctos'})
+    let {name, persons, date, sId, cId} = req.body;
+    let copia;
+    if(cId === undefined){
+        copia = {name, date, sId, persons};
+    } else {
+        copia = {cId, date, sId, persons};
     }
-    try{   
-        let y = req.body;
-        y.persons = persons.map(p => `${p.ageR}, Sexo: ${p.sexo}`);        
-        let hacer = await Activity.create(y);
-        let servic = await Service.findAll({
-            where :{
-                id: sId
-            }
-        });
-        await hacer.addService(servic);
-        let x;
-        if(cId){
-            x = await Client.findAll({
-                where: {
-                    id: cId
-                }
-            });
-        } else {
-            x = await Client.findAll({
-                where: {
-                    name: name
-                }
-            });
-        }
-        x = x[0]
-        await hacer.setClient(x);
-        await x.addActivity(hacer);
-        return res.json(hacer);
-    } catch (e){
-        return next({status: 500, message: 'Error en router Activity post', e});
-    };
+    validatePost(copia, next, Client, Service);
+    persons = persons.map(p => `${p.ageR}, Sexo: ${p.sexo}`);   
+    return postActivity(req.body, res, next, Activity, Service, Client);
 });
 
 module.exports = router;
