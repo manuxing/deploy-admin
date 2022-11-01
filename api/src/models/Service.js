@@ -19,6 +19,10 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false 
         },
+        tR_:{
+            type: DataTypes.TEXT,
+            // allowNull: false 
+        },
     },{
         timestamps: false,
      });
