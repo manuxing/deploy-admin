@@ -1,9 +1,13 @@
+const pre = require("../Tools");
+
 const getServices = async(res, next, model) => {
     try {
-        let peticionDB = await model.findAll()
+        let peticionDB = await model.findAndCountAll()
             .catch(err => next({status: "500", message: 'could not find model values or related models'}));
-        peticionDB.push({name:'Servicios', url:'services',  vals:[{key:"size", value:peticionDB.length}]});
-        return res.json(peticionDB);
+
+        let respuesta = pre.setStat('Servicios', 'services', peticionDB.count, peticionDB.rows);
+
+        return res.json(respuesta);
     }catch(e){
         return next({status: "500", message: 'Error en router Service get Plural'});
     }
