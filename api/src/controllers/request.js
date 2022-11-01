@@ -38,9 +38,6 @@ const postRequest = async(body, res, next, model, Service) => {
         await request.addService(service, {through:'Service_request'})
             .catch(err => next({status: "500", message: 'could not relate Request to Service'}));
 
-            // await service.setRequest(request, {through:'Service_request'})
-            // .catch(err => next({status: 500, message: 'could not relate Service to Request'}));
-
         res.json(request);
     } catch (e){
         return next({status: 500, message: 'Error en router Request Post'});

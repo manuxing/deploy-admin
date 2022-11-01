@@ -19,11 +19,10 @@ const getService = async( res, next, model, id, related) => {
     }
 };
 
-const postService = async(body, res, next, model, related) => {
+const postService = async(body, res, next, model) => {
     try{   
-        let service = await model.create(body, {
-            include: related
-          }).catch(err => next({status: "500", message: 'could not create model'}));
+        let service = await model.create(body)
+            .catch(err => next({status: "500", message: 'could not create model'}));
         return res.json(service);
     } catch (e){
         return next({status: "500", message: 'Error en router service post'});

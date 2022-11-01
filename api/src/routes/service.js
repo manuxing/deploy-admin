@@ -16,7 +16,7 @@ router.get('/', async(req, res, next) =>{
 router.post('/', async(req, res, next) => {
     const {body} = req;
     validatePost(body, next);
-    return postService(body, res, next, Service, [Review, Request]);
+    return postService(body, res, next, Service);
 });
 
 module.exports = router;
