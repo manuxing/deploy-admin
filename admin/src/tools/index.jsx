@@ -175,16 +175,6 @@ const tools = {
             res.status = false;
           }
           break;
-        case "name":
-          if (typeof p.target.value !== "string"|| p.target.value.length === 0) {
-            let err = {
-              message: "ingrese un nombre valido",
-              ubic: "name",
-            };
-            errs.push(err);
-            res.status = false;
-          }
-          break;
         case "sId":
           if (p.target.value.length > 2 ||!servicesIds.includes(parseInt(p.target.value))) {
             console.log(p.target.value.length>2, servicesIds)
