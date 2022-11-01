@@ -1,9 +1,12 @@
+const pre = require("../Tools");
+
 const getClients = async(res, next, model, related) => {
     try {
-        let peticionDB = await model.findAll({include: related})
-        .catch(err => next({status: "500", message: 'could not find model values or related models'}));
-        peticionDB.push({name:'Clientes', url:'clients', vals:[{key:"size",value:peticionDB.length}]});
-        return res.json(peticionDB);
+        let peticionDB = await model.findAndCountAll()
+            .catch(err => next({status: "500", message: 'could not find model values or related models'}));
+        let respuesta = pre.setStat('Clientes', 'clients', peticionDB.count, peticionDB.rows);
+
+        return res.json(respuesta);
     }catch(e){
         return next({status: "500", message: 'Error en router Client get Plural'});
     }

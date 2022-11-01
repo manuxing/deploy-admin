@@ -27,15 +27,7 @@ const Dash = ({id, back, name, contact, act, rev})=> {
                             })
                         }
                     </div>
-                    <div className="punto_fdato">
-                        <h2>Actividades realizadas</h2>
-                        <h3> {act.length} </h3>
-                    </div>
-                    <div className="punto_fdato">
-                        <h2>Reseñas</h2>
-                        <h3> {rev.length} </h3>
-                    </div>
-                    </div>
+                </div>
                 </NavLink>
         </div>
     )
