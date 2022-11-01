@@ -68,7 +68,8 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.GET_REVIEWS: {
-            let {data, stats} = tools.getSetter(action.payload.data, state)
+            let {data, stat} = action.payload.data;
+            let stats = tools.getSetter_(stat, state);
             return {
                 ...state,
                 reviews: data,
