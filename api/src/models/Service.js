@@ -17,10 +17,12 @@ module.exports = (sequelize) => {
         },
         tR:{
             type: DataTypes.TEXT,
+            // type: DataTypes.TIME,
             allowNull: false 
         },
         tR_:{
             type: DataTypes.TEXT,
+            // type: DataTypes.TIME,
             // allowNull: false 
         },
     },{
