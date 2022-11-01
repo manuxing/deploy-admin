@@ -25,19 +25,4 @@ router.put('/', async(req, res, next) => {
     return putReview(body, res, next, Review);
 });
 
-// router.delete('/:id', async(req, res, next) =>{
-//     const {id} = req.params;
-//     try {
-//         let peticionDB = await Review.destroy({
-//             where:{
-//                 id: id
-//             },
-//         });
-//         return res.json(peticionDB);
-//     }catch(e){
-//         return next({status: "500", message: 'Error en router Review I'});
-//     }
-// });
-
-
 module.exports = router;

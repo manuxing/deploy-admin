@@ -33,18 +33,17 @@ const postRequest = async(body, res, next, model, Service) => {
             where :{
                 id: parseInt(body.sId)
             }
-        })
-            .catch(err => next({status: "500", message: 'could not find Service related model'}));
+        }).catch(err => next({status: "500", message: 'could not find Service related model'}));
 
-        await request.addService(service)
-            .catch(err => next({status: "500", message: 'could not relate Client to Service'}));
+        await request.addService(service, {through:'Service_request'})
+            .catch(err => next({status: "500", message: 'could not relate Request to Service'}));
 
-        // await service.addService(request)
-        //     .catch(err => next({status: "500", message: 'could not relate Client to Service'}));
+            // await service.setRequest(request, {through:'Service_request'})
+            // .catch(err => next({status: 500, message: 'could not relate Service to Request'}));
 
         res.json(request);
     } catch (e){
-        return next({status: "500", message: 'Error en router Request Post'});
+        return next({status: 500, message: 'Error en router Request Post'});
     };
 };
 
