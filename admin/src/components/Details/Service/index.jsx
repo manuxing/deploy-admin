@@ -24,12 +24,18 @@ const Service = () => {
   useEffect(()=>{
     if(typeof actual !== "number"){
       setLoading(false)
+      if(reviews.length > 0){
+        reviews = reviews.filter(p =>{
+          if(p.services.length > 0){
+            if(p.services[0].id === actual.id){
+              return p;
+            }
+          }
+        });
+        reviews.length > 0 ? setLoadingR(false) : setLoadingR(true)
+      }
     }else{
       setLoading(true)
-    }
-    if(reviews.length > 0){
-      reviews = reviews.filter(p => parseInt(p.services[0].id) === parseInt(id));
-      reviews.length > 0 ? setLoadingR(false) : setLoadingR(true)
     }
   },[loading, actual, reviews])
 
@@ -86,8 +92,10 @@ const Service = () => {
                 reviews ? reviews.map(p => { 
                   return (
                     <NavLink key={`${p.id}`} className="link" to={`/review/${p.id}`}>
-                      {p.clients[0].name}:
-                      "{p.description}"
+                      <div>
+                        {p?.clients[0]?.name}:
+                        "{p.description}"
+                      </div>
                     </NavLink>
                   ) 
                 }) : "Reviews"
