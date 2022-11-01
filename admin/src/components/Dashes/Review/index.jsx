@@ -23,10 +23,6 @@ const Dash = ({ id, back, stat, dateR, dateP, thg, clients, services})=> {
                         {tools.display.review.dash(services)}
                     </div>
                     <div className="punto_fdato">
-                        <h2>Cliente</h2>
-                        <h3>{clients.name}</h3>
-                    </div>
-                    <div className="punto_fdato">
                         <h2>Fecha de la reseña</h2>
                         <h3>{dateR}</h3>
                     </div>

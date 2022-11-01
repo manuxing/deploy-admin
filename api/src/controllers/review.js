@@ -1,9 +1,14 @@
+const pre = require("../Tools");
+
 const getReviews = async(res, next, model, related) => {
     try {
-        let peticionDB = await model.findAll({include: related})
-            .catch(err => next({status: 500, message: 'could not find model values or related models'}));
-        peticionDB.push({name:'Reseñas', url:'reviews',  vals:[{key:"size",value:peticionDB.length}]});
-        return res.json(peticionDB);
+
+        let peticionDB = await model.findAndCountAll({include:related})
+            .catch(err => next({status: "500", message: 'could not find model values or related models'}));
+
+        let respuesta = pre.setStat('Reseñas', 'reviews', peticionDB.count, peticionDB.rows);
+
+        return res.json(respuesta);
     }catch(e){
         return next({status: "500", message: 'Error en router Review get Plural'});
     }

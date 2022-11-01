@@ -10,7 +10,7 @@ router.get('/:id', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
-    return getReviews(res, next, Review, [Client, Service]);
+    return getReviews(res, next, Review, [Service]);
 }); 
 
 router.post('/', async(req, res, next) => {

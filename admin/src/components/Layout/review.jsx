@@ -64,7 +64,6 @@ const ReviewLayout = () => {
                         dateR={p.dateR}
                         dateP={p.dateP}
                         thg={p.thg}
-                        clients={p.clients?.length > 0 ? p.clients?.length : 0}
                         services={
                           p.services?.length > 0 ? p.services?.length : 0
                         }
