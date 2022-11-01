@@ -22,8 +22,8 @@ const Service = () => {
 
   useEffect(()=>{
     if(typeof actual !== "number"){
-      setReviews(actual.reviews);
-      setRequests(actual.requests);
+      if(actual.reviews !== undefined)setReviews(actual.reviews);
+      if(actual.requests !== undefined)setRequests(actual.requests);
       setLoading(false)
     }else{
       setLoading(true)
@@ -64,21 +64,26 @@ const Service = () => {
             </div>
           </div>
           <div className="div_srv">
-            <span className="span_srv">
+            <h2>
               Horarios
-            </span>
+            </h2>
             <div>
-              {actual?.tR ? actual?.tR : "rango Horario"}
+              <span className="span_srv">Desde</span>
+              {actual?.tR ? actual?.tR : "Desde"}
+            </div>
+            <div>
+              <span className="span_srv">Hasta</span>
+              {actual?.tR_ ? actual?.tR_ : "Hasta"}
             </div>
           </div>
           <div className="div_srv">
             <span className="span_srv">
               Reviews
             </span>
-            {Reviews.length}
+            {Reviews?.length}
             <div>
               {
-                Reviews.length > 0 ? Reviews.map(p => { 
+                Reviews?.length > 0 ? Reviews.map(p => { 
                   return (
                     <NavLink key={`${p.id}`} className="link" to={`/review/${p.id}`}>
                       <div>

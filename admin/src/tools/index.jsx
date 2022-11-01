@@ -338,6 +338,7 @@ const tools = {
       let errs = [];
       let res = { status: true, ubic: evento.target.name };
       let nameR = new RegExp(/[a-zA-Z ]$/);
+      let timeR = new RegExp("([01]?[0-9]|2[0-3]):[0-5][0-9]?");
       switch (evento.target.name) {
         case "name":
           if (nameR.test(evento.target.value) === false) {
@@ -350,15 +351,25 @@ const tools = {
           }
           break;
         case "tR":
-          // if(evento.target.value.length < 5||nameR.test(evento.target.value) === false){
-          //     let err = {
-          //         message: "ingrese un nombre valido",
-          //         ubic: "cName"
-          //     }
-          //     res.status = false;
-          //     errs.push(err);
-          // }
+          if(timeR.test(evento.target.value) === false){
+              let err = {
+                  message: "ingrese un horario valido",
+                  ubic: "tR"
+              }
+              res.status = false;
+              errs.push(err);
+          }
           break;
+        case "tR_":
+          if(timeR.test(evento.target.value) === false){
+            let err = {
+                message: "ingrese un horario valido",
+                ubic: "tR_"
+            }
+            res.status = false;
+            errs.push(err);
+        }
+        break;
         case "description":
           if (typeof evento.target.value !== "string") {
             let err = {
@@ -385,14 +396,7 @@ const tools = {
     serviceForm: (service) => {
       let errs = [];
       let res = { status: true, ubic: "" };
-      let medios = [
-        "telefono",
-        "email",
-        "presencial",
-        "pagina",
-        "booking",
-        "otro",
-      ];
+      let timeR = new RegExp("([01]?[0-9]|2[0-3]):[0-5][0-9]?");
       let nameR = new RegExp(/[a-zA-Z ]$/);
       if (service.name.length < 5 || nameR.test(service.name) === false) {
         let err = {
@@ -417,16 +421,22 @@ const tools = {
         res.status = false;
         errs.push(err);
       }
-      // hacer tR
-      // if(medios.includes(review.thg) === false){
-      //     console.log("review entera");
-      //     let err = {
-      //     message:"rango de edad invalido",
-      //     ubic: "thg"
-      //     }
-      //     errs.push(err);
-      //     res.status = false;
-      // }
+      if (timeR.test(service.tR) === false) {
+        let err = {
+          message: "ingrese un horario valido",
+          ubic: "tR",
+        };
+        res.status = false;
+        errs.push(err);
+      }
+      if (timeR.test(service.tR_) === false) {
+        let err = {
+          message: "ingrese un horario valido",
+          ubic: "tR_",
+        };
+        res.status = false;
+        errs.push(err);
+      }
       res.err = errs;
       return res;
     },
