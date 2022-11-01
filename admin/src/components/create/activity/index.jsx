@@ -69,7 +69,6 @@ const ActivityR = ({ setP }) => {
   };
 
   let handleChange = (evento) => {
-    console.log(input);
     let val = validate.activity_client_field(evento, servicesIds, clientsNames);
     val.status === true ? notErrHan(evento) : errHan(val);
   };
