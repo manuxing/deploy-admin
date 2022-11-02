@@ -5,9 +5,8 @@ const Drop = ({not, l}) => {
   return (
       <div className="notification">
         {not.map(p=>{
-            console.log(p)
             return(
-                <NavLink to={p.description ? `/review/${p.id}`:`/request/${p.id}`} className="LinkNot">
+                <NavLink key={p.id} to={p.description ? `/review/${p.id}`:`/request/${p.id}`} className="LinkNot">
                      <p>
                         {
                             p.description ? "Review" : "Request"

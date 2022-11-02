@@ -19,8 +19,7 @@ const Request = () => {
     if(error){
       history.push("/err");
     } else{
-      
-      if(!parseInt(idR).toString().length !== idR.length){
+        if(parseInt(idR).toString().length === idR.length && idR !== "undefined"){
         dispatch(getSolicitudes(idR))
       }
     }

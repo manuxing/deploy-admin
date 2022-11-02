@@ -22,8 +22,7 @@ const Service = () => {
       history.push("/err");
     } else{
       dispatch(getReviews())
-      
-      if(!parseInt(id).toString().length !== id.length){
+      if(parseInt(id).toString().length === id.length && id !== "undefined"){
         dispatch(getServicio(id))
       }
     }

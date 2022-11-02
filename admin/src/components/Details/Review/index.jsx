@@ -21,8 +21,7 @@ const Review = () => {
     if(error){
       history.push("/err");
     } else{
-      
-      if(!parseInt(id).toString().length !== id.length){
+      if(parseInt(id).toString().length === id.length && id !== "undefined"){
         dispatch(getReviews(id))
       }
     }

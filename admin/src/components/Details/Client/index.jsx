@@ -22,8 +22,8 @@ const Cliente = () => {
       history.push("/err");
     } else{
       dispatch(getActividades())
-      
-      if(!parseInt(id).toString().length !== id.length){
+      console.log(id)
+      if(!parseInt(id).toString().length !== id.length && id !== "undefined"){
         dispatch(getClient(id))
       }
     }
