@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams, useHistory } from "react-router-dom"
+import { useParams, useHistory, NavLink } from "react-router-dom"
 import { statChange, setActual,getSolicitudes } from "../../../redux/actions";
 import Spinner from '../../Spinner'
 
@@ -19,7 +19,10 @@ const Request = () => {
     if(error){
       history.push("/err");
     } else{
-      dispatch(getSolicitudes(idR))
+      
+      if(!parseInt(idR).toString().length !== idR.length){
+        dispatch(getSolicitudes(idR))
+      }
     }
   },[dispatch, error]);
     
@@ -86,8 +89,10 @@ const Request = () => {
             <div>
                   {
                     actual?.services ? actual?.services.map(p => { 
-                      return (
-                      <span key={p.name}>{p.name}</span>
+                    return (
+                      <NavLink key={`${p.id}`} className="link" to={`/service/${p.id}`}>
+                        <span>{p.name}</span>
+                      </NavLink>
                     ) 
                   }) : "services"
                   }

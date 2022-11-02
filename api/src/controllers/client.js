@@ -13,6 +13,7 @@ const getClients = async(res, next, model, related) => {
 };
 
 const getClient = async( res, next, model, related, id) => {
+    
     try {
         let peticionDB = await model.findOne({
             where:{

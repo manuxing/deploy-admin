@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const Dash = ({data})=> { 
     let {id, imgs, name, description, tR} = data;
+    
     return (
         <div className="dash_act"> 
             <NavLink className="link" to={`/service/${parseInt(id)}`}>

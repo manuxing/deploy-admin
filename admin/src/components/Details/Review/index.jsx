@@ -21,7 +21,10 @@ const Review = () => {
     if(error){
       history.push("/err");
     } else{
-      dispatch(getReviews(id))
+      
+      if(!parseInt(id).toString().length !== id.length){
+        dispatch(getReviews(id))
+      }
     }
   },[dispatch, error]);
 

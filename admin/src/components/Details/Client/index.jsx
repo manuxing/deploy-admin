@@ -21,8 +21,11 @@ const Cliente = () => {
     if(error){
       history.push("/err");
     } else{
-      dispatch(getClient(id))
       dispatch(getActividades())
+      
+      if(!parseInt(id).toString().length !== id.length){
+        dispatch(getClient(id))
+      }
     }
   },[dispatch, error]);
 

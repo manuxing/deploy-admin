@@ -6,7 +6,7 @@ import tools from "../../../tools";
 
 const Dash = ({data})=> { 
     let { id, back, stat, dateR, dateP, thg, services} = data;
-    console.log(id)
+    
     return (
         <div className="dash_act"> 
                 <NavLink className="link" to={`/review/${id}`}>

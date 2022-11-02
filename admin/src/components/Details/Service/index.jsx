@@ -22,7 +22,10 @@ const Service = () => {
       history.push("/err");
     } else{
       dispatch(getReviews())
-      dispatch(getServicio(id))
+      
+      if(!parseInt(id).toString().length !== id.length){
+        dispatch(getServicio(id))
+      }
     }
   },[dispatch, error]);
 

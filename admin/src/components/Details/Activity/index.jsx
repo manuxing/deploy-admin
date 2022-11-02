@@ -19,7 +19,10 @@ const Activity = () => {
     if(error){
       history.push("/err");
     } else{
-      dispatch(getActividades(id))
+      
+      if(!parseInt(id).toString().length !== id.length){
+        dispatch(getActividades(parseInt(id)))
+      }
     }
   },[dispatch, error]);
 
@@ -65,7 +68,7 @@ const Activity = () => {
                     }) : "services"
                   }
                 </div>
-              </div>  
+              </div> 
               <div  className="div_act">
                 <span className="_span_act">
                   fecha de actividad

@@ -7,7 +7,6 @@ import tools from "../../../tools";
 
 
 const Dash = ({data})=> { 
-    console.log(data)
     let {id, back, dateR, dateP, thg, contact} = data;
     return (
         <div className="dash_act"> 
