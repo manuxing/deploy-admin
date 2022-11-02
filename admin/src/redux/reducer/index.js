@@ -15,6 +15,7 @@ const initialState = {
     servicios: [],
     not: [],
     error: null,
+    errForm: null,
 };
 
 export default function rootReducer(state=initialState, action){
@@ -100,11 +101,17 @@ export default function rootReducer(state=initialState, action){
                 servicios: [],
                 not: [],
                 error: null,
+                errForm: null,
             }
         case type.ERROR:
             return {
               ...state,
               error: action.payload.response,
+            }
+        case type.ERROR_FORM:
+            return {
+              ...state,
+              errForm: action.payload.response,
             }
         default:
             return {...state};

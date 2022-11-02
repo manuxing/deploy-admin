@@ -18,10 +18,12 @@ const Form = ({ setP }) => {
   const history = useHistory();
 
   let actual = useSelector((state) => state.actual);
+  let errForm = useSelector((state) => state.errForm);
 
   let [submited, setSubmited] = useState(false);
   let [pressed, setPressed] = useState(false);
   let [input, setInput] = useState({ name: "", contact: [], act: "no" });
+  
   let [warning, setWarning] = useState({
     name: "",
     contact: "",
@@ -71,6 +73,10 @@ const Form = ({ setP }) => {
     p.preventDefault();
     setPressed(true);
   };
+
+  useEffect(() => {
+    if(errForm && errForm?.data)alert(errForm.data)
+  }, [errForm]);
 
   useEffect(() => {
     if (input.act !== "no") {

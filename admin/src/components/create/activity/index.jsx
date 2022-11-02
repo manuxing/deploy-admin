@@ -20,6 +20,7 @@ const ActivityR = ({ setP }) => {
   let actual = useSelector((state) => state.actual);
   let services = useSelector((state) => state.servicios);
   let clientes = useSelector((state) => state.clientes);
+  let errForm = useSelector((state) => state.errForm);
 
   let clientsNames = clientes.map(p=> p.name);
   let servicesIds = services.map(p=> p.id);
@@ -80,6 +81,10 @@ const ActivityR = ({ setP }) => {
     dispatch(getServicio());
     dispatch(getClient());
   }, [dispatch]);
+
+  useEffect(() => {
+    if(errForm && errForm?.data)alert(errForm.data)
+  }, [errForm]);
 
   useEffect(() => {
     if (actual !== 1 && input.date === actual.date) {

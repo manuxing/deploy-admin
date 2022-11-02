@@ -12,7 +12,7 @@ export function createClient(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
@@ -71,7 +71,7 @@ export function createSolicitud(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
@@ -117,7 +117,7 @@ export function createActividades(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
@@ -164,7 +164,7 @@ export function createReviews(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
@@ -210,7 +210,7 @@ export function createServicio(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
@@ -291,6 +291,10 @@ export function setActual() {
 
 export function error() {
   return { type: type.ERROR, payload: null };
+}
+
+export function errorForm() {
+  return { type: type.ERROR_FORM, payload: null };
 }
 
 export function clearAll() {

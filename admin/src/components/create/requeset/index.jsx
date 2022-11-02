@@ -18,6 +18,8 @@ const RequestR = ({ setP }) => {
   ;
   let actual = useSelector((state) => state.actual);
   let services = useSelector((state) => state.servicios);
+  let errForm = useSelector((state) => state.errForm);
+
   let servicesIds = services.map(p=> p.id);
   let thg = [
     "telefono",
@@ -91,6 +93,10 @@ const RequestR = ({ setP }) => {
     x.status === false ? errHan(x) : sub();
   };
   
+  useEffect(() => {
+    if(errForm && errForm?.data)alert(errForm.data)
+  }, [errForm]);
+
   useEffect(() => {
     dispatch(getServicio());
   }, [dispatch]);
