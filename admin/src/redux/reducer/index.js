@@ -14,7 +14,7 @@ const initialState = {
     reviews: [],
     servicios: [],
     not: [],
-    error:{},
+    error:0,
 };
 
 export default function rootReducer(state=initialState, action){
@@ -99,7 +99,7 @@ export default function rootReducer(state=initialState, action){
         case type.ERROR:
             return {
               ...state,
-              error: action.payload,
+              error: action.payload.response,
             }
         default:
             return {...state};

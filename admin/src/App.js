@@ -17,6 +17,7 @@ import Form from "./components/create/client/prueba";
 import ReviewR from "./components/create/review";
 import RequestR from "./components/create/requeset";
 import AgregarServicio from "./components/create/service/prueba";
+import Error from "./components/Error";
 // import { authenticateAction } from "./redux/auth/authActions";
 
 function App() {
@@ -53,6 +54,9 @@ function App() {
           </Route>
           <Route path="/createser">
             <AgregarServicio />
+          </Route>
+          <Route path="/err">
+            <Error />
           </Route>
           <Route path="/client/:id" component={Client} />
           <Route path="/clients/">
