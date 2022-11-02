@@ -290,6 +290,10 @@ export function setActual() {
   return { type: type.SET_ACTUAL, payload: 1 };
 }
 
+export function error() {
+  return { type: type.ERROR, payload: 0 };
+}
+
 export function clearAll() {
   return { type: type.CLEAR_ALL };
 }

@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import { statChange, setActual,getSolicitudes } from "../../../redux/actions";
 
 const Request = () => {
 
   const {idR} = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
   const actual = useSelector((state) => state.actual);
-  console.log(actual)
+  const error = useSelector((state) => state.error);
   const [_stat, setStat] = useState(actual.stat);
   let [loading, setLoading] = useState(true);
 
   useEffect(()=>{
-    console.log("act",actual)
-    dispatch(getSolicitudes(idR))
-  },[dispatch])
+    if(error){
+      history.push("/err");
+    } else{
+      dispatch(getSolicitudes(idR))
+    }
+  },[dispatch, error]);
     
   useEffect(()=>{
     if(actual && actual !== 1 && actual?.stat !== null){

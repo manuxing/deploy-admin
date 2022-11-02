@@ -56,9 +56,6 @@ const ActivityLayout = () => {
                             ? p.back
                             : "https://e7.pngegg.com/pngimages/779/957/png-clipart-video-games-video-game-consoles-red-dead-redemption-video-game-developer-cool-gaming-logos-blue-game-logo.png"
                         }
-                        client={
-                          p.client === null ? { name: "peter pan" } : p.client
-                        }
                         services={p.services}
                         persons={p.persons}
                         date={p.date}

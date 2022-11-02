@@ -21,12 +21,8 @@ import ReviewR from "./components/create/review";
 import Service from "./components/Details/Service";
 import ServiceLayout from "./components/Layout/services";
 import AgregarServicio from "./components/create/service/prueba";
-<<<<<<< Updated upstream
-=======
-
 import Error from "./components/Error";
 import "../src/App.css";
->>>>>>> Stashed changes
 // import { authenticateAction } from "./redux/auth/authActions";
 
 function App() {
@@ -63,6 +59,9 @@ function App() {
           </Route>
           <Route path="/createser">
             <AgregarServicio />
+          </Route>
+          <Route path="/err">
+            <Error />
           </Route>
           <Route path="/client/:id" component={Client} />
           <Route path="/clients/">

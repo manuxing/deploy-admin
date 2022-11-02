@@ -1,44 +1,22 @@
 const { Router } = require('express');
-const { Service } = require('../db.js');
+const { Service, Review, Request } = require('../db.js');
+const { getService, getServices, postService} = require("../controllers/service.js");
+const {validatePost} = require("../cValidations/service.js");
 const router = Router();
 
 router.get('/:id', async(req, res, next) =>{
     const {id} = req.params
-    try {
-        let peticionDB = await Service.findAll({
-            where:{
-                id: id
-            },
-        });
-        return res.json(peticionDB);
-    }catch(e){
-        return next({status: "500", message: 'Error en router service get i'});
-    }
+    return getService(res, next, Service, id, [Review, Request]);
 });
 
 router.get('/', async(req, res, next) =>{
-        try {
-            let peticionDB = await Service.findAll();
-            peticionDB.push({name:'Servicios', url:'services',  vals:[{key:"size",value:peticionDB.length}]});
-            return res.json(peticionDB);
-        }catch(e){
-            console.log(req.body)
-            return next({status: "500", message: 'Error en router service get p'});
-        }
+    return getServices(res, next, Service);
 });
 
 router.post('/', async(req, res, next) => {
-    console.log(req.body);
-    const { name, description, tR } = req.body;
-    if(!name||!description||!tR){
-        return next({status: "400", message: 'Ingrese los datos correctos'})
-    }
-    try{   
-        let hacer = await Service.create(req.body);
-        return res.json(hacer);
-    } catch (e){
-        return next({status: "500", message: 'Error en router service post'});
-    };
+    const {body} = req;
+    validatePost(body, next);
+    return postService(body, res, next, Service);
 });
 
 module.exports = router;

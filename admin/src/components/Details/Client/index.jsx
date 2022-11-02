@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useParams, NavLink } from "react-router-dom"
+import { useSelector, useDispatch  } from 'react-redux'
+import { useParams, NavLink, useHistory} from "react-router-dom"
 import { getClient, getActividades, setActual } from '../../../redux/actions'
 import Spinner from '../../Spinner'
 import ReviewC from "../../lO/reviewC"
@@ -11,13 +11,19 @@ const Cliente = () => {
 
   const {id} = useParams();
   let dispatch = useDispatch();
+  let history = useHistory();
   let [loading, setLoading] = useState(true);
   let actual = useSelector((state) => state.actual);
+  let error = useSelector((state) => state.error);
 
   useEffect(()=>{
-    dispatch(getClient(id))
-    dispatch(getActividades())
-  },[dispatch])
+    if(error){
+      history.push("/err");
+    } else{
+      dispatch(getClient(id))
+      dispatch(getActividades())
+    }
+  },[dispatch, error]);
 
   useEffect(()=>{
     if(typeof actual !== "number"){

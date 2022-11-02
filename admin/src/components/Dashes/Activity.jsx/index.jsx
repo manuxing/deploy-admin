@@ -14,10 +14,6 @@ const Dash = ({id, back, client, services, persons, date})=> {
                     </div>
                     <div className="info_act_d"> 
                     <div className="punto_fdato">
-                        <h2> Cliente</h2>
-                        <h3>{client.name}</h3>
-                    </div>
-                    <div className="punto_fdato">
                         <h2>Fecha</h2>
                         <h3> {date} </h3>
                     </div>

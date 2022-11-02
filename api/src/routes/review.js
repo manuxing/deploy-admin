@@ -10,7 +10,7 @@ router.get('/:id', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
-    return getReviews(res, next, Review, [Client, Service]);
+    return getReviews(res, next, Review, [Service]);
 }); 
 
 router.post('/', async(req, res, next) => {
@@ -24,20 +24,5 @@ router.put('/', async(req, res, next) => {
     await validatePut(body, next, Review);
     return putReview(body, res, next, Review);
 });
-
-// router.delete('/:id', async(req, res, next) =>{
-//     const {id} = req.params;
-//     try {
-//         let peticionDB = await Review.destroy({
-//             where:{
-//                 id: id
-//             },
-//         });
-//         return res.json(peticionDB);
-//     }catch(e){
-//         return next({status: "500", message: 'Error en router Review I'});
-//     }
-// });
-
 
 module.exports = router;

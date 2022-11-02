@@ -10,14 +10,20 @@ const Review = () => {
 
   const {id} = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
   const actual = useSelector((state) => state.actual);
+  const error = useSelector((state) => state.error);
   const [_stat, setStat] = useState(false);
   let [loading, setLoading] = useState(true);
 
   useEffect(()=>{
-    dispatch(getReviews(id))
-  },[dispatch])
-    
+    if(error){
+      history.push("/err");
+    } else{
+      dispatch(getReviews(id))
+    }
+  },[dispatch, error]);
+
   useEffect(()=>{
     console.log(actual)
     if(actual && actual !== 1 && actual?.stat !== null){
