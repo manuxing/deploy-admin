@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getServicio, setActual } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
+import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Service";
 import AgregarServicio from "../create/service/prueba";
@@ -38,25 +39,7 @@ const ServiceLayout = () => {
           </div>
           {loading === false ? (
             <div className="cont">
-              <div className="cards">
-                  {todas.length > 0 &&
-                    todas.map((p) => {
-                    return (
-                      <Dash
-                        key={p.id}
-                        id={p.id}
-                        back={
-                          p.back
-                            ? p.back
-                            : "https://e7.pngegg.com/pngimages/779/957/png-clipart-video-games-video-game-consoles-red-dead-redemption-video-game-developer-cool-gaming-logos-blue-game-logo.png"
-                        }
-                        name={p.name}
-                        description={p.description}
-                        tR={p.tR}
-                      />
-                    );
-                  })}
-              </div>
+              <DashDisplay all={todas} Dash={Dash} model={"Servicios"}/>
             </div>
           ) : (
             <div>

@@ -5,6 +5,7 @@ import BarraFiltros from "./barraFiltros";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Activity.jsx";
 import ActivityR from "../create/activity";
+import DashDisplay from "./DashDisplay";
 
 const ActivityLayout = () => {
   let todas = useSelector((state) => state.actividades);
@@ -41,25 +42,7 @@ const ActivityLayout = () => {
           {loading === false ? (
             <div className="cont">
               <div className="cards">
-                {todas[0] !== 0 ? 
-                  todas.map((p) => {
-                    return (
-                      <Dash
-                        key={p.id}
-                        id={p.id}
-                        back={
-                          p.back
-                            ? p.back
-                            : "https://e7.pngegg.com/pngimages/779/957/png-clipart-video-games-video-game-consoles-red-dead-redemption-video-game-developer-cool-gaming-logos-blue-game-logo.png"
-                        }
-                        services={p.services}
-                        persons={p.persons}
-                        date={p.date}
-                      />
-                    );
-                  }) :
-                  "quee"
-                  }
+                  <DashDisplay all={todas} Dash={Dash} model={"Actividades"}/>
               </div>
             </div>
           ) : (

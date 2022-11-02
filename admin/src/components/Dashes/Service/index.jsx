@@ -3,7 +3,8 @@ import './Service.css';
 import { NavLink } from "react-router-dom";
 // import  icon  from "../../../img/star.png"; 
 
-const Dash = ({id, imgs, name, description, tR})=> { 
+const Dash = ({data})=> { 
+    let {id, imgs, name, description, tR} = data;
     return (
         <div className="dash_act"> 
             <NavLink className="link" to={`/service/${parseInt(id)}`}>
