@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink, useParams } from "react-router-dom"
+import { NavLink, useParams, useHistory } from "react-router-dom"
 import { getActividades,setActual } from '../../../redux/actions'
 import Spinner from '../../Spinner'
 import NavBar from "../../bars/navBar";
@@ -11,12 +11,18 @@ const Activity = () => {
 
   const {id} = useParams();
   let dispatch = useDispatch();
+  const history = useHistory();
   let [loading, setLoading] = useState(true);
   let actual = useSelector((state) => state.actual);
+  let error = useSelector((state) => state.error);
 
   useEffect(()=>{
-    dispatch(getActividades(id))
-  },[dispatch]);
+    if(error){
+      history.push("/err");
+    } else{
+      dispatch(getActividades(id))
+    }
+  },[dispatch, error]);
 
   useEffect(()=>{
     if(typeof actual !== "number"){

@@ -9,7 +9,7 @@ const getRequests = async(res, next, model) => {
 
         return res.json(respuesta);
     }catch(e){
-        return next({status: "500", message: 'Error en router Request get Plural'});
+        return next({status: 500, message: 'Error en router Request get Plural'});
     }
 };
 
@@ -21,17 +21,17 @@ const getRequest = async( res, next, model, related, id) => {
             },
             include: related
         })
-            .catch(err => next({status: "500", message: 'could not find model values or related models'}));
+            .catch(err => next({status: 500, message: 'could not find model values or related models'}));
         return res.json(peticionDB.dataValues);
     }catch(e){
-        return next({status: "500", message: 'Error en router Request get Individual'});
+        return next({status: 500, message: 'Error en router Request get Individual'});
     }
 };
 
 const postRequest = async(body, res, next, model, Service) => {
     try{
         let request = await model.create(body)
-            .catch(err => next({status: "500", message: 'could not create Request model'})); 
+            .catch(err => next({status: 500, message: 'could not create Request model'})); 
 
         let service = await Service.findAll({
             where :{
@@ -56,10 +56,10 @@ const putRequest = async(body, res, next, model) => {
             where: {
                 id: body.id,
             }
-        }).catch(err => next({status: "500", message: 'could not update Request'}));
+        }).catch(err => next({status: 500, message: 'could not update Request'}));
         return res.send("request actualizada");
     }catch(e){
-        return next({status: "500", message: 'Error en router Request put'});
+        return next({status: 500, message: 'Error en router Request put'});
     }
 };
 

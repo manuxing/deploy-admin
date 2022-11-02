@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams, NavLink } from "react-router-dom"
-import { getServicio, clearAll } from '../../../redux/actions'
+import { useParams, NavLink, useHistory } from "react-router-dom"
+import { getServicio, getReviews, clearAll } from '../../../redux/actions'
 import Spinner from '../../Spinner'
 import NavBar from "../../bars/navBar";
 import SideBar from "../../bars/sideBar";
@@ -11,14 +11,22 @@ const Service = () => {
 
   const {id} = useParams();
   let dispatch = useDispatch();
+  const history = useHistory();
   let [loading, setLoading] = useState(true);
   let [Reviews, setReviews] = useState([]);
   let [Requests, setRequests] = useState([]);
   let actual = useSelector((state) => state.actual);
+  let error = useSelector((state) => state.error);
+  let reviews = useSelector((state) => state.reviews);
 
   useEffect(()=>{
-    dispatch(getServicio(id))
-  },[dispatch])
+    if(error){
+      history.push("/err");
+    } else{
+      dispatch(getReviews())
+      dispatch(getServicio(id))
+    }
+  },[dispatch, error]);
 
   useEffect(()=>{
     if(typeof actual !== "number"){

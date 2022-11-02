@@ -32,7 +32,7 @@ const getActivity = async( res, next, model, related, id) => {
 const postActivity = async(body, res, next, model, Service, Client) => {
     try{   
         let create = await model.create(body)
-            .catch(err => next({status: "500", message: 'could not create Activity model'}));
+            .catch(err => next({status: 500, message: 'could not create Activity model'}));
 
         let service = await Service.findAll({
             where :{
