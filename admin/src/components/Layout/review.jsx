@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getReviews, setActual } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
 import Spinner from "../Spinner.jsx";
+import DashDisplay from "./DashDisplay";
 import Dash from "../Dashes/Review";
 import ReviewR from "../create/review";
 
@@ -38,29 +39,7 @@ const ReviewLayout = () => {
           </div>
           {loading === false ? (
             <div className="cont">
-              <div className="cards">
-                {todas.length > 0 &&
-                  todas?.map((p) => {
-                    return (
-                      <Dash
-                        key={p.id}
-                        id={p.id}
-                        back={
-                          p.back
-                            ? p.back
-                            : "https://e7.pngegg.com/pngimages/779/957/png-clipart-video-games-video-game-consoles-red-dead-redemption-video-game-developer-cool-gaming-logos-blue-game-logo.png"
-                        }
-                        stat={p.stat}
-                        dateR={p.dateR}
-                        dateP={p.dateP}
-                        thg={p.thg}
-                        services={
-                          p.services?.length > 0 ? p.services?.length : 0
-                        }
-                      />
-                    );
-                  })}
-              </div>
+              <DashDisplay all={todas} Dash={Dash} model={"Reseñas"}/>
             </div>
           ) : (
             <div>

@@ -12,8 +12,9 @@ const DashDisplay = ( data ) => {
                         </span> :
                         all.map(data=>{
                             data.back = back;
+                            console.log(data)
                             return(
-                                <Dash data={data} />
+                                <Dash key={data.id} data={data} />
                             );
                         })
                     }

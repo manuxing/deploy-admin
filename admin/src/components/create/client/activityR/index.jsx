@@ -44,7 +44,6 @@ const ActivityR = ({ submitted, pressed, setPressed, act, setAct }) => {
       let x = document.getElementById(id);
       x.selected = true;
       setInput({ ...input, sId: "" });
-      console.log(id)
     }
     let copy = warning;
     err.err.forEach((p) => copy = { ...copy, [p.ubic]: p.message });
@@ -57,7 +56,6 @@ const ActivityR = ({ submitted, pressed, setPressed, act, setAct }) => {
   };
 
   let handleSelect = (evento) => {
-    console.log(evento.target.value)
     let err = validate.activity_client_field(evento, servicesIds);
     err.status === true ? notErrHan(evento) : errHan(err);
   };
@@ -121,7 +119,7 @@ const ActivityR = ({ submitted, pressed, setPressed, act, setAct }) => {
           </option>
           {services.map((p) => {
             return (
-              <option value={p.id} key={p.id}>
+              <option value={p.id} key={`${p.id}`}>
                 {p.name}
               </option>
             );
