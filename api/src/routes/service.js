@@ -12,7 +12,7 @@ router.get('/:id', async(req, res, next) =>{
         });
         return res.json(peticionDB);
     }catch(e){
-        return next({status: "500", message: 'Error en router service get i'});
+        return next({status: 500, message: 'Error en router service get i'});
     }
 });
 
@@ -23,7 +23,7 @@ router.get('/', async(req, res, next) =>{
             return res.json(peticionDB);
         }catch(e){
             console.log(req.body)
-            return next({status: "500", message: 'Error en router service get p'});
+            return next({status: 500, message: 'Error en router service get p'});
         }
 });
 
@@ -31,13 +31,13 @@ router.post('/', async(req, res, next) => {
     console.log(req.body);
     const { name, description, tR } = req.body;
     if(!name||!description||!tR){
-        return next({status: "400", message: 'Ingrese los datos correctos'})
+        return next({status: 400, message: 'Ingrese los datos correctos'})
     }
     try{   
         let hacer = await Service.create(req.body);
         return res.json(hacer);
     } catch (e){
-        return next({status: "500", message: 'Error en router service post'});
+        return next({status: 500, message: 'Error en router service post'});
     };
 });
 

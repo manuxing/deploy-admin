@@ -35,7 +35,7 @@ router.put('/', async(req, res, next) => {
 //         });
 //         return res.json(peticionDB);
 //     }catch(e){
-//         return next({status: "500", message: 'Error en router Review I'});
+//         return next({status: 500, message: 'Error en router Review I'});
 //     }
 // });
 
