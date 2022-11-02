@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from "react-router-dom"
 import { statChange, setActual,getSolicitudes } from "../../../redux/actions";
+import Spinner from '../../Spinner'
 
 const Request = () => {
 
@@ -39,8 +40,8 @@ const Request = () => {
     }else{
       setLoading(true)
     }
-  },[loading,actual])
-
+  },[loading, actual])
+ 
   useEffect(() => {
     return () => dispatch(setActual())
   }, []);
@@ -58,7 +59,11 @@ const Request = () => {
   }
 
   return (
-    //poner spinner
+    loading === true ?
+        <div>
+          <Spinner/>
+        </div> 
+        :
         <div className="content_request">
           <div className="item_requestD">
             <span className="span_request">
@@ -120,4 +125,3 @@ const Request = () => {
 };
 
 export default Request;
-

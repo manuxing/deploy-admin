@@ -15,8 +15,6 @@ const Service = () => {
   let [Requests, setRequests] = useState([]);
   let actual = useSelector((state) => state.actual);
   let error = useSelector((state) => state.error);
-  let reviews = useSelector((state) => state.reviews);
-  let error = useSelector((state) => state.error);
 
   useEffect(()=>{
     if(error){

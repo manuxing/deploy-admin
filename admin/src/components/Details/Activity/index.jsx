@@ -36,8 +36,8 @@ const Activity = () => {
 
   return (
     loading === true ?
-      <div>
-        <Spinner/>
+        <div>
+          <Spinner/>
         </div> 
         :
             <div className="content_act">

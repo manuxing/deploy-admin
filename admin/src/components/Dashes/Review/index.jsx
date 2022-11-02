@@ -4,9 +4,7 @@ import { NavLink } from "react-router-dom";
 import tools from "../../../tools";
 // import  icon  from "../../../img/star.png"; 
 
-
-
-const Dash = ({ id, back, stat, dateR, dateP, thg, clients, services})=> { 
+const Dash = ({ id, back, stat, dateR, dateP, thg, services})=> { 
     return (
         <div className="dash_act"> 
                 <NavLink className="link" to={`/review/${id}`}>
