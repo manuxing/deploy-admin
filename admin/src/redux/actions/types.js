@@ -21,6 +21,7 @@ export const type = {
     SET_ALL: "SET_ALL",
     CLEAR_ALL: "CLEAR_ALL",
     ERROR: "ERROR",
+    ERROR_FORM: "ERROR_FORM",
     ORDER_N: "ORDER_N",
     ORDER_A: "ORDER_A"
   };

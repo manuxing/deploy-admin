@@ -18,6 +18,8 @@ const ReviewR = ({ setP }) => {
   let services = useSelector((state) => state.servicios);
   let servicesIds = services.map(p=> p.id);
   let clientes = useSelector((state) => state.clientes);
+  let errForm = useSelector((state) => state.errForm);
+  
   let clientsNames = clientes.map(p=> p.name);
   let thg = [
     "telefono",
@@ -91,6 +93,10 @@ const ReviewR = ({ setP }) => {
     x.status === false ? errHan(x) : sub();
   };
   
+  useEffect(() => {
+    if(errForm && errForm?.data)alert(errForm.data)
+  }, [errForm]);
+
   useEffect(() => {
     dispatch(getServicio());
     dispatch(getClient());

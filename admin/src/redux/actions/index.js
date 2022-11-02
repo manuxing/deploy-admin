@@ -12,7 +12,7 @@ export function createClient(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
@@ -71,7 +71,7 @@ export function createSolicitud(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
@@ -107,11 +107,9 @@ export function getSolicitudes(id) {
 
 export function createActividades(data) {
   return function (dispatch) {
-    console.log("por enviar", data);
     axios
       .post("http://localhost:3001/activity/", data)
       .then((res) => {
-        console.log(res);
         return { type: type.SET_ACTUAL, payload: res };
       })
       .then((p) => {
@@ -119,13 +117,14 @@ export function createActividades(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
 
 export function getActividades(id) {
   if (id) {
+    console.log(id)
     return function (dispatch) {
       axios
         .get(`http://localhost:3001/activity/${id}`)
@@ -165,7 +164,7 @@ export function createReviews(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
@@ -211,7 +210,7 @@ export function createServicio(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
@@ -292,6 +291,10 @@ export function setActual() {
 
 export function error() {
   return { type: type.ERROR, payload: null };
+}
+
+export function errorForm() {
+  return { type: type.ERROR_FORM, payload: null };
 }
 
 export function clearAll() {

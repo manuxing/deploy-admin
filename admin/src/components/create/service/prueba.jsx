@@ -15,6 +15,7 @@ const AgregarServicio = ({ setP }) => {
   const history = useHistory();
 
   let actual = useSelector((state) => state.actual);
+  let errForm = useSelector((state) => state.errForm);
   
   let [input, setInput] = useState({ name: "", description: "", tR: "", tR_: "" });
   let [warning, setWarning] = useState({ name: "", description: "", tR: "", tR_: ""});
@@ -54,6 +55,10 @@ const AgregarServicio = ({ setP }) => {
     p.preventDefault();
     sub();
   };
+
+  useEffect(() => {
+    if(errForm && errForm?.data)alert(errForm.data)
+  }, [errForm]);
 
   useEffect(() => {
     if (submited === true) {
