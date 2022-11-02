@@ -14,7 +14,7 @@ const initialState = {
     reviews: [],
     servicios: [],
     not: [],
-    error:0,
+    error: null,
 };
 
 export default function rootReducer(state=initialState, action){
@@ -99,7 +99,7 @@ export default function rootReducer(state=initialState, action){
                 reviews: [],
                 servicios: [],
                 not: [],
-                error:{},
+                error: null,
             }
         case type.ERROR:
             return {

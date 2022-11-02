@@ -15,6 +15,7 @@ const Activity = () => {
   let error = useSelector((state) => state.error);
 
   useEffect(()=>{
+    console.log(error);
     if(error){
       history.push("/err");
     } else{

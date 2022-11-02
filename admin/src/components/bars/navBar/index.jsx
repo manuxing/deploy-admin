@@ -20,6 +20,10 @@ const NavBar = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    console.log(pressed)
+  }, [pressed]);
+
+  useEffect(() => {
     if (not.length > 0 && l !==not.length) {
       setL(not.length);
     }

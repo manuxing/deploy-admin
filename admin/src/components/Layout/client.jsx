@@ -10,7 +10,6 @@ const ClientLayout = () => {
   let dispatch = useDispatch();
   let todas = useSelector((state) => state.clientes);
   let [pressed, setPressed] = useState(false);
-  let [cards, setCards] = useState([]);
   let [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,11 +17,8 @@ const ClientLayout = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (todas.length > 0) {
-      setCards(todas);
-    }
-    if (cards && cards.length > 0) setLoading(false);
-  }, [todas, cards]);
+    if (todas && todas.length > 0) setLoading(false);
+  }, [todas]);
 
   useEffect(() => {
     return () => dispatch(setActual());
@@ -43,8 +39,8 @@ const ClientLayout = () => {
           {loading === false ? (
             <div className="cont">
               <div className="cards">
-                {cards &&
-                  cards?.map((p) => {
+                {todas.length > 0 &&
+                  todas?.map((p) => {
                     if(p.id !== undefined){
                       return (
                         <Dash

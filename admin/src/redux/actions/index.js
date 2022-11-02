@@ -291,7 +291,7 @@ export function setActual() {
 }
 
 export function error() {
-  return { type: type.ERROR, payload: 0 };
+  return { type: type.ERROR, payload: null };
 }
 
 export function clearAll() {

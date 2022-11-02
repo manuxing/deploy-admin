@@ -9,7 +9,6 @@ import RequestR from "../create/requeset";
 const RequestLayout = () => {
   let todas = useSelector((state) => state.solicitudes);
   let dispatch = useDispatch();
-  let [cards, setCards] = useState([]);
   let [loading, setLoading] = useState(true);
   let [pressed, setPressed] = useState(false);
 
@@ -18,11 +17,8 @@ const RequestLayout = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (todas.length > 0) {
-      setCards(todas);
-    }
-    if (cards && cards.length > 0) setLoading(false);
-  }, [todas, cards]);
+    if (todas && todas.length > 0) setLoading(false);
+  }, [todas]);
 
   useEffect(() => {
     return () => dispatch(setActual());
@@ -43,8 +39,8 @@ const RequestLayout = () => {
           {loading === false ? (
             <div className="cont">
               <div className="cards">
-                {cards &&
-                  cards?.map((p) => {
+                {todas.length > 0 &&
+                    todas.map((p) => {
                     return (
                       <Dash
                         key={p.id}

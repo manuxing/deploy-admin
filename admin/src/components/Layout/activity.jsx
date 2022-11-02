@@ -9,7 +9,6 @@ import ActivityR from "../create/activity";
 const ActivityLayout = () => {
   let todas = useSelector((state) => state.actividades);
   let dispatch = useDispatch();
-  let [cards, setCards] = useState([]);
   let [pressed, setPressed] = useState(false);
   let [loading, setLoading] = useState(true);
 
@@ -18,11 +17,8 @@ const ActivityLayout = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (todas.length > 0) {
-      setCards(todas);
-    }
-    if (cards && cards.length > 0) setLoading(false);
-  }, [todas, cards]);
+    if (todas && todas.length > 0) setLoading(false);
+  }, [todas]);
 
   useEffect(() => {
     return () => dispatch(setActual());
@@ -45,8 +41,8 @@ const ActivityLayout = () => {
           {loading === false ? (
             <div className="cont">
               <div className="cards">
-                {cards &&
-                  cards?.map((p) => {
+                {todas.length > 0 &&
+                  todas.map((p) => {
                     return (
                       <Dash
                         key={p.id}

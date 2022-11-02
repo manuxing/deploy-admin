@@ -11,7 +11,7 @@ const Error = ( ) => {
     let err = useSelector(state => state.error);
     
     useEffect(() => {
-        if(err === 0){
+        if(!err){
             history.goBack();
         }
     }, [err]);
@@ -23,12 +23,11 @@ const Error = ( ) => {
         }
     }, []);
 
-    console.log(err.data, err.status);
     return (
                 <div>
-                    {
+                    {err&&
                         <span>
-                            {err.data}      
+                            {err?.data}      
                         </span>
                     }
                 </div>

@@ -17,6 +17,7 @@ const Review = () => {
   let [loading, setLoading] = useState(true);
 
   useEffect(()=>{
+    console.log(error);
     if(error){
       history.push("/err");
     } else{

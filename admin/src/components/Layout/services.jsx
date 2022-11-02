@@ -9,7 +9,6 @@ import AgregarServicio from "../create/service/prueba";
 const ServiceLayout = () => {
   let todas = useSelector((state) => state.servicios);
   let dispatch = useDispatch();
-  let [cards, setCards] = useState([]);
   let [loading, setLoading] = useState(true);
   let [pressed, setPressed] = useState(false);
 
@@ -18,11 +17,8 @@ const ServiceLayout = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (todas.length > 0) {
-      setCards(todas);
-    }
-    if (cards && cards.length > 0) setLoading(false);
-  }, [todas, cards]);
+    if (todas && todas.length > 0) setLoading(false);
+  }, [todas]);
 
   useEffect(() => {
     return () => dispatch(setActual());
@@ -43,8 +39,8 @@ const ServiceLayout = () => {
           {loading === false ? (
             <div className="cont">
               <div className="cards">
-                {cards &&
-                  cards?.map((p) => {
+                  {todas.length > 0 &&
+                    todas.map((p) => {
                     return (
                       <Dash
                         key={p.id}
