@@ -75,12 +75,15 @@ const Request = () => {
             </span>
             <button onClick={() => handleChange()}>change</button>
           </div>
-          <div className="item_requestD">
-            <span className="span_request">
-              Tipo
-            </span>
-            { actual?.ant ? (actual?.ant === false ? "Solcitada" : "Espontanea") : "aticipada"}
-          </div>
+          {
+           actual.solicitante && actual.solicitante.length > 1 &&
+              <div className="item_requestD">
+                <span className="span_request">
+                  Solicitante
+                </span>
+                {actual?.solicitante ? actual?.solicitante : "solicitante"}
+              </div>
+          }
           <div className="item_requestD">
             <span className="span_request">
                 Servicios

@@ -27,9 +27,8 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false 
         },
-        ant: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
+        solicitante: {
+            type: DataTypes.TEXT,
         },
     },{
         timestamps: false,

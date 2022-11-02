@@ -173,7 +173,7 @@ const ReviewR = ({ setP }) => {
                   {
                     clientsNames && clientsNames.map(p=>{
                       return(
-                        <option value={p}/>
+                        <option key={p}value={p}/>
                       )
                     })
                   }
@@ -181,11 +181,11 @@ const ReviewR = ({ setP }) => {
             <div className="warning">{warningA.cName}</div>
           </div>
           <div>
-            <label>description</label>
-            <input
+            <label>Descripcion</label>
+            <textarea
               className="input"
               type={"text"}
-              placeholder="descripcion"
+              placeholder="Descripcion"
               name={"description"}
               value={input.description}
               onChange={(p) => handleChange(p)}

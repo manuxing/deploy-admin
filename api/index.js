@@ -22,6 +22,6 @@ const { conn } = require('./src/db.js');
 
 conn.sync({ force: false }).then(() => {
   server.listen(3001, () => {
-    console.log('escuchl 3001'); // eslint-disable-line no-console
+    console.log('escuchan2 3001'); 
   });
 });

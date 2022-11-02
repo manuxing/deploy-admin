@@ -17,15 +17,13 @@ fs.readdirSync(path.join(__dirname, '/models'))
   .forEach((file) => {
     modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
-  
-  modelDefiners.forEach(model => model(sequelize));
-  let entries = Object.entries(sequelize.models);
-  console.log(entries)
+modelDefiners.forEach(model => model(sequelize));
+let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 console.log('coso',sequelize.models)
 
-const { Activity, Client, Person, Request, Review, Service } = sequelize.models;
+const { Activity, Client, Request, Review, Service } = sequelize.models;
 
 Client.belongsToMany(Review, {through:'client_review'});
 Review.belongsToMany(Client, {through:'client_review'});

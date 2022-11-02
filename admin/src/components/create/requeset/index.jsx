@@ -34,6 +34,7 @@ const RequestR = ({ setP }) => {
     thg: "",
     contact: [],
     sId: 0,
+    solicitante: "",
   });
 
   let [warningA, setWarningA] = useState({
@@ -42,6 +43,7 @@ const RequestR = ({ setP }) => {
     thg: "",
     contact: "",
     sId: "",
+    solicitante: "",
   });
 
   let sub = () => {
@@ -141,6 +143,18 @@ const RequestR = ({ setP }) => {
               onChange={(p) => handleChange(p)}
             />
             <div className="warning">{warningA.dateP}</div>
+          </div>
+          <div>
+            <label>Fecha solicitada</label>
+            <input
+              className="input"
+              type={"text"}
+              placeholder="Solicitante"
+              name={"solicitante"}
+              value={input.solicitante}
+              onChange={(p) => handleChange(p)}
+            />
+            <div className="warning">{warningA.solicitante}</div>
           </div>
           <div>
             <AgregarContacto

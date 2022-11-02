@@ -590,6 +590,7 @@ const tools = {
       let errs = [];
       let res = { status: true, ubic: "" };
       let dateR = new RegExp(/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/);
+      let nameR = new RegExp(/[a-zA-Z ]$/);
       switch (evento.target.name) {
         case "dateR":
           let x = evento.target.value.split("-").reverse().join("-");
@@ -624,6 +625,16 @@ const tools = {
               res.ubic = "service";
             }
             break;
+          case "solicitante":
+          if (evento.target.length > 0 && nameR.test(evento.target.value) === false) {
+            let err = {
+              message: "ingrese un nombre de solicitantevalido",
+              ubic: evento.target.name,
+            };
+            errs.push(err);
+            res.status = false;
+          }
+          break;
         default: {
         }
       }
@@ -633,6 +644,7 @@ const tools = {
     requestForm: (review, servicesIds) => {
       let errs = [];
       let res = { status: true, ubic: "" };
+      let nameR = new RegExp(/[a-zA-Z ]$/);
       let dateR = new RegExp(
         /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/
       );
@@ -650,6 +662,14 @@ const tools = {
         let err = {
           message: "ingrese una fecha valida",
           ubic: "dateP",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+      if (review.solicitante.length > 0 && nameR.test(review.solicitante) === false) {
+        let err = {
+          message: "ingrese un nombre de solicitante valido",
+          ubic: "solicitante",
         };
         errs.push(err);
         res.status = false;
