@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getActividades, setActual } from "../../redux/actions";
+import { getActividades, getNot, setActual } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Activity.jsx";

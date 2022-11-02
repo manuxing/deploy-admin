@@ -8,6 +8,7 @@ const Dash = ({data})=> {
     let { id, back, stat, dateR, dateP, thg, services} = data;
     
     return (
+        id === undefined ? <></> :
         <div className="dash_act"> 
                 <NavLink className="link" to={`/review/${id}`}>
                     <div className="container img_act_d">

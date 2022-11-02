@@ -15,7 +15,6 @@ const getRequests = async(res, next, model) => {
 
 const getRequest = async( res, next, model, related, id) => {
     try {
-        
         let peticionDB = await model.findOne({
             where:{
                 id: id

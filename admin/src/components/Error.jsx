@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import { error } from '../redux/actions/index'
 
 const Error = ( ) => {
@@ -30,6 +30,10 @@ const Error = ( ) => {
                             {err?.data}      
                         </span>
                     }
+                    <Link
+                        to="/">
+                      home
+                    </Link>
                 </div>
     );
 };

@@ -7,7 +7,7 @@ import tools from "../../../tools";
 const Dash = ({data})=> { 
     let {id, back, services, persons, date}= data;
     return (
-        id === undefined ? <></>:
+        id === undefined ? <></> :
         <div key={id} className="dash_act"> 
                 <NavLink className="link" to={`/activity/${id}`}>
                     <div className="container img_act_d">
