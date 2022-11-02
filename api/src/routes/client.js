@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/:clientId', async(req, res, next) =>{
     const {clientId} = req.params;
-    validateGet(clientId, next);
+    await validateGet(clientId, Client,next);
     return getClient(res, next, Client, [Activity, Review], clientId);
 });
 

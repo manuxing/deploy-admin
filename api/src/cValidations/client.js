@@ -24,8 +24,10 @@ const validatePostAct = async(act, next, Service) => {
     if(service === null) return next({status: 400, message:"service dont exist"});
 };
 
-const validateGet = (id, next) => {
+const validateGet = async(id, model, next) => {
     if(parseInt(id) !== Number(id))return next({status: 400, message:"ingrese un id valido"})
+    let {count} = await model.findAndCountAll();
+    if(count < parseInt(id))return next({status: 400, message:"Cliente inexistente"});
 };
 
 module.exports = {

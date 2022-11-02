@@ -755,7 +755,6 @@ const tools = {
     }
   },
   alert_notFound: ( model, cb, url) => {
-    console.log("e")
     alert(
       `el id del ${model} es invalido`
     );

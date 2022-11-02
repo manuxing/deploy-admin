@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/:id', async(req, res, next) =>{
     const {id} = req.params;
-    validateGet(id, next);
+    await validateGet(id, Review, next);
     return getReview(res, next, Review, [Client, Service], id);
 });
 

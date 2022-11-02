@@ -7,7 +7,7 @@ const router = Router();
 
 router.get('/:id', async(req, res, next) =>{
     let {id} = req.params;
-    validateGet(id, next);
+    await validateGet(id, Activity, next);
     return getActivity(res, next, Activity, [Client, Service], id);
 });
 

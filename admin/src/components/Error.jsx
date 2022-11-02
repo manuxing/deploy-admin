@@ -12,7 +12,7 @@ const Error = ( ) => {
     
     useEffect(() => {
         if(!err){
-            history.goBack();
+            history.push("/");
         }
     }, [err]);
 
