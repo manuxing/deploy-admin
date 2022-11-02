@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { useParams, NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getReviews, statChange, setActual, getNot } from "../../../redux/actions";
+import tools from "../../../tools";
 import Spinner from '../../Spinner'
 import "./review.css"
 
@@ -21,10 +22,12 @@ const Review = () => {
     if(error){
       history.push("/err");
     } else{
-      if(parseInt(id).toString().length === id.length && id !== "undefined"){
-        dispatch(getReviews(id))
+      if(parseInt(id) === Number(id)){
+        dispatch(getReviews(parseInt(id)))
+        dispatch(getNot());
+      }else{
+        tools.alert_notFound( "Reseña", history, "/reviews/")
       }
-      dispatch(getNot());
     }
   },[dispatch, error]);
 

@@ -1,11 +1,12 @@
 const { Router } = require('express');
 const { Service, Review, Request } = require('../db.js');
 const { getService, getServices, postService} = require("../controllers/service.js");
-const {validatePost} = require("../cValidations/service.js");
+const {validatePost, validateGet} = require("../cValidations/service.js");
 const router = Router();
 
 router.get('/:id', async(req, res, next) =>{
     const {id} = req.params
+    validateGet(id, next);
     return getService(res, next, Service, id, [Review, Request]);
 });
 

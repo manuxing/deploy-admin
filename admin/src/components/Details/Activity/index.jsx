@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useParams, useHistory } from "react-router-dom"
 import { getActividades, setActual, getNot } from '../../../redux/actions'
 import Spinner from '../../Spinner'
+import tools from "../../../tools";
 import "./Activity_d.css"
 
 const Activity = () => {
@@ -19,10 +20,12 @@ const Activity = () => {
     if(error){
       history.push("/err");
     } else{
-      if(parseInt(id).toString().length === id.length && id !== "undefined"){
+      if(parseInt(id) === Number(id)){
         dispatch(getActividades(parseInt(id)))
+        dispatch(getNot());
+      }else{
+        tools.alert_notFound( "Actividad", history, "/activitys/")
       }
-      dispatch(getNot());
     }
   },[dispatch, error]);
 

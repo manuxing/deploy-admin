@@ -9,6 +9,11 @@ const validatePost = async(body, next) => {
     if (!timeR.test(body.tR_))return next({status: 400, message:"invalid time range tR_"})
 };
 
+const validateGet = (id, next) => {
+    if(parseInt(id) !== Number(id))return next({status: 400, message:"ingrese un id valido"})
+};
+
 module.exports = {
     validatePost,
+    validateGet
 };

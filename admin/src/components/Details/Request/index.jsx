@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory, NavLink } from "react-router-dom"
 import { statChange, setActual, getSolicitudes, getNot } from "../../../redux/actions";
+import tools from '../../../tools';
 import Spinner from '../../Spinner'
 
 const Request = () => {
@@ -19,10 +20,12 @@ const Request = () => {
     if(error){
       history.push("/err");
     } else{
-        if(parseInt(idR).toString().length === idR.length && idR !== "undefined"){
+      if(parseInt(idR) === Number(idR)){
         dispatch(getSolicitudes(idR))
+        dispatch(getNot());
+      }else{
+        tools.alert_notFound( "Solicitud", history, "/requests/")
       }
-      dispatch(getNot());
     }
   },[dispatch, error]);
     

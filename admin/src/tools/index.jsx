@@ -754,6 +754,13 @@ const tools = {
       cb2(cb5());
     }
   },
+  alert_notFound: ( model, cb, url) => {
+    console.log("e")
+    alert(
+      `el id del ${model} es invalido`
+    );
+    cb.push(url)
+  },
   build: async (cb, actions) => {
     let hacer = actions.map(async p =>{
       new Promise(async(resolve)=>await cb(p()));

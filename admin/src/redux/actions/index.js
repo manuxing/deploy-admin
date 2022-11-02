@@ -107,11 +107,9 @@ export function getSolicitudes(id) {
 
 export function createActividades(data) {
   return function (dispatch) {
-    console.log("por enviar", data);
     axios
       .post("http://localhost:3001/activity/", data)
       .then((res) => {
-        console.log(res);
         return { type: type.SET_ACTUAL, payload: res };
       })
       .then((p) => {
@@ -126,6 +124,7 @@ export function createActividades(data) {
 
 export function getActividades(id) {
   if (id) {
+    console.log(id)
     return function (dispatch) {
       axios
         .get(`http://localhost:3001/activity/${id}`)

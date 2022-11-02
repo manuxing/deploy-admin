@@ -22,8 +22,13 @@ const validatePost = async(body, next, Client, Service) => {
     if(service === null) return next({status: 400, message:"service dont exist"});
 };
 
+const validateGet = (id, next) => {
+    if(parseInt(id) !== Number(id))return next({status: 400, message:"ingrese un id valido"})
+};
+
 module.exports = {
     validatePost,
+    validateGet
 };
 
 
