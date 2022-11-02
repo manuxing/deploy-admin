@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getClient, setActual } from "../../redux/actions";
-import NavBar from "../bars/navBar";
-import SideBar from "../bars/sideBar";
 import BarraFiltros from "./barraFiltros";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Client";
@@ -31,10 +29,6 @@ const ClientLayout = () => {
   }, []);
 
   return (
-    <div>
-      <NavBar />
-      <div className="client_l">
-        <SideBar />
         <div className="content_cli_l">
           <div>
             {pressed === false ? (
@@ -78,8 +72,6 @@ const ClientLayout = () => {
             </div>
           )}
         </div>
-      </div>
-    </div>
   );
 };
 

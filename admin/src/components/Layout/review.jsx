@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getReviews, setActual } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
-import NavBar from "../bars/navBar";
-import SideBar from "../bars/sideBar";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Review";
 import ReviewR from "../create/review";
@@ -31,10 +29,6 @@ const ReviewLayout = () => {
   }, []);
 
   return (
-    <div>
-      <NavBar />
-      <div className="client_l">
-        <SideBar />
         <div className="content_cli_l">
           <div>
             {pressed === false ? (
@@ -79,8 +73,6 @@ const ReviewLayout = () => {
             </div>
           )}
         </div>
-      </div>
-    </div>
   );
 };
 

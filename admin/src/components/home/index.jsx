@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearAll, getActividades, getClient, getReviews, getServicio, getSolicitudes, setAll } from "../../redux/actions";
-import NavBar from "../bars/navBar";
-import SideBar from "../bars/sideBar";
 import Stat from "../stats/Activity.jsx";
 import tools from "../../tools";
 import "./home.css";
@@ -34,10 +32,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <NavBar />
       <div className="home">
-        <SideBar />
         <div className="content">
         {loading === false ? 
             all?.stats.map((p) => {
@@ -47,7 +42,6 @@ const Home = () => {
         }
         </div>
       </div>
-    </div>
   );
 };
 

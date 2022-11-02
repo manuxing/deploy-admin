@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getActividades, setActual } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
-import NavBar from "../bars/navBar";
-import SideBar from "../bars/sideBar";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Activity.jsx";
 import ActivityR from "../create/activity";
@@ -31,10 +29,6 @@ const ActivityLayout = () => {
   }, []);
 
   return (
-    <div>
-      <NavBar />
-      <div className="client_d">
-        <SideBar />
         <div className="content_cli">
           <div>
             <div>
@@ -79,8 +73,6 @@ const ActivityLayout = () => {
             </div>
           )}
         </div>
-      </div>
-    </div>
   );
 };
 
