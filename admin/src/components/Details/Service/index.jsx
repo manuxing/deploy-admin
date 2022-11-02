@@ -13,7 +13,8 @@ const Service = () => {
   let dispatch = useDispatch();
   const history = useHistory();
   let [loading, setLoading] = useState(true);
-  let [loadingR, setLoadingR] = useState(true);
+  let [Reviews, setReviews] = useState([]);
+  let [Requests, setRequests] = useState([]);
   let actual = useSelector((state) => state.actual);
   let error = useSelector((state) => state.error);
   let reviews = useSelector((state) => state.reviews);
@@ -29,21 +30,13 @@ const Service = () => {
 
   useEffect(()=>{
     if(typeof actual !== "number"){
+      if(actual.reviews !== undefined)setReviews(actual.reviews);
+      if(actual.requests !== undefined)setRequests(actual.requests);
       setLoading(false)
-      if(reviews.length > 0){
-        reviews = reviews.filter(p =>{
-          if(p.services.length > 0){
-            if(p.services[0].id === actual.id){
-              return p;
-            }
-          }
-        });
-        reviews.length > 0 ? setLoadingR(false) : setLoadingR(true)
-      }
     }else{
       setLoading(true)
     }
-  },[loading, actual, reviews])
+  },[loading, actual])
 
   useEffect(() => {
     return () => dispatch(clearAll())
@@ -79,36 +72,60 @@ const Service = () => {
             </div>
           </div>
           <div className="div_srv">
-            <span className="span_srv">
+            <h2>
               Horarios
-            </span>
+            </h2>
             <div>
-              {actual?.tR ? actual?.tR : "rango Horario"}
+              <span className="span_srv">Desde</span>
+              {actual?.tR ? actual?.tR : "Desde"}
+            </div>
+            <div>
+              <span className="span_srv">Hasta</span>
+              {actual?.tR_ ? actual?.tR_ : "Hasta"}
             </div>
           </div>
-          {loadingR === true ? <></>
-          :
           <div className="div_srv">
             <span className="span_srv">
               Reviews
             </span>
-            {reviews.length}
+            {Reviews?.length}
             <div>
               {
-                reviews ? reviews.map(p => { 
+                Reviews?.length > 0 ? Reviews.map(p => { 
                   return (
                     <NavLink key={`${p.id}`} className="link" to={`/review/${p.id}`}>
                       <div>
-                        {p?.clients[0]?.name}:
-                        "{p.description}"
+                        <p>fecha:{p?.dateP}</p>
+                        <p>"{p.description}"</p>
+                        <p>{p.stat  === true ? "leida" : "pendiente"}</p>
                       </div>
                     </NavLink>
                   ) 
-                }) : "Reviews"
+                }) : ""
               }
             </div>
+            <div className="div_srv">
+            <span className="span_srv">
+              Requests
+            </span>
+              {Requests.length}
+            <div>
+              {
+                Requests.length > 0 ? Requests.map(p => { 
+                  return (
+                    <NavLink key={`${p.id}`} className="link" to={`/request/${p.id}`}>
+                      <div>
+                        <p>fecha Solicitada:{p?.dateR}</p>
+                        <p>{p.contact[0]}</p>
+                        <p>{p.stat  === true ? "leida" : "pendiente"}</p>
+                      </div>
+                    </NavLink>
+                  ) 
+                }) : ""
+              }
+            </div>
+           </div>
           </div>
-          }
         </div>
       </div>
     </div>

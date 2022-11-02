@@ -12,11 +12,11 @@ import tools from "../../../tools";
 const AgregarServicio = ({ setP }) => {
   let validate = tools.validate;
   let dispatch = useDispatch();
-  let actual = useSelector((state) => state.actual);
-  let [input, setInput] = useState({ name: "", description: "", tR: "" });
-  let [submited, setSubmited] = useState(false);
-  let [warning, setWarning] = useState({ name: "", description: "", tR: "" });
   const history = useHistory();
+  let actual = useSelector((state) => state.actual);
+  let [input, setInput] = useState({ name: "", description: "", tR: "", tR_: "" });
+  let [warning, setWarning] = useState({ name: "", description: "", tR: "", tR_: ""});
+  let [submited, setSubmited] = useState(false);
 
   let errHan = (evento, err) => {
     if (evento) {
@@ -24,7 +24,6 @@ const AgregarServicio = ({ setP }) => {
     }
     let copy = warning;
     err.err.forEach((p) => copy = { ...copy, [p.ubic]: p.message });
-    console.log(copy)
     setWarning(copy);
   };
 
@@ -66,8 +65,8 @@ const AgregarServicio = ({ setP }) => {
           setP,
           setActual
         );
-        setInput({ name: "", description: "", tR: "" });
-        setWarning({ name: "", description: "", tR: "" });
+        setInput({ name: "", description: "", tR: "", tR_: "" });
+        setWarning({ name: "", description: "", tR: "", tR_: "" });
       }
     }
   }, [submited, actual]);
@@ -91,7 +90,7 @@ const AgregarServicio = ({ setP }) => {
           </div>
           <div>
             <label>Descripcion</label>
-            <input
+            <textarea
               className="input"
               type={"text"}
               placeholder="Descripcion"
@@ -105,13 +104,22 @@ const AgregarServicio = ({ setP }) => {
             <label>Horarios</label>
             <input
               className="input"
-              type={"text"}
-              placeholder="Desde - Hasta"
+              type={"time"}
+              placeholder="Desde"
               name={"tR"}
               value={input.tR}
               onChange={(p) => handleChange(p)}
             />
             <div className="warning">{warning.tR}</div>
+            <input
+              className="input"
+              type={"time"}
+              placeholder="Hasta"
+              name={"tR_"}
+              value={input.tR_}
+              onChange={(p) => handleChange(p)}
+            />
+            <div className="warning">{warning.tR_}</div>
           </div>
           <input className="input" type={"submit"} name={"submit"} />
         </form>

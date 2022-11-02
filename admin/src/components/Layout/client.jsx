@@ -51,7 +51,6 @@ const ClientLayout = () => {
               <div className="cards">
                 {cards &&
                   cards?.map((p) => {
-                    //borrar
                     if(p.id !== undefined){
                       return (
                         <Dash
@@ -64,8 +63,6 @@ const ClientLayout = () => {
                           }
                           name={p.name}
                           contact={p.contact}
-                          act={p.activities}
-                          rev={p.reviews}
                         />
                       );
                     }

@@ -1,9 +1,13 @@
+const pre = require("../Tools");
+
 const getActivitys = async(res, next, model, related) => {
     try {
-        let peticionDB = await model.findAll({include: related})
-        .catch(err => next({status: 500, message: 'could not find model values or related models'}));
-        peticionDB.push({name:'Actividades', url:'activitys', vals:[{key:"size",value:peticionDB.length}]});
-        return res.json(peticionDB);
+        let peticionDB = await model.findAndCountAll({include: related})
+            .catch(err => next({status: "500", message: 'could not find model values or related models'}));
+
+        let respuesta = pre.setStat('Actividades', 'activitys', peticionDB.count, peticionDB.rows);
+
+        return res.json(respuesta);
     }catch(e){
         return next({status: 500, message: 'Error en router Activity get Plural'});
     }
@@ -11,14 +15,14 @@ const getActivitys = async(res, next, model, related) => {
 
 const getActivity = async( res, next, model, related, id) => {
     try {
-        let peticionDB = await model.findAll({
+        let peticionDB = await model.findOne({
             where:{
                 id: id
             },
             include: related
-        })
-        .catch(err => next({status: 500, message: 'could not find model values or related models'}));
-        return res.json(peticionDB[0].dataValues);
+        }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
+
+        return res.json(peticionDB.dataValues);
     }catch(e){
         return next({status: 500, message: 'Error en router Activity get Individual'});
     }
@@ -37,6 +41,7 @@ const postActivity = async(body, res, next, model, Service, Client) => {
         }).catch(err => next({status: 500, message: 'could not find related services'}));
 
         let client;
+
         if(body.cId){
             client = await Client.findAll({
                 where: {

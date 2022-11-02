@@ -41,7 +41,8 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.GET_CLIENTES: {
-            let {data, stats} = tools.getSetter(action.payload.data, state)
+            let {data, stat} = action.payload.data;
+            let stats = tools.getSetter_(stat, state);
             return {
                 ...state,
                 clientes: data,
@@ -49,7 +50,8 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.GET_SOLICITUDES: {
-            let {data, stats} = tools.getSetter(action.payload.data, state)
+            let {data, stat} = action.payload.data;
+            let stats = tools.getSetter_(stat, state);
             return {
                 ...state,
                 solicitudes: data,
@@ -57,7 +59,8 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.GET_ACTIVIDADES: {
-            let {data, stats} = tools.getSetter(action.payload.data, state)
+            let {data, stat} = action.payload.data;
+            let stats = tools.getSetter_(stat, state);
             return {
                 ...state,
                 actividades: data,
@@ -65,7 +68,8 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.GET_REVIEWS: {
-            let {data, stats} = tools.getSetter(action.payload.data, state)
+            let {data, stat} = action.payload.data;
+            let stats = tools.getSetter_(stat, state);
             return {
                 ...state,
                 reviews: data,
@@ -73,7 +77,8 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.GET_SERVICIOS: {
-            let {data, stats} = tools.getSetter(action.payload.data, state)
+            let {data, stat} = action.payload.data;
+            let stats = tools.getSetter_(stat, state);
             return {
                 ...state,
                 servicios: data,

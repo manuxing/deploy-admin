@@ -1,9 +1,13 @@
-const getRequests = async(res, next, model, related) => {
+const pre = require("../Tools");
+
+const getRequests = async(res, next, model) => {
     try {
-        let peticionDB = await model.findAll({include: related})
-            .catch(err => next({status: 500, message: 'could not find model values or related models'}));
-        peticionDB.push({name:'Solicitudes', url:'requests', vals:[{key:"size",value:peticionDB.length}]});
-        return res.json(peticionDB);
+        let peticionDB = await model.findAndCountAll()
+            .catch(err => next({status: "500", message: 'could not find model values or related models'}));
+
+        let respuesta = pre.setStat('Solicitudes', 'requests', peticionDB.count, peticionDB.rows);
+
+        return res.json(respuesta);
     }catch(e){
         return next({status: 500, message: 'Error en router Request get Plural'});
     }
@@ -33,14 +37,10 @@ const postRequest = async(body, res, next, model, Service) => {
             where :{
                 id: parseInt(body.sId)
             }
-        })
-            .catch(err => next({status: 500, message: 'could not find Service related model'}));
+        }).catch(err => next({status: "500", message: 'could not find Service related model'}));
 
-        await request.addService(service)
-            .catch(err => next({status: 500, message: 'could not relate Client to Service'}));
-
-        // await service.addService(request)
-        //     .catch(err => next({status: 500, message: 'could not relate Client to Service'}));
+        await request.addService(service, {through:'Service_request'})
+            .catch(err => next({status: "500", message: 'could not relate Request to Service'}));
 
         res.json(request);
     } catch (e){
