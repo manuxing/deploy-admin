@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getServicio, setActual } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
-import NavBar from "../bars/navBar";
-import SideBar from "../bars/sideBar";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Service";
 import AgregarServicio from "../create/service/prueba";
@@ -31,10 +29,6 @@ const ServiceLayout = () => {
   }, []);
 
   return (
-    <div>
-      <NavBar />
-      <div className="client_l">
-        <SideBar />
         <div className="content_cli_l">
           <div>
             {pressed === false ? (
@@ -74,8 +68,6 @@ const ServiceLayout = () => {
             </div>
           )}
         </div>
-      </div>
-    </div>
   );
 };
 

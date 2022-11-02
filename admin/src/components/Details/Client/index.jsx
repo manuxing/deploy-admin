@@ -3,8 +3,6 @@ import { useSelector, useDispatch  } from 'react-redux'
 import { useParams, NavLink, useHistory} from "react-router-dom"
 import { getClient, getActividades, setActual } from '../../../redux/actions'
 import Spinner from '../../Spinner'
-import NavBar from "../../bars/navBar";
-import SideBar from "../../bars/sideBar";
 import ReviewC from "../../lO/reviewC"
 import ActivityC from "../../lO/activityC"
 import "./client.css"
@@ -45,10 +43,6 @@ const Cliente = () => {
         <Spinner/>
       </div> 
       :
-      <div>
-        <NavBar/>
-        <div className="client_d">
-          <SideBar/>
           <div className="content_cli">
             <div className="div_cli">
               <span className="span_cli">
@@ -102,8 +96,6 @@ const Cliente = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
     );
 };
 

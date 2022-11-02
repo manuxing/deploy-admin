@@ -23,6 +23,7 @@ const NavBar = () => {
     if (not.length > 0 && l !==not.length) {
       setL(not.length);
     }
+    console.log(l)
   }, [not, l]);
 
   // const { profile } = useSelector((state) => state.authReducer);

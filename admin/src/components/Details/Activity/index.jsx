@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useParams, useHistory } from "react-router-dom"
 import { getActividades,setActual } from '../../../redux/actions'
 import Spinner from '../../Spinner'
-import NavBar from "../../bars/navBar";
-import SideBar from "../../bars/sideBar";
 import "./Activity_d.css"
 
 const Activity = () => {
@@ -42,10 +40,6 @@ const Activity = () => {
         <Spinner/>
         </div> 
         :
-        <div>
-          <NavBar/>
-          <div className="Activity_d">
-            <SideBar/>
             <div className="content_act">
               <div  className="div_act">
                 <span className="_span_act">
@@ -97,8 +91,6 @@ const Activity = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
     );
 };
 

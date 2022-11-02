@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from "react-router-dom"
 import { statChange, setActual,getSolicitudes } from "../../../redux/actions";
-import NavBar from "../../bars/navBar";
-import SideBar from "../../bars/sideBar";
 
 const Request = () => {
 
@@ -60,10 +58,7 @@ const Request = () => {
   }
 
   return (
-    <div>
-      <NavBar/>
-      <div className="request_d">
-        <SideBar/>
+    //poner spinner
         <div className="content_request">
           <div className="item_requestD">
             <span className="span_request">
@@ -121,8 +116,6 @@ const Request = () => {
             {actual?.dateP ? actual?.dateP : "fecha solicitada"}
           </div>
         </div>
-      </div>
-    </div>
   );
 };
 

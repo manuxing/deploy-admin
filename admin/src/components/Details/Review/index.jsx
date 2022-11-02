@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from "react";
+import { useParams, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, NavLink, useHistory } from "react-router-dom";
-import { getReviews, statChange, setActual, getClient } from "../../../redux/actions";
+import { getReviews, statChange, setActual } from "../../../redux/actions";
 import Spinner from '../../Spinner'
-import NavBar from "../../bars/navBar";
-import SideBar from "../../bars/sideBar";
 import "./review.css"
 
 
@@ -69,10 +67,6 @@ const Review = () => {
       <Spinner/>
     </div> 
     :
-    <div>
-      <NavBar/>
-      <div className="review_d">
-        <SideBar/>
         <div className="content_Review">
           {actual && actual.clients && actual.clients.length > 0 ?
             <div  className="div_rev">
@@ -134,8 +128,6 @@ const Review = () => {
               <button onClick={() => handleChange()}>change</button>
           </div>
         </div>
-      </div>
-    </div>
   );
 };
 

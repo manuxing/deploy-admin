@@ -3,8 +3,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom"
 import { error } from '../redux/actions/index'
-import NavBar from "./bars/navBar";
-import SideBar from "./bars/sideBar";
 
 const Error = ( ) => {
 
@@ -25,13 +23,8 @@ const Error = ( ) => {
         }
     }, []);
 
-
     console.log(err.data, err.status);
     return (
-        <div>
-            <NavBar/>
-            <div className="request_d">
-                <SideBar/>
                 <div>
                     {
                         <span>
@@ -39,8 +32,6 @@ const Error = ( ) => {
                         </span>
                     }
                 </div>
-            </div>
-        </div>
     );
 };
 

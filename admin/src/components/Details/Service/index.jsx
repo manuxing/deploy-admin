@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams, NavLink, useHistory } from "react-router-dom"
 import { getServicio, getReviews, clearAll } from '../../../redux/actions'
 import Spinner from '../../Spinner'
-import NavBar from "../../bars/navBar";
-import SideBar from "../../bars/sideBar";
 import "./Service.css"
 
 const Service = () => {
@@ -18,6 +16,7 @@ const Service = () => {
   let actual = useSelector((state) => state.actual);
   let error = useSelector((state) => state.error);
   let reviews = useSelector((state) => state.reviews);
+  let error = useSelector((state) => state.error);
 
   useEffect(()=>{
     if(error){
@@ -48,10 +47,6 @@ const Service = () => {
       <Spinner/>
     </div> 
     :
-    <div>
-      <NavBar/>
-      <div className="service_d">
-        <SideBar/>
         <div className="content_srv">
           <div className="div_srv">
             <span className="span_srv">
@@ -127,8 +122,6 @@ const Service = () => {
            </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 };
 

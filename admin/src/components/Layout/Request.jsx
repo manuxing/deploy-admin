@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getSolicitudes, setActual } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
-import NavBar from "../bars/navBar";
-import SideBar from "../bars/sideBar";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Request";
 import RequestR from "../create/requeset";
@@ -31,10 +29,6 @@ const RequestLayout = () => {
   }, []);
 
   return (
-    <div>
-      <NavBar />
-      <div className="client_l">
-        <SideBar />
         <div className="content_cli_l">
           <div>
             {pressed === false ? (
@@ -75,8 +69,6 @@ const RequestLayout = () => {
             </div>
           )}
         </div>
-      </div>
-    </div>
   );
 };
 
