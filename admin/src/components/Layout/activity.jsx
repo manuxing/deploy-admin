@@ -41,7 +41,7 @@ const ActivityLayout = () => {
           {loading === false ? (
             <div className="cont">
               <div className="cards">
-                {todas.length > 0 &&
+                {todas[0] !== 0 ? 
                   todas.map((p) => {
                     return (
                       <Dash
@@ -57,7 +57,9 @@ const ActivityLayout = () => {
                         date={p.date}
                       />
                     );
-                  })}
+                  }) :
+                  "quee"
+                  }
               </div>
             </div>
           ) : (

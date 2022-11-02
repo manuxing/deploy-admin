@@ -20,7 +20,7 @@
 const server = require('./src/server.js');
 const { conn } = require('./src/db.js');
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
     console.log('escuchl 3001'); // eslint-disable-line no-console
   });
