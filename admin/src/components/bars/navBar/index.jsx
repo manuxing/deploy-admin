@@ -17,7 +17,12 @@ const NavBar = () => {
 
   useEffect(() => {
     dispatch(getNot());
+    console.log(not)
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log(pressed)
+  }, [pressed]);
 
   useEffect(() => {
     if (not.length > 0 && l !==not.length) {
@@ -34,28 +39,27 @@ const NavBar = () => {
   // };
 
   return (
-    l !== "" ?
-      <div className="topbar">
+    <div className="topbar">
       <NavLink to={"/"} className="LinkSideB">
         <div className="logo">Administrador</div>
       </NavLink>
         <div className="topWrapper">
           <div className="topRight">
               {
-                l > 0 ?
+                l !== "" && l > 0 ?
                 <button onClick={()=>setPressed(!pressed)}>
                   <NotificationsActiveIcon/>
                 </button>:
-                <NotificationsIcon/> 
+              <NotificationsIcon/> 
               }
             {l}
             {pressed === true ? 
               <Drop not={not} l={l}/> : <></>
             }
-            <SearchBar />
           </div>
+            <SearchBar />
         </div>
-      </div> : <></>
+      </div>
   );
 };
 

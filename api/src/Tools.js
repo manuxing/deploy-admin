@@ -28,7 +28,8 @@ pre.setStat = (name, url, size, data) =>{
         url,
         vals:[{key:"size", value: size}]
     };
-    return {data, stat};
+    let dataRes = data.length < 1 ? [0] : data
+    return {data: dataRes, stat};
 }
 
 

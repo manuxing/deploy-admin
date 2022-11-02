@@ -17,11 +17,15 @@ const Cliente = () => {
   let error = useSelector((state) => state.error);
 
   useEffect(()=>{
+    console.log(error);
     if(error){
       history.push("/err");
     } else{
-      dispatch(getClient(id))
       dispatch(getActividades())
+      
+      if(!parseInt(id).toString().length !== id.length){
+        dispatch(getClient(id))
+      }
     }
   },[dispatch, error]);
 

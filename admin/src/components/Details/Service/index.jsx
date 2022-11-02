@@ -15,15 +15,17 @@ const Service = () => {
   let [Requests, setRequests] = useState([]);
   let actual = useSelector((state) => state.actual);
   let error = useSelector((state) => state.error);
-  let reviews = useSelector((state) => state.reviews);
-  let error = useSelector((state) => state.error);
 
   useEffect(()=>{
+    console.log(error);
     if(error){
       history.push("/err");
     } else{
       dispatch(getReviews())
-      dispatch(getServicio(id))
+      
+      if(!parseInt(id).toString().length !== id.length){
+        dispatch(getServicio(id))
+      }
     }
   },[dispatch, error]);
 

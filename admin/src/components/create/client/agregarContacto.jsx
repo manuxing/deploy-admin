@@ -38,6 +38,8 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
     setContacts({ ..._contacts, contact: [..._contacts.contact, contact] });
     setWarning({ contact: "" });
     setContact({ type: "", value: "" });
+    let x = document.getElementById("id");
+    x.selected = true;
   };
 
   let handleSubmit = (p, data) => {
@@ -55,7 +57,7 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
           name={"contact"}
           onChange={(e) => handleSelect(e)}
         >
-          <option hidden>medio de contacto</option>
+          <option id={"id"}hidden>medio de contacto</option>
           {contactsThg.map((p) => {
             return (
               <option value={p} key={p}>

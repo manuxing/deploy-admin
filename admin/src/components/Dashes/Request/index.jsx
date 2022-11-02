@@ -6,9 +6,10 @@ import tools from "../../../tools";
 
 
 
-const Dash = ({id, back, dateR, dateP, thg, contact})=> { 
-    
+const Dash = ({data})=> { 
+    let {id, back, dateR, dateP, thg, contact} = data;
     return (
+        id === undefined ? <></> :
         <div className="dash_act"> 
                 <NavLink className="link" to={`/request/${id}`}>
                     <div className="container img_act_d">

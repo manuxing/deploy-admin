@@ -133,7 +133,7 @@ const ActivityR = ({ setP }) => {
                   {
                     clientsNames && clientsNames.map(p=>{
                       return(
-                        <option value={p}/>
+                        <option value={p} key={p}/>
                       )
                     })
                   }

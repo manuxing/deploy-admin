@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import { error } from '../redux/actions/index'
 
 const Error = ( ) => {
@@ -11,7 +11,7 @@ const Error = ( ) => {
     let err = useSelector(state => state.error);
     
     useEffect(() => {
-        if(err === 0){
+        if(!err){
             history.goBack();
         }
     }, [err]);
@@ -23,14 +23,17 @@ const Error = ( ) => {
         }
     }, []);
 
-    console.log(err.data, err.status);
     return (
                 <div>
-                    {
+                    {err&&
                         <span>
-                            {err.data}      
+                            {err?.data}      
                         </span>
                     }
+                    <Link
+                        to="/">
+                      home
+                    </Link>
                 </div>
     );
 };

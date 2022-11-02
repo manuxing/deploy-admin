@@ -39,8 +39,8 @@ Service.belongsToMany(Review, {through:'service_review'});
 Service.belongsToMany(Request, {through:'Service_request'});
 Request.belongsToMany(Service, {through:'Service_request'});
 
-Service.belongsToMany(Activity, {through:'service_activity'});
-Activity.belongsToMany(Service, {through:'service_activity'});
+Service.belongsToMany(Activity, {through:'Service_activity'});
+Activity.belongsToMany(Service, {through:'Service_activity'});
 
 module.exports = {
   ...sequelize.models,

@@ -15,10 +15,14 @@ const Activity = () => {
   let error = useSelector((state) => state.error);
 
   useEffect(()=>{
+    console.log(error);
     if(error){
       history.push("/err");
     } else{
-      dispatch(getActividades(id))
+      
+      if(!parseInt(id).toString().length !== id.length){
+        dispatch(getActividades(parseInt(id)))
+      }
     }
   },[dispatch, error]);
 
@@ -36,8 +40,8 @@ const Activity = () => {
 
   return (
     loading === true ?
-      <div>
-        <Spinner/>
+        <div>
+          <Spinner/>
         </div> 
         :
             <div className="content_act">
@@ -64,7 +68,7 @@ const Activity = () => {
                     }) : "services"
                   }
                 </div>
-              </div>  
+              </div> 
               <div  className="div_act">
                 <span className="_span_act">
                   fecha de actividad

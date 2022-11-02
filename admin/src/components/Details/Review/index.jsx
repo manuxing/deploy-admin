@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getReviews, statChange, setActual } from "../../../redux/actions";
 import Spinner from '../../Spinner'
@@ -17,15 +17,18 @@ const Review = () => {
   let [loading, setLoading] = useState(true);
 
   useEffect(()=>{
+    console.log(error);
     if(error){
       history.push("/err");
     } else{
-      dispatch(getReviews(id))
+      
+      if(!parseInt(id).toString().length !== id.length){
+        dispatch(getReviews(id))
+      }
     }
   },[dispatch, error]);
 
   useEffect(()=>{
-    console.log(actual)
     if(actual && actual !== 1 && actual?.stat !== null){
       if(actual.stat === false){
         dispatch(statChange({

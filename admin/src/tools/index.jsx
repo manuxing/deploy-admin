@@ -20,7 +20,7 @@ const tools = {
       dash: (dis) => {
         return (
           <div>
-            <p>{dis}</p>
+            <p key={dis[0].id}>{dis[0].name}</p>
           </div>
         );
       },

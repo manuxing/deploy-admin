@@ -34,7 +34,7 @@ const postActivity = async(body, res, next, model, Service, Client) => {
         let create = await model.create(body)
             .catch(err => next({status: 500, message: 'could not create Activity model'}));
 
-        let service = await Service.findAll({
+        let service = await Service.findOne({
             where :{
                 id: body.sId
             }
@@ -43,7 +43,7 @@ const postActivity = async(body, res, next, model, Service, Client) => {
         let client;
 
         if(body.cId){
-            client = await Client.findAll({
+            client = await Client.findOne({
                 where: {
                     id: cId
                 }
@@ -63,6 +63,8 @@ const postActivity = async(body, res, next, model, Service, Client) => {
             .catch(err => next({status: 500, message: 'could not find relate activity to client'}));
         await client.addActivity(create)
             .catch(err => next({status: 500, message: 'could not find relate client to activity'}));
+        await service.addActivity(create)
+                .catch(err => next({status: 500, message: 'could not find relate activity to service'}));
 
         return res.json(create);
     } catch (e){
