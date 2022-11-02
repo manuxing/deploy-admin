@@ -15,6 +15,7 @@ const ActivityLayout = () => {
 
   useEffect(() => {
     dispatch(getActividades());
+    dispatch(getNot());
   }, [dispatch]);
 
   useEffect(() => {

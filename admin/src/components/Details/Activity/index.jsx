@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useParams, useHistory } from "react-router-dom"
-import { getActividades,setActual } from '../../../redux/actions'
+import { getActividades, setActual, getNot } from '../../../redux/actions'
 import Spinner from '../../Spinner'
 import "./Activity_d.css"
 
@@ -22,6 +22,7 @@ const Activity = () => {
       if(parseInt(id).toString().length === id.length && id !== "undefined"){
         dispatch(getActividades(parseInt(id)))
       }
+      dispatch(getNot());
     }
   },[dispatch, error]);
 

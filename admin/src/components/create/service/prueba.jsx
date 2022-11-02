@@ -13,7 +13,9 @@ const AgregarServicio = ({ setP }) => {
   let validate = tools.validate;
   let dispatch = useDispatch();
   const history = useHistory();
+
   let actual = useSelector((state) => state.actual);
+  
   let [input, setInput] = useState({ name: "", description: "", tR: "", tR_: "" });
   let [warning, setWarning] = useState({ name: "", description: "", tR: "", tR_: ""});
   let [submited, setSubmited] = useState(false);

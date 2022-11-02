@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory, NavLink } from "react-router-dom"
-import { statChange, setActual,getSolicitudes } from "../../../redux/actions";
+import { statChange, setActual, getSolicitudes, getNot } from "../../../redux/actions";
 import Spinner from '../../Spinner'
 
 const Request = () => {
@@ -22,6 +22,7 @@ const Request = () => {
         if(parseInt(idR).toString().length === idR.length && idR !== "undefined"){
         dispatch(getSolicitudes(idR))
       }
+      dispatch(getNot());
     }
   },[dispatch, error]);
     

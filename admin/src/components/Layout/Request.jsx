@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSolicitudes, setActual } from "../../redux/actions";
+import { getNot, getSolicitudes, setActual } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Request";
@@ -15,6 +15,7 @@ const RequestLayout = () => {
 
   useEffect(() => {
     dispatch(getSolicitudes());
+    dispatch(getNot());
   }, [dispatch]);
 
   useEffect(() => {

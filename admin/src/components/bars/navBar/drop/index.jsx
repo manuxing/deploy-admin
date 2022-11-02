@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Drop = ({not, l}) => {
+const Drop = ({not}) => {
   return (
       <div className="notification">
         {not.map(p=>{

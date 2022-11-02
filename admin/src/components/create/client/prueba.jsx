@@ -15,7 +15,10 @@ import tools from "../../../tools";
 const Form = ({ setP }) => {
   let validate = tools.validate;
   let dispatch = useDispatch();
+  const history = useHistory();
+
   let actual = useSelector((state) => state.actual);
+
   let [submited, setSubmited] = useState(false);
   let [pressed, setPressed] = useState(false);
   let [input, setInput] = useState({ name: "", contact: [], act: "no" });
@@ -33,7 +36,6 @@ const Form = ({ setP }) => {
     "booking",
     "otro",
   ]);
-  const history = useHistory();
   
   let errHan = (evento, err) => {
     if (evento) {

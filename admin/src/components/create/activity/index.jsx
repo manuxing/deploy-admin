@@ -16,11 +16,14 @@ const ActivityR = ({ setP }) => {
   const history = useHistory();
   let dispatch = useDispatch();
   let validate = tools.validate;
+
   let actual = useSelector((state) => state.actual);
   let services = useSelector((state) => state.servicios);
   let clientes = useSelector((state) => state.clientes);
+
   let clientsNames = clientes.map(p=> p.name);
   let servicesIds = services.map(p=> p.id);
+  
   let ageR = ["Adulto Mayor", "Adulto", "Adolecente", "niño"];
   let [input, setInputA] = useState({
     name: "",

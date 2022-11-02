@@ -17,7 +17,6 @@ const NavBar = () => {
 
   useEffect(() => {
     dispatch(getNot());
-    console.log(not)
   }, [dispatch]);
 
   useEffect(() => {
@@ -28,10 +27,10 @@ const NavBar = () => {
     if (not.length > 0 && l !==not.length) {
       setL(not.length);
     }
-    console.log(l)
+    setPressed(false);
   }, [not, l]);
 
-  // const { profile } = useSelector((state) => state.authReducer);
+  // const { profile } = useSeslector((state) => state.authReducer);
   // const logout = () => {
   //   localStorage.removeItem("profile");
   //   dispatch(logoutUser());
@@ -46,7 +45,7 @@ const NavBar = () => {
         <div className="topWrapper">
           <div className="topRight">
               {
-                l !== "" && l > 0 ?
+                l !== "" && parseInt(l) > 0 ?
                 <button onClick={()=>setPressed(!pressed)}>
                   <NotificationsActiveIcon/>
                 </button>:

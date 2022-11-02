@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, NavLink, useHistory } from "react-router-dom"
-import { getServicio, getReviews, clearAll } from '../../../redux/actions'
+import { getServicio, getReviews, clearAll, getNot } from '../../../redux/actions'
 import Spinner from '../../Spinner'
 import "./Service.css"
 
@@ -23,8 +23,9 @@ const Service = () => {
     } else{
       dispatch(getReviews())
       if(parseInt(id).toString().length === id.length && id !== "undefined"){
-        dispatch(getServicio(id))
+        dispatch(getServicio(id));
       }
+      dispatch(getNot());
     }
   },[dispatch, error]);
 

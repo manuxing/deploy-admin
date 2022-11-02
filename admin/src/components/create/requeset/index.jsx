@@ -14,20 +14,19 @@ import tools from "../../../tools";
 const RequestR = ({ setP }) => {
   const history = useHistory();
   let dispatch = useDispatch();
-  let validate = tools.validate;
+  let validate = tools.validate
+  ;
   let actual = useSelector((state) => state.actual);
   let services = useSelector((state) => state.servicios);
   let servicesIds = services.map(p=> p.id);
-  
-  let [thg] = useState([
+  let thg = [
     "telefono",
     "email",
     "presencial",
     "pagina",
     "booking",
     "otro",
-  ]);
-
+  ];
   let [input, setInputA] = useState({
     dateR: "",
     dateP: "",
@@ -36,7 +35,6 @@ const RequestR = ({ setP }) => {
     sId: 0,
     solicitante: "",
   });
-
   let [warningA, setWarningA] = useState({
     dateR: "",
     dateP: "",
@@ -86,7 +84,13 @@ const RequestR = ({ setP }) => {
     let val = validate.reviewForm_field(evento, servicesIds);
     val.status === true ? notErrHan(evento) : errHan(val, evento);
   };
-
+  
+  let handleSubmit = (e, inp) => {
+    e.preventDefault();
+    let x = validate.requestForm(inp, servicesIds);
+    x.status === false ? errHan(x) : sub();
+  };
+  
   useEffect(() => {
     dispatch(getServicio());
   }, [dispatch]);
@@ -109,11 +113,6 @@ const RequestR = ({ setP }) => {
     }
   }, [actual, input]);
 
-  let handleSubmit = (e, inp) => {
-    e.preventDefault();
-    let x = validate.requestForm(inp, servicesIds);
-    x.status === false ? errHan(x) : sub();
-  };
 
   return (
     <div>

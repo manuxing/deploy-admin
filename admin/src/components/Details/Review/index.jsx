@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useParams, NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getReviews, statChange, setActual } from "../../../redux/actions";
+import { getReviews, statChange, setActual, getNot } from "../../../redux/actions";
 import Spinner from '../../Spinner'
 import "./review.css"
 
@@ -24,6 +24,7 @@ const Review = () => {
       if(parseInt(id).toString().length === id.length && id !== "undefined"){
         dispatch(getReviews(id))
       }
+      dispatch(getNot());
     }
   },[dispatch, error]);
 

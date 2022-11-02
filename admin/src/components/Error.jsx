@@ -25,10 +25,15 @@ const Error = ( ) => {
 
     return (
                 <div>
-                    {err&&
+                    {err &&
+                    <div>
                         <span>
-                            {err?.data}      
+                            {err.status}
                         </span>
+                        <span>
+                            {err?.status === 500 ? "ups, algo salio mal" : err.data}      
+                        </span>
+                    </div>
                     }
                     <Link
                         to="/">

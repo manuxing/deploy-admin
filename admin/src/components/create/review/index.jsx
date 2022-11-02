@@ -19,14 +19,14 @@ const ReviewR = ({ setP }) => {
   let servicesIds = services.map(p=> p.id);
   let clientes = useSelector((state) => state.clientes);
   let clientsNames = clientes.map(p=> p.name);
-  let [thg] = useState([
+  let thg = [
     "telefono",
     "email",
     "presencial",
     "pagina",
     "booking",
     "otro",
-  ]);
+  ];
   let [input, setInputA] = useState({
     description: "",
     dateR: "",
@@ -84,7 +84,13 @@ const ReviewR = ({ setP }) => {
     let val = validate.reviewForm_field(evento, servicesIds);
     val.status === true ? notErrHan(evento) : errHan(val, evento);
   };
-
+  
+  let handleSubmit = (e, inp) => {
+    e.preventDefault();
+    let x = validate.reviewForm(inp, servicesIds, clientsNames);
+    x.status === false ? errHan(x) : sub();
+  };
+  
   useEffect(() => {
     dispatch(getServicio());
     dispatch(getClient());
@@ -124,11 +130,6 @@ const ReviewR = ({ setP }) => {
     }
   }, [actual]);
 
-  let handleSubmit = (e, inp) => {
-    e.preventDefault();
-    let x = validate.reviewForm(inp, servicesIds, clientsNames);
-    x.status === false ? errHan(x) : sub();
-  };
 
   return (
     <div>

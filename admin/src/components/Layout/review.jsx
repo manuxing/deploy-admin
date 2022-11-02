@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getReviews, setActual } from "../../redux/actions";
+import { getNot, getReviews, setActual } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
 import Spinner from "../Spinner.jsx";
 import DashDisplay from "./DashDisplay";
@@ -15,6 +15,7 @@ const ReviewLayout = () => {
 
   useEffect(() => {
     dispatch(getReviews());
+    dispatch(getNot());
   }, [dispatch]);
 
   useEffect(() => {

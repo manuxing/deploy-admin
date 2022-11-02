@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getClient, setActual } from "../../redux/actions";
+import { getClient, setActual, getNot } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
 import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
@@ -15,6 +15,7 @@ const ClientLayout = () => {
 
   useEffect(() => {
     dispatch(getClient());
+    dispatch(getNot());
   }, [dispatch]);
 
   useEffect(() => {

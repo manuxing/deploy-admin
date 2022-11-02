@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch  } from 'react-redux'
 import { useParams, NavLink, useHistory} from "react-router-dom"
-import { getClient, getActividades, setActual } from '../../../redux/actions'
+import { getClient, getActividades, setActual, getNot } from '../../../redux/actions'
 import Spinner from '../../Spinner'
 import ReviewC from "../../lO/reviewC"
 import ActivityC from "../../lO/activityC"
@@ -22,10 +22,10 @@ const Cliente = () => {
       history.push("/err");
     } else{
       dispatch(getActividades())
-      console.log(id)
       if(!parseInt(id).toString().length !== id.length && id !== "undefined"){
         dispatch(getClient(id))
       }
+      dispatch(getNot());
     }
   },[dispatch, error]);
 
