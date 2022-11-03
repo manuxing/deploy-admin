@@ -1,29 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import Spinner from "../Spinner";
-import { statChange } from "../../redux/actions";
+import React from "react";
 
 const ReviewC = ({ review }) => {
-  const dispatch = useDispatch();
-  const [_stat, setStat] = useState(review.stat);
-
-  useEffect(() => {
-    console.log("rev", review);
-  }, [dispatch, review]);
-
-  const handleChange = () => {
-    let x = {
-      type: "Review",
-      pack: {
-        id: review.id,
-        stat: !_stat,
-      },
-    };
-    setStat(!_stat);
-    dispatch(statChange(x));
-  };
-
-  return review && review.id ? (
+  return review && review.id && (
     <div>
       <div className="content_rewC">
         <div className="div_rewC">
@@ -36,8 +14,7 @@ const ReviewC = ({ review }) => {
         </div>
         <div className="div_rewC">
           <span className="span_rexC">Estado:</span>
-          {_stat === true ? "Leida" : "Por ver"}
-          <button onClick={handleChange}>change</button>
+          {review.stat === true ? "Leida" : "Por ver"}
         </div>
         <div className="div_rewC">
           <span className="span_rexC">Descripcion:</span>
@@ -53,11 +30,7 @@ const ReviewC = ({ review }) => {
         </div>
       </div>
     </div>
-  ) : (
-    <div>
-      <Spinner />
-    </div>
-  );
+  ) 
 };
 
-export default ReviewC;
+export default React.memo(ReviewC);
