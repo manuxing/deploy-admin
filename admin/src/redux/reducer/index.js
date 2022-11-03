@@ -109,9 +109,10 @@ export default function rootReducer(state=initialState, action){
               error: action.payload.response,
             }
         case type.ERROR_FORM:
+            let set = action.payload !== null ? action.payload.response : action.payload
             return {
               ...state,
-              errForm: action.payload.response,
+              errForm: set,
             }
         default:
             return {...state};

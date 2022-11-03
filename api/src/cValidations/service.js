@@ -1,6 +1,10 @@
-const validatePost = async(body, next) => {
+const validatePost = async(body, next, Service) => {
     let timeR = new RegExp("([01]?[0-9]|2[0-3]):[0-5][0-9]?");
     let nameR = new RegExp(/[a-zA-Z ]$/);
+
+    let service = await Service.findOne({ where:{name:body.name} })
+        .catch(err => next({status:400, message:"Error al validar nombre del servicio"}));
+    if(service) return next({status: 400, message:"Ya existe un Servicio con ese nombre"});
 
     if(Object.values(body).includes(undefined)||Object.values(body).includes(null))return next({status: 400, message:"Hay Campos incompletos, todos los campos son obliigatorios"})
     if (body.name.length < 5 || nameR.test(body.name) === false)return next({status: 400, message:"Nombre invalido, modifiquelo"})

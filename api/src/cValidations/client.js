@@ -1,8 +1,14 @@
-const validatePost = async(body, next, Service) => {
+const validatePost = async(body, next, Service, Client) => {
     if(Object.values(body).includes(undefined)||Object.values(body).includes(null))return next({status: 400, message:"Hay Campos incompletos, todos los campos son obliigatorios"})
 
     let nameReg = new RegExp("^(?=.{4,50}$)(?=.+[a-zA-Z])[a-zA-Z]+$");
     if(!nameReg.test(body.name.split(' ').join('') ))return next({status: 400, message:"El nombre de cliente no es Valido, modifiquelo"});
+
+    let client = await Client.findOne({ where:{name:body.name}})
+        .catch(err => next({status:400, message:"error validando Nombre del cliente"}));
+
+        console.log(client)
+    if(client !== null) return next({status: 400, message:"El nombre de cliente esta en uso"});
 
     if(typeof body.contact !== "object") return next({status: 400, message:"los valores ingresados en el campo Contacto son invalidos, modifiquelos"});
     if(body.contact.length < 1) return next({status: 400, message:"no se puede postear sin Contacto"});

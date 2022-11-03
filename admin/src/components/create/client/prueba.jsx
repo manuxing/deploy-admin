@@ -6,6 +6,7 @@ import {
   getServicio,
   getClient,
   setActual,
+  errorForm,
 } from "../../../redux/actions/index.js";
 import AgregarContacto from "./agregarContacto.jsx";
 import ContactCard from "./contactCard.jsx";
@@ -101,7 +102,10 @@ const Form = ({ setP }) => {
   };
 
   useEffect(() => {
-    if(errForm && errForm?.data)alert(errForm.data)
+    if(errForm && errForm?.data){
+      alert(errForm.data)
+      dispatch(errorForm());
+    }
   }, [errForm]);
 
   useEffect(() => {
