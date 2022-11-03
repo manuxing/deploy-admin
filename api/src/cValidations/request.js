@@ -18,15 +18,17 @@ const validatePost = async(body, next, Service) => {
 };
 
 const validatePut = async(body, next, model) => {
-    if(Object.values(body).includes(null))return next({status: 400, message:"Hay Campos incompletos, todos los campos son obliigatorios"})
+    if(Object.values(body).includes(null))return {status: 400, message:"Hay Campos incompletos, todos los campos son obliigatorios"};
 
-    if(parseInt(body.Id) !== Number(body.Id))return {status: 400, message:"el id de la reseña es invalido"};
+    if(parseInt(body.id) !== Number(body.id))return {status: 400, message:"el id de la reseña es invalido"};
 
     let request = await model.findByPk(parseInt(body.id))
-        .catch(err => next({status:400, message:"no se encontro la Request a actualizar"}));
-    if(request === null) return next({status: 400, message:"La Solicitud no existe"});
+        .catch(err => {return{status:400, message:"no se encontro la Request a actualizar"}});
+    if(request === null) return {status: 400, message:"La Solicitud no existe"};
 
-    if(typeof body.stat !== "boolean") return next({status: 400, message:"stat deberia ser un booleano"});
+    if(typeof body.stat !== "boolean") return {status: 400, message:"stat deberia ser un booleano"};
+
+    return {status: 200}
 };
 
 const validateGet = async(id, model, next) => {

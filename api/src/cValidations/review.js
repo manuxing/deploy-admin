@@ -34,14 +34,17 @@ const validatePost = async(body, next, Service, Client) => {
 };
 
 const validatePut = async(body, next, model) => {
-    if(Object.values(body).includes(undefined)||Object.values(body).includes(null))return next({status: 400, message:"Hay Campos incompletos, todos los campos son obliigatorios"})
+    if(Object.values(body).includes(null))return next({status: 400, message:"Hay Campos incompletos, todos los campos son obliigatorios"})
     
-    if(parseInt(body.Id) !== Number(body.Id))return {status: 400, message:"el id de la reseña es invalido"};
-    let review = await model.findByPk(parseInt(body.id))
-        .catch(err => next({status:400, message:"no se encontro la Reseña a actualizar"}));
-    if(review === null) return next({status: 400, message:"La Reseña no existe"});
+    if(parseInt(body.id) !== Number(body.id))return {status: 400, message:"el id de la reseña es invalido"};
 
-    if(typeof body.stat !== "boolean") return next({status: 400, message:"stat should be boolean type"});
+    let review = await model.findByPk(parseInt(body.id))
+        .catch(err => {return{status:400, message:"no se encontro la Reseña a actualizar"}});
+    if(review === null) return {status: 400, message:"La Reseña no existe"};
+
+    if(typeof body.stat !== "boolean") return {status: 400, message:"stat should be boolean type"};
+
+    return {status: 200}
 };
 
 const validateGet = async(id, model, next) => {

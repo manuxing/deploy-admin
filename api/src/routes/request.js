@@ -30,8 +30,16 @@ router.post('/', async(req, res, next) => {
 
 router.put('/', async(req, res, next) => {
     const {body} = req;
-    await validatePut(body, next, Request);
-    return putRequest(body, res, next, Request)
+    await validatePut(body, next, Request)
+        .then(val =>{
+            if(val.status === 200){
+                console.log("bien")
+                putRequest(body, res, next, Request);
+            } else {
+                console.log("mal")
+                next(val);
+            }
+        })
 });
 
 module.exports = router;
