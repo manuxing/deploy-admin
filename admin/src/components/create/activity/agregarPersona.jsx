@@ -95,4 +95,4 @@ const AgregarPersona = ({ setPersons, _persons }) => {
   );
 };
 
-export default AgregarPersona;
+export default React.memo(AgregarPersona);

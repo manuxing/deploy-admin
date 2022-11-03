@@ -22,11 +22,11 @@ const ActivityLayout = () => {
     <div className="content_cli">
           <div>
             <div>
+              <BarraFiltros />
               {pressed === false ? (
                 <button onClick={() => setPressed(true)}>agregar</button>
               ) : (
                 <div>
-                  <BarraFiltros />
                   <ActivityR setP={setPressed} />
                 </div>
               )}

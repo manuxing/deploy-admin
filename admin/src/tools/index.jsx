@@ -163,9 +163,12 @@ const tools = {
       let dateR = new RegExp(
         /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/
       );
+      console.log("field", p.target.name, p.target.value);
       switch (p.target.name) {
         case "date":
+
           let x = p.target.value.split("-").reverse().join("-");
+          console.log("field", dateR.test(x) );
           if ( dateR.test(x) === false || parseInt(x.split("-")[x.split("-").length - 1]) < 2000) {
             let err = {
               message: "ingrese una fecha valida",
@@ -233,6 +236,7 @@ const tools = {
       let res = { status: true, ubic: "activityForm" };
       let dateR = new RegExp(/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/);
       let x = act.date.split("-").reverse().join("-");
+      console.log(act.name)
       if (dateR.test(x) === false || parseInt(x.split("-")[x.split("-").length - 1]) < 2000) {
         let err = {
           message: "ingrese una fecha valida",

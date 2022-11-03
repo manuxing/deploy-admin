@@ -4,13 +4,6 @@ import { NavLink } from 'react-router-dom'
 function DetalleRequest({ actual, handleChange, _stat }) {
   return (
     <div>
-      <div className="item_requestD">
-        <span className="span_request">
-          Estado:
-          {_stat === true ? "Leida" : "Por ver"}
-        </span>
-        <button onClick={() => handleChange()}>change</button>
-      </div>
       {actual.solicitante.length > 1 && (
         <div className="item_requestD">
           <span className="span_request">Solicitante</span>
@@ -49,6 +42,13 @@ function DetalleRequest({ actual, handleChange, _stat }) {
       <div className="item_requestD">
         <span className="span_request">fecha solicitada</span>
         {actual?.dateP}
+      </div>
+      <div className="item_requestD">
+        <span className="span_request">
+          Estado:
+          {_stat === true ? "Leida" : "Por ver"}
+        </span>
+        <button onClick={() => handleChange()}>change</button>
       </div>
     </div>
   );

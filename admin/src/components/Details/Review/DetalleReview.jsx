@@ -6,9 +6,10 @@ function DetalleReview({actual, handleChange, _stat}) {
     <div>
         <div className="div_rev">
           <span className="span_rev">Cliente</span>
-          <NavLink className="link" to={`/client/${actual?.clients[0].id}`}>
-            {actual?.clients[0].name ? actual?.clients[0].name : "name"}
-          </NavLink>
+          {actual.clients && actual.clients.length > 0 &&
+            <NavLink className="link" to={`/client/${actual?.clients[0].id}`}>
+              {actual?.clients[0].name ? actual?.clients[0].name : "name"}
+            </NavLink>}
         </div>
       <div className="div_rev">
         <span className="span_rev">Descripcion</span>
@@ -17,7 +18,7 @@ function DetalleReview({actual, handleChange, _stat}) {
       <div className="div_rev">
         <span className="span_rev">Servicios</span>
         <div>
-          {actual?.services.map((p) => {
+          {actual?.services && actual?.services.map((p) => {
                 return (
                   <NavLink
                     key={`${p.id}`}

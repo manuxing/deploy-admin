@@ -2,6 +2,7 @@ const validatePost = async(body, next, Client, Service) => {
     if(Object.values(body).includes(null))return {status: 400, message:"Hay Campos incompletos, todos los campos son obliigatorios"}
 
     if(body.name){
+        console.log(body);
         let nameReg = new RegExp("^(?=.{4,50}$)(?=.+[a-zA-Z])[a-zA-Z]+$");
         if(!nameReg.test(body.name.split(' ').join('') ))return {status: 400, message:"El nombre de cliente no es Valido, modifiquelo"};
         
@@ -14,7 +15,6 @@ const validatePost = async(body, next, Client, Service) => {
             .catch(err => next({status:400, message:"no se encontro el cliente validando"}));
         if(client === null) return {status: 400, message:"el cliente ingresado no existe, modifiquelo"};
     }
-    
 
     if(parseInt(body.sId) !== Number(body.sId))return {status: 400, message:"el id del servicio es invalido"};
     let service = await Service.findByPk(parseInt(body.sId))

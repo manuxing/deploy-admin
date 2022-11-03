@@ -15,4 +15,4 @@ const BarraFiltros = ({activity}) => {
   );
 };
 
-export default BarraFiltros;
+export default React.memo(BarraFiltros);

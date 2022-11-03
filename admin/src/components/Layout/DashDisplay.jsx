@@ -21,4 +21,4 @@ const DashDisplay = ( data ) => {
     );
 };
 
-export default DashDisplay;
+export default React.memo(DashDisplay);
