@@ -11,23 +11,15 @@ const ActivityLayout = () => {
   let todas = useSelector((state) => state.actividades);
   let dispatch = useDispatch();
   let [pressed, setPressed] = useState(false);
-  let [loading, setLoading] = useState(true);
 
   useEffect(() => {
     dispatch(getActividades());
     dispatch(getNot());
+    return () => dispatch(setActual());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (todas && todas.length > 0) setLoading(false);
-  }, [todas]);
-
-  useEffect(() => {
-    return () => dispatch(setActual());
-  }, []);
-
   return (
-        <div className="content_cli">
+    <div className="content_cli">
           <div>
             <div>
               {pressed === false ? (
@@ -40,19 +32,15 @@ const ActivityLayout = () => {
               )}
             </div>
           </div>
-          {loading === false ? (
+          {todas.length === 0 ? 
+            <Spinner/> :
             <div className="cont">
               <div className="cards">
                   <DashDisplay all={todas} Dash={Dash} model={"Actividades"}/>
               </div>
-            </div>
-          ) : (
-            <div>
-              <Spinner />
-            </div>
-          )}
+            </div>}
         </div>
   );
 };
 
-export default ActivityLayout;
+export default React.memo(ActivityLayout);

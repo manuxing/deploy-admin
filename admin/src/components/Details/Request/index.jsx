@@ -7,7 +7,6 @@ import Spinner from '../../Spinner'
 import DetalleRequest from './DetalleRequest';
 
 const Request = () => {
-
   const {idR} = useParams();
   const dispatch = useDispatch();
   const history = useHistory();

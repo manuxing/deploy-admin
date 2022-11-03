@@ -10,21 +10,13 @@ import RequestR from "../create/requeset";
 const RequestLayout = () => {
   let todas = useSelector((state) => state.solicitudes);
   let dispatch = useDispatch();
-  let [loading, setLoading] = useState(true);
   let [pressed, setPressed] = useState(false);
 
   useEffect(() => {
     dispatch(getSolicitudes());
     dispatch(getNot());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (todas && todas.length > 0) setLoading(false);
-  }, [todas]);
-
-  useEffect(() => {
     return () => dispatch(setActual());
-  }, []);
+  }, [dispatch]);
 
   return (
         <div className="content_cli_l">
@@ -38,17 +30,14 @@ const RequestLayout = () => {
               </div>
             )}
           </div>
-          {loading === false ? (
+          {todas.length === 0 ? 
+            <Spinner/> : 
             <div className="cont">
               <DashDisplay all={todas} Dash={Dash} model={"Solicitudes"}/>
             </div>
-          ) : (
-            <div>
-              <Spinner />
-            </div>
-          )}
+          }
         </div>
   );
 };
 
-export default RequestLayout;
+export default React.memo(RequestLayout);

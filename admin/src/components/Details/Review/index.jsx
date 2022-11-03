@@ -8,7 +8,6 @@ import "./review.css"
 import DetalleReview from "./DetalleReview";
 
 const Review = () => {
-
   const {id} = useParams();
   const dispatch = useDispatch();
   const history = useHistory();

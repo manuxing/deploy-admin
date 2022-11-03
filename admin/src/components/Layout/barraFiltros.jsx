@@ -9,7 +9,7 @@ const BarraFiltros = ({activity}) => {
   return (
     <div>
         <button onClick={()=>dispatch(orderByV())}>orden valor</button>
-        <button onClick={()=> dispatch(orderByN())}>orden alfa</button>         
+        <button onClick={()=>dispatch(orderByN())}>orden alfa</button>         
         {/*selects o cosos de filtros*/}
     </div>
   );

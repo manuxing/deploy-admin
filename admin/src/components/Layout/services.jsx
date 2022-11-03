@@ -10,21 +10,13 @@ import AgregarServicio from "../create/service/prueba";
 const ServiceLayout = () => {
   let todas = useSelector((state) => state.servicios);
   let dispatch = useDispatch();
-  let [loading, setLoading] = useState(true);
   let [pressed, setPressed] = useState(false);
 
   useEffect(() => {
     dispatch(getServicio());
     dispatch(getNot());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (todas && todas.length > 0) setLoading(false);
-  }, [todas]);
-
-  useEffect(() => {
     return () => dispatch(setActual());
-  }, []);
+  }, [dispatch]);
 
   return (
         <div className="content_cli_l">
@@ -38,17 +30,14 @@ const ServiceLayout = () => {
               </div>
             )}
           </div>
-          {loading === false ? (
+          {todas.length === 0 ? 
+            <Spinner/> : 
             <div className="cont">
               <DashDisplay all={todas} Dash={Dash} model={"Servicios"}/>
             </div>
-          ) : (
-            <div>
-              <Spinner />
-            </div>
-          )}
+          }
         </div>
   );
 };
 
-export default ServiceLayout;
+export default React.memo(ServiceLayout);
