@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {
   createClient,
+  getServicio,
   getClient,
   setActual,
 } from "../../../redux/actions/index.js";
 import AgregarContacto from "./agregarContacto.jsx";
 import ContactCard from "./contactCard.jsx";
-import ActivityR from "./activityR";
+import AgregarPersona from "../activity/agregarPersona.jsx";
+import PersonCard from "../activity/personaCard";
 import tools from "../../../tools";
 // import "./Form.css";
 
@@ -19,27 +21,38 @@ const Form = ({ setP }) => {
 
   let actual = useSelector((state) => state.actual);
   let errForm = useSelector((state) => state.errForm);
+  let services = useSelector((state) => state.servicios);
+  let servicesIds = services.map(p=> p.id);
 
-  let [submited, setSubmited] = useState(false);
-  let [pressed, setPressed] = useState(false);
-  let [input, setInput] = useState({ name: "", contact: [], act: "no" });
-  
+  let [input, setInput] = useState({ name: "", contact: [], date: "", persons: [], sId: 1000 });
   let [warning, setWarning] = useState({
     name: "",
     contact: "",
-    activity: "",
+    date: "",
+    persons: "",
+    sId: "",
     general: "",
   });
-  let [contactsThg] = useState([
-    "telefono",
+  let contactsThg = ["telefono",
     "email",
     "presencial",
     "pagina",
     "booking",
     "otro",
-  ]);
+  ];
+
+  let handleChange = (evento) => {
+    let val = validate.clientForm_field(evento, servicesIds);
+    val.status === true ? notErrHan(evento) : errHan(evento, val);
+  };
   
   let errHan = (evento, err) => {
+    let id = err.ubic === "service" ? "service" : "";
+    if (id === "service") {
+      let x = document.getElementById(id);
+      x.selected = true;
+      setInput({ ...input, sId: "" });
+    }
     if (evento) {
       setInput({ ...input, [evento.target.name]: evento.target.value });
     }
@@ -48,30 +61,43 @@ const Form = ({ setP }) => {
     setWarning(copy);
   };
   
-  let handleChange = (evento) => {
-    let val = validate.clientForm_field(evento);
-    val.status === true ? notErrHan(evento) : errHan(evento, val);
-  };
-  
   let notErrHan = (evento) => {
     setInput({ ...input, [evento.target.name]: evento.target.value });
     setWarning({ ...warning, [evento.target.name]: "" });
   };
 
   let sub = () => {
-    let send = input;
-    let x = validate.clientForm(send);
+    let res = {
+      name: input.name,
+      contact: input.contact,
+      act: {
+        date: input.date,
+        persons: input.persons,
+        sId: input.sId,
+      }
+    };
+    let x = validate.clientForm(res, servicesIds);
     if (x.status === false) {
       errHan(null, x);
     } else {
-      setSubmited(true);
-      dispatch(createClient(send));
+      dispatch(createClient(res));
     }
   };
 
   let handleSubmit = (p, input) => {
+    console.log(input)
     p.preventDefault();
-    setPressed(true);
+    let res = {
+      name: input.name,
+      contact: input.contact,
+      act: {
+        date: input.date,
+        persons: input.persons,
+        sId: input.sId,
+      }
+    };
+    let x = validate.clientForm(res, servicesIds);
+    x.status === false ? errHan(null, x) : sub();
   };
 
   useEffect(() => {
@@ -79,13 +105,10 @@ const Form = ({ setP }) => {
   }, [errForm]);
 
   useEffect(() => {
-    if (input.act !== "no") {
-      sub();
-    }
-  }, [input]);
+    dispatch(getServicio());
+  }, [dispatch]);
 
   useEffect(() => {
-    if (submited === true) {
       if (typeof actual !== "number") {
         tools.alert(
           "cliente",
@@ -96,12 +119,10 @@ const Form = ({ setP }) => {
           setP,
           setActual
         );
-        setInput({ name: "", contact: [], act: "no" });
-        setWarning({ name: "", contact: "", activity: "", general: "" });
-        setSubmited(false);
+        setInput({ name: "", contact: [],  date: "", persons: [], sId: 1000 });
+        setWarning({ name: "", contact: "", date: "", persons: "", sId: "", general: "" });
       }
-    }
-  }, [submited, actual]);
+  }, [actual]);
 
   return (
     <div>
@@ -125,19 +146,54 @@ const Form = ({ setP }) => {
             setContacts={setInput}
             _contacts={input}
           />
+          <div className="warning">{warning.contact}</div>
           <div>
             {input.contact.map((p) => {
               return <ContactCard key={p.value} contact={p} />;
             })}
-            <div className="warning">{warning.contact}</div>
           </div>
-          <ActivityR
-            submitted={submited}
-            pressed={pressed}
-            setPressed={setPressed}
-            act={input}
-            setAct={setInput}
-          />
+          <div>
+            <label>Fecha de la actividad</label>
+            <input
+            className="input"
+            type={"date"}
+            placeholder="date"
+            name={"date"}
+            value={input.date}
+            onChange={(p) => handleChange(p)}
+            />
+            <div className="warning">{warning.date}</div>
+          </div>
+            <AgregarPersona setPersons={setInput} _persons={input} />
+          <div>
+          {input.persons.length > 0 && input.persons.map((p) => {
+            return (
+              <PersonCard key={ input.persons.length} person={p} />
+            )
+          })}
+          </div>
+        <div>
+          <label>Servicios</label>
+          <select
+            className="selectageR"
+            name={"sId"}
+            onChange={(e) => {
+              handleChange(e);
+            }}
+          >
+          <option id="service" hidden>
+            seleccione
+          </option>
+          {services.map((p) => {
+            return (
+              <option value={p.id} key={`${p.id}`}>
+                {p.name}
+              </option>
+            );
+          })}
+        </select>
+        <div className="warning">{warning.sId}</div>
+        </div>
           <button onClick={(e) => handleSubmit(e, input)}/>
         </form>
         <button onClick={() => setP(false)}>cerrar</button>

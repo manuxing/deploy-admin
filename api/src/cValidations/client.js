@@ -11,7 +11,7 @@ const validatePost = async(body, next, Service) => {
 };
 
 const validatePostAct = async(act, next, Service) => {
-    if(Object.values(body).includes(undefined)||Object.values(body).includes(null))return next({status: 400, message:"Hay Campos incompletos, todos los campos son obliigatorios"})
+    if(Object.values(act).includes(undefined)||Object.values(act).includes(null))return next({status: 400, message:"Hay Campos incompletos, todos los campos son obliigatorios"})
     
     let dateReg = new RegExp("^(19[0-9]{2}|2[0-9]{3})-(0[1-9]|1[012])-([123]0|[012][1-9]|31)$");
     if(!dateReg.test(act.date)) return next({status: 400, message:"Fecha Invalida"});

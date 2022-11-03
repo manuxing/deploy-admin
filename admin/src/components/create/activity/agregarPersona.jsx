@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import tools from "../../../tools";
 
-const AgregarPersona = ({ ageR, setPersons, _persons }) => {
+const AgregarPersona = ({ setPersons, _persons }) => {
   
   let [person, setPerson] = useState({ ageR: "", sexo: "" });
   let [warning, setWarning] = useState({ ageR: "", sexo: "", general: "" });
   let validate = tools.validate;
   let sexos = ["Femenino", "Masculino", "otro"];
+  let ageR = ["Adulto Mayor", "Adulto", "Adolecente", "niño"];
 
   let errHan = (err) => {
     let id = err.ubic === "ageR" ? "def1" : "def2";
@@ -28,8 +29,8 @@ const AgregarPersona = ({ ageR, setPersons, _persons }) => {
 
   let sub = () => {
     setPerson({ ageR: "", sexo: "" });
-    setPersons({ ..._persons, persons: [..._persons.persons, person] });
     setWarning({ ageR: "", sexo: "", general: "" });
+    setPersons({ ..._persons, persons: [..._persons.persons, person] });
     let x = document.getElementById("def1");
     let x1 = document.getElementById("def2");
     x.selected = true;

@@ -5,7 +5,7 @@ const validatePost = async(body, next, Client, Service) => {
         let client = await Client.findOne({ where: { name: body.name}})
             .catch(err => next({status:400, message:"no se encontro el cliente validando"}));
         if(client === null) return next({status: 400, message:"client dont exist"});
-    } else {
+    } else { 
         let client = await Client.findOne({ where: { id: body.cId}})
             .catch(err => next({status:400, message:"no se encontro el cliente validando"}));
         if(client === null) return next({status: 400, message:"el cliente ingresado no existe, modifiquelo"});

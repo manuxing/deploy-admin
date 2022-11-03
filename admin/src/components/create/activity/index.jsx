@@ -25,7 +25,6 @@ const ActivityR = ({ setP }) => {
   let clientsNames = clientes.map(p=> p.name);
   let servicesIds = services.map(p=> p.id);
   
-  let ageR = ["Adulto Mayor", "Adulto", "Adolecente", "niño"];
   let [input, setInputA] = useState({
     name: "",
     date: "",
@@ -148,7 +147,7 @@ const ActivityR = ({ setP }) => {
                 </datalist>
             <div className="warning">{warningA.name}</div>
           </div>
-          <AgregarPersona ageR={ageR} setPersons={setInputA} _persons={input} />
+          <AgregarPersona setPersons={setInputA} _persons={input} />
           <div>
             {input.persons.map((p) => {
               return (
