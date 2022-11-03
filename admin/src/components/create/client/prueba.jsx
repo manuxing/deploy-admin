@@ -86,7 +86,6 @@ const Form = ({ setP }) => {
   };
 
   let handleSubmit = (p, input) => {
-    console.log(input)
     p.preventDefault();
     let res = {
       name: input.name,
@@ -154,7 +153,7 @@ const Form = ({ setP }) => {
           />
           <div className="warning">{warning.contact}</div>
           <div>
-            {input.contact.map((p) => {
+            {typeof input.contact === 'object' && input.contact.map((p) => {
               return <ContactCard key={p.value} contact={p} />;
             })}
           </div>
@@ -172,7 +171,7 @@ const Form = ({ setP }) => {
           </div>
             <AgregarPersona setPersons={setInput} _persons={input} />
           <div>
-          {input.persons.length > 0 && input.persons.map((p) => {
+          {typeof input.persons === 'object' && input.persons.length > 0 && input.persons.map((p) => {
             return (
               <PersonCard key={ input.persons.length} person={p} />
             )

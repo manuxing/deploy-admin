@@ -153,7 +153,7 @@ const ActivityR = ({ setP }) => {
           </div>
           <AgregarPersona setPersons={setInputA} _persons={input} />
           <div>
-            {input.persons.map((p) => {
+            { typeof input.persons  === 'object' && input.persons.map((p) => {
               return (
                 <PersonCard
                   key={

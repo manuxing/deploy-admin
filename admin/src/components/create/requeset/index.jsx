@@ -173,11 +173,13 @@ const RequestR = ({ setP }) => {
             />
           </div>
           <div>
-            {input.contact.map((p) => {
+            { input.contact && typeof input.contact === 'object' &&
+             input.contact.map((p) => {
               return <ContactCard key={input.contact.length} contact={p} />;
             })}
           </div>
-          <div className="warning">{input.contact.length > 0 ? "":warningA.contact}</div>
+          <div className="warning">{ input.contact && 
+            input.contact.length > 0 ? "" : warningA.contact }</div>
           <div>
             <label>Servicios</label>
             <select

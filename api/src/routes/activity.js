@@ -24,9 +24,15 @@ router.post('/', async(req, res, next) => {
     } else {
         copia = {cId, date, sId, persons};
     }
-    await validatePost(copia, next, Client, Service);
-    req.body.persons =  typeof req.body.persons === "object" ? req.body.persons.map(p => `${p.ageR}, Sexo: ${p.sexo}`) : 0  
-    return postActivity(req.body, res, next, Activity, Service, Client);
+    await validatePost(copia, next, Client, Service)
+        .then(val => {
+            if(val.status === 200){
+                req.body.persons =  typeof req.body.persons === "object" ? req.body.persons.map(p => `${p.ageR}, Sexo: ${p.sexo}`) : 0  
+                postActivity(req.body, res, next, Activity, Service, Client);
+            } else {
+                next(val);
+            }
+        })
 });
 
 module.exports = router;
