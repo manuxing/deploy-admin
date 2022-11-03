@@ -798,12 +798,12 @@ const tools = {
     let sign = prompt(
       `su ${art} fue cread${f} exitosamente, desea quedarse en la lista o ser redirigidx al detalle`
     );
-    if (sign.length > 0) {
-      cb.push(`${url}`);
-      cb4(false);
-    } else {
+    if(!sign || sign.length < 1){
       cb2(cb3());
       cb2(cb5());
+    } else {
+      cb.push(`${url}`);
+      cb4(false);
     }
   },
   alert_notFound: ( model, cb, url) => {

@@ -125,6 +125,8 @@ const Form = ({ setP }) => {
         );
         setInput({ name: "", contact: [],  date: "", persons: [], sId: 1000 });
         setWarning({ name: "", contact: "", date: "", persons: "", sId: "", general: "" });
+        let x = document.getElementById("service");
+        x.selected = true;
       }
   }, [actual]);
 
