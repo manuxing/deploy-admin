@@ -6,6 +6,7 @@ import {
   createSolicitud,
   getSolicitudes,
   setActual,
+  errorForm
 } from "../../../redux/actions";
 import AgregarContacto from "./agregarContacto";
 import ContactCard from "./contactCard";
@@ -94,7 +95,10 @@ const RequestR = ({ setP }) => {
   };
   
   useEffect(() => {
-    if(errForm && errForm?.data)alert(errForm.data)
+    if(errForm && errForm?.data){
+      alert(errForm.data)
+      dispatch(errorForm());
+    }
   }, [errForm]);
 
   useEffect(() => {

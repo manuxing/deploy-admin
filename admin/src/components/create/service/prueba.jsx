@@ -5,6 +5,7 @@ import {
   createServicio,
   setActual,
   getServicio,
+  errorForm
 } from "../../../redux/actions/index.js";
 import tools from "../../../tools";
 // import "./Form.css";
@@ -57,7 +58,10 @@ const AgregarServicio = ({ setP }) => {
   };
 
   useEffect(() => {
-    if(errForm && errForm?.data)alert(errForm.data)
+    if(errForm && errForm?.data){
+      alert(errForm.data)
+      dispatch(errorForm());
+    }
   }, [errForm]);
 
   useEffect(() => {

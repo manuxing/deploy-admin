@@ -6,6 +6,7 @@ import {
   createActividades,
   getActividades,
   setActual,
+  errorForm,
   getClient,
 } from "../../../redux/actions";
 import tools from "../../../tools";
@@ -82,7 +83,10 @@ const ActivityR = ({ setP }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if(errForm && errForm?.data)alert(errForm.data)
+    if(errForm && errForm?.data){
+      alert(errForm.data)
+      dispatch(errorForm());
+    }
   }, [errForm]);
 
   useEffect(() => {

@@ -7,6 +7,7 @@ import {
   getReviews,
   setActual,
   getClient,
+  errorForm
 } from "../../../redux/actions";
 import tools from "../../../tools";
 
@@ -94,7 +95,10 @@ const ReviewR = ({ setP }) => {
   };
   
   useEffect(() => {
-    if(errForm && errForm?.data)alert(errForm.data)
+    if(errForm && errForm?.data){
+      alert(errForm.data)
+      dispatch(errorForm());
+    }
   }, [errForm]);
 
   useEffect(() => {
