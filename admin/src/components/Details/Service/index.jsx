@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from "react-router-dom"
-import { getServicio, getReviews, clearAll, getNot } from '../../../redux/actions'
+import { getServicio, getReviews, getNot, setActual } from '../../../redux/actions'
 import DetalleService from './DetalleService'
 import tools from '../../../tools'
 import Spinner from '../../Spinner'
@@ -26,7 +26,7 @@ const Service = () => {
         tools.alert_notFound( "Reseña", history, "/reviews/")
       }
     }
-    return () => dispatch(clearAll())
+    return () => dispatch(setActual())
   },[dispatch, error]);
    
   return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearAll, getActividades, getClient, getReviews, getServicio, getSolicitudes, setAll } from "../../redux/actions";
+import { getActividades, getClient, getReviews, getServicio, getSolicitudes, setAll } from "../../redux/actions";
 import Stat from "../stats/Activity.jsx";
 import tools from "../../tools";
 import "./home.css";
@@ -17,7 +17,7 @@ const Home = () => {
       dispatch(setAll());
     }
     tools.build(dispatch, actions);
-    return () => dispatch(clearAll())
+    // return () => dispatch(clearAll())
   }, [dispatch]);
   
   useEffect(() => {

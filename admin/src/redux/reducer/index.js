@@ -86,23 +86,6 @@ export default function rootReducer(state=initialState, action){
                 all:{...state.all, stats},
             };
         }
-        case type.CLEAR_ALL:
-            return {
-                actual:1,
-                actualG:{},
-                all:{
-                    display:[],
-                    stats:[],
-                },
-                solicitudes: [],
-                clientes: [],
-                actividades: [],
-                reviews: [],
-                servicios: [],
-                not: [],
-                error: null,
-                errForm: null,
-            }
         case type.ERROR:
             return {
               ...state,
