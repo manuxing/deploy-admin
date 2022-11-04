@@ -8,7 +8,7 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   let validate = tools.validate;
 
   let handleSelect = (evento) => {
-    setContact({ ...contact, type: evento.target.value });
+    setContact({ type: evento.target.value, value: "" });
     setWarning({ contacto: "" });
   };
 
@@ -89,4 +89,4 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   );
 };
 
-export default AgregarContacto;
+export default React.memo(AgregarContacto);

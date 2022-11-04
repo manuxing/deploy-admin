@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { actuallContext } from "../ActualContext";
@@ -22,9 +22,9 @@ const ActivityR = ({ setP }) => {
   let services = useSelector((state) => state.servicios);
   let clientes = useSelector((state) => state.clientes);
   let errForm = useSelector((state) => state.errForm);
-
-  let clientsNames = clientes.map(p=> p.name);
-  let servicesIds = services.map(p=> p.id);
+  
+  let clientsNames = useMemo(()=>clientes.map(p=> p.name), [clientes]);
+  let servicesIds = useMemo(()=>services.map(p=> p.id), [services]);
   
   let [input, setInputA] = useState({
     name: "",
@@ -77,7 +77,7 @@ const ActivityR = ({ setP }) => {
       let x = document.getElementById("service");
       x.selected = true;
     }
-  }, [actual, input]);
+  }, [actual]);
 
   return (
     <div>

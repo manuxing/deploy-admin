@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 function DetalleRequest({ actual, handleChange, _stat }) {
   return (
     <div>
-      {actual.solicitante.length > 1 && (
+      {actual.solicitante && actual?.solicitante.length > 1 && (
         <div className="item_requestD">
           <span className="span_request">Solicitante</span>
           {actual?.solicitante}
@@ -13,7 +13,7 @@ function DetalleRequest({ actual, handleChange, _stat }) {
       <div className="item_requestD">
         <span className="span_request">Servicios</span>
         <div>
-          {actual?.services.map((p) => {
+          {actual?.services && actual?.services.map((p) => {
                 return (
                   <NavLink
                     key={`${p.id}`}

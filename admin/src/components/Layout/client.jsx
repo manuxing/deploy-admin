@@ -5,7 +5,7 @@ import BarraFiltros from "./barraFiltros";
 import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Client";
-import Form from "../create/client/prueba";
+import CreateClient from "../create/client/prueba";
 
 const ClientLayout = () => {
   let dispatch = useDispatch();
@@ -25,7 +25,7 @@ const ClientLayout = () => {
               <button onClick={() => setPressed(true)}>agregar</button>
             ) : (
               <div>
-                <Form setP={setPressed} />
+                <CreateClient setP={setPressed} />
                 <BarraFiltros />
               </div>
             )}

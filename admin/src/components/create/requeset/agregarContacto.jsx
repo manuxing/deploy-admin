@@ -101,4 +101,4 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   );
 };
 
-export default AgregarContacto;
+export default React.memo(AgregarContacto);

@@ -20,9 +20,9 @@ const {
 
 let sub = () => {
     let senr = input;
-    let x = validate.activityForm(senr, servicesIds, clientsNames);
-    if (x.status === false) {
-      errHan(x);
+    let validation = validate.activityForm(senr, servicesIds, clientsNames);
+    if (validation.status === false) {
+      errHan(validation);
     } else {
       dispatch(createActividades(senr));
     }
@@ -56,6 +56,10 @@ let errHan = (err) => {
     let x = validate.activityForm(inp, servicesIds, clientsNames);
     x.status === false ? errHan(x) : sub();
   };
+
+  let pop = () =>{
+    setInputA({...input, persons:input.persons.slice(1)})
+  }
 
   return (
     <div>
@@ -96,13 +100,17 @@ let errHan = (err) => {
           {typeof input.persons === "object" &&
             input.persons.map((p) => {
               return (
-                <PersonCard
-                  key={
-                    input.persons.cant +
-                    `${Math.random() * (Math.random() * 300)}`
-                  }
-                  person={p}
-                />
+                <div>
+                  <PersonCard
+                    key={
+                      input.persons.cant +
+                      `${Math.random() * (Math.random() * 300)}`
+                    }
+                    person={p}
+                  />
+                  <button onClick={()=>pop()}>-
+                    </button>
+                </div>
               );
             })}
         </div>
@@ -135,4 +143,4 @@ let errHan = (err) => {
   );
 }
 
-export default Form;
+export default React.memo(Form);
