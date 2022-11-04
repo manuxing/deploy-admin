@@ -59,10 +59,10 @@ const postActivity = async(body, res, next, model, Service, Client) => {
 
         await create.addService(service)
             .catch(err => next({status: 500, message: 'could not find relate activity to service'}));
+        await client.addActivity(create)
+                .catch(err => next({status: 500, message: 'could not find relate client to activity'}));
         await create.setClient(client)
             .catch(err => next({status: 500, message: 'could not find relate activity to client'}));
-        await client.addActivity(create)
-            .catch(err => next({status: 500, message: 'could not find relate client to activity'}));
         await service.addActivity(create)
                 .catch(err => next({status: 500, message: 'could not find relate activity to service'}));
 

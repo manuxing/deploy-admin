@@ -3,7 +3,6 @@ import axios from "axios";
 
 export function createClient(data) {
   return function (dispatch) {
-    console.log(data);
     axios
       .post("http://localhost:3001/client/", data)
       .then((res) => {
@@ -198,7 +197,6 @@ export function getReviews(id) {
 }
 
 export function createServicio(data) {
-  console.log("antes de enviar", data);
   return function (dispatch) {
     axios
       .post("http://localhost:3001/service/", data)

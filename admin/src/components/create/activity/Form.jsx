@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext} from 'react';
 import PersonCard from "./personaCard";
 import AgregarPersona from "./agregarPersona";
 import { actuallContext } from '../ActualContext';
@@ -18,7 +18,7 @@ const {
     setWarningA,
 } = func;
 
-let sub = () => {
+  let sub = () => {
     let senr = input;
     let validation = validate.activityForm(senr, servicesIds, clientsNames);
     if (validation.status === false) {
@@ -26,9 +26,9 @@ let sub = () => {
     } else {
       dispatch(createActividades(senr));
     }
-};
+  };
 
-let errHan = (err) => {
+  let errHan = (err) => {
     let id = err.ubic === "service" ? "service" : "";
     if (id === "service") {
       let x = document.getElementById(id);
@@ -96,20 +96,23 @@ let errHan = (err) => {
           <div className="warning">{warningA.name}</div>
         </div>
         <AgregarPersona setPersons={setInputA} _persons={input} />
+        {typeof input.persons === "object" &&  input.persons.length > 0 &&
+          <button onClick={()=>pop()}>-
+          </button>
+        }
         <div>
           {typeof input.persons === "object" &&
             input.persons.map((p) => {
+              let count =Math.random() * (Math.random() * 300);
               return (
                 <div>
                   <PersonCard
                     key={
                       input.persons.cant +
-                      `${Math.random() * (Math.random() * 300)}`
+                      `${count}`
                     }
                     person={p}
                   />
-                  <button onClick={()=>pop()}>-
-                    </button>
                 </div>
               );
             })}

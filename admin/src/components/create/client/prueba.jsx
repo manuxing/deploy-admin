@@ -64,14 +64,8 @@ const CreateClient = ({ setP }) => {
 
   useEffect(() => {
       if (typeof actual !== "number") {
-        tools.alert(
-          "cliente",
-          `/client/${actual.id}`,
-          history,
-          dispatch,
-          getClient,
-          setP,
-          setActual
+        tools.alert("cliente",`/client/${actual.id}`,
+          history, dispatch, getClient, setP, setActual
         );
         setInput({ name: "", contact: [],  date: "", persons: [], sId: 1000 });
         setWarning({ name: "", contact: "", date: "", persons: "", sId: "", general: "" });
