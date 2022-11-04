@@ -13,4 +13,4 @@ const Bars = () => {
   );
 };
 
-export default Bars;
+export default React.memo(Bars);

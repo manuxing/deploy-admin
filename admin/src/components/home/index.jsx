@@ -17,6 +17,7 @@ const Home = () => {
       dispatch(setAll());
     }
     tools.build(dispatch, actions);
+    return () => dispatch(clearAll())
   }, [dispatch]);
   
   useEffect(() => {
@@ -27,9 +28,6 @@ const Home = () => {
     }
   }, [all]);
 
-  useEffect(() => {
-    return () => dispatch(clearAll())
-  }, []);
 
   return (
       <div className="home">
@@ -45,4 +43,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default React.memo(Home);

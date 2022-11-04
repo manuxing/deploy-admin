@@ -17,13 +17,27 @@ router.get('/', async(req, res, next) =>{
 router.post('/', async(req, res, next) => {
     let body = req.body.senr;
     validatePost(body, next, Service, Client)
-    return postReview(body, res, next, Review, Service, Client);
+        .then(val => {
+            if(val.status === 200){
+                postReview(body, res, next, Review, Service, Client);
+            } else {
+                next(val)
+            }
+        })
 });
 
 router.put('/', async(req, res, next) => {
     const {body} = req;
-    await validatePut(body, next, Review);
-    return putReview(body, res, next, Review);
+    await validatePut(body, next, Review)
+        .then(val =>{
+            if(val.status === 200){
+                console.log("bien")
+                putReview(body, res, next, Review);
+            } else {
+                console.log("mal")
+                next(val);
+            }
+        })
 });
 
 module.exports = router;

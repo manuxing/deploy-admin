@@ -16,16 +16,30 @@ router.get('/', async(req, res, next) =>{
 
 router.post('/', async(req, res, next) => {
     let body = req.body.senr;
-    body.thg = body.contact[0].type;
-    await validatePost(body, next, Service);
-    body.contact = typeof body.contact === "object" ? body.contact.map(p => `${p.type}: ${p.value}`) : 0
-    return postRequest(body, res, next, Request, Service);
+    await validatePost(body, next, Service)
+        .then(val => {
+        if(val.status === 200){
+                body.thg = body.contact[0].type;
+                body.contact = typeof body.contact === "object" ? body.contact.map(p => `${p.type}: ${p.value}`) : 0
+                postRequest(body, res, next, Request, Service);
+            } else {
+                next(val)
+            }
+        })
 });
 
 router.put('/', async(req, res, next) => {
     const {body} = req;
-    await validatePut(body, next, Request);
-    return putRequest(body, res, next, Request)
+    await validatePut(body, next, Request)
+        .then(val =>{
+            if(val.status === 200){
+                console.log("bien")
+                putRequest(body, res, next, Request);
+            } else {
+                console.log("mal")
+                next(val);
+            }
+        })
 });
 
 module.exports = router;

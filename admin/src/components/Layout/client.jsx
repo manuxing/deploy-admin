@@ -5,26 +5,18 @@ import BarraFiltros from "./barraFiltros";
 import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Client";
-import Form from "../create/client/prueba";
+import CreateClient from "../create/client/prueba";
 
 const ClientLayout = () => {
   let dispatch = useDispatch();
   let todas = useSelector((state) => state.clientes);
   let [pressed, setPressed] = useState(false);
-  let [loading, setLoading] = useState(true);
 
   useEffect(() => {
     dispatch(getClient());
     dispatch(getNot());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (todas && todas.length > 0) setLoading(false);
-  }, [todas]);
-
-  useEffect(() => {
     return () => dispatch(setActual());
-  }, []);
+  }, [dispatch]);
 
   return (
         <div className="content_cli_l">
@@ -33,22 +25,18 @@ const ClientLayout = () => {
               <button onClick={() => setPressed(true)}>agregar</button>
             ) : (
               <div>
-                <Form setP={setPressed} />
+                <CreateClient setP={setPressed} />
                 <BarraFiltros />
               </div>
             )}
           </div>
-          {loading === false ? (
+          {todas.length === 0 ? 
+          <Spinner/> :
             <div className="cont">
               <DashDisplay all={todas} Dash={Dash} model={"Clientes"}/>
-            </div>
-          ) : (
-            <div>
-              <Spinner />
-            </div>
-          )}
+            </div>}
         </div>
   );
 };
 
-export default ClientLayout;
+export default React.memo(ClientLayout);

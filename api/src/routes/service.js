@@ -16,8 +16,12 @@ router.get('/', async(req, res, next) =>{
 
 router.post('/', async(req, res, next) => {
     const {body} = req;
-    validatePost(body, next);
-    return postService(body, res, next, Service);
+    await validatePost(body, next, Service)
+        .then(val => {
+            val.status === 200 ?
+                postService(body, res, next, Service) :
+                next(val)
+            })
 });
 
 module.exports = router;

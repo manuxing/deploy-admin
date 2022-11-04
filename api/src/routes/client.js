@@ -16,10 +16,16 @@ router.get('/', async(req, res, next) =>{
 
 router.post('/', async(req, res, next) => {
     let {body} = req;
-    await validatePost(body, next, Service);
-    body.contact = typeof body.contact === "object" ? body.contact.map(p => `${p.type}: ${p.value}`) : 0
-    body.act.persons =  typeof body.act.persons === "object" ? body.act.persons.map(p => `${p.ageR}, Sexo: ${p.sexo}`) : Array.from(body.act.persons).map(p => `${p.ageR}, Sexo: ${p.sexo}`)
-    return postClient(body, res, next, Client, Activity, [Activity, Review]);
+    await validatePost(body, next, Service, Client)
+        .then(val =>{
+            if(val.status === 200){
+                body.contact = typeof body.contact === "object" ? body.contact.map(p => `${p.type}: ${p.value}`) : 0
+                body.act.persons =  typeof body.act.persons === "object" ? body.act.persons.map(p => `${p.ageR}, Sexo: ${p.sexo}`) : Array.from(body.act.persons).map(p => `${p.ageR}, Sexo: ${p.sexo}`)
+                postClient(body, res, next, Client, Activity, [Activity, Review]);
+            } else {
+                next(val);
+            }
+        })
 });
 
 module.exports = router;

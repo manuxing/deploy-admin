@@ -10,21 +10,13 @@ import ReviewR from "../create/review";
 const ReviewLayout = () => {
   let todas = useSelector((state) => state.reviews);
   let dispatch = useDispatch();
-  let [loading, setLoading] = useState(true);
   let [pressed, setPressed] = useState(false);
 
   useEffect(() => {
     dispatch(getReviews());
     dispatch(getNot());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (todas && todas.length > 0) setLoading(false);
-  }, [todas]);
-
-  useEffect(() => {
     return () => dispatch(setActual());
-  }, []);
+  }, [dispatch]);
 
   return (
         <div className="content_cli_l">
@@ -38,17 +30,14 @@ const ReviewLayout = () => {
               </div>
             )}
           </div>
-          {loading === false ? (
+          {todas.length === 0 ? 
+            <Spinner/> : 
             <div className="cont">
               <DashDisplay all={todas} Dash={Dash} model={"Reseñas"}/>
             </div>
-          ) : (
-            <div>
-              <Spinner />
-            </div>
-          )}
+          }
         </div>
   );
 };
 
-export default ReviewLayout;
+export default React.memo(ReviewLayout);
