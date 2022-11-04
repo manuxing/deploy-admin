@@ -81,7 +81,12 @@ const {
   
   let popP = (e) =>{
     e.preventDefault();
-    setInput({...input, persons:input.persons.slice(1)})
+    setInput({...input, persons:input.persons.slice(1)});
+  }
+
+  let popC = (e) =>{
+    e.preventDefault();
+    setInput({...input, contact:input.contact.slice(1)});
   }
 
   return (
@@ -105,9 +110,16 @@ const {
             _contacts={input}
           />
           <div className="warning">{warning.contact}</div>
+          {typeof input.contact === 'object' && input.contact.length > 0 &&
+                    <button onClick={(e)=>popC(e)}>-
+                    </button>}
           <div>
             {typeof input.contact === 'object' && input.contact.map((p) => {
-              return <ContactCard key={p.value} contact={p} />;
+              return (
+                <div>
+                  <ContactCard key={p.value} contact={p} />
+                </div>
+              )
             })}
           </div>
           <div>
@@ -123,6 +135,9 @@ const {
             <div className="warning">{warning.date}</div>
           </div>
             <AgregarPersona setPersons={setInput} _persons={input} />
+            {typeof input.persons === 'object' && input.persons.length > 0 && 
+                  <button onClick={(e)=>popP(e)}>-
+                    </button>}
           <div>
           {typeof input.persons === 'object' && input.persons.length > 0 && input.persons.map((p) => {
             return (
@@ -134,8 +149,6 @@ const {
                     }
                     person={p}
                   />
-                  <button onClick={(e)=>popP(e)}>-
-                    </button>
                 </div>
             )
           })}

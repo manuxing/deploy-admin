@@ -14,8 +14,8 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
 
   let chooseType = (t) => {
     if (t === "telefono") return "number";
-    if (t === "presencial" || t === "otro") return "text";
     if (t === "email") return "email";
+    return "text";
   };
 
   let handleChange = (p, data) => {

@@ -60,6 +60,11 @@ const Form = ()=>{
         x.status === false ? errHan(x) : sub();
     };
 
+    let popC = (e) =>{
+      e.preventDefault();
+      setInput({...input, contact:input.contact.slice(1)});
+    }
+
   return (
     <div>
       <form className="form" onSubmit={(e) => handleSubmit(e, input)}>
@@ -106,6 +111,9 @@ const Form = ()=>{
             _contacts={input}
           />
         </div>
+        {typeof input.contact === 'object' && input.contact.length > 0 &&
+                    <button onClick={(e)=>popC(e)}>-
+                    </button>}
         <div>
           {input.contact &&
             typeof input.contact === "object" &&

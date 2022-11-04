@@ -35,8 +35,6 @@ const CreateClient = ({ setP }) => {
   let contactsThg = ["telefono",
     "email",
     "presencial",
-    "pagina",
-    "booking",
     "otro",
   ];
 
