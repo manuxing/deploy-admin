@@ -38,7 +38,6 @@ const About = () => {
     }, [errForm]);
   
     useEffect(() => {
-      console.log(about)
       if(about !== null)setInput({id: about.id, info:about.info,
          contact:about.contact});
     }, [about]);

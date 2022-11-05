@@ -35,7 +35,6 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   let sub = () => {
     if (contact.value === ""&&contact.type.length > 0) contact.value = contact.type;
     if (contact.type === ""&&contact.value.length > 0) contact.type = contact.value;
-    console.log(_contacts)
     setContacts({ ..._contacts, contact: [..._contacts.contact, contact] });
     setWarning({ contact: "" });
     setContact({ type: "", value: "" });
@@ -59,7 +58,8 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
           onChange={(e) => handleSelect(e)}
         >
           <option id={"id"}hidden>medio de contacto</option>
-          {contactsThg.map((p) => {
+          {contactsThg && contactsThg.length > 0 &&
+           contactsThg.map((p) => {
             return (
               <option value={p} key={p}>
                 {p}

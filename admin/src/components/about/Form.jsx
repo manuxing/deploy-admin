@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import { actuallContext } from '../create/ActualContext'
 import AgregarContacto from "./agregarContacto"
 import ContactCard from "./contactCard"
@@ -13,6 +13,10 @@ const Form =()=> {
     setInput,
     thg
   } = send;
+
+  let [edit, setEdit] = useState(false);
+
+  let inpt = document.getElementById("id");
 
   let handleChange = (evento) => {
     setInput({...input, [evento.target.name]: evento.target.value});
@@ -29,6 +33,12 @@ const Form =()=> {
     setInput({...input, contact:input.contact.slice(1)});
   }
 
+  let editS = (e) =>{
+    e.preventDefault();
+    inpt.disabled = edit;
+    setEdit(!edit);
+  }
+
   let id= 0; 
 
   return (
@@ -37,25 +47,27 @@ const Form =()=> {
           <div>
             <label>Info</label>
             <textarea
+              id='id'
               className="input"
               placeholder="info"
               name={"info"}
               value={input.info}
               onChange={(p) => handleChange(p)}
+              disabled
             />
           </div>
-          <AgregarContacto
             contactsThg={thg}
+          {edit === false ? <></>:
+          <AgregarContacto
             setContacts={setInput}
             _contacts={input}
-          />
+          />}
           <div className="warning">{warning.contact}</div>
           {typeof input.contact === 'object' && input.contact.length > 0 &&
                     <button onClick={(e)=>popC(e)}>-
                     </button>}
           <div>
             {typeof input.contact === 'object' && input?.contact.map((p) => {
-              console.log(id)
               id++
               return (
                 <div key={`${id}`}>
@@ -66,6 +78,7 @@ const Form =()=> {
           </div>
           <input type={"submit"}/>
         </form>
+        <button onClick={(e)=>editS(e)}> edit </button>
     </div>
   )
 }
