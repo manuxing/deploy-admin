@@ -12,7 +12,6 @@ router.get('/:id', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
-    console.log("id")
     return getActivitys(res, next, Activity, [Client, Service]);
 });
 

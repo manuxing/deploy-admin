@@ -58,6 +58,33 @@ export function getNot(id) {
   };
 }
 
+export function getAbout() {
+  return function (dispatch) {
+    axios
+      .get(`http://localhost:3001/about/`)
+      .then((res) => {
+        dispatch({ type: type.GET_ABOUT, payload: res });
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: "ERROR", payload: e });
+      });
+  };
+}
+
+export function putAbout(data) {
+  return function (dispatch) {
+    axios
+      .put(`http://localhost:3001/about/`, data)
+      .then((res) => {
+        dispatch({ type: type.GET_ABOUT, payload: res });
+      })
+      .catch((e) => {
+        dispatch({ type: type.ERROR_FORM, payload: e });
+      });
+  };
+}
+
 export function createSolicitud(data) {
   return function (dispatch) {
     axios

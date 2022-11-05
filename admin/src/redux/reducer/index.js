@@ -8,6 +8,7 @@ const initialState = {
         display:[],
         stats:[],
     },
+    about:null,
     solicitudes: [],
     clientes: [],
     actividades: [],
@@ -39,6 +40,13 @@ export default function rootReducer(state=initialState, action){
             return {
                 ...state,
                 not: action.payload.data
+            };
+        }
+        case type.GET_ABOUT: {
+            console.log(action.payload)
+            return {
+                ...state,
+                about: action.payload.data
             };
         }
         case type.GET_CLIENTES: {
