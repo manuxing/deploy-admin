@@ -3,6 +3,12 @@ const { Op } = require("sequelize");
 
 const searchClients = async(res, next, model, query) => {
     try {
+        if(query.length === 1){
+            let respuesta = await model.findAll();
+            return res.json(respuesta)
+        }
+        query = Array.from(query).slice(1).join("")
+        // .toLocaleLowerCase();
         let peticionDB = await model.findAll({
             where: {
                 [Op.or]: [

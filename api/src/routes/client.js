@@ -6,7 +6,6 @@ const router = Router();
 
 router.get('/search/:search?', async(req, res, next) =>{
     let {query} = req._parsedUrl;
-    query = Array.from(query).slice(1).join("").toLocaleLowerCase();
 
     if(query)return searchClients(res, next, Client, query);
 

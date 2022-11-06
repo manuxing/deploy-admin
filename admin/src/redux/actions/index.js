@@ -342,6 +342,10 @@ export function setActualG(to) {
   };
 }
 
+export function clearActualG(to) {
+  return { type: type.CLEAR_ACTUALG, payload: null };
+}
+
 export function error() {
   return { type: type.ERROR, payload: null };
 }

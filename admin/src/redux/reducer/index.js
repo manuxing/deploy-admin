@@ -40,6 +40,12 @@ export default function rootReducer(state=initialState, action){
                 }
             }
         }
+        case type.CLEAR_ACTUALG: {
+            return {
+                ...state,
+                actualG: null
+            }
+        }
         case type.SERCH: {
             console.log(action.payload)
             return {

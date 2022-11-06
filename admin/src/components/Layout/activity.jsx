@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setActualG, getNot, setActual } from "../../redux/actions";
+import { setActualG, getNot, clearActualG } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Activity.jsx";
@@ -16,11 +16,11 @@ const ActivityLayout = () => {
   useEffect(() => {
     dispatch(setActualG("activity"));
     dispatch(getNot());
-    return () => dispatch(setActual());
+    return () => dispatch(clearActualG());
   }, [dispatch]);
   
   useEffect(() => {
-    if(todas && todas.data)setCards(todas.data)
+    if(todas && todas.model === "activity")setCards(todas.data)
   }, [todas]);
 
   return (
@@ -40,7 +40,7 @@ const ActivityLayout = () => {
           {cards.length === 0 ? 
             <Spinner/> :
             <div className="cont">
-                  <DashDisplay all={todas.data} Dash={Dash} model={"Actividades"}/>
+                  <DashDisplay all={cards} Dash={Dash} model={"Actividades"}/>
             </div>}
         </div>
   );

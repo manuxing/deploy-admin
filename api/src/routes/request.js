@@ -4,6 +4,13 @@ const {getRequests, getRequest, postRequest, putRequest, searchRequest} = requir
 const {validatePost, validatePut, validateGet} = require("../cValidations/request.js");
 const router = Router();
 
+router.get('/search/:search?', async(req, res, next) =>{
+    let {query} = req._parsedUrl;
+    if(query) return searchRequest(res, next, Request, query );
+
+    return res.json({status:400, message:"busqueda invalida"});
+});
+
 router.get('/:idR', async(req, res, next) =>{
     const {idR} = req.params;
     await validateGet(idR, Request, next);
@@ -11,9 +18,7 @@ router.get('/:idR', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
-    let {query} = req.body;
-    if(query) return searchRequest(res, next, Request, query );
-    return getRequests(res, next, Request, [Service]);
+    return getRequests(res, next, Request);
 });
 
 router.post('/', async(req, res, next) => {

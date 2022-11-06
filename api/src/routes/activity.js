@@ -7,8 +7,7 @@ const router = Router();
 
 router.get('/search/:search?', async(req, res, next) =>{
     let {query} = req._parsedUrl;
-    query = Array.from(query).slice(1).join("")
-    // .toLocaleLowerCase();
+    
     if(query)return searchActivity(res, next, Activity, query, Client);
     
     return res.json({status:400, message:"busqueda invalida"});
