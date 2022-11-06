@@ -1,4 +1,22 @@
 const pre = require("../Tools");
+const { Op } = require("sequelize");
+
+const searchService = async(res, next, model, query ) => {
+    try {
+        let peticionDB = await model.findAll({
+            where: {
+                [Op.or]: [
+                    { 'name': { [Op.like]: '%' + query + '%' } },
+                    { 'description': { [Op.like]: '%' + query + '%' } },
+                  ]
+                },
+        }).catch(err => next({status: 500, message: 'could not find model searched'}));
+
+        return res.json(peticionDB);
+    }catch(e){
+        return next({status: 500, message: 'Error en router search'});
+    }
+};
 
 const getServices = async(res, next, model) => {
     try {
@@ -37,4 +55,5 @@ module.exports = {
     getService,
     getServices,
     postService,
+    searchService
 };

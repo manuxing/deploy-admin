@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { Service, Review, Request } = require('../db.js');
-const { getService, getServices, postService} = require("../controllers/service.js");
+const { getService, getServices, postService, searchService} = require("../controllers/service.js");
 const {validatePost, validateGet} = require("../cValidations/service.js");
 const router = Router();
 
@@ -11,6 +11,8 @@ router.get('/:id', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
+    let {query} = req.body;
+    if(query) return searchService(res, next, Service, query);
     return getServices(res, next, Service);
 });
 

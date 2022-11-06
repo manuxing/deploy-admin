@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { Client, Review, Service } = require('../db.js');
-const {getReviews, getReview, postReview, putReview} = require("../controllers/review.js");
+const {getReviews, getReview, postReview, putReview, searchReviews} = require("../controllers/review.js");
 const {validatePost, validatePut, validateGet} = require("../cValidations/review.js");
 const router = Router();
 
@@ -11,6 +11,8 @@ router.get('/:id', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
+    let {query} = req.body;
+    if(query) return searchReviews(res, next, Review, query);
     return getReviews(res, next, Review, [Service]);
 }); 
 

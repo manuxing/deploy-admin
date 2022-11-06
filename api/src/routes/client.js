@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { Client, Review, Activity, Service } = require('../db.js');
-const {getClients, getClient, postClient} = require("../controllers/client.js");
+const {getClients, getClient, postClient, searchClients} = require("../controllers/client.js");
 const {validatePost, validateGet} = require("../cValidations/client.js");
 const router = Router();
 
@@ -11,6 +11,10 @@ router.get('/:clientId', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
+    let {query} = req.body;
+
+    if(query)return searchClients(res, next, Client, query);
+
     return getClients(res, next, Client, [Activity, Review]);
 });
 
