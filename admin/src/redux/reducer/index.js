@@ -3,7 +3,7 @@ import tools from "../../tools";
 
 const initialState = {
     actual:1,
-    actualG:{},
+    actualG:null,
     all:{
         display:[],
         stats:[],
@@ -28,6 +28,27 @@ export default function rootReducer(state=initialState, action){
                 ...state,
                 actual: action.payload === 1 ? action.payload : action.payload.data
             };
+        }
+        case type.SET_ACTUALG: {
+            console.log(action.payload)
+            action.payload.data.stat.url = Array.from(action.payload.data.stat.url).slice(0,-1).join("");
+            return {
+                ...state,
+                actualG: {
+                    data:action.payload.data.data,
+                    model:action.payload.data.stat.url,
+                }
+            }
+        }
+        case type.SERCH: {
+            console.log(action.payload)
+            return {
+                ...state,
+                actualG: {
+                    ...state.actualG,
+                    data:action.payload.data,
+                }
+            }
         }
         case type.SET_ALL: {
             let {display} = action.payload.data;

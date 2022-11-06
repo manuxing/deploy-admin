@@ -28,6 +28,7 @@ const { Activity, Client, Request, Review, Service } = sequelize.models;
 Client.belongsToMany(Review, {through:'client_review'});
 Review.belongsToMany(Client, {through:'client_review'});
 
+//belongsTo
 Activity.hasOne(Client);
 Client.hasMany(Activity);
 

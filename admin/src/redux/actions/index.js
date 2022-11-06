@@ -1,6 +1,20 @@
 import { type } from "./types";
 import axios from "axios";
 
+export function search(querys, to) {
+  return function (dispatch) {
+    axios
+      .get(`http://localhost:3001/${to}/search/query?=${querys}`)
+      .then((res) => {
+        dispatch({ type: type.SERCH, payload: res });
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: type.ERROR_FORM, payload: e });
+      });
+  };
+}
+
 export function createClient(data) {
   return function (dispatch) {
     axios
@@ -14,7 +28,7 @@ export function createClient(data) {
         dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
-}
+} 
 
 export function getClient(id) {
   if (id) {
@@ -314,6 +328,20 @@ export function setActual() {
   return { type: type.SET_ACTUAL, payload: 1 };
 }
 
+export function setActualG(to) {
+  return function (dispatch) {
+    axios
+      .get(`http://localhost:3001/${to}/`)
+      .then((res) => {
+        dispatch({ type: type.SET_ACTUALG, payload: res });
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: type.ERROR_FORM, payload: e });
+      });
+  };
+}
+
 export function error() {
   return { type: type.ERROR, payload: null };
 }
@@ -334,10 +362,6 @@ export function orderByN(n) {
 export function orderByV(n) {
   //logica
   return { type: type.ORDER_A, payload: n };
-}
-
-export function search(payload) {
-  return { type: "SEARCH", payload };
 }
 
 export function all() {

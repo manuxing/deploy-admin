@@ -10,8 +10,8 @@ const searchClients = async(res, next, model, query) => {
                   ]
               }
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
-
-        return res.json(peticionDB);
+        let respuesta = peticionDB.length > 0 ? peticionDB : [0]
+        return res.json(respuesta);
     }catch(e){
         return next({status: 500, message: 'Error en router search'});
     }

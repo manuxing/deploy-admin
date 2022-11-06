@@ -1,16 +1,17 @@
 const pre = require("../Tools");
 
-const searchActivity = async(res, next, model, query) => {
+const searchActivity = async(res, next, model, query, Client) => {
+    //corregir con modelos bien
     try {
         let peticionDB = await model.findAll({
               include: [{model:Client}]
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
-
         let respuesta = peticionDB.filter(p=> {
             if(p.dataValues.client && p.dataValues.client.dataValues){
                 if(p.dataValues.client.dataValues.name.includes(query))return p
             }
         })
+        respuesta = respuesta.length > 0 ? respuesta : [0]
 
         return res.json(respuesta);
     }catch(e){

@@ -8,7 +8,7 @@ const DashDisplay = ( data ) => {
                 <div>
                     { all[0] === 0 ?
                         <span>
-                            no se encontraron{model}
+                            no se encontraron {model}
                         </span> :
                         all.map(data=>{
                             data.back = back;
