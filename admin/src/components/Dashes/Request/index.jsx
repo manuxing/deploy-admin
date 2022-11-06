@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 // import  icon  from "../../../img/star.png"; 
 
 const Dash = ({data})=> { 
-    console.log(data)
     let {id, back, dateR, dateP, thg, contact, solicitante} = data;
     return (
         id === undefined ? <></> :
