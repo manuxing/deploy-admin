@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getServicio, setActual, getNot } from "../../redux/actions";
+import { clearActualG, setActualG, getNot } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
 import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
@@ -8,15 +8,20 @@ import Dash from "../Dashes/Service";
 import AgregarServicio from "../create/service/prueba";
 
 const ServiceLayout = () => {
-  let todas = useSelector((state) => state.servicios);
+  let todas = useSelector((state) => state.actualG);
   let dispatch = useDispatch();
   let [pressed, setPressed] = useState(false);
+  let [cards, setCards] = useState([]);
 
   useEffect(() => {
-    dispatch(getServicio());
+    dispatch(setActualG("service"));
     dispatch(getNot());
-    return () => dispatch(setActual());
+    return () => dispatch(clearActualG());
   }, [dispatch]);
+
+  useEffect(() => {
+    if(todas && todas.model === "service")setCards(todas.data)
+  }, [todas]);
 
   return (
         <div className="content_cli_l">
@@ -30,10 +35,10 @@ const ServiceLayout = () => {
               </div>
             )}
           </div>
-          {todas.length === 0 ? 
+          {cards.length === 0 ? 
             <Spinner/> : 
             <div className="cont">
-              <DashDisplay all={todas} Dash={Dash} model={"Servicios"}/>
+              <DashDisplay all={cards} Dash={Dash} model={"Servicios"}/>
             </div>
           }
         </div>
