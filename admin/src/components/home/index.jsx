@@ -4,6 +4,7 @@ import { getActividades, getClient, getReviews, getServicio, getSolicitudes, set
 import Stat from "../stats/Activity.jsx";
 import tools from "../../tools";
 import "./home.css";
+import Spinner from "../Spinner";
 
 const Home = () => {
   let all = useSelector((state) => state.all);
@@ -21,13 +22,12 @@ const Home = () => {
   }, [dispatch]);
   
   useEffect(() => {
-    if(all.stats && all.stats.length === all.display.length){
+    if(all.stats && all.stats.length > 0 ){
       setLoading(false);
     } else {
       setLoading(true);
     }
   }, [all]);
-
 
   return (
       <div className="home">
@@ -36,8 +36,8 @@ const Home = () => {
             all?.stats.map((p) => {
               return <Stat key={p.url} p={p} />;
             }) :
-            <></>
-        }
+          <Spinner/>
+          }
         </div>
       </div>
   );
