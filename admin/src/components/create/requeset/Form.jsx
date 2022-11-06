@@ -25,7 +25,6 @@ const Form = ()=>{
         if (x.status === false) {
           errHan(x);
         } else {
-          senr.sId = "a"
           dispatch(createSolicitud({ senr }));
         }
     };
