@@ -7,8 +7,7 @@ const searchService = async(res, next, model, query ) => {
             let respuesta = await model.findAll();
             return res.json(respuesta)
         }
-        query = Array.from(query).slice(1).join("")
-        // .toLocaleLowerCase();
+        query = Array.from(query).slice(1).join("").toLocaleLowerCase();
         let peticionDB = await model.findAll({
             where: {
                 [Op.or]: [
@@ -18,7 +17,6 @@ const searchService = async(res, next, model, query ) => {
                 },
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
 
-        
         let respuesta = peticionDB.length > 0 ? peticionDB : [0]
         return res.json(respuesta);
     }catch(e){
@@ -43,6 +41,10 @@ const getService = async( res, next, model, id, related) => {
     try {
         let peticionDB = await model.findOne({ where:{id: id}, include: related})
             .catch(err => next({status: "500", message: 'could not find model values or related models'}));
+            
+        let name = peticionDB.dataValues.name.charAt(0).toUpperCase() +  peticionDB.dataValues.name.slice(1);
+        peticionDB.dataValues.name = name;
+
         return res.json(peticionDB.dataValues);
     }catch(e){
         return next({status: "500", message: 'Error en router Service get Individual'});

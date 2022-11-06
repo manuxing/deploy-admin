@@ -24,6 +24,7 @@ router.get('/', async(req, res, next) =>{
 
 router.post('/', async(req, res, next) => {
     let {body} = req;
+    body.name = body.name.toLowerCase();
     await validatePost(body, next, Service, Client)
         .then(val =>{
             if(val.status === 200){

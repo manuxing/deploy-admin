@@ -7,8 +7,7 @@ const searchClients = async(res, next, model, query) => {
             let respuesta = await model.findAll();
             return res.json(respuesta)
         }
-        query = Array.from(query).slice(1).join("")
-        // .toLocaleLowerCase();
+        query = Array.from(query).slice(1).join("").toLocaleLowerCase();
         let peticionDB = await model.findAll({
             where: {
                 [Op.or]: [
@@ -43,8 +42,11 @@ const getClient = async( res, next, model, related, id) => {
                 id: id
             },
             include: related
-        })
-        .catch(err => next({status: 500, message: 'could not find model values or related models'}));
+        }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
+
+        let name = peticionDB.dataValues.name.charAt(0).toUpperCase() + peticionDB.dataValues.name.slice(1);
+        peticionDB.dataValues.name = name;
+        
         return res.json(peticionDB.dataValues);
     }catch(e){
         return next({status: 500, message: 'Error en router Request get Individual'});

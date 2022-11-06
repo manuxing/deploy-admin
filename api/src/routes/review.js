@@ -38,10 +38,8 @@ router.put('/', async(req, res, next) => {
     await validatePut(body, next, Review)
         .then(val =>{
             if(val.status === 200){
-                console.log("bien")
                 putReview(body, res, next, Review);
             } else {
-                console.log("mal")
                 next(val);
             }
         })

@@ -289,6 +289,7 @@ export function statChange(x) {
         .put(`http://localhost:3001/review/`, x.pack)
         .then((res) => {
           console.log(res);
+          dispatch({ type: type.ADD_NOT, payload: res });
         })
         .catch((e) => {
           console.log(e);

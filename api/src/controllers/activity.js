@@ -7,8 +7,7 @@ const searchActivity = async(res, next, model, query, Client) => {
             let respuesta = await model.findAll();
             return res.json(respuesta)
         }
-        query = Array.from(query).slice(1).join("")
-        // .toLocaleLowerCase();
+        query = Array.from(query).slice(1).join("").toLocaleLowerCase();
         let peticionDB = await model.findAll({
               include: [{model:Client}]
         }).catch(err => next({status: 500, message: 'could not find model searched'}));

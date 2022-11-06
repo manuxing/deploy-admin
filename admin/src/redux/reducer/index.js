@@ -47,7 +47,6 @@ export default function rootReducer(state=initialState, action){
             }
         }
         case type.SERCH: {
-            console.log(action.payload)
             return {
                 ...state,
                 actualG: {
@@ -69,8 +68,14 @@ export default function rootReducer(state=initialState, action){
                 not: action.payload.data
             };
         }
+        case type.ADD_NOT: {
+            console.log(action.payload.data)
+            return {
+                ...state,
+                not: [...state.not, action.payload.data]
+            };
+        }
         case type.GET_ABOUT: {
-            console.log(action.payload)
             return {
                 ...state,
                 about: action.payload.data

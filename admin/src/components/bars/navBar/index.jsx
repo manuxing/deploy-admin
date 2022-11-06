@@ -14,7 +14,6 @@ const NavBar = () => {
   navigate = navigate.location.pathname;
   let dispatch = useDispatch();
   let not = useSelector((state) => state.not);
-  let [l, setL] = useState("");
   let [pressed, setPressed] = useState(false);
   let [search, setSearch] = useState(true);
   let searchAdresses = [
@@ -39,11 +38,9 @@ const NavBar = () => {
   }, [navigate]);
 
   useEffect(() => {
-    if (not.length > 0 && l !==not.length) {
-      setL(not.length);
-    }
+    console.log(not)
     setPressed(false);
-  }, [not, l]);
+  }, [not]);
 
   // const { profile } = useSeslector((state) => state.authReducer);
   // const logout = () => {
@@ -60,16 +57,15 @@ const NavBar = () => {
         <div className="topWrapper">
           <div className="topRight">
               {
-                l !== "" && parseInt(l) > 0 ?
+              not && not.length > 0  ?
                 <button onClick={()=>setPressed(!pressed)}>
                   <NotificationsActiveIcon/>
                 </button>:
               <NotificationsIcon/> 
               }
-            {l}
             {pressed === true ? 
-              <Drop not={not} l={l}/> : <></>
-            }
+              <Drop not={not} /> 
+              : <></>}
           </div>
             {search === true ?
             <SearchBar /> :
@@ -80,4 +76,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default React.memo(NavBar);
