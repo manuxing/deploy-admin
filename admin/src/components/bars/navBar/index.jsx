@@ -38,7 +38,6 @@ const NavBar = () => {
   }, [navigate]);
 
   useEffect(() => {
-    console.log(not)
     setPressed(false);
   }, [not]);
 
