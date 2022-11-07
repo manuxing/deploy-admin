@@ -1,13 +1,10 @@
 import React from "react";
 import './Request.css';
 import { NavLink } from "react-router-dom";
-import tools from "../../../tools";
 // import  icon  from "../../../img/star.png"; 
 
-
-
 const Dash = ({data})=> { 
-    let {id, back, dateR, dateP, thg, contact} = data;
+    let {id, back, dateR, dateP, thg, contact, solicitante} = data;
     return (
         id === undefined ? <></> :
         <div className="dash_act"> 
@@ -20,6 +17,10 @@ const Dash = ({data})=> {
                         <h2>Numero</h2>
                         <h3>{id}</h3>
                     </div>
+                    {solicitante !== undefined ? <div className="punto_fdato">
+                        <h2>solicitante</h2>
+                        <h3>{solicitante}</h3>
+                    </div> : <></>}
                     <div className="punto_fdato">
                         <h2>Fecha de la Solicitud</h2>
                         <h3>{dateR}</h3>
@@ -34,7 +35,7 @@ const Dash = ({data})=> {
                     </div>
                     <div className="punto_fdato">
                         <h2>Contacto</h2>
-                        {
+                        {contact && contact.length > 0 &&
                             contact.map(p =>{
                                 return(
                                     <h3 key={p}> {p} </h3>

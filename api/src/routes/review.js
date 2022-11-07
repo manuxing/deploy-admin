@@ -4,6 +4,13 @@ const {getReviews, getReview, postReview, putReview, searchReviews} = require(".
 const {validatePost, validatePut, validateGet} = require("../cValidations/review.js");
 const router = Router();
 
+router.get('/search/:search?', async(req, res, next) =>{
+    let {query} = req._parsedUrl;
+    if(query) return searchReviews(res, next, Review, query );
+
+    return res.json({status:400, message:"busqueda invalida"});
+});
+
 router.get('/:id', async(req, res, next) =>{
     const {id} = req.params;
     await validateGet(id, Review, next);
@@ -11,8 +18,6 @@ router.get('/:id', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
-    let {query} = req.body;
-    if(query) return searchReviews(res, next, Review, query);
     return getReviews(res, next, Review, [Service]);
 }); 
 
@@ -33,10 +38,8 @@ router.put('/', async(req, res, next) => {
     await validatePut(body, next, Review)
         .then(val =>{
             if(val.status === 200){
-                console.log("bien")
                 putReview(body, res, next, Review);
             } else {
-                console.log("mal")
                 next(val);
             }
         })

@@ -41,7 +41,7 @@ function App() {
         <Bars/>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/about">
+          <Route path="/about/">
             <About />
           </Route>
           <Route path="/activity/:id">

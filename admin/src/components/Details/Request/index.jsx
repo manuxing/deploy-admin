@@ -57,7 +57,7 @@ const Request = () => {
         </div> 
         :
         <div className="content_request">
-          <DetalleRequest actual={actual} handleChange={handleChange} stat={_stat} />
+          <DetalleRequest actual={actual} handleChange={handleChange} _stat={_stat} />
         </div>
   );
 };

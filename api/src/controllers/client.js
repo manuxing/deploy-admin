@@ -3,6 +3,11 @@ const { Op } = require("sequelize");
 
 const searchClients = async(res, next, model, query) => {
     try {
+        if(query.length === 1){
+            let respuesta = await model.findAll();
+            return res.json(respuesta)
+        }
+        query = Array.from(query).slice(1).join("").toLocaleLowerCase();
         let peticionDB = await model.findAll({
             where: {
                 [Op.or]: [
@@ -10,8 +15,8 @@ const searchClients = async(res, next, model, query) => {
                   ]
               }
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
-
-        return res.json(peticionDB);
+        let respuesta = peticionDB.length > 0 ? peticionDB : [0]
+        return res.json(respuesta);
     }catch(e){
         return next({status: 500, message: 'Error en router search'});
     }
@@ -37,8 +42,11 @@ const getClient = async( res, next, model, related, id) => {
                 id: id
             },
             include: related
-        })
-        .catch(err => next({status: 500, message: 'could not find model values or related models'}));
+        }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
+
+        let name = peticionDB.dataValues.name.charAt(0).toUpperCase() + peticionDB.dataValues.name.slice(1);
+        peticionDB.dataValues.name = name;
+        
         return res.json(peticionDB.dataValues);
     }catch(e){
         return next({status: 500, message: 'Error en router Request get Individual'});

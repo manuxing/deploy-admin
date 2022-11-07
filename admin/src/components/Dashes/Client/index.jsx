@@ -19,7 +19,7 @@ const Dash = ({data})=> {
                         </div>
                         <div className="punto_fdato">
                             <h2>Contacto</h2>
-                            {
+                            {contact && contact.length > 0 &&
                                 contact.map(p =>{
                                     return(
                                         <h3 key={p}> {p} </h3>

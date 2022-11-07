@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getActividades, getClient, getReviews, getServicio, getSolicitudes, setAll } from "../../redux/actions";
+import { getActividades, getClient, getNot, getReviews, getServicio, getSolicitudes, setAll } from "../../redux/actions";
 import Stat from "../stats/Activity.jsx";
 import tools from "../../tools";
 import "./home.css";
+import Spinner from "../Spinner";
 
 const Home = () => {
   let all = useSelector((state) => state.all);
@@ -13,21 +14,20 @@ const Home = () => {
 
   useEffect(() => {
     let actions = [getActividades, getClient, getServicio, getSolicitudes, getReviews];
+    dispatch(getNot());
     if (all.display.length === 0){
       dispatch(setAll());
     }
     tools.build(dispatch, actions);
-    // return () => dispatch(clearAll())
   }, [dispatch]);
   
   useEffect(() => {
-    if(all.stats && all.stats.length === all.display.length){
+    if(all.stats && all.stats.length > 0 ){
       setLoading(false);
     } else {
       setLoading(true);
     }
   }, [all]);
-
 
   return (
       <div className="home">
@@ -36,8 +36,8 @@ const Home = () => {
             all?.stats.map((p) => {
               return <Stat key={p.url} p={p} />;
             }) :
-            <></>
-        }
+          <Spinner/>
+          }
         </div>
       </div>
   );

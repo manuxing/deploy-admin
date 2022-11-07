@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getClient, setActual, getNot } from "../../redux/actions";
+import { clearActualG, getNot, setActualG } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
 import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
@@ -9,31 +9,36 @@ import CreateClient from "../create/client/prueba";
 
 const ClientLayout = () => {
   let dispatch = useDispatch();
-  let todas = useSelector((state) => state.clientes);
+  let todas = useSelector((state) => state.actualG);
   let [pressed, setPressed] = useState(false);
+  let [cards, setCards] = useState([]);
 
   useEffect(() => {
-    dispatch(getClient());
+    dispatch(setActualG("client"));
     dispatch(getNot());
-    return () => dispatch(setActual());
+    return () => dispatch(clearActualG());
   }, [dispatch]);
+
+  useEffect(() => {
+    if(todas && todas.model === "client")setCards(todas.data)
+  }, [todas]);
 
   return (
         <div className="content_cli_l">
           <div>
+            <BarraFiltros />
             {pressed === false ? (
               <button onClick={() => setPressed(true)}>agregar</button>
             ) : (
               <div>
                 <CreateClient setP={setPressed} />
-                <BarraFiltros />
               </div>
             )}
           </div>
-          {todas.length === 0 ? 
+          {cards.length ===  0 ? 
           <Spinner/> :
             <div className="cont">
-              <DashDisplay all={todas} Dash={Dash} model={"Clientes"}/>
+              <DashDisplay all={cards} Dash={Dash} model={"Clientes"}/>
             </div>}
         </div>
   );

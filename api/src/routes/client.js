@@ -4,6 +4,14 @@ const {getClients, getClient, postClient, searchClients} = require("../controlle
 const {validatePost, validateGet} = require("../cValidations/client.js");
 const router = Router();
 
+router.get('/search/:search?', async(req, res, next) =>{
+    let {query} = req._parsedUrl;
+
+    if(query)return searchClients(res, next, Client, query);
+
+    return res.json({status:400, message:"busqueda invalida"});
+});
+
 router.get('/:clientId', async(req, res, next) =>{
     const {clientId} = req.params;
     await validateGet(clientId, Client,next);
@@ -11,15 +19,12 @@ router.get('/:clientId', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
-    let {query} = req.body;
-
-    if(query)return searchClients(res, next, Client, query);
-
     return getClients(res, next, Client, [Activity, Review]);
 });
 
 router.post('/', async(req, res, next) => {
     let {body} = req;
+    body.name = body.name.toLowerCase();
     await validatePost(body, next, Service, Client)
         .then(val =>{
             if(val.status === 200){

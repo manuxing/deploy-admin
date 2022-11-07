@@ -3,6 +3,12 @@ const { Op } = require("sequelize");
 
 const searchReviews = async(res, next, model, query) => {
     try {
+        if(query.length === 1){
+            let respuesta = await model.findAll();
+            return res.json(respuesta)
+        }
+        query = Array.from(query).slice(1).join("")
+        // .toLocaleLowerCase();
         let peticionDB = await model.findAll({
             where: {
                 [Op.or]: [
@@ -12,7 +18,8 @@ const searchReviews = async(res, next, model, query) => {
               }
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
 
-        return res.json(peticionDB);
+        let respuesta = peticionDB.length > 0 ? peticionDB : [0]
+        return res.json(respuesta);
     }catch(e){
         return next({status: 500, message: 'Error en router search'});
     }
@@ -55,22 +62,22 @@ const postReview = async(body, res, next, model, Service, Client) => {
             where :{
                 id: parseInt(body.sId)
             }
-        })
-            .catch(err => next({status: 500, message: 'could not find Service related review'}));
-
+        }).catch(err => next({status: 500, message: 'could not find Service related review'}));
+        
         let client = await Client.findOne({
             where :{
                 name: body.cName
             }
         }).catch(err => next({status: 500, message: 'could not find Client related review'}));
-
-        await review.addService(service)
+        
+        await review.setService(service)
             .catch(err => next({status: 500, message: 'could not relate Review to Service'}));
-
+        
         await service.addReview(review)
             .catch(err => next({status: 500, message: 'could not relate Service to Review'}));
-
-        await review.addClient(client)
+            
+            console.log("aca")
+        await review.setClient(client)
             .catch(err => next({status: 500, message: 'could not relate Review to Client'}));
 
         await client.addReview(review)
@@ -91,7 +98,10 @@ const putReview = async(body, res, next, model) => {
                 id: body.id,
             }
         }).catch(err => next({status: 500, message: 'could not update Review'}));
-        return res.send("Review actualizada");
+
+        let respuesta = await model.findOne({where:{id:body.id}})
+            .catch(err => next({status: 500, message: 'could not return updated review'}));
+        return res.send(respuesta);
     }catch(e){
         return next({status: 500, message: 'Error en router Review put'});
     }

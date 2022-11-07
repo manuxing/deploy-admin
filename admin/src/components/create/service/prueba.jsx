@@ -5,7 +5,8 @@ import {
   createServicio,
   setActual,
   getServicio,
-  errorForm
+  errorForm,
+  setActualG
 } from "../../../redux/actions/index.js";
 import { actuallContext } from "../ActualContext";
 import Form from "./Form.jsx";
@@ -47,7 +48,7 @@ const AgregarServicio = ({ setP }) => {
           `/service/${actual.id}`,
           history,
           dispatch,
-          getServicio,
+          setActualG, "service",
           setP,
           setActual
         );

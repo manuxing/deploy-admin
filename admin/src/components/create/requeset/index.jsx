@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getServicio,
   createSolicitud,
-  getSolicitudes,
+  setActualG,
   setActual,
   errorForm
 } from "../../../redux/actions";
@@ -78,7 +78,7 @@ const RequestR = ({ setP }) => {
         `/request/${actual.id}`,
         history,
         dispatch,
-        getSolicitudes,
+        setActualG, "request",
         setP,
         setActual
       );

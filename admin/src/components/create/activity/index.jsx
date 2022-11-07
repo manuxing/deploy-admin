@@ -6,7 +6,7 @@ import Form from "./Form";
 import {
   getServicio,
   createActividades,
-  getActividades,
+  setActualG,
   setActual,
   errorForm,
   getClient,
@@ -70,7 +70,7 @@ const ActivityR = ({ setP }) => {
       tools.alert("actividad",
         `/activity/${actual.id}`,
         history, dispatch,
-        getActividades,
+        setActualG, "activity",
         setP, setActual);
       setInputA({ name: "", date: "", persons: [], sId: 1000 });
       setWarningA({ name: "", date: "", persons: "", sId: "" });
