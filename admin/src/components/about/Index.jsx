@@ -3,14 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getAbout, putAbout, errorForm } from "../../redux/actions";
 import Form from './Form';
 import { actuallContext } from '../create/ActualContext';
-import tools from '../../tools/index';
 import Spinner from '../Spinner';
 
 const About = () => {
     let about = useSelector(state => state.about);
-    let {validate} = tools;
     let dispatch = useDispatch();
-  
+
     let errForm = useSelector((state) => state.errForm);
     let thg = [
       "telefono",
@@ -55,7 +53,7 @@ const About = () => {
       setWarning,
       thg
     };
-    
+
     return (
       <div>
         {about === null ? 

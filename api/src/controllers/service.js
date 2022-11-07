@@ -61,9 +61,32 @@ const postService = async(body, res, next, model) => {
     };
 };
 
+const putService = async(body, res, next, model) => {
+    try { 
+        await model.update({
+            name: body.name,
+            description: body.description,
+            tR: body.tR,
+            tR_: body.tR_,
+        }, {
+            where: {
+                id: body.id,
+            }
+        }).catch(err => next({status: 500, message: 'could not update Service'}));
+
+        let respuesta = await model.findOne({where:{id:body.id}})
+            .catch(err => next({status: 500, message: 'could not return updated servicio'}));
+
+        return res.send(respuesta);
+    }catch(e){
+        return next({status: 500, message: 'Error en router Review put'});
+    }
+};
+
 module.exports = {
     getService,
     getServices,
     postService,
-    searchService
+    searchService,
+    putService
 };

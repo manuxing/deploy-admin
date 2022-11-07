@@ -12,7 +12,7 @@ const Request = () => {
   const history = useHistory();
   const actual = useSelector((state) => state.actual);
   const error = useSelector((state) => state.error);
-  const [_stat, setStat] = useState(actual.stat);
+  const [_stat, setStat] = useState(true);
 
   useEffect(()=>{
     if(error){
@@ -31,22 +31,22 @@ const Request = () => {
   useEffect(()=>{
     if(actual && actual !== 1 && actual?.stat !== null){
       if(actual.stat === false){
-        handleChange();
+        handleChange(true);
       } else {
         setStat(actual?.stat);
       }
     }
   },[actual])
 
-  const handleChange = () => {  
+  const handleChange = (val) => {  
     let x = {
       type : "Request",
       pack: {
         id: parseInt(idR),
-        stat: !_stat,
+        stat: val,
       }
     }
-    setStat(!_stat);
+    setStat(val);
     dispatch(statChange(x));
   }
 
