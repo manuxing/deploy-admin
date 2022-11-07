@@ -7,7 +7,7 @@ const router = Router();
 router.get('/search/:search?', async(req, res, next) =>{
     let {query} = req._parsedUrl;
 
-    if(query)return searchClients(res, next, Client, query);
+    if(query)return searchClients(req, res, next, Client, query);
 
     return res.json({status:400, message:"busqueda invalida"});
 });
@@ -19,7 +19,7 @@ router.get('/:clientId', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
-    return getClients(res, next, Client, [Activity, Review]);
+    return getClients(req, res, next, Client);
 });
 
 

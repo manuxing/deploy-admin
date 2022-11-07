@@ -1,38 +1,50 @@
 const pre = require("../Tools");
 const { Op } = require("sequelize");
 
-const searchReviews = async(res, next, model, query) => {
+const searchReviews = async(req, res, next, model) => {
     try {
-        if(query.length === 1){
-            let respuesta = await model.findAll();
-            return res.json(respuesta)
+
+        const { page, size } = req.query;
+        const sValue = req.query.query;
+        const { limit, offset } = pre.getPagination(page, size);
+
+        if(sValue.length === 0){
+            let respuesta  = await model.findAndCountAll({
+                limit,
+                offset,
+            }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
+            let resp = pre.getPagingData(respuesta, page, limit);
+            return res.json(resp);
         }
-        query = Array.from(query).slice(1).join("")
-        // .toLocaleLowerCase();
-        let peticionDB = await model.findAll({
+        
+        let peticionDB = await model.findAndCountAll({
             where: {
                 [Op.or]: [
-                    { 'description': { [Op.like]: '%' + query + '%' } },
-                    { 'thg': { [Op.like]: '%' + query + '%' } },
-                  ]
-              }
+                    { 'description': { [Op.like]: '%' + sValue + '%' } },
+                    { 'thg': { [Op.like]: '%' + sValue + '%' } },
+                ]
+            }
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
+        
+        const response = pre.getPagingData(peticionDB, page, limit);
 
-        let respuesta = peticionDB.length > 0 ? peticionDB : [0]
-        return res.json(respuesta);
+        return res.json(response);
     }catch(e){
         return next({status: 500, message: 'Error en router search'});
     }
 };
 
-const getReviews = async(res, next, model, related) => {
+const getReviews = async(req, res, next, model, related) => {
     try {
-        let peticionDB = await model.findAndCountAll({include:related})
-            .catch(err => next({status: "500", message: 'could not find model values or related models'}));
-
-        let respuesta = pre.setStat('Reseñas', 'reviews', peticionDB.count, peticionDB.rows);
-
-        return res.json(respuesta);
+        const { page, size } = req.query;
+        const { limit, offset } = pre.getPagination(page, size);
+        let peticionDB = await model.findAndCountAll({
+            limit,
+            offset,
+        }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
+        const response = pre.getPagingData(peticionDB, page, limit);
+        let stat = pre.setStat('Reviews', 'reviews', peticionDB.count);
+        return res.json({actual:response, stat});
     }catch(e){
         return next({status: 500, message: 'Error en router Review get Plural'});
     }

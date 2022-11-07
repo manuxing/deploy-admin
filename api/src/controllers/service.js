@@ -1,39 +1,53 @@
 const pre = require("../Tools");
 const { Op } = require("sequelize");
 
-const searchService = async(res, next, model, query ) => {
+const searchService = async(req, res, next, model ) => {
     try {
-        if(query.length === 1){
-            let respuesta = await model.findAll();
-            return res.json(respuesta)
+
+        
+        const { page, size } = req.query;
+        const sValue = req.query.query;
+        const { limit, offset } = pre.getPagination(page, size);
+
+        if(sValue.length === 1){
+            let respuesta  = await model.findAndCountAll({
+                limit,
+                offset,
+            }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
+            let resp = pre.getPagingData(respuesta, page, limit);
+            return res.json(resp);
         }
-        query = Array.from(query).slice(1).join("").toLocaleLowerCase();
-        let peticionDB = await model.findAll({
+
+        let peticionDB = await model.findAndCountAll({
             where: {
                 [Op.or]: [
-                    { 'name': { [Op.like]: '%' + query + '%' } },
-                    { 'description': { [Op.like]: '%' + query + '%' } },
+                    { 'name': { [Op.like]: '%' + sValue + '%' } },
+                    { 'description': { [Op.like]: '%' + sValue + '%' } },
                   ]
                 },
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
 
-        let respuesta = peticionDB.length > 0 ? peticionDB : [0]
-        return res.json(respuesta);
+        const response = pre.getPagingData(peticionDB, page, limit);
+
+        return res.json(response);
     }catch(e){
         return next({status: 500, message: 'Error en router search'});
     }
 };
 
-const getServices = async(res, next, model) => {
+const getServices = async(req, res, next, model) => {
     try {
-        let peticionDB = await model.findAndCountAll()
-            .catch(err => next({status: "500", message: 'could not find model values or related models'}));
-
-        let respuesta = pre.setStat('Servicios', 'services', peticionDB.count, peticionDB.rows);
-
-        return res.json(respuesta);
+        const { page, size } = req.query;
+        const { limit, offset } = pre.getPagination(page, size);
+        let peticionDB = await model.findAndCountAll({
+            limit,
+            offset,
+        }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
+        const response = pre.getPagingData(peticionDB, page, limit);
+        let stat = pre.setStat('Service', 'services', peticionDB.count);
+        return res.json({actual:response, stat});
     }catch(e){
-        return next({status: "500", message: 'Error en router Service get Plural'});
+        return next({status: 500, message: 'Error en router Service get Plural'});
     }
 };
 
