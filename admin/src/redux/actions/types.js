@@ -24,6 +24,7 @@ export const type = {
     SET_ACTUALG: "SET_ACTUALG",
     CLEAR_ACTUALG: "CLEAR_ACTUALG",
     SET_ALL: "SET_ALL",
+    DELETE: "DELETE",
     CLEAR_ALL: "CLEAR_ALL",
     ERROR: "ERROR",
     ERROR_FORM: "ERROR_FORM",

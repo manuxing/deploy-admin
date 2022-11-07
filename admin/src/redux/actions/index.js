@@ -72,6 +72,20 @@ export function getNot(id) {
   };
 }
 
+export function deleteModel(model ,id) {
+  return function (dispatch) {
+    axios
+      .delete(`http://localhost:3001/${model}/${id}`)
+      .then((res) => {
+        dispatch({ type: type.DELETE, payload: res });
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: "ERROR", payload: e });
+      });
+  };
+}
+
 export function getAbout() {
   return function (dispatch) {
     axios
@@ -362,6 +376,10 @@ export function setActualG(to) {
 
 export function clearActualG(to) {
   return { type: type.CLEAR_ACTUALG, payload: null };
+}
+
+export function setDeleted() {
+  return { type: type.DELETE, payload: false };
 }
 
 export function error() {

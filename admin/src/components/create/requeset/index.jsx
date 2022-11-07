@@ -82,8 +82,8 @@ const RequestR = ({ setP }) => {
         setP,
         setActual
       );
-      setInput({ dateR: "", dateP: "", thg: "", contact: [], sId: 0 });
-      setWarning({ dateR: "", dateP: "", thg: "", contact: "", sId: "" });
+      setInput({ dateR: "", dateP: "", thg: "", contact: [], sId: 0, solicitante:""});
+      setWarning({ dateR: "", dateP: "", thg: "", solicitante:"", contact: "", sId: "" });
       let x = document.getElementById("service");
       x.selected = true;
     }

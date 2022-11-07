@@ -34,7 +34,7 @@ router.post('/', async(req, res, next) => {
 
 router.delete('/:id', async(req, res, next) =>{
     let {id} = req.params;
-    await validateDelete(id,  next);
+    await validateDelete(id, next);
     return deleteService(res, next, Service, id);
 });
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getNot, setActualG, clearActualG } from "../../redux/actions";
+import { getNot, deleteModel, setDeleted, setActualG, clearActualG } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
 import Spinner from "../Spinner.jsx";
 import DashDisplay from "./DashDisplay";
@@ -9,6 +9,7 @@ import ReviewR from "../create/review";
 
 const ReviewLayout = () => {
   let todas = useSelector((state) => state.actualG);
+  let deleted = useSelector((state) => state.deleted);
   let dispatch = useDispatch();
   let [pressed, setPressed] = useState(false);
   let [cards, setCards] = useState([]);
@@ -22,6 +23,19 @@ const ReviewLayout = () => {
   useEffect(() => {
     if(todas && todas.model === "review")setCards(todas.data)
   }, [todas]);
+
+  useEffect(() => {
+    if(deleted === true){
+      alert("deleted");
+      dispatch(setDeleted()); 
+      dispatch(setActualG("review"));
+    }
+  }, [deleted]);
+
+  let handleClick = (e, id)=>{
+    e.preventDefault();
+    dispatch(deleteModel("review", id));
+  }
 
   return (
         <div className="content_cli_l">
@@ -38,7 +52,7 @@ const ReviewLayout = () => {
           {cards.length === 0 ? 
             <Spinner/> : 
             <div className="cont">
-              <DashDisplay all={cards} Dash={Dash} model={"Reseñas"}/>
+              <DashDisplay all={cards} Dash={Dash} model={"Reseñas"} handleClick={handleClick}/>
             </div>
           }
         </div>

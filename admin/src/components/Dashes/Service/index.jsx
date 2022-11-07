@@ -3,7 +3,7 @@ import './Service.css';
 import { NavLink } from "react-router-dom";
 // import  icon  from "../../../img/star.png"; 
 
-const Dash = ({data})=> { 
+const Dash = ({data, handleClick})=> { 
     let {id, imgs, name, description, tR} = data;
     
     return (
@@ -25,6 +25,7 @@ const Dash = ({data})=> {
                     </div>
                 </div>
             </NavLink>
+            <button onClick={(e)=>handleClick(e, id)}>borrar</button>
         </div>
     )
 };

@@ -14,6 +14,7 @@ const initialState = {
     actividades: [],
     reviews: [],
     servicios: [],
+    deleted: null,
     not: [],
     error: null,
     errForm: null,
@@ -44,6 +45,14 @@ export default function rootReducer(state=initialState, action){
             return {
                 ...state,
                 actualG: null
+            }
+        }
+        case type.DELETE: {
+            let set = action.payload === false ? false : true
+            console.log(set)
+            return {
+                ...state,
+                deleted:set
             }
         }
         case type.SERCH: {

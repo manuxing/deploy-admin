@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import tools from "../../../tools";
 // import  icon  from "../../../img/star.png"; 
 
-const Dash = ({data})=> { 
+const Dash = ({data, handleClick})=> { 
     let {id, back, services, persons, date}= data;
     return (
         id === undefined ? <></> :
@@ -27,6 +27,7 @@ const Dash = ({data})=> {
                         <h3> {services && tools.display.activity.dash(services)} </h3>
                     </div>
                     </div>
+                    <button onClick={(e)=>handleClick(e, id)}>borrar</button>
                 </NavLink>
         </div>
     )

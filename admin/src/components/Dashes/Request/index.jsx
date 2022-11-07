@@ -3,7 +3,7 @@ import './Request.css';
 import { NavLink } from "react-router-dom";
 // import  icon  from "../../../img/star.png"; 
 
-const Dash = ({data})=> { 
+const Dash = ({data, handleClick})=> { 
     let {id, back, dateR, dateP, thg, contact, solicitante} = data;
     return (
         id === undefined ? <></> :
@@ -45,6 +45,7 @@ const Dash = ({data})=> {
                     </div>
                 </div>
                 </NavLink>
+                <button onClick={(e)=>handleClick(e, id)}>borrar</button>
         </div>
     )
 };

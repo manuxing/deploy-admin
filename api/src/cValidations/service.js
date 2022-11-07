@@ -33,8 +33,8 @@ const validatePut = async(body) => {
 
 const validateGet = async(id, model, next) => {
     if(parseInt(id) !== Number(id))return next({status: 400, message:"ingrese un id valido"})
-    let {count} = await model.findAndCountAll();
-    if(count < parseInt(id))return next({status: 400, message:"Servicio inexistente"});
+    // let {count} = await model.findAndCountAll();
+    // if(count < parseInt(id))return next({status: 400, message:"Servicio inexistente"});
 };
 
 const validateDelete = async(id, next) => {

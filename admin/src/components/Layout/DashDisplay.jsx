@@ -2,9 +2,8 @@ import React from "react";
 
 const DashDisplay = ( data ) => {
     let back = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToGGvDxkPArT8mDgzcziQn30blnyEY_REmrg&usqp=CAU";
-    let {Dash, model} = data;
+    let {Dash, model, handleClick} = data;
     let all = data.all;
-    console.log(data)
     return (
                 <div>
                     { all[0] === 0 ?
@@ -14,7 +13,7 @@ const DashDisplay = ( data ) => {
                         all.map(data=>{
                             data.back = back;
                             return(
-                                <Dash key={data.id} data={data} />
+                                <Dash key={data.id} data={data} handleClick={handleClick} />
                             );
                         })
                     }
