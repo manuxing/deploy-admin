@@ -1,9 +1,17 @@
 const { Router } = require('express');
 const { Activity, Service, Client } = require('../db.js');
 const db = require('../db.js');
-const {getActivitys, getActivity, postActivity} = require("../controllers/activity.js");
+const {getActivitys, searchActivity, getActivity, postActivity} = require("../controllers/activity.js");
 const { validatePost, validateGet } = require("../cValidations/activity.js");
 const router = Router();
+
+router.get('/search/:search?', async(req, res, next) =>{
+    let {query} = req._parsedUrl;
+    
+    if(query)return searchActivity(res, next, Activity, query, Client);
+    
+    return res.json({status:400, message:"busqueda invalida"});
+});
 
 router.get('/:id', async(req, res, next) =>{
     let {id} = req.params;
@@ -12,7 +20,6 @@ router.get('/:id', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
-    console.log("id")
     return getActivitys(res, next, Activity, [Client, Service]);
 });
 

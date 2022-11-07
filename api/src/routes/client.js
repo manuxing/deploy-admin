@@ -1,8 +1,16 @@
 const { Router } = require('express');
 const { Client, Review, Activity, Service } = require('../db.js');
-const {getClients, getClient, postClient} = require("../controllers/client.js");
+const {getClients, getClient, postClient, searchClients} = require("../controllers/client.js");
 const {validatePost, validateGet} = require("../cValidations/client.js");
 const router = Router();
+
+router.get('/search/:search?', async(req, res, next) =>{
+    let {query} = req._parsedUrl;
+
+    if(query)return searchClients(res, next, Client, query);
+
+    return res.json({status:400, message:"busqueda invalida"});
+});
 
 router.get('/:clientId', async(req, res, next) =>{
     const {clientId} = req.params;
@@ -16,6 +24,7 @@ router.get('/', async(req, res, next) =>{
 
 router.post('/', async(req, res, next) => {
     let {body} = req;
+    body.name = body.name.toLowerCase();
     await validatePost(body, next, Service, Client)
         .then(val =>{
             if(val.status === 200){

@@ -1,5 +1,30 @@
 const pre = require("../Tools");
 
+const searchActivity = async(res, next, model, query, Client) => {
+    //corregir con modelos bien
+    try {
+        if(query.length === 1){
+            let respuesta = await model.findAll();
+            return res.json(respuesta)
+        }
+        query = Array.from(query).slice(1).join("").toLocaleLowerCase();
+        let peticionDB = await model.findAll({
+              include: [{model:Client}]
+        }).catch(err => next({status: 500, message: 'could not find model searched'}));
+        let respuesta = peticionDB.filter(p=> {
+            if(p.dataValues.client && p.dataValues.client.dataValues){
+                if(p.dataValues.client.dataValues.name.includes(query))return p
+            }
+        })
+        respuesta = respuesta.length > 0 ? respuesta : [0]
+
+        return res.json(respuesta);
+    }catch(e){
+        return next({status: 500, message: 'Error en router search'});
+    }
+};
+
+
 const getActivitys = async(res, next, model, related) => {
     try {
         let peticionDB = await model.findAndCountAll({include: related})
@@ -76,4 +101,5 @@ module.exports = {
     getActivity,
     getActivitys,
     postActivity,
+    searchActivity
 };

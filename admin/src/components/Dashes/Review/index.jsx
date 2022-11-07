@@ -5,8 +5,7 @@ import tools from "../../../tools";
 // import  icon  from "../../../img/star.png"; 
 
 const Dash = ({data})=> { 
-    let { id, back, stat, dateR, dateP, thg, services} = data;
-    
+    let { id, back, stat, dateR, description, dateP, thg, services} = data;
     return (
         id === undefined ? <></> :
         <div className="dash_act"> 
@@ -20,9 +19,14 @@ const Dash = ({data})=> {
                         <h3>{id}</h3>
                     </div>
                     <div className="punto_fdato">
-                        <h2>Servicios</h2>
-                        {tools.display.review.dash(services)}
+                        <h2>descripcion</h2>
+                        <h3>{description}</h3>
                     </div>
+                    <div className="punto_fdato">
+                        <h2>Servicios</h2>
+                    </div>
+                        {services && services.length > 0 &&
+                        tools.display.review.dash(services)}
                     <div className="punto_fdato">
                         <h2>Fecha de la reseña</h2>
                         <h3>{dateR}</h3>

@@ -7,7 +7,12 @@ const axios = require('axios').default;
 let pre = {};
 
 pre.setDisplayModels = (p) => {
-    let res = {
+    let res = p === "About" ? {
+                url:`/${p.toLowerCase()}/`,
+                src:`../icons/${p}.png`,
+                to:p
+            } :
+            {
                 url:`/${p.toLowerCase()}s/`,
                 src:`../icons/${p}.png`,
                 to:p
@@ -18,7 +23,6 @@ pre.setDisplayModels = (p) => {
 pre.getDateXDaysAgo =(numOfDays, date = new Date()) =>{
     const daysAgo = new Date(date.getTime());
     daysAgo.setDate(date.getDate() - numOfDays);
-    console.log(daysAgo)
     return daysAgo;
 }
 

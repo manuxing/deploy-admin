@@ -20,11 +20,11 @@ const Dash = ({data})=> {
                     </div>
                     <div className="punto_fdato">
                         <h2>Participantes</h2>
-                        <h3> {persons.length} </h3>
+                        <h3> {persons &&persons.length} </h3>
                     </div>
                     <div className="punto_fdato">
                         <h2>Servicios</h2>
-                        <h3> {tools.display.activity.dash(services)} </h3>
+                        <h3> {services && tools.display.activity.dash(services)} </h3>
                     </div>
                     </div>
                 </NavLink>

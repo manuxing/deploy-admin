@@ -3,11 +3,12 @@ import tools from "../../tools";
 
 const initialState = {
     actual:1,
-    actualG:{},
+    actualG:null,
     all:{
         display:[],
         stats:[],
     },
+    about:null,
     solicitudes: [],
     clientes: [],
     actividades: [],
@@ -28,6 +29,32 @@ export default function rootReducer(state=initialState, action){
                 actual: action.payload === 1 ? action.payload : action.payload.data
             };
         }
+        case type.SET_ACTUALG: {
+            console.log(action.payload)
+            action.payload.data.stat.url = Array.from(action.payload.data.stat.url).slice(0,-1).join("");
+            return {
+                ...state,
+                actualG: {
+                    data:action.payload.data.data,
+                    model:action.payload.data.stat.url,
+                }
+            }
+        }
+        case type.CLEAR_ACTUALG: {
+            return {
+                ...state,
+                actualG: null
+            }
+        }
+        case type.SERCH: {
+            return {
+                ...state,
+                actualG: {
+                    ...state.actualG,
+                    data:action.payload.data,
+                }
+            }
+        }
         case type.SET_ALL: {
             let {display} = action.payload.data;
             return {
@@ -39,6 +66,19 @@ export default function rootReducer(state=initialState, action){
             return {
                 ...state,
                 not: action.payload.data
+            };
+        }
+        case type.ADD_NOT: {
+            console.log(action.payload.data)
+            return {
+                ...state,
+                not: [...state.not, action.payload.data]
+            };
+        }
+        case type.GET_ABOUT: {
+            return {
+                ...state,
+                about: action.payload.data
             };
         }
         case type.GET_CLIENTES: {

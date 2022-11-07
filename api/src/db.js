@@ -25,20 +25,21 @@ console.log('coso',sequelize.models)
 
 const { Activity, Client, Request, Review, Service } = sequelize.models;
 
-Client.belongsToMany(Review, {through:'client_review'});
-Review.belongsToMany(Client, {through:'client_review'});
+Review.belongsTo(Client);
+Client.hasMany(Review);
 
-Activity.hasOne(Client);
+//belongsTo
+Activity.belongsTo(Client);
 Client.hasMany(Activity);
 
-Review.belongsToMany(Service, {through:'service_review'});
-Service.belongsToMany(Review, {through:'service_review'});
+Review.belongsTo(Service);
+Service.hasMany(Review);
 
-Service.belongsToMany(Request, {through:'Service_request'});
-Request.belongsToMany(Service, {through:'Service_request'});
+Request.belongsTo(Service);
+Service.hasMany(Request);
 
-Service.belongsToMany(Activity, {through:'Service_activity'});
-Activity.belongsToMany(Service, {through:'Service_activity'});
+Activity.belongsTo(Service);
+Service.hasMany(Activity);
 
 module.exports = {
   ...sequelize.models,

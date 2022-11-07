@@ -13,17 +13,14 @@ function DetalleRequest({ actual, handleChange, _stat }) {
       <div className="item_requestD">
         <span className="span_request">Servicios</span>
         <div>
-          {actual?.services && actual?.services.map((p) => {
-                return (
+          {actual?.service &&
                   <NavLink
-                    key={`${p.id}`}
+                    key={`${actual.service.id}`}
                     className="link"
-                    to={`/service/${p.id}`}
+                    to={`/service/${actual.service.id}`}
                   >
-                    <span>{p.name}</span>
+                    <span>{actual.service.name}</span>
                   </NavLink>
-                );
-              })
            }
         </div>
       </div>

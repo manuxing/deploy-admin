@@ -7,6 +7,7 @@ import {
   getClient,
   setActual,
   errorForm,
+  setActualG,
 } from "../../../redux/actions/index.js";
 import { actuallContext } from "../ActualContext";
 import Form from "./Form";
@@ -65,7 +66,7 @@ const CreateClient = ({ setP }) => {
   useEffect(() => {
       if (typeof actual !== "number") {
         tools.alert("cliente",`/client/${actual.id}`,
-          history, dispatch, getClient, setP, setActual
+          history, dispatch, setActualG, "client", setP, setActual
         );
         setInput({ name: "", contact: [],  date: "", persons: [], sId: 1000 });
         setWarning({ name: "", contact: "", date: "", persons: "", sId: "", general: "" });

@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Bars from "./components/bars";
 import Home from "./components/home";
 
+import About from "../src/components/about/Index";
+
 import Activity from "./components/Details/Activity";
 import ActivityLayout from "./components/Layout/activity";
 import ActivityR from "./components/create/activity";
@@ -39,6 +41,9 @@ function App() {
         <Bars/>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/about/">
+            <About />
+          </Route>
           <Route path="/activity/:id">
             <Activity />
           </Route>

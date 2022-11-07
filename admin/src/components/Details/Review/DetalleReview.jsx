@@ -6,9 +6,9 @@ function DetalleReview({actual, handleChange, _stat}) {
     <div>
         <div className="div_rev">
           <span className="span_rev">Cliente</span>
-          {actual.clients && actual.clients.length > 0 &&
-            <NavLink className="link" to={`/client/${actual?.clients[0].id}`}>
-              {actual?.clients[0].name ? actual?.clients[0].name : "name"}
+          {actual.client && 
+            <NavLink className="link" to={`/client/${actual?.client.id}`}>
+              {actual?.client.name}
             </NavLink>}
         </div>
       <div className="div_rev">

@@ -1,4 +1,28 @@
 const pre = require("../Tools");
+const { Op } = require("sequelize");
+
+const searchRequest = async(res, next, model, query) => {
+    try {
+        if(query.length === 1){
+            let respuesta = await model.findAll();
+            return res.json(respuesta)
+        }
+        query = Array.from(query).slice(1).join("")
+        // .toLocaleLowerCase();
+        let peticionDB = await model.findAll({
+            where: {
+                [Op.or]: [
+                    { 'thg': { [Op.like]: '%' + query + '%' } },
+                    { 'solicitante': { [Op.like]: '%' + query + '%' } },
+                  ]
+                },
+        }).catch(err => next({status: 500, message: 'could not find model searched'}));
+        let respuesta = peticionDB.length > 0 ? peticionDB : [0]
+        return res.json(respuesta);
+    }catch(e){
+        return next({status: 500, message: 'Error en router search'});
+    }
+};
 
 const getRequests = async(res, next, model) => {
     try {
@@ -33,14 +57,17 @@ const postRequest = async(body, res, next, model, Service) => {
         let request = await model.create(body)
             .catch(err => next({status: 500, message: 'could not create Request model'})); 
 
-        let service = await Service.findAll({
+        let service = await Service.findOne({
             where :{
                 id: parseInt(body.sId)
             }
         }).catch(err => next({status: "500", message: 'could not find Service related model'}));
 
-        await request.addService(service, {through:'Service_request'})
-            .catch(err => next({status: "500", message: 'could not relate Request to Service'}));
+        await request.setService(service)
+        .catch(err => next({status: "500", message: 'could not relate Request to Service'}));
+
+        await service.addRequest(request)
+            .catch(err => next({status: 500, message: 'could not relate Service to Review'}));
 
         res.json(request);
     } catch (e){
@@ -57,7 +84,11 @@ const putRequest = async(body, res, next, model) => {
                 id: body.id,
             }
         }).catch(err => next({status: 500, message: 'could not update Request'}));
-        return res.send("request actualizada");
+
+        let respuesta = await model.findOne({where:{id:body.id}})
+            .catch(err => next({status: 500, message: 'could not return updated review'}));
+
+        return res.send(respuesta);
     }catch(e){
         return next({status: 500, message: 'Error en router Request put'});
     }
@@ -69,4 +100,5 @@ module.exports = {
     getRequests,
     postRequest,
     putRequest,
+    searchRequest
 };

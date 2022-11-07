@@ -7,7 +7,8 @@ import {
   getReviews,
   setActual,
   getClient,
-  errorForm
+  errorForm,
+  setActualG
 } from "../../../redux/actions";
 import { actuallContext } from "../ActualContext";
 import Form from "./Form";
@@ -83,7 +84,7 @@ const ReviewR = ({ setP }) => {
         `/review/${actual.id}`,
         history,
         dispatch,
-        getReviews,
+        setActualG, "review",
         setP,
         setActual
       );
