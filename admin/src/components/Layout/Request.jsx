@@ -21,7 +21,7 @@ const RequestLayout = () => {
   }, [dispatch]);
     
   useEffect(() => {
-    if(todas && todas.model === "request")setCards(todas.data)
+    if(todas.data && todas.model === "request")setCards(todas.data)
   }, [todas]);
 
   useEffect(() => {

@@ -21,7 +21,7 @@ const ServiceLayout = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if(todas && todas.model === "service")setCards(todas.data)
+    if(todas.data && todas.model === "service")setCards(todas.data)
   }, [todas]);
 
   useEffect(() => {

@@ -21,7 +21,7 @@ const ClientLayout = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if(todas && todas.model === "client")setCards(todas.data)
+    if(todas.data && todas.model === "client")setCards(todas.data)
   }, [todas]);
 
   useEffect(() => {

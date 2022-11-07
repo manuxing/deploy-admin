@@ -21,7 +21,7 @@ const ActivityLayout = () => {
   }, [dispatch]);
   
   useEffect(() => {
-    if(todas && todas.model === "activity")setCards(todas.data)
+    if(todas.data && todas.model === "activity")setCards(todas.data)
   }, [todas]);
 
   useEffect(() => {
