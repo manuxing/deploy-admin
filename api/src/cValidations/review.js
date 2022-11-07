@@ -54,8 +54,9 @@ const validateDelete = async(id, model, next) => {
 
 const validateGet = async(id, model, next) => {
     if(parseInt(id) !== Number(id))return next({status: 400, message:"ingrese un id valido"})
-    // let {count} = await model.findAndCountAll();
-    // if(count < parseInt(id))return next({status: 400, message:"Review inexistente"});
+    let ids = await model.findAll({attributes:['id']});
+    ids = ids.map(p=> p.dataValues.id)
+    if(!ids.includes(parseInt(id)))return next({status: 400, message:"Servicio inexistente"});
     return {status:200}
 };
 module.exports = {

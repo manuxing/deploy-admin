@@ -33,8 +33,9 @@ const validatePostAct = async(act, next, Service) => {
 
 const validateGet = async(id, model, next) => {
     if(parseInt(id) !== Number(id))return next({status: 400, message:"ingrese un id valido"})
-    // let {count} = await model.findAndCountAll();
-    // if(count < parseInt(id))return next({status: 400, message:"Cliente inexistente"});
+    let ids = await model.findAll({attributes:['id']});
+    ids = ids.map(p=> p.dataValues.id)
+    if(!ids.includes(parseInt(id)))return next({status: 400, message:"Servicio inexistente"});
 };
 
 const validateDelete = async(id, next) => {

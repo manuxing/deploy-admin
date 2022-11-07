@@ -3,7 +3,7 @@ const validatePost = async(body, model) => {
     
     let about = await model.findAll()
         .catch(err => {return{status:400, message:"Error al validar About"}});
-    if(about) return {status:400, message:"no puede postearse otro about"};
+    if(about.length !== 0) return {status:400, message:"no puede postearse otro about"};
 
     if (typeof body.info !== "string")return {status: 400, message:"info invalida"}
 
