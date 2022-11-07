@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getAbout, putAbout, errorForm } from "../../redux/actions";
+import { getAbout, putAbout, errorForm, setAbout } from "../../redux/actions";
 import Form from './Form';
 import { actuallContext } from '../create/ActualContext';
 import Spinner from '../Spinner';
@@ -37,11 +37,12 @@ const About = () => {
   
     useEffect(() => {
       if(about !== null)setInput({id: about.id, info:about.info,
-         contact:about.contact});
-    }, [about]);
+        contact:about.contact});
+      }, [about]);
 
     useEffect(() => {
       dispatch(getAbout())
+      return ()=>dispatch(setAbout())
     }, [dispatch]);
     
     let send = {
@@ -69,4 +70,4 @@ const About = () => {
     );
   };
   
-  export default React.memo(About);
+  export default About;

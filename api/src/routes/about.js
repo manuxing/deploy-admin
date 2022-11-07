@@ -11,7 +11,7 @@ router.get('/', async(req, res, next) =>{
 
 router.post('/', async(req, res, next) => {
     let {body} = req;
-    await validatePost(body, next, About)
+    await validatePost(body, About)
         .then(val =>{
             if(val.status === 200){
             postAbout(res, next, About, body); 
