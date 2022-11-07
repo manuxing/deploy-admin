@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { Client, Review, Service } = require('../db.js');
-const {getReviews, getReview, postReview, putReview, searchReviews} = require("../controllers/review.js");
-const {validatePost, validatePut, validateGet} = require("../cValidations/review.js");
+const {getReviews, getReview, postReview, putReview, searchReviews, deleteReview} = require("../controllers/review.js");
+const {validatePost, validateDelete, validatePut, validateGet} = require("../cValidations/review.js");
 const router = Router();
 
 router.get('/search/:search?', async(req, res, next) =>{
@@ -32,6 +32,13 @@ router.post('/', async(req, res, next) => {
             }
         })
 });
+
+router.delete('/:id', async(req, res, next) =>{
+    let {id} = req.params;
+    await validateDelete(id,  next);
+    return deleteReview(res, next, Review, id);
+});
+
 
 router.put('/', async(req, res, next) => {
     const {body} = req;

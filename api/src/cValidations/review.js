@@ -47,13 +47,20 @@ const validatePut = async(body, next, model) => {
     return {status: 200}
 };
 
+const validateDelete = async(id, model, next) => {
+    if(parseInt(id) !== Number(id))return next({status: 400, message:"ingrese un id valido"})
+    return {status:200}
+};
+
 const validateGet = async(id, model, next) => {
     if(parseInt(id) !== Number(id))return next({status: 400, message:"ingrese un id valido"})
     let {count} = await model.findAndCountAll();
-    if(count < parseInt(id))return next({status: 400, message:"Reseña inexistente"});
+    if(count < parseInt(id))return next({status: 400, message:"Review inexistente"});
+    return {status:200}
 };
 module.exports = {
     validatePost,
     validatePut,
-    validateGet
+    validateGet,
+    validateDelete
 };

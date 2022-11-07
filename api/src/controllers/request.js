@@ -75,6 +75,17 @@ const postRequest = async(body, res, next, model, Service) => {
     };
 };
 
+const deleteRequest = async(res, next, model, id) => {
+    try {
+        let peticionDB = await model.destroy({where:{id: id}})
+            .catch(err => next({status: 500, message: 'could not delete model'}));
+
+        return res.json("succesfully deleted");
+    }catch(e){
+        return next({status: 500, message: 'Error en router Activity delete'});
+    }
+};
+
 const putRequest = async(body, res, next, model) => {
     try { 
         await model.update({
@@ -100,5 +111,6 @@ module.exports = {
     getRequests,
     postRequest,
     putRequest,
-    searchRequest
+    searchRequest,
+    deleteRequest
 };

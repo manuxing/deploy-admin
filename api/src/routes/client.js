@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { Client, Review, Activity, Service } = require('../db.js');
-const {getClients, getClient, postClient, searchClients} = require("../controllers/client.js");
-const {validatePost, validateGet} = require("../cValidations/client.js");
+const {getClients, deleteClient, getClient, postClient, searchClients} = require("../controllers/client.js");
+const {validatePost, validateGet, validateDelete} = require("../cValidations/client.js");
 const router = Router();
 
 router.get('/search/:search?', async(req, res, next) =>{
@@ -20,6 +20,13 @@ router.get('/:clientId', async(req, res, next) =>{
 
 router.get('/', async(req, res, next) =>{
     return getClients(res, next, Client, [Activity, Review]);
+});
+
+
+router.delete('/:id', async(req, res, next) =>{
+    let {id} = req.params;
+    await validateDelete(id, next);
+    return deleteClient(res, next, Client, id);
 });
 
 router.post('/', async(req, res, next) => {

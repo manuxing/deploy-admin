@@ -24,11 +24,21 @@ const searchActivity = async(res, next, model, query, Client) => {
     }
 };
 
+const deleteActivity = async(res, next, model, id) => {
+    try {
+        let peticionDB = await model.destroy({where:{id: id}})
+            .catch(err => next({status: 500, message: 'could not delete model'}));
+
+        return res.json("succesfully deleted");
+    }catch(e){
+        return next({status: 500, message: 'Error en router Activity delete'});
+    }
+};
 
 const getActivitys = async(res, next, model, related) => {
     try {
         let peticionDB = await model.findAndCountAll({include: related})
-            .catch(err => next({status: "500", message: 'could not find model values or related models'}));
+            .catch(err => next({status: 500, message: 'could not find model values or related models'}));
 
         let respuesta = pre.setStat('Actividades', 'activitys', peticionDB.count, peticionDB.rows);
 
@@ -51,7 +61,6 @@ const getActivity = async( res, next, model, related, id) => {
     }catch(e){
         return next({status: 500, message: 'Error en router Activity get Individual'});
     }
-
 };
 
 const postActivity = async(body, res, next, model, Service, Client) => {
@@ -101,5 +110,6 @@ module.exports = {
     getActivity,
     getActivitys,
     postActivity,
-    searchActivity
+    searchActivity,
+    deleteActivity
 };

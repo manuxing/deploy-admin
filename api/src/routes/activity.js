@@ -1,8 +1,8 @@
 const { Router } = require('express');
 const { Activity, Service, Client } = require('../db.js');
 const db = require('../db.js');
-const {getActivitys, searchActivity, getActivity, postActivity} = require("../controllers/activity.js");
-const { validatePost, validateGet } = require("../cValidations/activity.js");
+const {getActivitys, searchActivity, deleteActivity, getActivity, postActivity} = require("../controllers/activity.js");
+const { validatePost, validateGet, validateDelete } = require("../cValidations/activity.js");
 const router = Router();
 
 router.get('/search/:search?', async(req, res, next) =>{
@@ -21,6 +21,13 @@ router.get('/:id', async(req, res, next) =>{
 
 router.get('/', async(req, res, next) =>{
     return getActivitys(res, next, Activity, [Client, Service]);
+});
+
+
+router.delete('/:id', async(req, res, next) =>{
+    let {id} = req.params;
+    await validateDelete(id, next);
+    return deleteActivity(res, next, Activity, id);
 });
 
 router.post('/', async(req, res, next) => {

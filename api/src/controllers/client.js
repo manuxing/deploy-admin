@@ -22,6 +22,17 @@ const searchClients = async(res, next, model, query) => {
     }
 };
 
+const deleteClient = async(res, next, model, id) => {
+    try {
+        let peticionDB = await model.destroy({where:{id: id}})
+            .catch(err => next({status: 500, message: 'could not delete model'}));
+
+        return res.json("succesfully deleted");
+    }catch(e){
+        return next({status: 500, message: 'Error en router Activity delete'});
+    }
+};
+
 const getClients = async(res, next, model, related) => {
     try {
         let peticionDB = await model.findAndCountAll()
@@ -80,5 +91,6 @@ module.exports = {
     getClient,
     getClients,
     postClient,
-    searchClients
+    searchClients,
+    deleteClient
 };

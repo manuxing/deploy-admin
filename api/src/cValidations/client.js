@@ -37,7 +37,13 @@ const validateGet = async(id, model, next) => {
     if(count < parseInt(id))return next({status: 400, message:"Cliente inexistente"});
 };
 
+const validateDelete = async(id, next) => {
+    if(parseInt(id) !== Number(id))return next({status: 400, message:"ingrese un id valido"})
+    return {status:200}
+};
+
 module.exports = {
     validatePost,
-    validateGet
+    validateGet,
+    validateDelete
 };

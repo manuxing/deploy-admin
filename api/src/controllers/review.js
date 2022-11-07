@@ -45,8 +45,7 @@ const getReview = async( res, next, model, related, id) => {
                 id: id
             },
             include: related
-        })
-            .catch(err => next({status: 500, message: 'could not find model values or related models'}));
+        }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
         return res.json(peticionDB.dataValues);
     }catch(e){
         return next({status: 500, message: 'Error en router Review get Individual'});
@@ -89,6 +88,17 @@ const postReview = async(body, res, next, model, Service, Client) => {
     };
 };
 
+const deleteReview = async(res, next, model, id) => {
+    try {
+        let peticionDB = await model.destroy({where:{id: id}})
+            .catch(err => next({status: 500, message: 'could not delete model'}));
+
+        return res.json("succesfully deleted");
+    }catch(e){
+        return next({status: 500, message: 'Error en router Activity delete'});
+    }
+};
+
 const putReview = async(body, res, next, model) => {
     try { 
         await model.update({
@@ -113,5 +123,6 @@ module.exports = {
     getReviews,
     postReview,
     putReview,
-    searchReviews
+    searchReviews,
+    deleteReview
 };

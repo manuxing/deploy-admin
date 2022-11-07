@@ -2,7 +2,6 @@ const validatePost = async(body, next, Client, Service) => {
     if(Object.values(body).includes(null))return {status: 400, message:"Hay Campos incompletos, todos los campos son obliigatorios"}
 
     if(body.name){
-        console.log(body);
         let nameReg = new RegExp("^(?=.{4,50}$)(?=.+[a-zA-Z])[a-zA-Z]+$");
         if(!nameReg.test(body.name.split(' ').join('') ))return {status: 400, message:"El nombre de cliente no es Valido, modifiquelo"};
         
@@ -36,9 +35,15 @@ const validateGet = async(id, model, next) => {
     if(count < parseInt(id))return next({status: 400, message:"La Actividad inexistente"});
 };
 
+const validateDelete = async(id, next) => {
+    if(parseInt(id) !== Number(id))return next({status: 400, message:"ingrese un id valido"})
+    return {status:200}
+};
+
 module.exports = {
     validatePost,
-    validateGet
+    validateGet,
+    validateDelete
 };
 
 

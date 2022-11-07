@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { Request, Service } = require('../db.js');
-const {getRequests, getRequest, postRequest, putRequest, searchRequest} = require("../controllers/request.js");
-const {validatePost, validatePut, validateGet} = require("../cValidations/request.js");
+const {getRequests, deleteRequest, getRequest, postRequest, putRequest, searchRequest} = require("../controllers/request.js");
+const {validatePost, validateDelete, validatePut, validateGet} = require("../cValidations/request.js");
 const router = Router();
 
 router.get('/search/:search?', async(req, res, next) =>{
@@ -33,6 +33,12 @@ router.post('/', async(req, res, next) => {
                 next(val)
             }
         })
+});
+
+router.delete('/:id', async(req, res, next) =>{
+    let {id} = req.params;
+    await validateDelete(id,  next);
+    return deleteRequest(res, next, Request, id);
 });
 
 router.put('/', async(req, res, next) => {
