@@ -254,6 +254,23 @@ export function createServicio(data) {
   };
 }
 
+export function updateServicio(data) {
+  return function (dispatch) {
+    axios
+      .put("http://localhost:3001/service/", data)
+      .then((res) => {
+        return { type: type.SET_ACTUAL, payload: {...res, data:{...res.data, updated:true}}};
+      })
+      .then((p) => {
+        dispatch(p);
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: type.ERROR_FORM, payload: e });
+      });
+  };
+}
+
 export function getServicio(id) {
   if (id) {
     return function (dispatch) {
