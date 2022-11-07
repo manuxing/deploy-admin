@@ -6,6 +6,7 @@ import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Client";
 import CreateClient from "../create/client/prueba";
+import Paginado from "./paginado";
 
 const ClientLayout = () => {
   let dispatch = useDispatch();
@@ -52,6 +53,7 @@ const ClientLayout = () => {
           {cards.length ===  0 ? 
           <Spinner/> :
             <div className="cont">
+              <Paginado values={todas}/>
               <DashDisplay all={cards} Dash={Dash} model={"Clientes"} handleClick={handleClick}/>
             </div>}
         </div>

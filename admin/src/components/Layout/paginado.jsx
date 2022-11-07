@@ -8,8 +8,8 @@ const Paginado = ({values}) =>{
 
     let arr = ()=>{
         let array = []
-        for(let i = 0; i < values.totalPages-1; i++){
-            array.push(i+1)
+        for(let i = 0; i < values.totalPages; i++){
+            array.push(i)
         }
         return array;
     }

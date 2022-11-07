@@ -7,7 +7,8 @@ const Dash = ({data, handleClick})=> {
     let { id, back, name, contact } = data;
     return (
         id === undefined ? <></> :
-        <div className="dash_act"> 
+        <div className="dash_act">
+            <h1>{id}</h1> 
                 <NavLink className="link" to={`/client/${id}`}>
                     <div className="container img_act_d">
                         <img src={back} alt='Activity icon'/>

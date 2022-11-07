@@ -6,6 +6,7 @@ import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Service";
 import AgregarServicio from "../create/service/prueba";
+import Paginado from "./paginado";
 
 const ServiceLayout = () => {
   let todas = useSelector((state) => state.actualG);
@@ -52,6 +53,7 @@ const ServiceLayout = () => {
           {cards.length === 0 ? 
             <Spinner/> : 
             <div className="cont">
+              <Paginado values={todas}/>
               <DashDisplay all={cards} Dash={Dash} model={"Servicios"} handleClick={handleClick}/>
             </div>
           }
