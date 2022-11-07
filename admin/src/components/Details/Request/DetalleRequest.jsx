@@ -45,7 +45,7 @@ function DetalleRequest({ actual, handleChange, _stat }) {
           Estado:
           {_stat === true ? "Leida" : "Por ver"}
         </span>
-        <button onClick={() => handleChange()}>change</button>
+        <button onClick={() => handleChange(!_stat)}>change</button>
       </div>
     </div>
   );

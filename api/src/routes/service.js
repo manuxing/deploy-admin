@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { Service, Review, Request } = require('../db.js');
-const { getService, getServices, postService, searchService} = require("../controllers/service.js");
-const {validatePost, validateGet} = require("../cValidations/service.js");
+const { getService, getServices, postService, searchService, putService} = require("../controllers/service");
+const {validatePost, validatePut, validateGet} = require("../cValidations/service.js");
 const router = Router();
 
 router.get('/search/:search?', async(req, res, next) =>{
@@ -28,6 +28,16 @@ router.post('/', async(req, res, next) => {
         .then(val => {
             val.status === 200 ?
                 postService(body, res, next, Service) :
+                next(val)
+            })
+});
+
+router.put('/', async(req, res, next) => {
+    const {body} = req;
+    await validatePut(body, next, Service)
+        .then(val => {
+            val.status === 200 ?
+                putService(body, res, next, Service) :
                 next(val)
             })
 });
