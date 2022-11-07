@@ -74,7 +74,7 @@ export default function rootReducer(state=initialState, action){
                 ...state,
                 actualG: {
                     ...state.actualG,
-                    data:action.payload.data,
+                    data:action.payload.data.data,
                 }
             }
         }

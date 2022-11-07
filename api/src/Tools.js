@@ -21,7 +21,7 @@ pre.setDisplayModels = (p) => {
 }
 
 pre.getPagination = (page, size) => {
-    const limit = size ? +size : 10;
+    const limit = size ? +size : 1;
     const offset = page ? page * limit : 0;
     return { limit, offset };
   };

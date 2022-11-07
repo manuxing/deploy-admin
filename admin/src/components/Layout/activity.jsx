@@ -6,6 +6,7 @@ import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Activity.jsx";
 import ActivityR from "../create/activity";
 import DashDisplay from "./DashDisplay";
+import Paginado from "./paginado";
 
 const ActivityLayout = () => {
   let todas = useSelector((state) => state.actualG);
@@ -54,6 +55,7 @@ const ActivityLayout = () => {
           {cards.length === 0 ? 
             <Spinner/> :
             <div className="cont">
+                  <Paginado values={todas}/>
                   <DashDisplay all={cards} Dash={Dash} model={"Actividades"} handleClick={handleClick}/>
             </div>}
         </div>

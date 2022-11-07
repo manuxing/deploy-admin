@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getAbout, putAbout, errorForm, setAbout } from "../../redux/actions";
+import { getAbout, putAbout, errorForm } from "../../redux/actions";
 import Form from './Form';
 import { actuallContext } from '../create/ActualContext';
 import Spinner from '../Spinner';
@@ -42,7 +42,6 @@ const About = () => {
 
     useEffect(() => {
       dispatch(getAbout())
-      return ()=>dispatch(setAbout())
     }, [dispatch]);
     
     let send = {
