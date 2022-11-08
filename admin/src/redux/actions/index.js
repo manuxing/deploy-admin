@@ -1,11 +1,10 @@
 import { type } from "./types";
 import axios from "axios";
 
-export function search(querys, to, page) {
+export function search(querys, to, page, ord) {
   return function (dispatch) {
-    console.log(`http://localhost:3001/${to}/search/?query=${querys}&page=${page}`)
     axios
-      .get(`http://localhost:3001/${to}/search/?query=${querys}}&page=${page}`)
+      .get(`http://localhost:3001/${to}/search/?query=${querys}&page=${page}&ord=${ord}`)
       .then((res) => {
         dispatch({ type: type.SERCH, payload: res });
       })
@@ -15,6 +14,7 @@ export function search(querys, to, page) {
       });
   };
 }
+
 export function changePage(page, to){
   return function changePage(dispatch) {
     axios
@@ -409,13 +409,7 @@ export function clearAll() {
 }
 
 export function orderByN(n) {
-  //logica
   return { type: type.ORDER_N, payload: n };
-}
-
-export function orderByV(n) {
-  //logica
-  return { type: type.ORDER_A, payload: n };
 }
 
 export function all() {

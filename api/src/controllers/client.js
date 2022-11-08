@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 const searchClients = async(req, res, next, model) => {
     try {
 
-        const { page, size } = req.query;
+        const { page, size, ord } = req.query;
         const sValue = req.query.query;
         const { limit, offset } = pre.getPagination(page, size);
 
@@ -12,6 +12,7 @@ const searchClients = async(req, res, next, model) => {
             let respuesta  = await model.findAndCountAll({
                 limit,
                 offset,
+                order:[['name', ord === "DESC" ? ord : 'ASC']]
             }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
             let resp = pre.getPagingData(respuesta, page, limit);
             return res.json(resp);
@@ -25,6 +26,7 @@ const searchClients = async(req, res, next, model) => {
               },
             limit,
             offset,
+            order:[['name', ord === "DESC" ? ord : 'ASC']]
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
         
         const response = pre.getPagingData(peticionDB, page, limit);
@@ -48,11 +50,12 @@ const deleteClient = async(res, next, model, id) => {
 
 const getClients = async(req, res, next, model) => {
     try {
-        const { page, size } = req.query;
+        const { page, size, ord } = req.query;
         const { limit, offset } = pre.getPagination(page, size);
         let peticionDB = await model.findAndCountAll({
             limit,
             offset,
+            order:[['name', ord === "DESC" ? ord : 'ASC']]
         }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
         const response = pre.getPagingData(peticionDB, page, limit);
         let stat = pre.setStat('Clientes', 'clients', peticionDB.count);

@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 const searchReviews = async(req, res, next, model) => {
     try {
 
-        const { page, size } = req.query;
+        const { page, size, ord } = req.query;
         const sValue = req.query.query;
         const { limit, offset } = pre.getPagination(page, size);
 
@@ -12,6 +12,7 @@ const searchReviews = async(req, res, next, model) => {
             let respuesta  = await model.findAndCountAll({
                 limit,
                 offset,
+                order:[['dateR', ord === "DESC" ? ord : 'ASC']]
             }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
             let resp = pre.getPagingData(respuesta, page, limit);
             return res.json(resp);
@@ -23,7 +24,8 @@ const searchReviews = async(req, res, next, model) => {
                     { 'description': { [Op.like]: '%' + sValue + '%' } },
                     { 'thg': { [Op.like]: '%' + sValue + '%' } },
                 ]
-            }
+            },
+            order:[['dateR', ord === "DESC" ? ord : 'ASC']]
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
         
         const response = pre.getPagingData(peticionDB, page, limit);
@@ -36,11 +38,12 @@ const searchReviews = async(req, res, next, model) => {
 
 const getReviews = async(req, res, next, model, related) => {
     try {
-        const { page, size } = req.query;
+        const { page, size, ord } = req.query;
         const { limit, offset } = pre.getPagination(page, size);
         let peticionDB = await model.findAndCountAll({
             limit,
             offset,
+            order:[['dateR', ord === "DESC" ? ord : 'ASC']]
         }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
         const response = pre.getPagingData(peticionDB, page, limit);
         let stat = pre.setStat('Reviews', 'reviews', peticionDB.count);

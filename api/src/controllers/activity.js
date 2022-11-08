@@ -2,7 +2,7 @@ const pre = require("../Tools");
 
 const searchActivity = async(req, res, next, model, related) => {
     try {
-        const { page, size } = req.query;
+        const { page, size, ord } = req.query;
         const sValue = req.query.query;
         const { limit, offset } = pre.getPagination(page, size);
 
@@ -11,6 +11,7 @@ const searchActivity = async(req, res, next, model, related) => {
                 limit,
                 offset,
                 include: related,
+                order:[['date', ord === "DESC" ? ord : 'ASC']]
             }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
             let resp = pre.getPagingData(respuesta, page, limit);
             return res.json(resp)
@@ -19,7 +20,8 @@ const searchActivity = async(req, res, next, model, related) => {
         let peticionDB = await model.findAndCountAll({
             limit,
             offset,
-            include: related
+            include: related,
+            order:[['date', ord === "DESC" ? ord : 'ASC']]
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
 
         peticionDB.rows = peticionDB.rows.filter(p=> {
@@ -30,7 +32,7 @@ const searchActivity = async(req, res, next, model, related) => {
         peticionDB.count = peticionDB.rows.length
 
         const response = pre.getPagingData(peticionDB, page, limit);
-
+        response.search = sValue;
         return res.json(response);
     }catch(e){
         return next({status: 500, message: 'Error en router search'});
@@ -50,12 +52,13 @@ const deleteActivity = async(res, next, model, id) => {
 
 const getActivitys = async(res, req,next, model, related) => {
     try {
-        const { page, size } = req.query;
+        const { page, size, ord } = req.query;
         const { limit, offset } = pre.getPagination(page, size);
         let peticionDB = await model.findAndCountAll({
             limit,
             offset,
             include: related,
+            order:[['date', ord === "DESC" ? ord : 'ASC']]
         }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
         const response = pre.getPagingData(peticionDB, page, limit);
         let stat = pre.setStat('Actividades', 'activitys', peticionDB.count);

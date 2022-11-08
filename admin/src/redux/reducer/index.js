@@ -7,7 +7,8 @@ const initialState = {
         total:0,
         totalPages:0,
         currentPage:0,
-        data:null
+        data:null,
+        search:""
     },
     all:{
         display:[],
@@ -28,27 +29,7 @@ const initialState = {
 export default function rootReducer(state=initialState, action){
     console.log("mira",action.type,action.payload)
     switch (action.type) {
-        case type.SET_ACTUAL: {
-            if(action.payload !== 1 && action.payload.data.length)action.payload.data = action.payload.data[0]
-            return {
-                ...state,
-                actual: action.payload === 1 ? action.payload : action.payload.data
-            };
-        }
-        case type.SET_ACTUALG: {
-            console.log(action.payload)
-            action.payload.data.stat.url = Array.from(action.payload.data.stat.url).slice(0,-1).join("");
-            return {
-                ...state,
-                actualG: {
-                    total:action.payload.data.actual.total,
-                    totalPages:action.payload.data.actual.totalPages,
-                    currentPage:action.payload.data.actual.currentPage,
-                    data:action.payload.data.actual.data,
-                    model:action.payload.data.stat.url,
-                }
-            }
-        }
+
         case type.CLEAR_ACTUALG: {
             return {
                 ...state,
@@ -75,6 +56,42 @@ export default function rootReducer(state=initialState, action){
                 actualG: {
                     ...state.actualG,
                     data:action.payload.data.data,
+                    search:action.payload.data.search,
+                    total:action.payload.data.total,
+                    totalPages:action.payload.data.totalPages,
+                    currentPage:action.payload.data.currentPage,
+                }
+            }
+        }
+        case type.ADD_NOT: {
+            console.log(action.payload.data)
+            return {
+                ...state,
+                not: [...state.not, action.payload.data]
+            };
+        }
+        
+        
+        
+        //set
+        case type.SET_ACTUAL: {
+            if(action.payload !== 1 && action.payload.data.length)action.payload.data = action.payload.data[0]
+            return {
+                ...state,
+                actual: action.payload === 1 ? action.payload : action.payload.data
+            };
+        }
+        case type.SET_ACTUALG: {
+            console.log(action.payload)
+            action.payload.data.stat.url = Array.from(action.payload.data.stat.url).slice(0,-1).join("");
+            return {
+                ...state,
+                actualG: {
+                    total:action.payload.data.actual.total,
+                    totalPages:action.payload.data.actual.totalPages,
+                    currentPage:action.payload.data.actual.currentPage,
+                    data:action.payload.data.actual.data,
+                    model:action.payload.data.stat.url,
                 }
             }
         }
@@ -85,17 +102,14 @@ export default function rootReducer(state=initialState, action){
                 all: {...state.all, display},
             };
         }
+
+
+
+        //gets
         case type.GET_NOT: {
             return {
                 ...state,
                 not: action.payload.data
-            };
-        }
-        case type.ADD_NOT: {
-            console.log(action.payload.data)
-            return {
-                ...state,
-                not: [...state.not, action.payload.data]
             };
         }
         case type.GET_ABOUT: {
@@ -149,6 +163,8 @@ export default function rootReducer(state=initialState, action){
                 all:{...state.all, stats},
             };
         }
+
+            //error
         case type.ERROR:
             return {
               ...state,
