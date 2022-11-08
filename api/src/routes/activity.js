@@ -5,10 +5,11 @@ const {getActivitys, searchActivity, deleteActivity, getActivity, postActivity} 
 const { validatePost, validateGet, validateDelete } = require("../cValidations/activity.js");
 const router = Router();
 
-router.get('/search/:search?', async(req, res, next) =>{
+router.get('/search/', async(req, res, next) =>{
     let {query} = req._parsedUrl;
+    console.log(query)
     
-    if(query)return searchActivity(res, next, Activity, query, Client);
+    if(query)return searchActivity(req, res, next, Activity, [Client]);
     
     return res.json({status:400, message:"busqueda invalida"});
 });
@@ -20,7 +21,7 @@ router.get('/:id', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
-    return getActivitys(res, next, Activity, [Client, Service]);
+    return getActivitys(res, req, next, Activity, [Client, Service]);
 });
 
 

@@ -6,6 +6,7 @@ import Spinner from "../Spinner.jsx";
 import DashDisplay from "./DashDisplay";
 import Dash from "../Dashes/Review";
 import ReviewR from "../create/review";
+import Paginado from "./paginado";
 
 const ReviewLayout = () => {
   let todas = useSelector((state) => state.actualG);
@@ -21,7 +22,7 @@ const ReviewLayout = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if(todas && todas.model === "review")setCards(todas.data)
+    if(todas.data && todas.model === "review")setCards(todas.data)
   }, [todas]);
 
   useEffect(() => {
@@ -52,6 +53,7 @@ const ReviewLayout = () => {
           {cards.length === 0 ? 
             <Spinner/> : 
             <div className="cont">
+              <Paginado values={todas}/>
               <DashDisplay all={cards} Dash={Dash} model={"Reseñas"} handleClick={handleClick}/>
             </div>
           }

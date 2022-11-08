@@ -6,6 +6,7 @@ import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Request";
 import DashDisplay from "./DashDisplay";
 import RequestR from "../create/requeset";
+import Paginado from "./paginado";
 
 const RequestLayout = () => {
   let todas = useSelector((state) => state.actualG);
@@ -21,7 +22,7 @@ const RequestLayout = () => {
   }, [dispatch]);
     
   useEffect(() => {
-    if(todas && todas.model === "request")setCards(todas.data)
+    if(todas.data && todas.model === "request")setCards(todas.data)
   }, [todas]);
 
   useEffect(() => {
@@ -52,6 +53,7 @@ const RequestLayout = () => {
           {cards.length === 0 ? 
             <Spinner/> : 
             <div className="cont">
+              <Paginado values={todas}/>
               <DashDisplay all={cards} Dash={Dash} model={"Solicitudes"} handleClick={handleClick}/>
             </div>
           }

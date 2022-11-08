@@ -1,16 +1,30 @@
 import { type } from "./types";
 import axios from "axios";
 
-export function search(querys, to) {
+export function search(querys, to, page) {
   return function (dispatch) {
+    console.log(`http://localhost:3001/${to}/search/?query=${querys}&page=${page}`)
     axios
-      .get(`http://localhost:3001/${to}/search/query?=${querys}`)
+      .get(`http://localhost:3001/${to}/search/?query=${querys}}&page=${page}`)
       .then((res) => {
         dispatch({ type: type.SERCH, payload: res });
       })
       .catch((e) => {
         console.log(e);
         dispatch({ type: type.ERROR_FORM, payload: e });
+      });
+  };
+}
+export function changePage(page, to){
+  return function changePage(dispatch) {
+    axios
+      .get(`http://localhost:3001/${to}/?page=${page}`)
+      .then((res) => {
+        dispatch({ type: type.SET_ACTUALG, payload: res });
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: type.ERROR, payload: e });
       });
   };
 }

@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/search/:search?', async(req, res, next) =>{
     let {query} = req._parsedUrl;
-    if(query) return searchReviews(res, next, Review, query );
+    if(query) return searchReviews(req, res, next, Review, query );
 
     return res.json({status:400, message:"busqueda invalida"});
 });
@@ -18,7 +18,7 @@ router.get('/:id', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
-    return getReviews(res, next, Review, [Service]);
+    return getReviews(req, res, next, Review, [Service]);
 }); 
 
 router.post('/', async(req, res, next) => {
@@ -37,7 +37,7 @@ router.delete('/:id', async(req, res, next) =>{
     let {id} = req.params;
     await validateDelete(id,  next);
     return deleteReview(res, next, Review, id);
-});
+}); 
 
 
 router.put('/', async(req, res, next) => {

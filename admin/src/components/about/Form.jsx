@@ -56,11 +56,11 @@ const Form =()=> {
               disabled
             />
           </div>
-            contactsThg={thg}
           {edit === false ? <></>:
           <AgregarContacto
             setContacts={setInput}
             _contacts={input}
+            contactsThg={thg}
           />}
           <div className="warning">{warning.contact}</div>
           {typeof input.contact === 'object' && input.contact.length > 0 &&

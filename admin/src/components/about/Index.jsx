@@ -37,8 +37,8 @@ const About = () => {
   
     useEffect(() => {
       if(about !== null)setInput({id: about.id, info:about.info,
-         contact:about.contact});
-    }, [about]);
+        contact:about.contact});
+      }, [about]);
 
     useEffect(() => {
       dispatch(getAbout())
@@ -69,4 +69,4 @@ const About = () => {
     );
   };
   
-  export default React.memo(About);
+  export default About;

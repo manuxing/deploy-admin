@@ -1,37 +1,52 @@
 const pre = require("../Tools");
 const { Op } = require("sequelize");
 
-const searchRequest = async(res, next, model, query) => {
+const searchRequest = async(req, res, next, model) => {
     try {
-        if(query.length === 1){
-            let respuesta = await model.findAll();
-            return res.json(respuesta)
+
+        const { page, size } = req.query;
+        const sValue = req.query.query;
+        const { limit, offset } = pre.getPagination(page, size);
+
+        if(sValue.length === 0){
+            let respuesta  = await model.findAndCountAll({
+                limit,
+                offset,
+            }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
+            let resp = pre.getPagingData(respuesta, page, limit);
+            return res.json(resp);
         }
-        query = Array.from(query).slice(1).join("")
-        // .toLocaleLowerCase();
-        let peticionDB = await model.findAll({
+
+        let peticionDB = await model.findAndCountAll({
             where: {
                 [Op.or]: [
-                    { 'thg': { [Op.like]: '%' + query + '%' } },
-                    { 'solicitante': { [Op.like]: '%' + query + '%' } },
+                    { 'thg': { [Op.like]: '%' + sValue + '%' } },
+                    { 'solicitante': { [Op.like]: '%' + sValue + '%' } },
                   ]
                 },
+                limit,
+                offset
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
-        let respuesta = peticionDB.length > 0 ? peticionDB : [0]
-        return res.json(respuesta);
+
+        const response = pre.getPagingData(peticionDB, page, limit);
+
+        return res.json(response);
     }catch(e){
         return next({status: 500, message: 'Error en router search'});
     }
 };
 
-const getRequests = async(res, next, model) => {
+const getRequests = async(req, res, next, model) => {
     try {
-        let peticionDB = await model.findAndCountAll()
-            .catch(err => next({status: "500", message: 'could not find model values or related models'}));
-
-        let respuesta = pre.setStat('Solicitudes', 'requests', peticionDB.count, peticionDB.rows);
-
-        return res.json(respuesta);
+        const { page, size } = req.query;
+        const { limit, offset } = pre.getPagination(page, size);
+        let peticionDB = await model.findAndCountAll({
+            limit,
+            offset,
+        }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
+        const response = pre.getPagingData(peticionDB, page, limit);
+        let stat = pre.setStat('Request', 'requests', peticionDB.count);
+        return res.json({actual:response, stat});
     }catch(e){
         return next({status: 500, message: 'Error en router Request get Plural'});
     }
@@ -44,8 +59,7 @@ const getRequest = async( res, next, model, related, id) => {
                 id: id
             },
             include: related
-        })
-            .catch(err => next({status: 500, message: 'could not find model values or related models'}));
+        }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
         return res.json(peticionDB.dataValues);
     }catch(e){
         return next({status: 500, message: 'Error en router Request get Individual'});
@@ -55,7 +69,7 @@ const getRequest = async( res, next, model, related, id) => {
 const postRequest = async(body, res, next, model, Service) => {
     try{
         let request = await model.create(body)
-            .catch(err => next({status: 500, message: 'could not create Request model'})); 
+            .catch(err => {console.log(err);next({status: 500, message: 'could not create Request model'})}); 
 
         let service = await Service.findOne({
             where :{

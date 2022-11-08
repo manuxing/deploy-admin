@@ -4,7 +4,7 @@ const getAbout = async(res, next, model) => {
     try {
         let peticionDB = await model.findAll()
             .catch(err => next({status: 500, message: 'could not find model values'}));
-
+        console.log(peticionDB)
         return res.json(peticionDB[0].dataValues);
     }catch(e){
         return next({status: 500, message: 'Error en router About get'});

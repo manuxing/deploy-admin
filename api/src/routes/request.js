@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/search/:search?', async(req, res, next) =>{
     let {query} = req._parsedUrl;
-    if(query) return searchRequest(res, next, Request, query );
+    if(query) return searchRequest(req, res, next, Request, query );
 
     return res.json({status:400, message:"busqueda invalida"});
 });
@@ -18,7 +18,7 @@ router.get('/:idR', async(req, res, next) =>{
 });
 
 router.get('/', async(req, res, next) =>{
-    return getRequests(res, next, Request);
+    return getRequests(req, res, next, Request);
 });
 
 router.post('/', async(req, res, next) => {
@@ -42,11 +42,11 @@ router.delete('/:id', async(req, res, next) =>{
 });
 
 router.put('/', async(req, res, next) => {
-    const {body} = req;
+    const {body} = req; 
     await validatePut(body, next, Request)
         .then(val =>{
             if(val.status === 200){
-                console.log("bien")
+                console.log("bien") 
                 putRequest(body, res, next, Request);
             } else {
                 console.log("mal")

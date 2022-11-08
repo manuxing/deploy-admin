@@ -17,7 +17,7 @@ const SearchBar = () => {
   let handleSubmit = (evento) => {
     evento.preventDefault();
     setName("")
-    dispatch(search(name, actual.model));
+    dispatch(search(name, actual.model, actual.currentPage));
   };
 
   return (

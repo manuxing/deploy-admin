@@ -1,24 +1,37 @@
 const pre = require("../Tools");
 
-const searchActivity = async(res, next, model, query, Client) => {
-    //corregir con modelos bien
+const searchActivity = async(req, res, next, model, related) => {
     try {
-        if(query.length === 1){
-            let respuesta = await model.findAll();
-            return res.json(respuesta)
-        }
-        query = Array.from(query).slice(1).join("").toLocaleLowerCase();
-        let peticionDB = await model.findAll({
-              include: [{model:Client}]
-        }).catch(err => next({status: 500, message: 'could not find model searched'}));
-        let respuesta = peticionDB.filter(p=> {
-            if(p.dataValues.client && p.dataValues.client.dataValues){
-                if(p.dataValues.client.dataValues.name.includes(query))return p
-            }
-        })
-        respuesta = respuesta.length > 0 ? respuesta : [0]
+        const { page, size } = req.query;
+        const sValue = req.query.query;
+        const { limit, offset } = pre.getPagination(page, size);
 
-        return res.json(respuesta);
+        if(sValue.length === 0){
+            let respuesta  = await model.findAndCountAll({
+                limit,
+                offset,
+                include: related,
+            }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
+            let resp = pre.getPagingData(respuesta, page, limit);
+            return res.json(resp)
+        }
+        
+        let peticionDB = await model.findAndCountAll({
+            limit,
+            offset,
+            include: related
+        }).catch(err => next({status: 500, message: 'could not find model searched'}));
+
+        peticionDB.rows = peticionDB.rows.filter(p=> {
+            if(p.dataValues.client && p.dataValues.client.dataValues){
+                if(p.dataValues.client.dataValues.name.includes(sValue))return p
+            }
+        });
+        peticionDB.count = peticionDB.rows.length
+
+        const response = pre.getPagingData(peticionDB, page, limit);
+
+        return res.json(response);
     }catch(e){
         return next({status: 500, message: 'Error en router search'});
     }
@@ -35,14 +48,18 @@ const deleteActivity = async(res, next, model, id) => {
     }
 };
 
-const getActivitys = async(res, next, model, related) => {
+const getActivitys = async(res, req,next, model, related) => {
     try {
-        let peticionDB = await model.findAndCountAll({include: related})
-            .catch(err => next({status: 500, message: 'could not find model values or related models'}));
-
-        let respuesta = pre.setStat('Actividades', 'activitys', peticionDB.count, peticionDB.rows);
-
-        return res.json(respuesta);
+        const { page, size } = req.query;
+        const { limit, offset } = pre.getPagination(page, size);
+        let peticionDB = await model.findAndCountAll({
+            limit,
+            offset,
+            include: related,
+        }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
+        const response = pre.getPagingData(peticionDB, page, limit);
+        let stat = pre.setStat('Actividades', 'activitys', peticionDB.count);
+        return res.json({actual:response, stat});
     }catch(e){
         return next({status: 500, message: 'Error en router Activity get Plural'});
     }
@@ -92,11 +109,11 @@ const postActivity = async(body, res, next, model, Service, Client) => {
 
         await create.setService(service)
             .catch(err => next({status: 500, message: 'could not find relate activity to service'}));
-        await client.addActivity(create)
+        await service.addActivity(create)
                 .catch(err => next({status: 500, message: 'could not find relate client to activity'}));
         await create.setClient(client)
             .catch(err => next({status: 500, message: 'could not find relate activity to client'}));
-        await service.addActivity(create)
+        await client.addActivity(create)
                 .catch(err => next({status: 500, message: 'could not find relate activity to service'}));
 
         return res.json(create);

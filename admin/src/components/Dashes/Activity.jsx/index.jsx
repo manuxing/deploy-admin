@@ -9,6 +9,7 @@ const Dash = ({data, handleClick})=> {
     return (
         id === undefined ? <></> :
         <div key={id} className="dash_act"> 
+        <h1>{id}</h1>
                 <NavLink className="link" to={`/activity/${id}`}>
                     <div className="container img_act_d">
                         <img src={back} alt='Activity icon'/>

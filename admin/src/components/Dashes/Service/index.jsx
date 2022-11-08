@@ -9,6 +9,7 @@ const Dash = ({data, handleClick})=> {
     return (
         id === undefined ? <></> :
         <div className="dash_act"> 
+        <h1>{id}</h1>
             <NavLink className="link" to={`/service/${parseInt(id)}`}>
                 <div className="info_act_d"> 
                     <div className="punto_fdato">

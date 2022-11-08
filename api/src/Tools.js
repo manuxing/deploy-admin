@@ -20,20 +20,33 @@ pre.setDisplayModels = (p) => {
     return res;
 }
 
+pre.getPagination = (page, size) => {
+    const limit = size ? +size : 1;
+    const offset = page ? page * limit : 0;
+    return { limit, offset };
+  };
+
+pre.getPagingData = (values, page, limit) => {
+    const { count: total, rows: items } = values;
+    const currentPage = page ? +page : 0;
+    const totalPages = Math.ceil(total / limit);
+    let dataRes = items.length < 1 ? [0] : items
+  return { total, data:dataRes, totalPages, currentPage };
+};
+
 pre.getDateXDaysAgo =(numOfDays, date = new Date()) =>{
     const daysAgo = new Date(date.getTime());
     daysAgo.setDate(date.getDate() - numOfDays);
     return daysAgo;
 }
 
-pre.setStat = (name, url, size, data) =>{
+pre.setStat = (name, url, size) =>{
     let stat = {
         name,
         url,
         vals:[{key:"size", value: size}]
     };
-    let dataRes = data.length < 1 ? [0] : data
-    return {data: dataRes, stat};
+    return stat;
 }
 
 
