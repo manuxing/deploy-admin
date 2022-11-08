@@ -7,7 +7,6 @@ const router = Router();
 
 router.get('/search/', async(req, res, next) =>{
     let {query} = req._parsedUrl;
-    console.log(query)
     
     if(query)return searchActivity(req, res, next, Activity, [Client]);
     
