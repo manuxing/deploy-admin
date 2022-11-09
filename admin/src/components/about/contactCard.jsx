@@ -12,4 +12,4 @@ const ContactCard = ({ contact }) => {
   );
 };
 
-export default ContactCard;
+export default React.memo(ContactCard);

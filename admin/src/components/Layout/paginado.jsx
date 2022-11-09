@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { changePage } from '../../redux/actions'
 
 const Paginado = ({values}) =>{
-    console.log(values)
     let dispatch = useDispatch();
 
     let arr = ()=>{
@@ -31,4 +30,4 @@ const Paginado = ({values}) =>{
   )
 }
 
-export default Paginado;
+export default React.memo(Paginado);

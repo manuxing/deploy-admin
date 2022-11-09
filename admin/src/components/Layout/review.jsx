@@ -41,12 +41,14 @@ const ReviewLayout = () => {
   return (
         <div className="content_cli_l">
           <div>
+            <BarraFiltros />
             {pressed === false ? (
-              <button onClick={() => setPressed(true)}>agregar</button>
+              <div>
+                <button onClick={() => setPressed(true)}>agregar</button>
+              </div>
             ) : (
               <div>
                 <ReviewR setP={setPressed} />
-                <BarraFiltros />
               </div>
             )}
           </div>

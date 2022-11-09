@@ -26,6 +26,8 @@ const Form =()=> {
       e.preventDefault();
       let res = input;
       dispatch(putAbout(res));
+      inpt.disabled = edit;
+      setEdit(!edit);
   };
 
   let popC = (e) =>{

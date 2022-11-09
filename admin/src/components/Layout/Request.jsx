@@ -41,13 +41,13 @@ const RequestLayout = () => {
   return (
         <div className="content_cli_l">
           <div>
+            <BarraFiltros />
             {pressed === false ? (
-              <button onClick={() => setPressed(true)}>agregar</button>
-            ) : (
               <div>
-                <RequestR setP={setPressed} />
-                <BarraFiltros />
+                <button onClick={() => setPressed(true)}>agregar</button>
               </div>
+            ) : (
+              <RequestR setP={setPressed} />
             )}
           </div>
           {cards.length === 0 ? 

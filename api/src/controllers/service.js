@@ -14,6 +14,7 @@ const searchService = async(req, res, next, model ) => {
                 order:[['name', ord === "DESC" ? ord : 'ASC']]
             }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
             let resp = pre.getPagingData(respuesta, page, limit);
+            resp.search = sValue;
             return res.json(resp);
         }
 
@@ -28,7 +29,7 @@ const searchService = async(req, res, next, model ) => {
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
 
         const response = pre.getPagingData(peticionDB, page, limit);
-
+        response.search = sValue;
         return res.json(response);
     }catch(e){
         return next({status: 500, message: 'Error en router search'});

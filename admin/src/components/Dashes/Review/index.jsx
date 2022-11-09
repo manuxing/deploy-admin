@@ -50,4 +50,4 @@ const Dash = ({data, handleClick})=> {
     )
 };
 
-export default Dash;
+export default React.memo(Dash);

@@ -45,7 +45,6 @@ export default function rootReducer(state=initialState, action){
         }
         case type.DELETE: {
             let set = action.payload === false ? false : true
-            console.log(set)
             return {
                 ...state,
                 deleted:set
