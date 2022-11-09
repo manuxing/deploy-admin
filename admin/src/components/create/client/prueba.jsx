@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import {
   createClient,
   getServicio,
-  getClient,
   setActual,
   errorForm,
   setActualG,
