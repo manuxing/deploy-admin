@@ -59,6 +59,7 @@ const Service = () => {
        description:actual.description, tR:actual.tR, tR_:actual.tR_});
     if(actual && actual.updated){
       alert("updated");
+      setEdit(false)
     }
   }, [actual]);
 

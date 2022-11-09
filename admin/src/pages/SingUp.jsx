@@ -25,7 +25,6 @@ const SingUp = ()=> {
     let sub = async(user)=>{
         try {
             setLoading(true);
-            console.log(user)
             await firebase.auth().signInWithEmailAndPassword(user.email, user.password)
             history.push("/home");
         }catch(e){

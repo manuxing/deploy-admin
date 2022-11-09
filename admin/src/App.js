@@ -16,7 +16,6 @@ function App() {
     firebase.auth().onAuthStateChanged(val => dispatch(setCurrentUser(val)));
   },[dispatch, currentUser])
 
-
   return (
     <div className="App">
         <BrowserRouter> 

@@ -14,6 +14,7 @@ router.post('/', async(req, res, next) => {
     await validatePost(body, About)
         .then(val =>{
             if(val.status === 200){
+            body.contact = typeof body.contact === "object" ? body.contact.map(p => `${p.type}: ${p.value}`) : 0
             postAbout(res, next, About, body); 
             } else {
                 next(val);
@@ -26,6 +27,7 @@ router.put('/', async(req, res, next) => {
     await validatePut(body, About)
         .then(val =>{
             if(val.status === 200){
+                body.contact = typeof body.contact === "object" ? body.contact.map(p => `${p.type}: ${p.value}`) : 0
                 putAbout(res, next, About, body); 
             } else {
                 next(val);
