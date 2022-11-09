@@ -1,18 +1,18 @@
+import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import "../src/App.css";
-import { useContext } from "react";
-import { AuthContext } from "./AuthProv";
+import { useSelector } from "react-redux";
 
-function PrivateComponents({component: Component, ...rest}) {
-    const {currentUser} = useContext(AuthContext);
-    console.log(currentUser)
+const PrivateComponents = ({component: Component, ...rest}) =>{
+  let currentUser = useSelector(state => state.currentUser);
+  
   return (
     <Route {...rest}
         render={routeProps =>
           currentUser ? (
                 <Component {...routeProps}/>
           ) : (
-            <Redirect to={"/login"}/>
+            <Redirect to={"/signin"}/>
           )}
     />
   );

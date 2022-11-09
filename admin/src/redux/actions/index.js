@@ -1,5 +1,6 @@
 import { type } from "./types";
 import axios from "axios";
+import firebase from "../../firebase"
 
 export function search(querys, to, page, ord) {
   return function (dispatch) {
@@ -386,6 +387,10 @@ export function setActualG(to) {
         dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
+}
+
+export function setCurrentUser(user) {
+  return { type: type.SET_CURRENTUSER, payload: user };
 }
 
 export function clearActualG(to) {

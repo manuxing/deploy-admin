@@ -14,6 +14,7 @@ const initialState = {
         display:[],
         stats:[],
     },
+    currentUser: null,
     about:null,
     solicitudes: [],
     clientes: [],
@@ -71,6 +72,13 @@ export default function rootReducer(state=initialState, action){
             };
         }
         
+        case type.SET_CURRENTUSER: {
+            console.log(action.payload)
+            return {
+                ...state,
+                currentUser:action.payload
+            }
+        }
         
         
         //set
