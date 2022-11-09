@@ -41,12 +41,12 @@ const ServiceLayout = () => {
   return (
         <div className="content_cli_l">
           <div>
+            <BarraFiltros />
             {pressed === false ? (
               <button onClick={() => setPressed(true)}>agregar</button>
             ) : (
               <div>
                 <AgregarServicio setP={setPressed} />
-                <BarraFiltros />
               </div>
             )}
           </div>

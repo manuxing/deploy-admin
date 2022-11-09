@@ -116,8 +116,8 @@ const {
           <div>
             {typeof input.contact === 'object' && input.contact.map((p) => {
               return (
-                <div>
-                  <ContactCard key={p.value} contact={p} />
+                <div key={p.value}>
+                  <ContactCard contact={p} />
                 </div>
               )
             })}

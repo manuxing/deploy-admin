@@ -27,6 +27,54 @@ const tools = {
     },
   },
   validate: {
+    login: (user) => {
+      let res = { status: true };
+      let errs = [];
+      let reg = new RegExp(/\b[\w.-]+@[\w.-]+\.\w{2,4}\b/);
+      let vals = Object.values(user);
+      
+      console.log(user)
+      if(vals.length !== 2||vals.includes(undefined)|| vals.includes(null)){
+        let err = {
+          message: "complete los campos",
+          ubic: "gral",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+
+      vals.forEach(p => {
+        if(typeof p !== 'string'){
+          let err = {
+            message: "revise los campos",
+            ubic: "gral",
+          };
+          errs.push(err);
+          res.status = false;
+        }
+      })
+
+      if (reg.test(user.email) === false) {
+              let err = {
+                message: "email invalido",
+                ubic: "email",
+              };
+              errs.push(err);
+              res.status = false;
+          }
+
+      if (user.password.length < 6 || user.password.length > 30) {
+        let err = {
+          message: "contraseña invalida",
+          ubic: "password",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+      
+      res.err = errs;
+      return res
+    },
     agregarContacto: (con) => {
       let res = { status: true };
       let errs = [];
@@ -149,8 +197,7 @@ const tools = {
       resX.push(checkS);
       res.res = resX;
       res.errs = resX.map((p) => {
-        if (p.status === false)
-        {
+        if (p.status === false){
           res.status = false;
           return p.err;
         } 

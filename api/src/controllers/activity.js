@@ -5,7 +5,6 @@ const searchActivity = async(req, res, next, model, related) => {
         const { page, size, ord } = req.query;
         const sValue = req.query.query;
         const { limit, offset } = pre.getPagination(page, size);
-
         if(sValue.length === 0){
             let respuesta  = await model.findAndCountAll({
                 limit,
@@ -14,16 +13,16 @@ const searchActivity = async(req, res, next, model, related) => {
                 order:[['date', ord === "DESC" ? ord : 'ASC']]
             }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
             let resp = pre.getPagingData(respuesta, page, limit);
+            resp.search = sValue;
             return res.json(resp)
         }
         
         let peticionDB = await model.findAndCountAll({
-            limit,
-            offset,
             include: related,
             order:[['date', ord === "DESC" ? ord : 'ASC']]
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
-
+        
+        console.log(peticionDB)
         peticionDB.rows = peticionDB.rows.filter(p=> {
             if(p.dataValues.client && p.dataValues.client.dataValues){
                 if(p.dataValues.client.dataValues.name.includes(sValue))return p

@@ -8,6 +8,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import "../navBar/navbar.css";
 import Drop from "./drop";
+import LogOut from "../LogOut";
 
 const NavBar = () => {
   let navigate = useHistory()
@@ -50,9 +51,10 @@ const NavBar = () => {
 
   return (
     <div className="topbar">
-      <NavLink to={"/"} className="LinkSideB">
+      <NavLink to={"/home"} className="LinkSideB">
         <div className="logo">Administrador</div>
       </NavLink>
+      <LogOut/>
         <div className="topWrapper">
           <div className="topRight">
               {

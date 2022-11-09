@@ -6,6 +6,7 @@ import tools from "../../../tools";
 
 const Dash = ({data, handleClick})=> { 
     let {id, back, services, persons, date}= data;
+    console.log(id)
     return (
         id === undefined ? <></> :
         <div key={id} className="dash_act"> 
@@ -34,4 +35,4 @@ const Dash = ({data, handleClick})=> {
     )
 };
 
-export default Dash;
+export default React.memo(Dash);
