@@ -23,7 +23,7 @@ const Paginado = ({values}) =>{
       <span>sosppaap</span>
           {cas.map(p => {
             return(
-                <button onClick={(e)=>handleClick(e, p)}>{p}</button>
+                <button key={p} onClick={(e)=>handleClick(e, p)}>{p}</button>
             )
           })}
       </div>
