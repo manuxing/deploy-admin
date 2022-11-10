@@ -57,7 +57,6 @@ function DetalleCliente({actual}) {
                 }
               </div>
             </div>
-
     </div>
   )
 }

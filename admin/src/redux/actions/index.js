@@ -61,7 +61,7 @@ export function getClient(id) {
   } else {
     return function (dispatch) {
       axios
-        .get(`http://localhost:3001/client/`)
+        .get(`http://localhost:3001/data/client/`)
         .then((res) => {
           dispatch({ type: type.GET_CLIENTES, payload: res });
         })
@@ -316,7 +316,7 @@ export function getServicio(id) {
   } else {
     return function (dispatch) {
       axios
-        .get(`http://localhost:3001/service/`)
+        .get(`http://localhost:3001/data/service/`)
         .then((res) => {
           dispatch({ type: type.GET_SERVICIOS, payload: res });
         })

@@ -41,6 +41,7 @@ pre.getDateXDaysAgo =(numOfDays, date = new Date()) =>{
 }
 
 pre.setStat = (name, url, size) =>{
+    console.log("aca", name, url, size)
     let stat = {
         name,
         url,
