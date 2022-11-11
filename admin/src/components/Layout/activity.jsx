@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setActualG, getNot, clearActualG, deleteModel, setDeleted } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
+import ActivitysGraph from "../Graphs/ActivitysGraph";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Activity.jsx";
 import ActivityR from "../create/activity";
@@ -55,6 +56,7 @@ const ActivityLayout = () => {
           {cards.length === 0 ? 
             <Spinner/> :
             <div className="cont">
+                  <ActivitysGraph/>
                   <Paginado values={todas}/>
                   <DashDisplay all={cards} Dash={Dash} model={"Actividades"} handleClick={handleClick}/>
             </div>}
