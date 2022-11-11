@@ -870,7 +870,6 @@ const tools = {
     return {data, stats};
   },
   getSetter_: (stat, state) => {
-    console.log(stat, state)
     let stats =  state.all.stats.filter(p=> p.name !== stat.name)
     stats.push(stat);
     return stats;
