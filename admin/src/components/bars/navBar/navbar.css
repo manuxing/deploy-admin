@@ -6,7 +6,7 @@
     box-shadow: 3px 0px 5px 1px rgba(0, 0, 0, 0.1);
     background-color: aliceblue;
     height: 100%;   
-    padding: 20px 25px;
+    padding: 0.9rem 0.7rem 0.9rem 0.9rem;
     transition: 400ms margin-left;
 }
 

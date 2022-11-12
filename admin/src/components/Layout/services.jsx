@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearActualG, setActualG, getNot, setDeleted, deleteModel } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
+import AddIcon from '@mui/icons-material/Add';
 import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Service";
 import AgregarServicio from "../create/service/prueba";
 import Paginado from "./paginado";
+import DetalleLay from "../DetalleLay";
 
 const ServiceLayout = () => {
   let todas = useSelector((state) => state.actualG);
@@ -40,23 +42,30 @@ const ServiceLayout = () => {
 
   return (
         <div className="content_cli_l">
-          <div>
-            <BarraFiltros />
-            {pressed === false ? (
-              <button onClick={() => setPressed(true)}>agregar</button>
-            ) : (
-              <div>
-                <AgregarServicio setP={setPressed} />
+              {cards.length ===  0 ? 
+          <Spinner/> :
+          <div className="cont">
+              <div className="stats">
+                <DetalleLay/>
               </div>
-            )}
-          </div>
-          {cards.length === 0 ? 
-            <Spinner/> : 
-            <div className="cont">
-              <Paginado values={todas}/>
+              <div className="barraL">
+                <div className="item">
+                  <BarraFiltros />
+                </div>
+                <div className="item">
+                  {pressed === false ? (
+                    <button onClick={() => setPressed(true)}>
+                      <AddIcon/> </button>
+                    ) : (
+                      <div>
+                        <AgregarServicio setP={setPressed} />
+                    </div>
+                  )}
+                </div>
+              </div>
               <DashDisplay all={cards} Dash={Dash} model={"Servicios"} handleClick={handleClick}/>
-            </div>
-          }
+              <Paginado values={todas}/>
+            </div>}
         </div>
   );
 };

@@ -5,9 +5,11 @@ import BarraFiltros from "./barraFiltros";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Request";
 import DashDisplay from "./DashDisplay";
+import AddIcon from '@mui/icons-material/Add';
 import RequestR from "../create/requeset";
 import Paginado from "./paginado";
 import RequestGraph from "../Graphs/RequestsGraphs";
+import DetalleLay from "../DetalleLay";
 
 const RequestLayout = () => {
   let todas = useSelector((state) => state.actualG);
@@ -41,24 +43,31 @@ const RequestLayout = () => {
 
   return (
         <div className="content_cli_l">
-          <div>
-            <BarraFiltros />
-            {pressed === false ? (
-              <div>
-                <button onClick={() => setPressed(true)}>agregar</button>
-              </div>
-            ) : (
-              <RequestR setP={setPressed} />
-            )}
-          </div>
-          {cards.length === 0 ? 
-            <Spinner/> : 
+            {cards.length ===  0 ? 
+          <Spinner/> :
             <div className="cont">
-              <RequestGraph/>
-              <Paginado values={todas}/>
+              <div className="stats">
+                <RequestGraph/>
+                <DetalleLay/>
+              </div>
+              <div className="barraL">
+                <div className="item">
+                  <BarraFiltros />
+                </div>
+                <div className="item">
+                  {pressed === false ? (
+                    <button onClick={() => setPressed(true)}>
+                      <AddIcon/> </button>
+                    ) : (
+                      <div>
+                      <RequestR setP={setPressed} />
+                    </div>
+                  )}
+                </div>
+              </div>
               <DashDisplay all={cards} Dash={Dash} model={"Solicitudes"} handleClick={handleClick}/>
-            </div>
-          }
+              <Paginado values={todas}/>
+            </div>}
         </div>
   );
 };

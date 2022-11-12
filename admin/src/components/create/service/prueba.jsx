@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import RemoveIcon from '@mui/icons-material/Remove';
 import {
   createServicio,
   setActual,
-  getServicio,
   errorForm,
   setActualG
 } from "../../../redux/actions/index.js";
@@ -60,11 +60,11 @@ const AgregarServicio = ({ setP }) => {
   return (
     <div>
       <div className="content_act">
+      <button onClick={() => setP(false)}><RemoveIcon/></button>
         Servicio:
         <actuallContext.Provider value={send}>
           <Form/>
         </actuallContext.Provider>
-        <button onClick={() => setP(false)}>cerrar</button>
       </div>
     </div>
   );

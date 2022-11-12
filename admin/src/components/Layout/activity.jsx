@@ -10,6 +10,7 @@ import ActivityR from "../create/activity";
 import DashDisplay from "./DashDisplay";
 import Paginado from "./paginado";
 import DetalleLay from "../DetalleLay";
+import "./Layout.css"
 
 const ActivityLayout = () => {
   let todas = useSelector((state) => state.actualG);

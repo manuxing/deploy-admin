@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import RemoveIcon from '@mui/icons-material/Remove';
 import {
   createClient,
   getServicio,
@@ -77,11 +78,11 @@ const CreateClient = ({ setP }) => {
   return (
     <div>
       <div className="content_act">
+        <button onClick={() => setP(false)}><RemoveIcon/></button>
         Cliente:
         <actuallContext.Provider value={send}>
           <Form/>
         </actuallContext.Provider>
-        <button onClick={() => setP(false)}>cerrar</button>
       </div>
     </div>
   );

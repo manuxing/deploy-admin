@@ -1,29 +1,28 @@
 import React from "react";
 import './Service.css';
 import { NavLink } from "react-router-dom";
-// import  icon  from "../../../img/star.png"; 
+import RoofingIcon from '@mui/icons-material/Roofing';
 
 const Dash = ({data, handleClick})=> { 
     let {id, name, description, tR} = data;
     
     return (
         id === undefined ? <></> :
-        <div className="dash_act"> 
-        <h1>{id}</h1>
-            <NavLink className="link" to={`/service/${parseInt(id)}`}>
-                <div className="info_act_d"> 
-                    <div className="punto_fdato">
-                        <h2> Nombre</h2>
+        <div className="dash"> 
+          <div className="container img_act_d">
+                        <RoofingIcon/>
+                    </div>
+            <NavLink className="dashdata" to={`/service/${parseInt(id)}`}>
+                    <div className="contact" >
                         <h3>{name}</h3>
                     </div>
-                    <div className="punto_fdato">
+                    <div >
                         <h2>Descripcion</h2>
                         <h3> {description} </h3>
                     </div>
-                    <div className="punto_fdato">
+                    <div >
                         <h2>Horarios</h2>
                         <h3>{tR}</h3>
-                    </div>
                 </div>
             </NavLink>
             <button onClick={(e)=>handleClick(e, id)}>borrar</button>
