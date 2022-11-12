@@ -32,9 +32,7 @@ const Activity = () => {
       typeof actual !== "object" ?
           <Spinner/>
         :
-          <div className="content_act">
               <Detalle actual={actual}/>
-          </div>
     );
 };
 
