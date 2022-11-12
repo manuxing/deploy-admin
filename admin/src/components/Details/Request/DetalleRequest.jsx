@@ -1,18 +1,28 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import FaceIcon from '@mui/icons-material/Face';
+import "./Request.css"
 
 function DetalleRequest({ actual, handleChange, _stat }) {
   return (
-    <div>
-      {actual.solicitante && actual?.solicitante.length > 1 && (
-        <div className="item_requestD">
-          <span className="span_request">Solicitante</span>
-          {actual?.solicitante}
+    <div className='reqdetail'>
+      <div className='div_act'>
+      <FaceIcon size={"large"}/>
+        <div className='div_info'>
+          {actual.solicitante && actual?.solicitante.length > 1 && (
+            <div>
+              <h3 className="span_request">Solicitante:</h3>
+              {actual?.solicitante}
+            </div>
+          )}
         </div>
-      )}
-      <div className="item_requestD">
-        <span className="span_request">Servicios</span>
-        <div>
+      </div>
+      <div className='div_act'>
+        <div className='div_info'>
+          <div>
+            <h3>Servicios</h3>
+          </div>
+          <div>
           {actual?.service &&
                   <NavLink
                     key={`${actual.service.id}`}
@@ -22,32 +32,53 @@ function DetalleRequest({ actual, handleChange, _stat }) {
                     <span>{actual.service.name}</span>
                   </NavLink>
            }
+          </div>
+        </div>
+        <div className="div_info">
+          <div>
+            <h3>Contactos</h3>
+          </div>
+          <div>{actual?.contact}</div>
         </div>
       </div>
-      <div className="item_requestD">
-        <span className="span_request">Contactos</span>
-        <div>{actual?.contact}</div>
+      <div className="div_act">
+      <div className="div_info">
+        <div>
+          <h3>fecha solicitada</h3>
+        </div>
+        <div>
+          {actual?.dateP}
+        </div>
       </div>
-      <div className="item_requestD">
-        <span className="span_request">Medio</span>
-        {actual?.thg}
+        <div className="div_info">
+          <div>
+            <h3 className="span_request">fecha de solicitud</h3>
+          </div>
+          <div>
+            {actual?.dateR}
+          </div>
+        </div>
       </div>
-      <div className="item_requestD">
-        <span className="span_request">fecha de solicitud</span>
-        {actual?.dateR}
-      </div>
-      <div className="item_requestD">
-        <span className="span_request">fecha solicitada</span>
-        {actual?.dateP}
-      </div>
-      <div className="item_requestD">
-        <span className="span_request">
-          Estado:
+      <div className="div_act">
+        <div className="div_info">
+            <div>
+              <h3>Medio</h3>
+            </div>
+            <div>
+              {actual?.thg}
+            </div>
+        </div>
+        <div className="div_info">
+          <div>
+            <h3>Estado:</h3>
+          </div>
+          <div>
           {_stat === true ? "Leida" : "Por ver"}
-        </span>
-        <button onClick={() => handleChange(!_stat)}>change</button>
+          <button onClick={() => handleChange(!_stat)}>change</button>
+          </div>
+        </div>
       </div>
-    </div>
+      </div>
   );
 }
 

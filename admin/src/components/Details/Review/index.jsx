@@ -57,9 +57,7 @@ const Review = () => {
         <Spinner/>
       </div> 
       :
-    <div className="content_Review">
       <DetalleReview actual={actual} handleChange={handleChange} _stat={_stat}/>
-    </div>
   );
 };
 

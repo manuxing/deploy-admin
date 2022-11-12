@@ -3,55 +3,66 @@ import { NavLink } from 'react-router-dom';
 
 function DetalleService({actual}) {
   return (
-    <div>
-      <div className="div_srv">
-        <span className="span_srv">imagenes</span>
-      </div>
-      <div className="div_srv">
-        <span className="span_srv">{actual?.name ? actual?.name : "name"}</span>
-      </div>
-      <div className="div_srv">
-        <span className="span_srv">Descripcion</span>
-        <div>{actual?.description ? actual?.description : "descripcion"}</div>
-      </div>
-      <div className="div_srv">
-        <h2>Horarios</h2>
-        <div>
-          <span className="span_srv">Desde</span>
-          {actual?.tR ? actual?.tR : "Desde"}
-        </div>
-        <div>
-          <span className="span_srv">Hasta</span>
-          {actual?.tR_ ? actual?.tR_ : "Hasta"}
-        </div>
-      </div>
-      <div className="div_srv">
-        <span className="span_srv">Reviews</span>
-        {actual.reviews?.length}
-        <div>
-          {actual.reviews?.length > 0
-            ? actual.reviews.map((p) => {
-                return (
-                  <NavLink
-                    key={`${p.id}`}
-                    className="link"
-                    to={`/review/${p.id}`}
-                  >
-                    <div>
-                      <p>fecha:{p?.dateP}</p>
-                      <p>"{p.description}"</p>
-                      <p>{p.stat === true ? "leida" : "pendiente"}</p>
-                    </div>
-                  </NavLink>
-                );
-              })
-            : ""}
-        </div>
-        <div className="div_srv">
-          <span className="span_srv">Requests</span>
-          {actual?.requests?.length}
+<div className='actdetail'>
+      <div className="div_act">
+        <div className='div_info'>
           <div>
-            {actual?.requests?.length > 0
+            <h3>{actual?.name ? actual?.name : "name"}</h3>
+          </div>
+        </div>
+        <div className='div_info'>
+          <div>
+            <h3>Horarios</h3>
+          </div>
+          <div>
+            {actual?.tR ? actual?.tR : "Desde"}
+          </div>
+          <div>
+            {actual?.tR_ ? actual?.tR_ : "Hasta"}
+          </div>
+        </div>
+      </div>
+      <div className="div_act">
+        <div className='div_info'>
+          <div>
+            <h3>Descripcion</h3>
+          </div>
+          <div>{actual?.description ? actual?.description : "descripcion"}</div>
+        </div>
+      </div>
+      <div className="div_act">
+        <div className='div_info'>
+          <div>
+            <h3>Reseñas</h3>
+            {actual.reviews.length}
+          </div>
+          <div>
+            {/* {actual.reviews?.length > 0
+              ? actual.reviews.map((p) => {
+                  return (
+                    <NavLink
+                      key={`${p.id}`}
+                      className="link"
+                      to={`/review/${p.id}`}
+                    >
+                      <div>
+                        <p>fecha:{p?.dateP}</p>
+                        <p>"{p.description}"</p>
+                        <p>{p.stat === true ? "leida" : "pendiente"}</p>
+                      </div>
+                    </NavLink>
+                  );
+                })
+              : ""} */}
+          </div>
+        </div>
+        <div className='div_info'>
+          <div>
+            <h3>Request</h3>
+            {actual.requests.length}
+          </div>
+          <div>
+          {/* {actual?.requests?.length > 0
               ? actual.requests.map((p) => {
                   return (
                     <NavLink
@@ -67,11 +78,11 @@ function DetalleService({actual}) {
                     </NavLink>
                   );
                 })
-              : ""}
-          </div>
+              : ""} */}
+              </div>
         </div>
       </div>
-    </div>
+      </div>
   );
 }
 

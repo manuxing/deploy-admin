@@ -36,9 +36,7 @@ const Cliente = () => {
         <Spinner/>
       </div> 
       :
-          <div className="content_cli">
             <DetalleCliente actual={actual}/>
-          </div>
     );
 };
 
