@@ -1,11 +1,12 @@
 import React from "react";
+import "./Layout.css"
 
 const DashDisplay = ( data ) => {
     let back = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToGGvDxkPArT8mDgzcziQn30blnyEY_REmrg&usqp=CAU";
     let {Dash, model, handleClick} = data;
     let all = data.all;
     return (
-                <div>
+                <section className="basic-grid">
                     { all[0] === 0 ?
                         <span>
                             no se encontraron {model}
@@ -17,7 +18,7 @@ const DashDisplay = ( data ) => {
                             );
                         })
                     }
-                </div>
+                </section>
     );
 };
 

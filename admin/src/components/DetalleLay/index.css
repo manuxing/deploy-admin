@@ -1,0 +1,30 @@
+.detailaycard{
+    display: flex;
+    flex-direction: column;
+    height: 12rem;
+    width: 90%;
+    padding:  0.7rem 0.7rem 0rem 0.7rem;
+    margin: 0.2rem 1.3rem 0.2rem 1.2rem;
+    border-radius: 0.4rem;
+    background-color: rgb(223, 235, 231);
+}
+
+.titulo{
+    background-color: yellow;
+    display: inline;
+    height: 4rem;
+    padding: 0;
+    margin: 0;
+}
+
+.content{
+    display: flex;
+    flex-shrink: 1rem;
+    margin-top: 0.7rem;
+    height: 4rem;
+    justify-content: space-around;
+}
+
+.content h2{
+    margin-bottom: 0.7rem;
+}

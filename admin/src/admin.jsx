@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Bars from "./components/bars";
 import Home from "./components/home";
-
+import "./App.css"
 import About from "../src/components/about/Index";
 
 import Activity from "./components/Details/Activity";
@@ -29,9 +29,10 @@ import "../src/App.css";
 function Admin() {
 
   return (
-    <div>
+    <div >
         <BrowserRouter>
             <Bars/>
+            <div className="App">
             <Switch>
             <Route exact path="/home" component={Home} />
             <Route path="/about/">
@@ -78,6 +79,7 @@ function Admin() {
                 <ServiceLayout />
             </Route>
             </Switch>
+            </div>
         </BrowserRouter>
     </div>
   );

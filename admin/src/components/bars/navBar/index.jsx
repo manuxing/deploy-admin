@@ -31,7 +31,7 @@ const NavBar = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if(searchAdresses.includes(navigate)){
+  if(searchAdresses.includes(navigate) || navigate === "/about"){
       setSearch(true)
     }else{
       setSearch(false)
@@ -50,13 +50,15 @@ const NavBar = () => {
   // };
 
   return (
-    <div className="topbar">
-      <NavLink to={"/home"} className="LinkSideB">
-        <div className="logo">Administrador</div>
-      </NavLink>
-      <LogOut/>
-        <div className="topWrapper">
+    <div className="top-section">
+      {/* <NavLink to={"/home"} className="LinkSideB">
+        <div className="logo">Bodega RP</div>
+      </NavLink> */}
+      {/* <LogOut/> */}
           <div className="topRight">
+            {pressed === true ? 
+              <Drop not={not} /> 
+              : <></>}
               {
               not && not.length > 0  ?
                 <button onClick={()=>setPressed(!pressed)}>
@@ -64,16 +66,12 @@ const NavBar = () => {
                 </button>:
               <NotificationsIcon/> 
               }
-            {pressed === true ? 
-              <Drop not={not} /> 
-              : <></>}
           </div>
             {search === true ?
             <SearchBar /> :
           <></>
           }
         </div>
-      </div>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { actuallContext } from "../ActualContext";
+import RemoveIcon from '@mui/icons-material/Remove';
 import Form from "./Form";
 import {
   getServicio,
@@ -82,11 +83,11 @@ const ActivityR = ({ setP }) => {
   return (
     <div>
       <div className="content_act">
+        <button onClick={() => setP(false)}><RemoveIcon/></button>
         Actividad:
         <actuallContext.Provider value={send}>
           <Form/>
         </actuallContext.Provider>
-        <button onClick={() => setP(false)}>cerrar</button>
       </div>
     </div>
   );

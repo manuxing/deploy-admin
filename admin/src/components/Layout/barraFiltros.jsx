@@ -1,6 +1,8 @@
 import React,  { useState }  from 'react';
 import {search} from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 const BarraFiltros = () => {
     let [order, setOrder] = useState("DESC");
@@ -16,9 +18,9 @@ const BarraFiltros = () => {
       }
     }
   return (
-    <div>
-        <button onClick={(e)=>handleClick(e)}>orden {order ===false ? "asc" : "desc"}</button>         
-    </div>
+      order === "DESC" ? 
+      <button onClick={(e)=>handleClick(e)}><ArrowDownwardIcon/></button>         :
+      <button onClick={(e)=>handleClick(e)}><ArrowUpwardIcon/></button>         
   );
 };
 

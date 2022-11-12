@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import AddIcon from '@mui/icons-material/Add';
 import { useSelector, useDispatch } from "react-redux";
 import { setActualG, getNot, clearActualG, deleteModel, setDeleted } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
@@ -8,6 +9,7 @@ import Dash from "../Dashes/Activity.jsx";
 import ActivityR from "../create/activity";
 import DashDisplay from "./DashDisplay";
 import Paginado from "./paginado";
+import DetalleLay from "../DetalleLay";
 
 const ActivityLayout = () => {
   let todas = useSelector((state) => state.actualG);
@@ -41,24 +43,29 @@ const ActivityLayout = () => {
   
   return (
     <div className="content_cli">
-          <div>
-            <div>
-              <BarraFiltros />
-              {pressed === false ? (
-                <button onClick={() => setPressed(true)}>agregar</button>
-              ) : (
-                <div>
-                  <ActivityR setP={setPressed} />
-                </div>
-              )}
-            </div>
-          </div>
           {cards.length === 0 ? 
             <Spinner/> :
             <div className="cont">
+              <div className="stats">
                   <ActivitysGraph/>
-                  <Paginado values={todas}/>
+                  <DetalleLay/>
+              </div>
+              <div className="barraL">
+                <div className="item">
+                  <BarraFiltros />
+                </div>
+                <div className="item">
+                  {pressed === false ? (
+                    <button onClick={() => setPressed(true)}>
+                      <AddIcon />
+                    </button>
+                  ) : (
+                      <ActivityR className="item" setP={setPressed} />
+                  )}
+              </div>
+            </div>
                   <DashDisplay all={cards} Dash={Dash} model={"Actividades"} handleClick={handleClick}/>
+                  <Paginado values={todas}/>
             </div>}
         </div>
   );

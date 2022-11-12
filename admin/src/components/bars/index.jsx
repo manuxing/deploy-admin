@@ -1,15 +1,14 @@
 import React from "react";
+import ActivitysGraph from "../Graphs/ActivitysGraph";
 import NavBar from "./navBar";
 import SideBar from "./sideBar";
 
 const Bars = () => {
   return (
-    <div>
+    <div className="bars">
         <NavBar/>
-        <div>
             <SideBar/>
-        </div>
-    </div>
+     </div>
   );
 };
 

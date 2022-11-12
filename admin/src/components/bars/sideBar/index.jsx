@@ -2,9 +2,11 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { setAll } from "../../../redux/actions";
 import "../sideBar/sideBar.css";
-import LinkWIcon from "../../../mod/linksWLogo";
+import {NavLink} from "react-router-dom"
+// import LinkWIcon from "../../../mod/linksWLogo";
 // Icons
-// import PersonIcon from "@mui/icons-material/Person";
+import PersonIcon from "@mui/icons-material/Person";
+import LogOut from "../LogOut";
 // import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 // import GridViewIcon from "@mui/icons-material/GridView";
 // import PaidIcon from "@mui/icons-material/Paid";
@@ -23,18 +25,31 @@ const SideBar = () => {
 
   return (
     <div className="side">
-      <div className="items">
-        <ul>
-          {
-            all.length > 0 && all.map(p =>{
-              return(
-                  <li key ={p.url} className="item">
-                    <LinkWIcon p={p}/>
-                  </li>
-                );
-            })
-          }
-        </ul>
+      <div>
+        <section className="title-container">
+          <h1>
+            Bodega RP
+          </h1>
+        </section>
+        <div className="link-container">
+            {
+              all.length > 0 && all.map(p =>{
+                return(
+                    <div key ={p.url} className="links">
+                      <div className="icon">
+                        <PersonIcon/>
+                      </div>
+                      <NavLink className="linkto"to={`${p.url}`}>
+                        {p.to}
+                      </NavLink>
+                    </div>
+                  );
+              })
+            }
+        </div>
+      </div>
+      <div className="logout">
+            <LogOut/>
       </div>
     </div>
   );

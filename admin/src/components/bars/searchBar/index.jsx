@@ -21,9 +21,8 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="nav">
       <form className="form-container" onSubmit={(e) => handleSubmit(e)}>
-        <div className="form-div">
+        <div className="input-box">
           <input
             className="inputt"
             type="text"
@@ -36,7 +35,6 @@ const SearchBar = () => {
           </button>
         </div>
       </form>
-    </div>
   );
 };
 

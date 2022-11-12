@@ -1,17 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
 
-.dash {
+.card {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    background: #b59a9a;
-    font-size: 0.7rem;
-    justify-content: space-around;
+    background: #a28585;
+    font-size: 0.8rem;
     color: #fff;
     box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
-    height: 60%;
-    width: 98%;
-    margin: 0.3rem 0.2rem 0rem 0.7rem;
-    border-radius: 3px;
+    height: 12rem;
+    width: 15.6rem;
+    border-radius: 2.9px;
     transition: all 500ms;
     overflow: hidden;
 
@@ -19,15 +17,18 @@
     background-position: center;
     background-repeat: no-repeat;
  }
- .dashdata{
-     display: flex;
-     justify-content: space-around;
+ .top{
+    display: flex;
+    justify-content: space-around;
+ }
+ .paginado{
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
  }
   
- .dashdata h2{ 
-    margin: 0.5rem;
-}
-
 .card:hover {
     box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
     transform: translateY(-3px) scale(1.1);

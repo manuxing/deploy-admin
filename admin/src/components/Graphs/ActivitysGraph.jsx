@@ -18,7 +18,7 @@ function ActivitysGraph() {
       ]; 
   }, []);
   return (
-    <LineChart width={420} height={300} data={data}>
+    <LineChart width={500} height={230} data={data}>
         <Line type="monotone" dataKey="activitys" stroke="#2196F3" strokeWidth={3} />;
         <CartesianGrid stroke="#ccc"/>
         <XAxis dataKey="mes"/>
