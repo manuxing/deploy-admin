@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react'
 import { actuallContext } from '../create/ActualContext'
+import "./About.css"
 import AgregarContacto from "./agregarContacto"
 import ContactCard from "./contactCard"
 
@@ -44,10 +45,9 @@ const Form =()=> {
   let id= 0; 
 
   return (
-    <div>
-        <form className="form" onSubmit={(e)=>sub(e)} >
+    <form className="form" onSubmit={(e)=>sub(e)} >
+          <div className='about'>
           <div>
-            <label>Info</label>
             <textarea
               id='id'
               className="input"
@@ -64,11 +64,11 @@ const Form =()=> {
             _contacts={input}
             contactsThg={thg}
           />}
-          <div className="warning">{warning.contact}</div>
-          {typeof input.contact === 'object' && input.contact.length > 0 &&
+          {edit === true && typeof input.contact === 'object' && input.contact.length > 0 &&
                     <button onClick={(e)=>popC(e)}>-
                     </button>}
-          <div>
+          <div className="warning">{warning.contact}</div>
+          <div className='contacts'>
             {typeof input.contact === 'object' && input?.contact.map((p) => {
               id++
               return (
@@ -78,10 +78,12 @@ const Form =()=> {
               )
             })}
           </div>
-          <input type={"submit"}/>
+            <div className='buttons'>
+              <input type={"submit"}/>
+              <button onClick={(e)=>editS(e)}> edit </button>
+            </div>
+        </div>
         </form>
-        <button onClick={(e)=>editS(e)}> edit </button>
-    </div>
   )
 }
 

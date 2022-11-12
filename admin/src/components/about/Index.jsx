@@ -59,7 +59,9 @@ const About = () => {
         {about === null ? 
         <Spinner/> :
         <div className="content_act">
-          Informacion
+          <h3>
+            Informacion
+          </h3>
           <actuallContext.Provider value={send}>
             <Form/>
           </actuallContext.Provider>

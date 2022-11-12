@@ -1,14 +1,16 @@
 import React from "react";
+import "./About.css"
 
 const ContactCard = ({ contact }) => {
   console.log(contact)
   return (
     typeof contact === 'object' ?
-    <div className="contact_card_createClient">
-      <h2>{contact.type}</h2>
-      <h2>{contact.value}</h2>
+    <div className="contactcard">
+      <h3>{contact.type}: {contact.value}</h3>
     </div>: 
-    <h2>{contact}</h2>
+    <div className="contactcard">
+      <h3>{contact}</h3>
+    </div>
   );
 };
 
