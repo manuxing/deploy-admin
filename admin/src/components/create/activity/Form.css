@@ -164,3 +164,11 @@
     justify-content: flex-end;
     margin: 2rem 0.8rem 0rem 0rem;
 }
+
+.warning{
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0.2rem 0.6rem 0.2rem;
+    background-color: hsla(0, 85%, 41%, 0.263); 
+    border-radius: 0.5rem;
+}

@@ -59,9 +59,10 @@ const AgregarServicio = ({ setP }) => {
 
   return (
     <div>
-      <div className="content_act">
-      <button onClick={() => setP(false)}><RemoveIcon/></button>
-        Servicio:
+      <div className="preform">
+        <div className="titlef">
+          <h2>Crear Servicio</h2>
+        </div>
         <actuallContext.Provider value={send}>
           <Form/>
         </actuallContext.Provider>

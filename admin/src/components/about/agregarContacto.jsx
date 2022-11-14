@@ -87,7 +87,7 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
               }}
             />
             </div>
-              <div className="warning_acs">{warning.contacto}</div>
+              <div className="acs">{warning.contacto}</div>
               <div className="buttonab">
                 <button   onClick={(p) => handleSubmit(p, contact)} />
               </div>
