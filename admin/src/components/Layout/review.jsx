@@ -7,6 +7,7 @@ import DashDisplay from "./DashDisplay";
 import Dash from "../Dashes/Review";
 import RequestGraph from "../Graphs/RequestsGraphs";
 import Paginado from "./paginado";
+import AddIcon from '@mui/icons-material/Add';
 import DetalleLay from "../DetalleLay";
 import { useHistory } from "react-router-dom";
 
@@ -52,7 +53,7 @@ const ReviewLayout = () => {
               <div className="barraL">
                 <div className="item">
                 <button onClick={() => history.push("/create/review")}>
-                      +
+                <AddIcon fontSize="small"/>
                     </button>
                 </div>
                   <BarraFiltros />

@@ -9,6 +9,7 @@ import Dash from "../Dashes/Client";
 import Paginado from "./paginado";
 import ActivitysGraph from "../Graphs/ActivitysGraph";
 import DetalleLay from "../DetalleLay";
+import AddIcon from '@mui/icons-material/Add';
 import { useHistory } from "react-router-dom";
 
 const ClientLayout = () => {
@@ -53,7 +54,7 @@ const ClientLayout = () => {
               <div className="barraL">
                 <div className="item">
                 <button onClick={() => history.push("/create/client")}>
-                      +
+                  <AddIcon fontSize="small"/>
                     </button>
                 </div>
                   <BarraFiltros />

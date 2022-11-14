@@ -8,6 +8,7 @@ import DashDisplay from "./DashDisplay";
 import Paginado from "./paginado";
 import RequestGraph from "../Graphs/RequestsGraphs";
 import DetalleLay from "../DetalleLay";
+import AddIcon from '@mui/icons-material/Add';
 import { useHistory } from "react-router-dom";
 
 const RequestLayout = () => {
@@ -53,7 +54,7 @@ const RequestLayout = () => {
                 <div className="barraL">
                 <div className="item">
                 <button onClick={() => history.push("/create/request")}>
-                      +
+                <AddIcon fontSize="small"/>
                     </button>
                 </div>
                   <BarraFiltros />

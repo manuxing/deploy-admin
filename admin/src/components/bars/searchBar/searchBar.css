@@ -1,6 +1,6 @@
 .input-box {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   height: 1.3rem;
   width: 16rem;
   box-shadow: 8px 2px 9px 1px hsla(234, 54%, 50%, 0.1);

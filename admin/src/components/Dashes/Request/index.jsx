@@ -2,26 +2,25 @@ import React from "react";
 import './Request.css';
 import { NavLink } from "react-router-dom";
 import PostAddIcon from '@mui/icons-material/PostAdd';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Dash = ({data, handleClick})=> { 
     let {id,  dateP, contact, solicitante} = data;
     return (
         id === undefined ? <></> :
         <div className="dash"> 
-                     <div className="top">
-                        <PostAddIcon/>
+                     <div className="topdash">
+                        <PostAddIcon color="secondary"/>
                     </div>
                 <NavLink className="dashdata" to={`/request/${id}`}>
-                    {solicitante !== undefined ? <div className="punto_fdato">
-                        <h3> solicitante: <span></span>
-                        <br></br>
-                        {solicitante}</h3>
+                    {solicitante !== undefined ? <div className="divdash">
+                        <h2> Solicitante: {solicitante}</h2>
                     </div> : <></>}
-                    <div >
-                        <h2>Fecha solicitada</h2>
-                        <h3>{dateP}</h3>
+                    <div className="divdash">
+                        <h2>Fecha solicitada:  {dateP.slice(0, 10)}
+                        </h2>
                     </div>
-                    <div >
+                    {/* <div >
                         <h2>Contacto</h2>
                         {contact && contact.length > 0 &&
                             contact.map(p =>{
@@ -30,9 +29,11 @@ const Dash = ({data, handleClick})=> {
                                 )
                             })
                         }
-                    </div>
+                    </div> */}
                 </NavLink>
-                <button onClick={(e)=>handleClick(e, id)}>borrar</button>
+                <div className="delete">
+                    <button oClick={(e)=>handleClick(e, id)}><DeleteForeverIcon fontSize="small"/></button>
+                </div>
         </div>
     )
 };

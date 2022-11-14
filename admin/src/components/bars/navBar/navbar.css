@@ -24,3 +24,19 @@
     color: darkblue;
     cursor: pointer;
 }
+
+.top-section button{
+    border-style: solid;
+    border-radius: 0.7rem;
+    background-color: transparent;
+    border-width: 0rem;
+    padding: 0rem;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0rem 0.5rem;
+}
+/* .search{
+    display: flex;
+    flex-direction: row;
+} */

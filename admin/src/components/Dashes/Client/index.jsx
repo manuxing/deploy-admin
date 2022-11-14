@@ -3,6 +3,7 @@ import './Client.css';
 import "../../Layout/base.css"
 import { NavLink } from "react-router-dom";
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Dash = ({data, handleClick})=> { 
     let { id,  name, contact } = data;
@@ -10,7 +11,7 @@ const Dash = ({data, handleClick})=> {
         id === undefined ? <></> :
         <div className="dash">
                     <div className="topdash">
-                        <AccountBoxIcon/>
+                        <AccountBoxIcon color="secondary"    />
                     </div>
                 <NavLink className="dashdata" to={`/client/${id}`}>
                         <div >
@@ -21,7 +22,7 @@ const Dash = ({data, handleClick})=> {
                             {contact && contact.length > 0 &&
                                 contact.map(p =>{
                                     return(
-                                        <div  key={p}>
+                                        <div className="contd" key={p}>
                                             <h3 > {p} </h3>
                                         </div>
                                     )
@@ -29,7 +30,7 @@ const Dash = ({data, handleClick})=> {
                             }
                 </NavLink>
                 <div className="delete">
-                    <button onClick={(e)=> handleClick(e, id)}>borrar</button>
+                    <button onClick={(e)=>handleClick(e, id)}><DeleteForeverIcon fontSize="small"/></button>
                 </div>
         </div>
     )

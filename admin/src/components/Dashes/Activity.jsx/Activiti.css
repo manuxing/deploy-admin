@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* background: #b59a9a; */
     font-size: 0.6rem;
     justify-content: flex-start;
     color: #fff;
@@ -31,20 +30,38 @@
     margin: 0.5rem;
 }
 
+.divdash{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.56rem;
+}
+
+
+.divdash h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+}
+
  .dash button{
     border-style: solid;
     border-color: hsla(271, 24%, 65%, 0.041);
     border-radius: 0.7rem;
     background-color: transparent;
     border-width: 0.1rem;
-    /* box-shadow: hsla(222, 40%, 51%, 0.135) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem; */
-    /* color: rgb(44, 39, 39); */
     padding: 0.2rem;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
 } 
 
+.contd{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
 .topdash{
     display: flex;
     justify-content: flex-start;

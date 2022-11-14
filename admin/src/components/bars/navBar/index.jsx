@@ -42,31 +42,22 @@ const NavBar = () => {
     setPressed(false);
   }, [not]);
 
-  // const { profile } = useSeslector((state) => state.authReducer);
-  // const logout = () => {
-  //   localStorage.removeItem("profile");
-  //   dispatch(logoutUser());
-  //   navigate.push("");
-  // };
-
   return (
     <div className="top-section">
       {/* <NavLink to={"/home"} className="LinkSideB">
         <div className="logo">Bodega RP</div>
       </NavLink> */}
       {/* <LogOut/> */}
-          <div className="topRight">
             {pressed === true ? 
               <Drop not={not} /> 
               : <></>}
               {
               not && not.length > 0  ?
                 <button onClick={()=>setPressed(!pressed)}>
-                  <NotificationsActiveIcon/>
+                  <NotificationsActiveIcon fontSize="small"/>
                 </button>:
               <NotificationsIcon/> 
               }
-          </div>
             {search === true ?
             <SearchBar /> :
           <></>

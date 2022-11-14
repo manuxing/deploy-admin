@@ -19,8 +19,8 @@ function RequestGraph() {
       ]; 
   }, []);
   return (
-    <LineChart width={420} height={300} data={data}>
-        <Line type="monotone" dataKey="Solicitudes" stroke="#2196F3" strokeWidth={3} />;
+    <LineChart width={440} height={210} data={data}>
+        <Line type="monotone" dataKey="Solicitudes" stroke="#2196F3" strokeWidth={1.5} />;
         <CartesianGrid stroke="#ccc"/>
         <XAxis dataKey="name"/>
     </LineChart>

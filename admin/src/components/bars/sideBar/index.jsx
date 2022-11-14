@@ -3,14 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 import { setAll } from "../../../redux/actions";
 import "../sideBar/sideBar.css";
 import {NavLink} from "react-router-dom"
-// import LinkWIcon from "../../../mod/linksWLogo";
-// Icons
-import PersonIcon from "@mui/icons-material/Person";
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import LogOut from "../LogOut";
-// import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
-// import GridViewIcon from "@mui/icons-material/GridView";
-// import PaidIcon from "@mui/icons-material/Paid";
-// import GradingIcon from "@mui/icons-material/Grading";
 
 const SideBar = () => {
   
@@ -26,10 +20,12 @@ const SideBar = () => {
   return (
     <div className="side">
       <div>
-        <section className="title-container">
-          <h1>
-            Bodega RP
-          </h1>
+        <section className="bodega">
+           <NavLink className="linkto" to={"/activitys"} >
+            <h1>
+              Bodega RP
+            </h1>
+          </NavLink>
         </section>
         <div className="link-container">
             {
@@ -37,7 +33,7 @@ const SideBar = () => {
                 return(
                     <div key ={p.url} className="links">
                       <div className="icon">
-                        <PersonIcon/>
+                        <ArrowRightIcon fontSize="small"/>
                       </div>
                       <NavLink className="linkto"to={`${p.url}`}>
                         {p.to}

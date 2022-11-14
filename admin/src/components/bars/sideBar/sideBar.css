@@ -61,6 +61,20 @@
     margin-right: 1rem;
     margin-bottom: 1.7rem;
 }
+
+.side button{
+  height: 1.7rem;
+  width: 45%;
+  font-size: 0.86rem;
+  border-radius: 0.5rem;
+  border-width: 0rem;
+  background-color: hsla(10, 78%, 43%, 0.3);
+}
+
+.bodega{
+  font-size: 0.9rem;
+  margin-left: 2rem;
+}
 /* .items{
     width: 90%;
     height: 99%;

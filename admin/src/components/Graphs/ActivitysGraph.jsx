@@ -21,7 +21,7 @@ function ActivitysGraph() {
   return (
     <div className="chart">
       <LineChart width={430} height={210} data={data}>
-          <Line type="monotone" dataKey="activitys" stroke="#2196F3" strokeWidth={3} />;
+          <Line type="monotone" dataKey="activitys" stroke="#2186F2" strokeWidth={1.5} />;
           <CartesianGrid stroke="#ccc"/>
           <XAxis dataKey="mes"/>
       </LineChart>

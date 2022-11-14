@@ -7,6 +7,7 @@ import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Service";
 import Paginado from "./paginado";
 import DetalleLay from "../DetalleLay";
+import AddIcon from '@mui/icons-material/Add';
 import { useHistory } from "react-router-dom";
 
 const ServiceLayout = () => {
@@ -50,7 +51,7 @@ const ServiceLayout = () => {
               <div className="barraL">
                 <div className="item">
                 <button onClick={() => history.push("/create/service")}>
-                      +
+                <AddIcon fontSize="small"/>
                     </button>
                 </div>
                   <BarraFiltros />
