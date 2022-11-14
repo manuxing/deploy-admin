@@ -49,43 +49,45 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   };
 
   return (
-    <div className="addcontact">
-      <div className="addcontact_form">
-        <label>Contacto</label>
-        <select
-          className="selectcontact"
-          name={"contact"}
-          onChange={(e) => handleSelect(e)}
-        >
-          <option id={"id"}hidden>medio de contacto</option>
-          {contactsThg.map((p) => {
-            return (
-              <option value={p} key={p}>
-                {p}
-              </option>
-            );
-          })}
-        </select>
-        {contact.type === "pagina" ||
-        contact.type === "booking" ||
-        contact.type === "presencial" ||
-        contact.type === "" ? (
-          <></>
-        ) : (
-          <input
-            className="inputcontact"
-            type={chooseType(contact.type)}
-            name={"value"}
-            value={contact.value}
-            onChange={(p) => {
-              handleChange(p);
-            }}
-          />
-        )}
+    <div className="agregarvontacto">
+        <h3>Contacto</h3>
+        <div className="top">
+          <select
+            className="selectcontact"
+            name={"contact"}
+            onChange={(e) => handleSelect(e)}
+          >
+            <option id={"id"}hidden>medio de contacto</option>
+            {contactsThg.map((p) => {
+              return (
+                <option value={p} key={p}>
+                  {p}
+                </option>
+              );
+            })}
+          </select>
+          {contact.type === "pagina" ||
+          contact.type === "booking" ||
+          contact.type === "presencial" ||
+          contact.type === "" ? (
+            <></>
+          ) : (
+            <input
+              className="inputcontact"
+              type={chooseType(contact.type)}
+              name={"value"}
+              value={contact.value}
+              onChange={(p) => {
+                handleChange(p);
+              }}
+            />
+          )}
+        </div>
         <div className="warning_acs">{warning.contacto}</div>
-        <button onClick={(p) => handleSubmit(p, contact)} />
+        <div className="agregar">
+          <button onClick={(p) => handleSubmit(p, contact)}>+</button>
+        </div>
       </div>
-    </div>
   );
 };
 

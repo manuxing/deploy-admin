@@ -90,10 +90,11 @@ const {
   }
 
   return (
-    <div>
-        <form className="form" >
-          <div>
-            <label>Nombre</label>
+    <form >
+      <div className="form">
+        <div className='topf'>
+          <div className='node'>
+            <h3>Nombre</h3>
             <input
               className="input"
               type={"text"}
@@ -104,44 +105,82 @@ const {
             />
             <div className="warning">{warning.name}</div>
           </div>
-          <AgregarContacto
-            contactsThg={contactsThg}
-            setContacts={setInput}
-            _contacts={input}
-          />
+            <AgregarContacto
+              contactsThg={contactsThg}
+              setContacts={setInput}
+              _contacts={input}
+            />
+            {typeof input.contact === "object" && input.contact.length > 0 && (
+              <div className='pop'>
+                <button onClick={(e) => popC(e)}>-</button>
+              </div>
+            )}
           <div className="warning">{warning.contact}</div>
-          {typeof input.contact === 'object' && input.contact.length > 0 &&
-                    <button onClick={(e)=>popC(e)}>-
-                    </button>}
-          <div>
-            {typeof input.contact === 'object' && input.contact.map((p) => {
-              return (
-                <div key={p.value}>
-                  <ContactCard contact={p} />
-                </div>
-              )
-            })}
+        </div>
+          <div id='personss'>
+            <h3>Contactos</h3>
           </div>
+          <div className='contacts'>
           <div>
-            <label>Fecha de la actividad</label>
-            <input
+            {typeof input.contact === "object" &&
+              input.contact.map((p) => {
+                return (
+                  <div key={p.value}>
+                    <ContactCard contact={p} />
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+        <div className='topf'>
+          <div className='node'>
+            <h3>Fecha de la actividad</h3>
+          <input
             className="input"
             type={"date"}
             placeholder="date"
             name={"date"}
             value={input.date}
             onChange={(p) => handleChange(p)}
-            />
+          />
             <div className="warning">{warning.date}</div>
           </div>
-            <AgregarPersona setPersons={setInput} _persons={input} />
-            {typeof input.persons === 'object' && input.persons.length > 0 && 
-                  <button onClick={(e)=>popP(e)}>-
-                    </button>}
-          <div>
-          {typeof input.persons === 'object' && input.persons.length > 0 && input.persons.map((p) => {
-            return (
-              <div>
+          <div className='node'>
+            <h3>Servicios</h3>
+            <select
+              className="selectageR"
+              name={"sId"}
+              onChange={(e) => {
+                handleChange(e);
+              }}
+            >
+              <option id="service" hidden>
+                seleccione
+              </option>
+              {services.map((p) => {
+                return (
+                  <option value={p.id} key={`${p.id}`}>
+                    {p.name}
+                  </option>
+                );
+              })}
+            </select>
+            <div className="warning">{warning.sId}</div>
+          </div>
+        </div>
+          <AgregarPersona setPersons={setInput} _persons={input} />
+          {typeof input.persons === "object" && input.persons.length > 0 && (
+            <button onClick={(e) => popP(e)}>-</button>
+          )}
+           <div id='personss'>
+          <h3>Personas</h3>
+        </div>
+        <div className='persons'>
+            {typeof input.persons === "object" &&
+              input.persons.length > 0 &&
+              input.persons.map((p) => {
+              return (
+                <div>
                   <PersonCard
                     key={
                       input.persons.length +
@@ -150,35 +189,15 @@ const {
                     person={p}
                   />
                 </div>
-            )
-          })}
-          </div>
-        <div>
-          <label>Servicios</label>
-          <select
-            className="selectageR"
-            name={"sId"}
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          >
-          <option id="service" hidden>
-            seleccione
-          </option>
-          {services.map((p) => {
-            return (
-              <option value={p.id} key={`${p.id}`}>
-                {p.name}
-              </option>
-            );
-          })}
-        </select>
-        <div className="warning">{warning.sId}</div>
+              );
+            })}
         </div>
-          <button onClick={(e) => handleSubmit(e, input)}/>
-        </form>
-    </div>
-  )
+        <div className='enviar'>
+          <button onClick={(e) => handleSubmit(e, input)}> Enviar</button>
+        </div>
+      </div>
+    </form>
+  );
 }
 
 export default React.memo(Form);

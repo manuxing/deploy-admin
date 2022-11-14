@@ -25,6 +25,7 @@ import ServiceLayout from "./components/Layout/services";
 import AgregarServicio from "./components/create/service/prueba";
 import Error from "./components/Error";
 import "../src/App.css";
+import Prueba from "./components/create/client/prueba";
 
 function Admin() {
 
@@ -43,7 +44,7 @@ function Admin() {
             </Route>
             <Route path="/activitys/">
                 {/* <ActivityLayout /> */}
-                <ActivityR />
+                <Prueba/>
             </Route>
             <Route path="/createcl">
                 <Form />
