@@ -89,18 +89,21 @@ const RequestR = ({ setP }) => {
       x.selected = true;
     }
   }, [actual, input]);
-
   return (
     <div>
-      <div className="content_act">
-      <button onClick={() => setP(false)}><RemoveIcon/></button>
-        solicitud:
-        <actuallContext.Provider value={send}>
-          <Form/>
-        </actuallContext.Provider>
+      <div className="preform">
+      <div className="titlef">
+          <h2>Crear Solicitud</h2>
+        </div>
+        <div>
+          <actuallContext.Provider value={send}>
+            <Form/>
+          </actuallContext.Provider>
+        </div>
       </div>
     </div>
   );
 };
 
 export default React.memo(RequestR);
+
