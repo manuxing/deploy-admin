@@ -1,6 +1,7 @@
 import React, { useMemo, useEffect } from "react";
 import { XAxis, CartesianGrid, Line, LineChart } from "recharts";
 import { useSelector } from "react-redux";
+import "./index.css"
 
 function ActivitysGraph() {
   let Requests = useSelector((state) => state.actualG.data)
@@ -18,11 +19,13 @@ function ActivitysGraph() {
       ]; 
   }, []);
   return (
-    <LineChart width={500} height={230} data={data}>
-        <Line type="monotone" dataKey="activitys" stroke="#2196F3" strokeWidth={3} />;
-        <CartesianGrid stroke="#ccc"/>
-        <XAxis dataKey="mes"/>
-    </LineChart>
+    <div className="chart">
+      <LineChart width={500} height={230} data={data}>
+          <Line type="monotone" dataKey="activitys" stroke="#2196F3" strokeWidth={3} />;
+          <CartesianGrid stroke="#ccc"/>
+          <XAxis dataKey="mes"/>
+      </LineChart>
+    </div>
   );
 }
 
