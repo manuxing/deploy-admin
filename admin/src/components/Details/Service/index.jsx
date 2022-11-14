@@ -90,7 +90,10 @@ const Service = () => {
             <Form/>
           </actuallContext.Provider>
       }
-        <button onClick={(e)=>editS(e)}> edit </button>
+      <br></br>
+      <div className='buttons'>
+        <button onClick={(e)=>editS(e)}> Edit </button>
+      </div>
       </div>
   );
 };

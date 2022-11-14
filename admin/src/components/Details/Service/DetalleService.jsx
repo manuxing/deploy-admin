@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
+import ReviewC from '../../lO/reviewC';
 
 function DetalleService({actual}) {
   return (
@@ -35,34 +36,32 @@ function DetalleService({actual}) {
           <div>
             <h3>Reseñas</h3>
             {actual?.reviews && actual?.reviews.length}
+          <br></br>
           </div>
-          <div>
-            {/* {actual.reviews?.length > 0
-              ? actual.reviews.map((p) => {
-                  return (
-                    <NavLink
-                      key={`${p.id}`}
-                      className="link"
-                      to={`/review/${p.id}`}
-                    >
-                      <div>
-                        <p>fecha:{p?.dateP}</p>
-                        <p>"{p.description}"</p>
-                        <p>{p.stat === true ? "leida" : "pendiente"}</p>
-                      </div>
-                    </NavLink>
-                  );
-                })
-              : ""} */}
-          </div>
+          <br></br>
+          <div className="display_info">
+          {actual?.reviews
+            ? actual?.reviews.map((p) => {
+                return (
+                  <NavLink
+                    key={`${p.id}`}
+                    className="link"
+                    to={`/review/${p.id}`}
+                  >
+                    <ReviewC key={p} review={p} />
+                  </NavLink>
+                );
+              })
+            : "Reviews"}
+        </div>
         </div>
         <div className='div_info'>
           <div>
             <h3>Request</h3>
-            {actual?.request && actual?.request.length}
+            {actual?.requests && actual?.requests.length}
           </div>
-          <div>
-          {/* {actual?.requests?.length > 0
+          <div className="display_info">
+          {actual?.requests?.length > 0
               ? actual.requests.map((p) => {
                   return (
                     <NavLink
@@ -70,15 +69,11 @@ function DetalleService({actual}) {
                       className="link"
                       to={`/request/${p.id}`}
                     >
-                      <div>
-                        <p>fecha Solicitada:{p?.dateR}</p>
-                        <p>{p.contact[0]}</p>
-                        <p>{p.stat === true ? "leida" : "pendiente"}</p>
-                      </div>
+                      <ReviewC key={p} review={p} />
                     </NavLink>
                   );
                 })
-              : ""} */}
+              : ""}
               </div>
         </div>
       </div>

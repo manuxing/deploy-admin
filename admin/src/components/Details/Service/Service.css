@@ -3,6 +3,15 @@
     height: 600px;
 }
 
+.content_srv button{
+    width: 5%;
+    height: 1rem;
+    font-size: 0.7rem;
+    border-radius: 0.42rem;
+    border-width: 0.02rem;
+    border-color: hsla(240, 29%, 66%, 0.297);
+}
+
 .div_srv{
     margin: 20px;
     font-size: 24px;
@@ -27,6 +36,7 @@
     border-color: hsla(150, 2%, 80%, 0.06);
     border-width: 0.2rem;
     border-radius: 0.6rem;
+    border-right: 0rem;
     padding: 0.6rem;
 }
 

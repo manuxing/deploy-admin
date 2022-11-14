@@ -15,6 +15,18 @@
     padding: 0.1rem 0.8rem;
 }
 
+.form button{
+    border-style: solid;
+    border-color: hsla(271, 24%, 65%, 0.041);
+    border-radius: 0.7rem;
+    background-color: transparent;
+    border-width: 0.1rem;
+    padding: 0.2rem 0.4rem;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .form textarea{
     margin: 1rem 1rem  0rem 0rem;
     border-radius: 0.4rem;

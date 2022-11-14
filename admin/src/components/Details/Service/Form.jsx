@@ -108,7 +108,7 @@ const Form = ()=>{
               <div className="warning">{warning.description}</div>
             </div>
           </div>
-          <input className="input" type={"submit"} name={"submit"} />
+          <button className="input" type={"submit"} name={"submit"}> Enviar</button>
           
         </form>
     </div>

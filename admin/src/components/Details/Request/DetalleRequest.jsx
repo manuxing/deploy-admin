@@ -7,7 +7,6 @@ function DetalleRequest({ actual, handleChange, _stat }) {
   return (
     <div className='reqdetail'>
       <div className='div_act'>
-      <FaceIcon size={"large"}/>
         <div className='div_info'>
           {actual.solicitante && actual?.solicitante.length > 1 && (
             <div>
@@ -16,8 +15,6 @@ function DetalleRequest({ actual, handleChange, _stat }) {
             </div>
           )}
         </div>
-      </div>
-      <div className='div_act'>
         <div className='div_info'>
           <div>
             <h3>Servicios</h3>
@@ -34,17 +31,11 @@ function DetalleRequest({ actual, handleChange, _stat }) {
            }
           </div>
         </div>
-        <div className="div_info">
-          <div>
-            <h3>Contactos</h3>
-          </div>
-          <div>{actual?.contact}</div>
-        </div>
       </div>
       <div className="div_act">
       <div className="div_info">
         <div>
-          <h3>fecha solicitada</h3>
+          <h3>Fecha solicitada</h3>
         </div>
         <div>
           {actual?.dateP}
@@ -52,14 +43,20 @@ function DetalleRequest({ actual, handleChange, _stat }) {
       </div>
         <div className="div_info">
           <div>
-            <h3 className="span_request">fecha de solicitud</h3>
+            <h3 className="span_request">Fecha de solicitud</h3>
           </div>
           <div>
             {actual?.dateR}
           </div>
         </div>
       </div>
-      <div className="div_act">
+      <div className='div_act'>
+        <div className="div_info">
+          <div>
+            <h3>Contactos</h3>
+          </div>
+          <div>{actual?.contact}</div>
+        </div>
         <div className="div_info">
             <div>
               <h3>Medio</h3>
@@ -68,16 +65,16 @@ function DetalleRequest({ actual, handleChange, _stat }) {
               {actual?.thg}
             </div>
         </div>
-        <div className="div_info">
+        {/* <div className="div_info">
           <div>
             <h3>Estado:</h3>
           </div>
           <div>
           {_stat === true ? "Leida" : "Por ver"}
-          <button onClick={() => handleChange(!_stat)}>change</button>
+          <br></br> <button onClick={() => handleChange(!_stat)}>change</button>
           </div>
+        </div> */}
         </div>
-      </div>
       </div>
   );
 }

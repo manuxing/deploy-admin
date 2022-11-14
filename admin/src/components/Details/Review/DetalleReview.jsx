@@ -1,12 +1,10 @@
 import React from 'react'
-import FaceIcon from '@mui/icons-material/Face';
 import { NavLink } from 'react-router-dom'
 
 function DetalleReview({actual, handleChange, _stat}) {
   return (
     <div className='reqdetail'>
         <div className='div_act'>
-        <FaceIcon size={"large"}/>
         <div className='div_info'>
           {actual.client && (
             <div>
@@ -17,16 +15,6 @@ function DetalleReview({actual, handleChange, _stat}) {
             </NavLink>}
             </div>
           )}
-        </div>
-      </div>
-      <div className='div_act'>
-        <div className='div_info'>
-          <div>
-            <h3>Descripcion</h3>
-          </div>
-          <div>
-            {actual?.description ? actual?.description : "description"}
-          </div>
         </div>
         <div className='div_info'>
           <div>
@@ -83,6 +71,12 @@ function DetalleReview({actual, handleChange, _stat}) {
           </div>
         <button onClick={() => handleChange()}>change</button>
         </div>
+      </div>
+      <div className='des'>
+          <div>
+            <h3>Descripcion</h3>
+            {actual?.description ? actual?.description : "description"}
+          </div>
       </div>
     </div>
   );

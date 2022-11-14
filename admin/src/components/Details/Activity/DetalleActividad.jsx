@@ -1,13 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 import "./Activity_d.css";
-import FaceIcon from '@mui/icons-material/Face';
 
 function Detalle ({actual}) {
   return (
     <div className='actdetail'>
       <div className="div_act">
-        <FaceIcon size={"large"}/>
         <div className='div_info'>
             <div>
               <h3>Cliente:</h3>
@@ -18,11 +16,44 @@ function Detalle ({actual}) {
               </NavLink>
             </div>
         </div>
-      </div>
+        <div className='div_info'>
+          <div>
+            <h3 >Fecha de actividad</h3>
+          </div>
+          <div>
+            {actual?.date ? actual?.date : "date"}
+          </div>
+        </div>
+          </div>
       <div className="div_act">
         <div className='div_info'>
           <div>
-            <h3>Servicios:</h3>
+            <h3 >Personas:</h3>
+          </div>
+          <div>
+            {actual?.persons ? actual?.persons.length : "0"}
+          </div>
+        </div>
+        <div   className='div_info'>
+          <div className="map">
+            <ul>
+              {actual?.persons
+                ? actual?.persons.map((p) => {
+                    return (
+                      <li key={p}>
+                        <span>- {p}</span>
+                      </li>
+                    );
+                  })
+                : "persons"}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className="div_act">
+        <div className='div_solo'>
+          <div>
+            <h3>Servicio:</h3>
           </div>
           <div className='map'>
             {actual?.services
@@ -37,41 +68,8 @@ function Detalle ({actual}) {
                     </NavLink>
                   );
                 })
-              : "services"}
-          </div>
-        </div>
-        <div className='div_info'>
-          <div>
-            <h3 >fecha de actividad</h3>
-          </div>
-          <div>
-            {actual?.date ? actual?.date : "date"}
-          </div>
-        </div>
+              : "Recorrido"}
       </div>
-      <div className="div_act">
-        <div className='div_info'>
-          <div>
-            <span >Personas:</span>
-          </div>
-          <div>
-            {actual?.persons ? actual?.persons.length : "0"}
-          </div>
-        </div>
-        <div className='div_info'>
-          <div className="map">
-            <ul>
-              {actual?.persons
-                ? actual?.persons.map((p) => {
-                    return (
-                      <li key={p}>
-                        <span>- {p}</span>
-                      </li>
-                    );
-                  })
-                : "persons"}
-            </ul>
-          </div>
         </div>
       </div>
     </div>
