@@ -2,19 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearActualG, setActualG, getNot, setDeleted, deleteModel } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
-import AddIcon from '@mui/icons-material/Add';
 import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Service";
-import AgregarServicio from "../create/service/prueba";
 import Paginado from "./paginado";
 import DetalleLay from "../DetalleLay";
+import { useHistory } from "react-router-dom";
 
 const ServiceLayout = () => {
   let todas = useSelector((state) => state.actualG);
   let deleted = useSelector((state) => state.deleted);
+  let history= useHistory();
   let dispatch = useDispatch();
-  let [pressed, setPressed] = useState(false);
   let [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -50,18 +49,11 @@ const ServiceLayout = () => {
               </div>
               <div className="barraL">
                 <div className="item">
+                <button onClick={() => history.push("/create/client")}>
+                      +
+                    </button>
+                </div>
                   <BarraFiltros />
-                </div>
-                <div className="item">
-                  {pressed === false ? (
-                    <button onClick={() => setPressed(true)}>
-                      <AddIcon/> </button>
-                    ) : (
-                      <div>
-                        <AgregarServicio setP={setPressed} />
-                    </div>
-                  )}
-                </div>
               </div>
               <DashDisplay all={cards} Dash={Dash} model={"Servicios"} handleClick={handleClick}/>
               <Paginado values={todas}/>

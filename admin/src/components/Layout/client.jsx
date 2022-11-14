@@ -6,18 +6,17 @@ import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
 import "./Layout.css"
 import Dash from "../Dashes/Client";
-import CreateClient from "../create/client/prueba";
-import AddIcon from '@mui/icons-material/Add';
 import Paginado from "./paginado";
 import ActivitysGraph from "../Graphs/ActivitysGraph";
 import DetalleLay from "../DetalleLay";
+import { useHistory } from "react-router-dom";
 
 const ClientLayout = () => {
   let dispatch = useDispatch();
   let todas = useSelector((state) => state.actualG);
   let deleted = useSelector((state) => state.deleted);
-  let [pressed, setPressed] = useState(false);
   let [cards, setCards] = useState([]);
+  let history = useHistory();
 
   useEffect(() => {
     dispatch(setActualG("client"));
@@ -53,14 +52,9 @@ const ClientLayout = () => {
               </div>
               <div className="barraL">
                 <div className="item">
-                  {pressed === false ? (
-                    <button onClick={() => setPressed(true)}>
-                      <AddIcon/> </button>
-                    ) : (
-                      <div>
-                      <CreateClient setP={setPressed} />
-                    </div>
-                  )}
+                <button onClick={() => history.push("/create/client")}>
+                      +
+                    </button>
                 </div>
                   <BarraFiltros />
               </div>

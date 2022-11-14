@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
-import AddIcon from '@mui/icons-material/Add';
 import { useSelector, useDispatch } from "react-redux";
 import { setActualG, getNot, clearActualG, deleteModel, setDeleted } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
 import ActivitysGraph from "../Graphs/ActivitysGraph";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Activity.jsx";
-import ActivityR from "../create/activity";
 import DashDisplay from "./DashDisplay";
 import Paginado from "./paginado";
 import DetalleLay from "../DetalleLay";
 import "./Layout.css"
+import { useHistory } from "react-router-dom";
 
 const ActivityLayout = () => {
   let todas = useSelector((state) => state.actualG);
   let deleted = useSelector((state) => state.deleted);
+  let history = useHistory()
   let dispatch = useDispatch();
-  let [pressed, setPressed] = useState(false);
   let [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -53,13 +52,9 @@ const ActivityLayout = () => {
               </div>
               <div className="barraL">
                 <div className="item">
-                  {pressed === false ? (
-                    <button onClick={() => setPressed(true)}>
-                      <AddIcon />
+                    <button onClick={() => history.push("/create/activity")}>
+                      +
                     </button>
-                  ) : (
-                      <ActivityR className="item" setP={setPressed} />
-                  )}
               </div>
                   <BarraFiltros />
             </div>

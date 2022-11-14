@@ -5,17 +5,16 @@ import BarraFiltros from "./barraFiltros";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Request";
 import DashDisplay from "./DashDisplay";
-import AddIcon from '@mui/icons-material/Add';
-import RequestR from "../create/requeset";
 import Paginado from "./paginado";
 import RequestGraph from "../Graphs/RequestsGraphs";
 import DetalleLay from "../DetalleLay";
+import { useHistory } from "react-router-dom";
 
 const RequestLayout = () => {
   let todas = useSelector((state) => state.actualG);
   let deleted = useSelector((state) => state.deleted);
   let dispatch = useDispatch();
-  let [pressed, setPressed] = useState(false);
+  let history = useHistory();
   let [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -50,20 +49,14 @@ const RequestLayout = () => {
                 <RequestGraph/>
                 <DetalleLay/>
               </div>
-              <div className="barraL">
+            
+                <div className="barraL">
                 <div className="item">
+                <button onClick={() => history.push("/create/request")}>
+                      +
+                    </button>
+                </div>
                   <BarraFiltros />
-                </div>
-                <div className="item">
-                  {pressed === false ? (
-                    <button onClick={() => setPressed(true)}>
-                      <AddIcon/> </button>
-                    ) : (
-                      <div>
-                      <RequestR setP={setPressed} />
-                    </div>
-                  )}
-                </div>
               </div>
               <DashDisplay all={cards} Dash={Dash} model={"Solicitudes"} handleClick={handleClick}/>
               <Paginado values={todas}/>
