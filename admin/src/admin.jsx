@@ -10,7 +10,6 @@ import ActivityR from "./components/create/activity";
 
 import Client from "./components/Details/Client";
 import ClientLayout from "./components/Layout/client";
-import Form from "./components/create/client/prueba";
 
 import Request from "./components/Details/Request";
 import RequestLayout from "./components/Layout/Request";

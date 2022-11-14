@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Redirect, useHistory, withRouter } from 'react-router-dom';
-import Spinner from '../components/SpinnerApp';
+import Spinner from '../components/Spinner';
 import firebase from '../firebase';
 import tools from '../tools';
 import "./singup.css"
