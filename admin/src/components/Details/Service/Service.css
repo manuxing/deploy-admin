@@ -21,8 +21,13 @@
 .node{
     display: flex;
     flex-direction: column;
-    margin: 0.3rem 7rem  2rem 0rem;
+    margin: 0.3rem 7rem 0.3rem 0rem;
     width: 32%;
+    border-style:solid;
+    border-color: hsla(150, 2%, 80%, 0.06);
+    border-width: 0.2rem;
+    border-radius: 0.6rem;
+    padding: 0.6rem;
 }
 
 .nodebot{

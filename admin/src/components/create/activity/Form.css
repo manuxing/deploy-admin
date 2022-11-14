@@ -1,7 +1,6 @@
 .preform{
     display: flex;
     flex-direction: column;
-    background-color: azure;
     width: 99%;
 }
 
@@ -12,6 +11,7 @@
 }
 
 .form{
+    margin: 0.5rem 0rem;
     padding: 0.1rem 0.8rem;
 }
 
@@ -41,11 +41,12 @@
     padding: 0.1rem 4rem 1rem 0rem;
     width: 32%;
     height: 16%;
+    
 }
 
 .nodec h4{
     font-size: 0.83rem;
-    margin: 0.3rem 0rem 1.1rem 0rem;
+    margin: 0.3rem 0rem 1rem 0rem;
 }
 
 .topf{
@@ -59,13 +60,23 @@
     width: 90%;
 }
 
+#personss{
+    display: flex;
+    justify-content: center;
+    margin-right: 5rem;
+}
+
 .persons{
     display: grid;
+    padding: 0.9rem;
     width: 96%;
     height: 16rem;
-    margin: 1rem;
+    margin:  1rem 0.2rem;
     gap: 0.2rem;
-    grid-template-columns: repeat(auto-fill, minmax(11rem, 2rem));
+    grid-template-columns: rep
+    at(auto-fill, minmax(11rem, 2rem));
+    border-radius: 0.6rem;
+    background-color: hsla(193, 38%, 32%, 0.036);
  }
 
 .contactcard{
@@ -85,6 +96,16 @@
     width: fit-content;
 }
 
+.agregarpersona{
+    border-style:solid;
+    border-color: hsla(150, 2%, 80%, 0.05);
+    border-width: 0.2rem;
+    border-radius: 0.6rem;
+    border-right: 0rem;
+    border-bottom: 0rem;
+    padding: 0.6rem;
+}
+
 .pop{
     width: fit-content;
     display: flex;
@@ -95,4 +116,11 @@
 .pop button{
     width: fit-content;
     height: fit-content;
+}
+
+.enviar{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 2rem 0.8rem 0rem 0rem;
 }

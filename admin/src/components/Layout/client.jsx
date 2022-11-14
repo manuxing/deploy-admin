@@ -53,9 +53,6 @@ const ClientLayout = () => {
               </div>
               <div className="barraL">
                 <div className="item">
-                  <BarraFiltros />
-                </div>
-                <div className="item">
                   {pressed === false ? (
                     <button onClick={() => setPressed(true)}>
                       <AddIcon/> </button>
@@ -65,6 +62,7 @@ const ClientLayout = () => {
                     </div>
                   )}
                 </div>
+                  <BarraFiltros />
               </div>
               <DashDisplay all={cards} Dash={Dash} model={"Clientes"} handleClick={handleClick}/>
               <Paginado values={todas}/>

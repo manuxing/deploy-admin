@@ -84,11 +84,8 @@ const ActivityR = ({ setP }) => {
   return (
     <div>
       <div className="preform">
-        <div className="close">
-          <button onClick={() => setP(false)}><RemoveIcon/></button>
-        </div>
         <div className="titlef">
-          Actividad:
+          <h2>Crear Actividad</h2>
         </div>
         <div>
           <actuallContext.Provider value={send}>

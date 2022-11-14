@@ -98,13 +98,6 @@ const {
           </div>
         </div>
         <div className="midf">
-          <AgregarPersona setPersons={setInputA} _persons={input} />
-          {typeof input.persons === "object" &&  input.persons.length > 0 &&
-            <div className="pop">
-                <button  onClick={()=>pop()}>-
-                </button>
-            </div>
-          }
           <div className='node'>
             <h3>Servicios</h3>
             <select
@@ -127,6 +120,16 @@ const {
             </select>
             <div className="warning">{warningA.sId}</div>
           </div>
+          <AgregarPersona setPersons={setInputA} _persons={input} />
+          {typeof input.persons === "object" &&  input.persons.length > 0 &&
+            <div className="pop">
+                <button  onClick={()=>pop()}>-
+                </button>
+            </div>
+          }
+        </div>
+        <div id='personss'>
+          <h3>Personas</h3>
         </div>
         <div className='persons'>
             {typeof input.persons === "object" &&
@@ -144,7 +147,9 @@ const {
               })}
           </div>
         <div className="warning">{warningA.general}</div>
-        <input className="input" type={"submit"} name={"submit"} />
+        <div className='enviar'>
+          <button  type={"submit"} name={"submit"}> Enviar</button>
+        </div>
       </div>
       </form>
   );

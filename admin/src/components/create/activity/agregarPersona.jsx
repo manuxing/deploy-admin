@@ -47,9 +47,12 @@ const AgregarPersona = ({ setPersons, _persons }) => {
 
   return (
     <div className="agregarpersona">
+      <h3>Agregar Personas</h3>
+      <br></br>
       <div className='top'>
           <div className="node_add_per">
-            <h3>Sexo</h3>
+            <h4>Sexo</h4>
+            <br></br>
             <select
               className="selectsexo"
               name={"sexo"}
@@ -95,7 +98,7 @@ const AgregarPersona = ({ setPersons, _persons }) => {
       </div>
             <div className="warning">{warning.general}</div>
             <div className="agregar">
-              <button onClick={(p) => handleSubmit(p)} >Agregar</button>
+              <button onClick={(p) => handleSubmit(p)} >+ </button>
             </div>
     </div>
   );
