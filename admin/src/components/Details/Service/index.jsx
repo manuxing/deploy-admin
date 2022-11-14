@@ -24,7 +24,6 @@ const Service = () => {
       history.push("/err");
     } else{
       if(parseInt(id) === Number(id)){
-        // dispatch(getReviews())
         dispatch(getServicio(parseInt(id)));
         dispatch(getNot());
       }else{

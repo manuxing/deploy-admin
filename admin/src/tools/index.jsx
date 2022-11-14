@@ -836,18 +836,15 @@ const tools = {
       },
     },
   },
-  alert: (art, url, cb, cb2, cb3, v3, cb4, cb5) => {
+  alert: (art, url, cb) => {
     let fem = ["reseña", "solicitud", "actividad"];
     let f = fem.includes(art) ? "a" : "o";
     let sign = prompt(
       `su ${art} fue cread${f} exitosamente, desea quedarse en la lista o ser redirigidx al detalle`
     );
     if(!sign || sign.length < 1){
-      cb2(cb3(v3));
-      cb2(cb5());
     } else {
       cb.push(`${url}`);
-      cb4(false);
     }
   },
   alert_notFound: ( model, cb, url) => {

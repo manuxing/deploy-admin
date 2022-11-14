@@ -83,10 +83,6 @@ const ReviewR = ({ setP }) => {
         "reseña",
         `/review/${actual.id}`,
         history,
-        dispatch,
-        setActualG, "review",
-        setP,
-        setActual
       );
       let x = document.getElementById("service");
       x.selected = true;
@@ -104,7 +100,7 @@ const ReviewR = ({ setP }) => {
     <div>
       <div className="preform">
         <div className="titlef">
-          <h2>Crear Reseña</h2>
+          <h2>Crear Reseña:</h2>
         </div>
         <div>
           <actuallContext.Provider value={send}>

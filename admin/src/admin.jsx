@@ -79,7 +79,7 @@ function Admin() {
             <Route path="/services">
                 <ServiceLayout />
             </Route>
-            <Route path="/create/servicio">
+            <Route path="/create/service">
                 <AgregarServicio />
             </Route>
 

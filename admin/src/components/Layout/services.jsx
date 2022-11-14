@@ -49,7 +49,7 @@ const ServiceLayout = () => {
               </div>
               <div className="barraL">
                 <div className="item">
-                <button onClick={() => history.push("/create/client")}>
+                <button onClick={() => history.push("/create/service")}>
                       +
                     </button>
                 </div>

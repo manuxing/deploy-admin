@@ -69,10 +69,7 @@ const ActivityR = ({ setP }) => {
   useEffect(() => {
     if (actual !== 1 && input.date === actual.date) {
       tools.alert("actividad",
-        `/activity/${actual.id}`,
-        history, dispatch,
-        setActualG, "activity",
-        setP, setActual);
+        `/activity/${actual.id}`, history);
       setInputA({ name: "", date: "", persons: [], sId: 1000 });
       setWarningA({ name: "", date: "", persons: "", sId: "" });
       let x = document.getElementById("service");

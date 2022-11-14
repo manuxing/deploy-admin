@@ -173,6 +173,7 @@ export default function rootReducer(state=initialState, action){
 
             //error
         case type.ERROR:
+            console.log(action.payload)
             return {
               ...state,
               error: action.payload.response,

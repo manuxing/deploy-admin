@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import RemoveIcon from '@mui/icons-material/Remove';
 import {
   createServicio,
-  setActual,
   errorForm,
-  setActualG
 } from "../../../redux/actions/index.js";
 import { actuallContext } from "../ActualContext";
 import Form from "./Form.jsx";
 import tools from "../../../tools";
-// import "./Form.css";
 
-const AgregarServicio = ({ setP }) => {
+const AgregarServicio = () => {
   let validate = tools.validate;
   let dispatch = useDispatch();
   const history = useHistory();
@@ -42,15 +38,11 @@ const AgregarServicio = ({ setP }) => {
   }, [errForm]);
 
   useEffect(() => {
-      if (typeof actual !== "number") {
+      if (typeof actual !== "number" && actual.name === input.name) {
         tools.alert(
           "servicio",
           `/service/${actual.id}`,
           history,
-          dispatch,
-          setActualG, "service",
-          setP,
-          setActual
         );
         setInput({ name: "", description: "", tR: "", tR_: "" });
         setWarning({ name: "", description: "", tR: "", tR_: "" });
