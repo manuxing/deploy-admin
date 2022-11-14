@@ -5,7 +5,7 @@ function DetalleLay() {
   return (
     <div className='detailaycard'>
       <div className='titulo'>
-        <h1>Activitys</h1>
+        <h2>Activitys</h2>
       </div>
       <div className='content'>
         <div>
@@ -16,10 +16,10 @@ function DetalleLay() {
           <h3>ultima semana</h3>
           <span> 1</span>
         </div>
-        <div>
+        {/* <div>
           <h3>servicio mas popular</h3>
           <span> servicio</span>
-        </div>
+        </div> */}
       </div>
     </div>
   )

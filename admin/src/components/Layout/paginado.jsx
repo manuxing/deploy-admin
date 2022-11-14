@@ -23,7 +23,8 @@ const Paginado = ({values}) =>{
       <div className="paginado">
           {cas.map(p => {
             return(
-                <button key={p} onClick={(e)=>handleClick(e, p)}>{p}</button>
+                <button key={p} onClick={(e)=>handleClick(e, p)}><span>{p}
+                    </span></button>
             )
           })}
       </div>

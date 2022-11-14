@@ -20,7 +20,7 @@ function ActivitysGraph() {
   }, []);
   return (
     <div className="chart">
-      <LineChart width={500} height={230} data={data}>
+      <LineChart width={430} height={210} data={data}>
           <Line type="monotone" dataKey="activitys" stroke="#2196F3" strokeWidth={3} />;
           <CartesianGrid stroke="#ccc"/>
           <XAxis dataKey="mes"/>

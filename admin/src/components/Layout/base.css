@@ -22,16 +22,31 @@
     justify-content: space-around;
  }
  .paginado{
-    margin: 1rem;
+    margin: 0rem 1rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    font-size: 0.2rem;
  }
   
  .paginado button{
+   background-color: rgba(168, 146, 146, 0.146);
+   height: 1.8rem;
+   width:1.82rem;
+   padding: 0.4rem 0.5rem;
+   border-radius: 0.4rem;
+   text-align: center;
+   text-decoration: none;
+   cursor: pointer;
+   border-style: none;
    margin: 0.4rem;
 }
+
+.paginado button:focus {     
+   background-color: rgba(163, 67, 67, 0.146);
+}
+
 
 .card:hover {
     box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;

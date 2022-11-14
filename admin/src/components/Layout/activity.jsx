@@ -8,6 +8,7 @@ import Dash from "../Dashes/Activity.jsx";
 import DashDisplay from "./DashDisplay";
 import Paginado from "./paginado";
 import DetalleLay from "../DetalleLay";
+import AddIcon from '@mui/icons-material/Add';
 import "./Layout.css"
 import { useHistory } from "react-router-dom";
 
@@ -53,7 +54,7 @@ const ActivityLayout = () => {
               <div className="barraL">
                 <div className="item">
                     <button onClick={() => history.push("/create/activity")}>
-                      +
+                      <AddIcon fontSize="small"/>
                     </button>
               </div>
                   <BarraFiltros />

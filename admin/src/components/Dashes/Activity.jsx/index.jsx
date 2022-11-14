@@ -3,19 +3,19 @@ import './Activiti.css';
 import { NavLink } from "react-router-dom";
 import "../../Layout/base.css"
 import GolfCourseIcon from '@mui/icons-material/GolfCourse';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Dash = ({data, handleClick})=> { 
     let {id, persons, date}= data;
     return (
         id === undefined ? <></> :
         <div className="dash">
-                <div className="top">
-                        <GolfCourseIcon className="icon"fontSize="large"/>
+                <div className="topdash">
+                        <GolfCourseIcon className="icon"fontSize="medium"/>
                 </div>
                 <NavLink className="dashdata" to={`/activity/${id}`}>
                     <div>
-                        <h2>Fecha<span></span>:
-                            {date} 
+                        <h2>Fecha: <span>{date}</span>
                         </h2>
                     </div>
                     <div>
@@ -24,7 +24,9 @@ const Dash = ({data, handleClick})=> {
                         </h2>
                     </div>
                 </NavLink>
-                <button onClick={(e)=>handleClick(e, id)}>borrar</button>
+                <div className="delete">
+                    <button onClick={(e)=>handleClick(e, id)}><DeleteForeverIcon fontSize="small"/></button>
+                </div>
         </div>
     )
 };

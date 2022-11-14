@@ -19,8 +19,8 @@ const BarraFiltros = () => {
     }
   return (
       order === "DESC" ? 
-      <button onClick={(e)=>handleClick(e)}><ArrowDownwardIcon/></button>         :
-      <button onClick={(e)=>handleClick(e)}><ArrowUpwardIcon/></button>         
+      <button onClick={(e)=>handleClick(e)}><ArrowDownwardIcon fontSize="small"/></button>         :
+      <button onClick={(e)=>handleClick(e)}><ArrowUpwardIcon fontSize="small"/></button>         
   );
 };
 

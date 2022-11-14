@@ -26,14 +26,15 @@
 
 .contactcard_ab{
    display: flex;
-   padding:  0.2rem ;
-   width: 30%;
+   padding: 0.2rem;
+   width: 96%;
    height: 27%;
    border-radius: 0.5rem;
    border-style: solid;
    border-color: hsla(206, 48%, 30%, 0.018);
    border-width: 0.09rem;
    border-right: 0px;
+   border-bottom: 0px;
 }
  .buttons{
     display: flex;

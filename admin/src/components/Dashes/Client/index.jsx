@@ -9,7 +9,7 @@ const Dash = ({data, handleClick})=> {
     return (
         id === undefined ? <></> :
         <div className="dash">
-                    <div className="top">
+                    <div className="topdash">
                         <AccountBoxIcon/>
                     </div>
                 <NavLink className="dashdata" to={`/client/${id}`}>
@@ -21,14 +21,16 @@ const Dash = ({data, handleClick})=> {
                             {contact && contact.length > 0 &&
                                 contact.map(p =>{
                                     return(
-                                        <div className="contact" key={p}>
+                                        <div  key={p}>
                                             <h3 > {p} </h3>
                                         </div>
                                     )
                                 })
                             }
                 </NavLink>
-                <button onClick={(e)=> handleClick(e, id)}>borrar</button>
+                <div className="delete">
+                    <button onClick={(e)=> handleClick(e, id)}>borrar</button>
+                </div>
         </div>
     )
 };
