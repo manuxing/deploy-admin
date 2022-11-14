@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'
 import { actuallContext } from '../create/ActualContext'
 import "./About.css"
-import AgregarContacto from "./agregarContacto"
+import AgregarContacto from "../create/client/agregarContacto"
 import ContactCard from "./contactCard"
 
 const Form =()=> {
@@ -71,7 +71,7 @@ const Form =()=> {
                     <button onClick={(e)=>popC(e)}>-
                     </button>}
           </div>
-          <div className='contacts'>
+          <div className='persons'>
             {typeof input.contact === 'object' && input?.contact.map((p) => {
               id++
               return (
@@ -82,8 +82,8 @@ const Form =()=> {
             })}
           </div>
             <div className='buttons'>
-              <input type={"submit"}/>
-              <button onClick={(e)=>editS(e)}> edit </button>
+            <button  type={"submit"} name={"submit"}> Enviar</button>
+              <button onClick={(e)=>editS(e)}> Edit </button>
             </div>
         </div>
         </form>

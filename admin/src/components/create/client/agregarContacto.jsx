@@ -50,7 +50,7 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
 
   return (
     <div className="agregarvontacto">
-        <h3>Contacto</h3>
+        <h3>Agregar Contacto</h3>
         <div className="top">
           <select
             className="selectcontact"

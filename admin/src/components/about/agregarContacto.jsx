@@ -49,7 +49,7 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   };
 
   return (
-    <div className="addcontact">
+    <div className="contacts_ab">
       <div>
         <h3>Agregar Contacto</h3>
       </div>

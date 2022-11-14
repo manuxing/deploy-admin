@@ -18,12 +18,18 @@
 
 .content{
     display: flex;
+    justify-content: flex-start;
     flex-shrink: 1rem;
     margin-top: 0.7rem;
     height: 4rem;
-    justify-content: space-around;
+    width:840%;
 }
 
-.content h2{
+
+.content div{
+    margin: 0.1rem  0.9rem 0.1rem 0.2rem;
+}
+
+.content h3{
     margin-bottom: 0.7rem;
 }

@@ -4,6 +4,7 @@
     justify-content: space-between;
     height: 36rem;
     width: 98%;
+    padding-bottom: 0.6rem;
 }
 
 .about textarea{
@@ -16,15 +17,23 @@
     height: 12rem;
 }
 
- .contacts{
-    display: flex;
-    justify-content: space-evenly;
- }
 
-.contactcard{
-    padding:  0.6rem 0.9rem;
-    border-radius: 0.5rem;
-    background-color: hsla(159, 65%, 92%, 0.459);
+
+.contacts{
+   display: flex;
+   justify-content: space-evenly;
+}
+
+.contactcard_ab{
+   display: flex;
+   padding:  0.2rem ;
+   width: 30%;
+   height: 27%;
+   border-radius: 0.5rem;
+   border-style: solid;
+   border-color: hsla(206, 48%, 30%, 0.018);
+   border-width: 0.09rem;
+   border-right: 0px;
 }
  .buttons{
     display: flex;
@@ -81,7 +90,7 @@
     margin: 0.5rem 0rem;
  }
 
- .contacts{
+ .contacts_ab{
     background-color: hsla(0, 0%, 89%, 0.146);
     padding: 0.7rem 0.2rem;
     display: flex;
@@ -95,4 +104,9 @@
 
  .title- h3{ 
     margin-right: 1rem;
+ }
+
+ .buttons{
+   display: flex;
+   justify-content: flex-end;
  }

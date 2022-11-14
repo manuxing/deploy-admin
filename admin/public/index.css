@@ -13,6 +13,8 @@ body {
 
 body {
   font-family: "Poppins";
+  background-color: aliceblue;
+  height: 100%;
 }
 
 button{

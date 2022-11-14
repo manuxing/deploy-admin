@@ -9,15 +9,15 @@ function DetalleLay() {
       </div>
       <div className='content'>
         <div>
-          <h2>total</h2>
+          <h3>total</h3>
           <span> 3</span>
         </div>
         <div>
-          <h2>ultima semana</h2>
+          <h3>ultima semana</h3>
           <span> 1</span>
         </div>
         <div>
-          <h2>servicio mas popular</h2>
+          <h3>servicio mas popular</h3>
           <span> servicio</span>
         </div>
       </div>
