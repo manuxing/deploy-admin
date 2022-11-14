@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { actuallContext } from "../ActualContext";
 import RemoveIcon from '@mui/icons-material/Remove';
 import Form from "./Form";
+import "./Form.css";
 import {
   getServicio,
   createActividades,
@@ -82,12 +83,18 @@ const ActivityR = ({ setP }) => {
 
   return (
     <div>
-      <div className="content_act">
-        <button onClick={() => setP(false)}><RemoveIcon/></button>
-        Actividad:
-        <actuallContext.Provider value={send}>
-          <Form/>
-        </actuallContext.Provider>
+      <div className="preform">
+        <div className="close">
+          <button onClick={() => setP(false)}><RemoveIcon/></button>
+        </div>
+        <div className="titlef">
+          Actividad:
+        </div>
+        <div>
+          <actuallContext.Provider value={send}>
+            <Form/>
+          </actuallContext.Provider>
+        </div>
       </div>
     </div>
   );

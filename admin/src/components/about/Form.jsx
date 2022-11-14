@@ -64,10 +64,13 @@ const Form =()=> {
             _contacts={input}
             contactsThg={thg}
           />}
+          <div className="warning">{warning.contact}</div>
+          <div className='title-'>
+            <h3>Contactos</h3>
           {edit === true && typeof input.contact === 'object' && input.contact.length > 0 &&
                     <button onClick={(e)=>popC(e)}>-
                     </button>}
-          <div className="warning">{warning.contact}</div>
+          </div>
           <div className='contacts'>
             {typeof input.contact === 'object' && input?.contact.map((p) => {
               id++

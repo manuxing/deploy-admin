@@ -7,13 +7,20 @@
 
  .barraL{
     display: flex;
+    justify-content: space-between;
     margin: 0.7rem 0rem;
  }
 
  .stats{
     display: flex;
- }
+   }
 
  .item{
     margin:  0rem 1rem;
+    width: 95%;
  }
+
+ .itemS{
+   margin:  0rem 1rem;
+   width: 8%;
+}

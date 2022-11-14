@@ -51,50 +51,62 @@ const Form = ()=>{
   return (
     <div>
            <form className="form" onSubmit={(e) => handleSubmit(e, input)}>
-          <div>
-            <label>Nombre</label>
-            <input
-              className="input"
-              type={"text"}
-              placeholder="Name"
-              name={"name"}
-              value={input.name}
-              onChange={(p) => handleChange(p)}
-            />
-            <div className="warning">{warning.name}</div>
-          </div>
-          <div>
-            <label>Descripcion</label>
-            <textarea
-              className="input"
-              type={"text"}
-              placeholder="Descripcion"
-              name={"description"}
-              value={input.description}
-              onChange={(p) => handleChange(p)}
-            />
-            <div className="warning">{warning.description}</div>
-          </div>
-          <div>
-            <label>Horarios</label>
-            <input
-              className="input"
-              type={"time"}
-              placeholder="Desde"
-              name={"tR"}
-              value={input.tR}
-              onChange={(p) => handleChange(p)}
-            />
-            <div className="warning">{warning.tR}</div>
-            <input
-              className="input"
-              type={"time"}
-              placeholder="Hasta"
-              name={"tR_"}
-              value={input.tR_}
-              onChange={(p) => handleChange(p)}
-            />
-            <div className="warning">{warning.tR_}</div>
+            <div className='servicertop'>
+              <div className='node'>
+                <h3>Nombre</h3>
+                <input
+                  className="input"
+                  type={"text"}
+                  placeholder="Name"
+                  name={"name"}
+                  value={input.name}
+                  onChange={(p) => handleChange(p)}
+                />
+                <div className="warning">{warning.name}</div>
+              </div>
+              <div className='node'>
+                <h3>Horarios</h3>
+                <div className='horarios'>
+                  <div className='horario'>
+                      <h5>Apertura</h5> 
+                      <input
+                        className="input"
+                        type={"time"}
+                        placeholder="Desde"
+                        name={"tR"}
+                        value={input.tR}
+                        onChange={(p) => handleChange(p)}
+                      />
+                    <div className="warning">{warning.tR}</div>
+                  </div>
+                  <div className='horario'>
+                    <h5>Cierre</h5> 
+                    <input
+                      className="input"
+                      type={"time"}
+                      placeholder="Hasta"
+                      name={"tR_"}
+                      value={input.tR_}
+                      onChange={(p) => handleChange(p)}
+                    />
+                    <div className="warning">{warning.tR_}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div className='servicebot'>
+            <div className='nodebot'>
+              <h3>Descripcion</h3>
+              <textarea
+                className="input"
+                type={"text"}
+                placeholder="Descripcion"
+                name={"description"}
+                value={input.description}
+                onChange={(p) => handleChange(p)}
+              />
+              <div className="warning">{warning.description}</div>
+            </div>
           </div>
           <input className="input" type={"submit"} name={"submit"} />
           

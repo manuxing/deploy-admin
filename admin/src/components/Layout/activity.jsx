@@ -53,9 +53,6 @@ const ActivityLayout = () => {
               </div>
               <div className="barraL">
                 <div className="item">
-                  <BarraFiltros />
-                </div>
-                <div className="item">
                   {pressed === false ? (
                     <button onClick={() => setPressed(true)}>
                       <AddIcon />
@@ -64,6 +61,9 @@ const ActivityLayout = () => {
                       <ActivityR className="item" setP={setPressed} />
                   )}
               </div>
+                <div className="itemS">
+                  <BarraFiltros />
+                </div>
             </div>
                   <DashDisplay all={cards} Dash={Dash} model={"Actividades"} handleClick={handleClick}/>
                   <Paginado values={todas}/>
