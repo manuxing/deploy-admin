@@ -44,7 +44,7 @@ function Admin() {
             </Route>
             <Route path="/activitys/">
                 {/* <ActivityLayout /> */}
-                <RequestR/>
+                <ReviewR/>
             </Route>
             <Route path="/createcl">
                 <Form />

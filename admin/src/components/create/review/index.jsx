@@ -102,12 +102,15 @@ const ReviewR = ({ setP }) => {
 
   return (
     <div>
-      <div className="content_act">
-      <button onClick={() => setP(false)}><RemoveIcon/></button>
-        Reseña:
-        <actuallContext.Provider value={send}>
-          <Form/>
-        </actuallContext.Provider>
+      <div className="preform">
+        <div className="titlef">
+          <h2>Crear Reseña</h2>
+        </div>
+        <div>
+          <actuallContext.Provider value={send}>
+            <Form/>
+          </actuallContext.Provider>
+        </div>
       </div>
     </div>
   );
