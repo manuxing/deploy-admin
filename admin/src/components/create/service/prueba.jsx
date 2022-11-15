@@ -38,7 +38,7 @@ const AgregarServicio = () => {
   }, [errForm]);
 
   useEffect(() => {
-      if (typeof actual !== "number" && actual.name === input.name) {
+      if (typeof actual !== "number" && actual.description === input.description) {
         tools.alert(
           "servicio",
           `/service/${actual.id}`,

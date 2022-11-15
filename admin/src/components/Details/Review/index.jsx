@@ -16,7 +16,7 @@ const Review = () => {
   const [_stat, setStat] = useState(false);
 
   useEffect(()=>{
-    console.log(actual.stat)
+    console.log(actual)
     if(error){
       history.push("/err");
     } else{
