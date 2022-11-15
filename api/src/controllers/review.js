@@ -91,7 +91,6 @@ const postReview = async(body, res, next, model, Service, Client) => {
         await service.addReview(review)
             .catch(err => next({status: 500, message: 'could not relate Service to Review'}));
             
-            console.log("aca")
         await review.setClient(client)
             .catch(err => next({status: 500, message: 'could not relate Review to Client'}));
 

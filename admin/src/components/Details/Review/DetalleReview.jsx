@@ -6,15 +6,17 @@ function DetalleReview({actual, handleChange, _stat}) {
     <div className='reqdetail'>
         <div className='div_act'>
         <div className='div_info'>
-          {actual.client && (
             <div>
               <h3>Cliente:</h3>
-              {actual.client && 
-            <NavLink className="link" to={`/client/${actual?.client.id}`}>
-              {actual?.client.name}
-            </NavLink>}
+              {actual?.de ? 
+              <NavLink className="link" to={`/client/${actual?.client.id}`}>
+                {actual?.de}
+              </NavLink>
+              :
+              <NavLink className="link" to={`/client/${actual?.client.id}`}>
+                {actual?.client.name}
+              </NavLink>}
             </div>
-          )}
         </div>
         <div className='div_info'>
           <div>
