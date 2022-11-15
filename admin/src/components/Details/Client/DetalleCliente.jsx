@@ -2,7 +2,6 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import ReviewC from '../../lO/reviewC'
 import ActivityC from "../../lO/activityC";
-import FaceIcon from '@mui/icons-material/Face';
 
 function DetalleCliente({actual}) {
   return (
