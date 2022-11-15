@@ -64,7 +64,7 @@ const Form = ()=>{
                 />
                 <div className="warning">{warning.name}</div>
               </div>
-              <div className='node'>
+              <div className='nodeh'>
                 <h3>Horarios</h3>
                 <div className='horarios'>
                   <div className='horario'>

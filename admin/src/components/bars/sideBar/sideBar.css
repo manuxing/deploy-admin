@@ -60,6 +60,7 @@
     justify-content: center;
     margin-right: 1rem;
     margin-bottom: 1.7rem;
+
 }
 
 .side button{
@@ -75,6 +76,37 @@
   font-size: 0.9rem;
   margin-left: 2rem;
 }
+
+@media (max-width: 950px){
+  .icon{
+    display: none;
+  }
+  .links{
+    font-size: 0.7rem;
+    margin: 0.5rem  0rem 1.1rem 0.4rem;
+  }
+  .logout{
+    font-size: 0.7rem;
+    margin-left: 1rem;
+  }
+  .side button{
+    height: 1.4rem;
+    width: 60%;
+    font-size: 0.7rem;
+    border-radius: 0.4rem;
+    border-width: 0rem;
+    background-color: hsla(10, 78%, 43%, 0.3);
+  }
+  .bodega{
+    font-size: 0.6rem;
+    margin-left: 0.7rem;
+    margin-top: 0.4rem;
+  }
+  .side{
+    width: 6rem;
+  }
+}
+
 /* .items{
     width: 90%;
     height: 99%;

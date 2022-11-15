@@ -75,7 +75,9 @@ function DetalleReview({actual, handleChange, _stat}) {
       <div className='des'>
           <div>
             <h3>Descripcion</h3>
+            <p>
             {actual?.description ? actual?.description : "description"}
+              </p>
           </div>
       </div>
     </div>

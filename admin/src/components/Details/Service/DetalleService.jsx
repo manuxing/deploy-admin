@@ -34,8 +34,8 @@ function DetalleService({actual}) {
       <div className="div_act">
         <div className='div_info'>
           <div>
-            <h3>Reseñas</h3>
-            {actual?.reviews && actual?.reviews.length}
+            <h3>Reseñas  {actual?.reviews && actual?.reviews.length}
+            </h3>
           <br></br>
           </div>
           <br></br>
@@ -57,8 +57,8 @@ function DetalleService({actual}) {
         </div>
         <div className='div_info'>
           <div>
-            <h3>Request</h3>
-            {actual?.requests && actual?.requests.length}
+            <h3>Request  {actual?.requests && actual?.requests.length}
+            </h3>
           </div>
           <div className="display_info">
           {actual?.requests?.length > 0

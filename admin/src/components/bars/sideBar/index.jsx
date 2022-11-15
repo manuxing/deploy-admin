@@ -36,7 +36,9 @@ const SideBar = () => {
                         <ArrowRightIcon fontSize="small"/>
                       </div>
                       <NavLink className="linkto"to={`${p.url}`}>
+                        <span>
                         {p.to}
+                          </span>
                       </NavLink>
                     </div>
                   );

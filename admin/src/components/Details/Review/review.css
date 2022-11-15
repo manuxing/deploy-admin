@@ -19,3 +19,13 @@
      border-left: 0.1rem;
      border-right: 0.1rem;
 }
+
+
+@media (max-width: 950px){
+.des{
+    padding-left: 3rem;
+}
+.des p{
+    font-size: 0.7rem;
+}
+}
