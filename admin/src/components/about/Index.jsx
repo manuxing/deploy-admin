@@ -22,9 +22,11 @@ const About = () => {
     let [input, setInput] = useState({
       info: "",
       contact: "",
+      servicios: [],
     });
     let [warning, setWarning] = useState({
         info: "",
+        servicio: "",
         contact: "",
     });
   
@@ -36,9 +38,24 @@ const About = () => {
     }, [errForm]);
   
     useEffect(() => {
-      if(about !== null)setInput({id: about.id, info:about.info,
-        contact:about.contact});
-      }, [about]);
+      if(about !== null){
+        if(typeof about.servicios === "string"){
+          let serv = JSON.stringify(about.servicios);
+          serv = JSON.parse(serv)
+          setInput({id: about.id, info:about.info,  servicios:JSON.parse(serv),
+          contact:about.contact});
+        }else{
+          setInput({id: about.id, info:about.info,  servicios:about.servicios,
+            contact:about.contact});
+
+        }
+      }}, [about]);
+
+        
+    useEffect(() => {
+      console.log(input.servicios);
+      }, [input]);
+
 
     useEffect(() => {
       dispatch(getAbout())

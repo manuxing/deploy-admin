@@ -11,6 +11,12 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false 
         },
+        servicios: {
+            type: DataTypes.STRING, 
+        set: function(val) {
+            return this.setDataValue('servicios', JSON.stringify(val));
+        }
+        },
         contact: {
             type: DataTypes.ARRAY(DataTypes.TEXT),
         },

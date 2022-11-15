@@ -1,9 +1,9 @@
 const validatePost = async(body, model) => {
     if(Object.values(body).includes(null))return{status: 400, message:"Hay Campos incompletos, todos los campos son obliigatorios"}
     
-    let about = await model.findAll()
-        .catch(err => {return{status:400, message:"Error al validar About"}});
-    if(about.length !== 0) return {status:400, message:"no puede postearse otro about"};
+    // let about = await model.findAll()
+    //     .catch(err => {return{status:400, message:"Error al validar About"}});
+    // if(about.length !== 0) return {status:400, message:"no puede postearse otro about"};
 
     if (typeof body.info !== "string")return {status: 400, message:"info invalida"}
 
