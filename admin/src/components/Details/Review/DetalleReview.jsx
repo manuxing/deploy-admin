@@ -69,7 +69,7 @@ function DetalleReview({actual, handleChange, _stat}) {
           <div>
           {_stat === true ? "Leida" : "Por ver"}
           </div>
-        <button onClick={() => handleChange()}>change</button>
+        {/* <button onClick={() => handleChange()}>change</button> */}
         </div>
       </div>
       <div className='des'>

@@ -64,6 +64,7 @@ const getRequest = async( res, next, model, related, id) => {
             },
             include: related
         }).catch(err => next({status: 500, message: 'could not find model values or related models'}));
+        console.log(peticionDB.dataValues)
         return res.json(peticionDB.dataValues);
     }catch(e){
         return next({status: 500, message: 'Error en router Request get Individual'});
@@ -86,7 +87,7 @@ const postRequest = async(body, res, next, model, Service) => {
 
         await service.addRequest(request)
             .catch(err => next({status: 500, message: 'could not relate Service to Review'}));
-
+            console.log(request)
         res.json(request);
     } catch (e){
         return next({status: 500, message: 'Error en router Request Post'});

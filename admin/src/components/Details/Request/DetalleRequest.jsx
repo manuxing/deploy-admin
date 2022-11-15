@@ -65,15 +65,15 @@ function DetalleRequest({ actual, handleChange, _stat }) {
               {actual?.thg}
             </div>
         </div>
-        {/* <div className="div_info">
+        <div className="div_info">
           <div>
             <h3>Estado:</h3>
           </div>
           <div>
           {_stat === true ? "Leida" : "Por ver"}
-          <br></br> <button onClick={() => handleChange(!_stat)}>change</button>
+          {/* <br></br> <button onClick={() => handleChange(!_stat)}>change</button> */}
           </div>
-        </div> */}
+        </div>
         </div>
       </div>
   );

@@ -5,7 +5,8 @@ import PostAddIcon from '@mui/icons-material/PostAdd';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Dash = ({data, handleClick})=> { 
-    let {id,  dateP, contact, solicitante} = data;
+    let {id,  stat,dateP, contact, solicitante} = data;
+    console.log(stat)
     return (
         id === undefined ? <></> :
         <div className="dash"> 
@@ -20,16 +21,10 @@ const Dash = ({data, handleClick})=> {
                         <h2>Fecha solicitada:  {dateP.slice(0, 10)}
                         </h2>
                     </div>
-                    {/* <div >
-                        <h2>Contacto</h2>
-                        {contact && contact.length > 0 &&
-                            contact.map(p =>{
-                                return(
-                                    <h3 key={p}> {p} </h3>
-                                )
-                            })
-                        }
-                    </div> */}
+                    <div className="divdash">
+                    <h2>Estado</h2>
+                        <h3>{stat === true ? "Leida" : "Por ver"}</h3>
+                    </div>
                 </NavLink>
                 <div className="delete">
                     <button oClick={(e)=>handleClick(e, id)}><DeleteForeverIcon fontSize="small"/></button>
