@@ -17,10 +17,11 @@ const Form = ()=>{
 
     let sub = () => {
         let senr = input;
-        console.log("aca")
         senr.thg = "pagina";
         let date =new Date();
         senr.dateP  = `${date.getUTCFullYear()}-${date.getUTCMonth()}-${date.getUTCDate()}`
+        senr.de = senr.cName;
+        senr.cName = "deff";
         let x = validate.reviewForm(senr, servicesIds);
         if (x.status === false) {
           errHan(x);
