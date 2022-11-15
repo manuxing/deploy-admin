@@ -110,7 +110,7 @@ const deleteReview = async(res, next, model, id) => {
 
         return res.json("succesfully deleted");
     }catch(e){
-        return next({status: 500, message: 'Error en router Activity delete'});
+        return next({status: 500, message: 'Error en router Review delete'});
     }
 };
 
