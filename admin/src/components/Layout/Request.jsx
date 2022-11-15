@@ -1,83 +1,64 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSolicitudes, setActual } from "../../redux/actions";
+import { getNot, clearActualG, deleteModel, setDeleted, setActualG } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
-import NavBar from "../bars/navBar";
-import SideBar from "../bars/sideBar";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Request";
+import DashDisplay from "./DashDisplay";
 import RequestR from "../create/requeset";
+import Paginado from "./paginado";
 
 const RequestLayout = () => {
-  let todas = useSelector((state) => state.solicitudes);
+  let todas = useSelector((state) => state.actualG);
+  let deleted = useSelector((state) => state.deleted);
   let dispatch = useDispatch();
-  let [cards, setCards] = useState([]);
-  let [loading, setLoading] = useState(true);
   let [pressed, setPressed] = useState(false);
+  let [cards, setCards] = useState([]);
 
   useEffect(() => {
-    dispatch(getSolicitudes());
+    dispatch(setActualG("request"));
+    dispatch(getNot());
+    return () => dispatch(clearActualG());
   }, [dispatch]);
+    
+  useEffect(() => {
+    if(todas.data && todas.model === "request")setCards(todas.data)
+  }, [todas]);
 
   useEffect(() => {
-    if (todas.length > 0) {
-      setCards(todas);
+    if(deleted === true){
+      alert("deleted");
+      dispatch(setDeleted()); 
+      dispatch(setActualG("request"));
     }
-    if (cards && cards.length > 0) setLoading(false);
-  }, [todas, cards]);
+  }, [deleted]);
 
-  useEffect(() => {
-    return () => dispatch(setActual());
-  }, []);
+  let handleClick = (e, id)=>{
+    e.preventDefault();
+    dispatch(deleteModel("request", id));
+  }
 
   return (
-    <div>
-      <NavBar />
-      <div className="client_l">
-        <SideBar />
         <div className="content_cli_l">
           <div>
+            <BarraFiltros />
             {pressed === false ? (
-              <button onClick={() => setPressed(true)}>agregar</button>
-            ) : (
               <div>
-                <RequestR setP={setPressed} />
-                <BarraFiltros />
+                <button onClick={() => setPressed(true)}>agregar</button>
               </div>
+            ) : (
+              <RequestR setP={setPressed} />
             )}
           </div>
-          {loading === false ? (
+          {cards.length === 0 ? 
+            <Spinner/> : 
             <div className="cont">
-              <div className="cards">
-                {cards &&
-                  cards?.map((p) => {
-                    return (
-                      <Dash
-                        key={p.id}
-                        id={p.id}
-                        back={
-                          p.back
-                            ? p.back
-                            : "https://e7.pngegg.com/pngimages/779/957/png-clipart-video-games-video-game-consoles-red-dead-redemption-video-game-developer-cool-gaming-logos-blue-game-logo.png"
-                        }
-                        dateR={p.dateR}
-                        dateP={p.dateP}
-                        thg={p.thg}
-                        contact={p.contact}
-                      />
-                    );
-                  })}
-              </div>
+              <Paginado values={todas}/>
+              <DashDisplay all={cards} Dash={Dash} model={"Solicitudes"} handleClick={handleClick}/>
             </div>
-          ) : (
-            <div>
-              <Spinner />
-            </div>
-          )}
+          }
         </div>
-      </div>
-    </div>
   );
 };
 
-export default RequestLayout;
+export default React.memo(RequestLayout);

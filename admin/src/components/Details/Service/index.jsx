@@ -1,113 +1,100 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams, NavLink } from "react-router-dom"
-import { getServicio, getReviews, clearAll } from '../../../redux/actions'
+import { useParams, useHistory } from "react-router-dom"
+import { getServicio, errorForm, updateServicio, getReviews, getNot, setActual } from '../../../redux/actions'
+import Form from './Form'
+import DetalleService from './DetalleService'
+import tools from '../../../tools'
 import Spinner from '../../Spinner'
-import NavBar from "../../bars/navBar";
-import SideBar from "../../bars/sideBar";
+import { actuallContext } from '../../create/ActualContext';
 import "./Service.css"
 
 const Service = () => {
-
   const {id} = useParams();
   let dispatch = useDispatch();
-  let [loading, setLoading] = useState(true);
-  let [loadingR, setLoadingR] = useState(true);
+  let validate = tools.validate
+  const history = useHistory();
   let actual = useSelector((state) => state.actual);
-  let reviews = useSelector((state) => state.reviews);
+  let error = useSelector((state) => state.error);
+  let errForm = useSelector((state) => state.errForm);
+  let [edit, setEdit] = useState(false);
 
   useEffect(()=>{
-    dispatch(getReviews())
-    dispatch(getServicio(id))
-  },[dispatch])
-
-  useEffect(()=>{
-    if(typeof actual !== "number"){
-      setLoading(false)
-      if(reviews.length > 0){
-        reviews = reviews.filter(p =>{
-          if(p.services.length > 0){
-            if(p.services[0].id === actual.id){
-              return p;
-            }
-          }
-        });
-        reviews.length > 0 ? setLoadingR(false) : setLoadingR(true)
+    if(error){
+      history.push("/err");
+    } else{
+      if(parseInt(id) === Number(id)){
+        dispatch(getReviews())
+        dispatch(getServicio(parseInt(id)));
+        dispatch(getNot());
+      }else{
+        tools.alert_notFound( "Reseña", history, "/reviews/")
       }
-    }else{
-      setLoading(true)
     }
-  },[loading, actual, reviews])
+    return () => dispatch(setActual())
+  },[dispatch, error]);
+   
+  let [input, setInput] = useState({
+    name: "",
+    description: "",
+    tR: "",
+    _tR: "",
+  });
+  let [warning, setWarning] = useState({
+    name: "",
+    description: "",
+    tR: "",
+    _tR: "",
+  });
 
   useEffect(() => {
-    return () => dispatch(clearAll())
-  }, []);
-   
+    if(errForm && errForm?.data){
+      alert(errForm.data)
+      dispatch(errorForm());
+    }
+  }, [errForm]);
+
+  useEffect(() => {
+    if(actual !== null)setInput({id: actual.id, name:actual.name,
+       description:actual.description, tR:actual.tR, tR_:actual.tR_});
+    if(actual && actual.updated){
+      alert("updated");
+      setEdit(false)
+    }
+  }, [actual]);
+
+  let send = {
+    input,
+    warning,
+    dispatch,
+    validate,
+    updateServicio,
+    setInput,
+    setWarning,
+  };
+
+  let editS = (e) =>{
+    e.preventDefault();
+    setEdit(!edit);
+  }
+
   return (
-    loading === true ?
-    <div>
-      <Spinner/>
-    </div> 
-    :
-    <div>
-      <NavBar/>
-      <div className="service_d">
-        <SideBar/>
-        <div className="content_srv">
-          <div className="div_srv">
-            <span className="span_srv">
-              imagenes
-            </span>
-          </div>
-          <div className="div_srv">
-            <span className="span_srv">
-              {actual?.name ? actual?.name : "name"}
-            </span>
-          </div>
-          <div className="div_srv">
-            <span className="span_srv">
-              Descripcion
-            </span>
-            <div>
-              {actual?.description ? actual?.description : "descripcion"}
-            </div>
-          </div>
-          <div className="div_srv">
-            <span className="span_srv">
-              Horarios
-            </span>
-            <div>
-              {actual?.tR ? actual?.tR : "rango Horario"}
-            </div>
-          </div>
-          {loadingR === true ? <></>
-          :
-          <div className="div_srv">
-            <span className="span_srv">
-              Reviews
-            </span>
-            {reviews.length}
-            <div>
-              {
-                reviews ? reviews.map(p => { 
-                  return (
-                    <NavLink key={`${p.id}`} className="link" to={`/review/${p.id}`}>
-                      <div>
-                        {p?.clients[0]?.name}:
-                        "{p.description}"
-                      </div>
-                    </NavLink>
-                  ) 
-                }) : "Reviews"
-              }
-            </div>
-          </div>
-          }
-        </div>
+    typeof actual !== "object" ?
+      <div>
+        <Spinner/>
+      </div> 
+      :
+      <div className="content_srv">{
+        edit === false ?
+        <DetalleService actual={actual}/> :
+        <actuallContext.Provider value={send}>
+            <Form/>
+          </actuallContext.Provider>
+      }
+        <button onClick={(e)=>editS(e)}> edit </button>
       </div>
-    </div>
   );
 };
 
-export default Service;
+export default React.memo(Service);
 

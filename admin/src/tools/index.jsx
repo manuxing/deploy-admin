@@ -20,13 +20,61 @@ const tools = {
       dash: (dis) => {
         return (
           <div>
-            <p>{dis}</p>
+            <p key={dis[0].id}>{dis[0].name}</p>
           </div>
         );
       },
     },
   },
   validate: {
+    login: (user) => {
+      let res = { status: true };
+      let errs = [];
+      let reg = new RegExp(/\b[\w.-]+@[\w.-]+\.\w{2,4}\b/);
+      let vals = Object.values(user);
+      
+      console.log(user)
+      if(vals.length !== 2||vals.includes(undefined)|| vals.includes(null)){
+        let err = {
+          message: "complete los campos",
+          ubic: "gral",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+
+      vals.forEach(p => {
+        if(typeof p !== 'string'){
+          let err = {
+            message: "revise los campos",
+            ubic: "gral",
+          };
+          errs.push(err);
+          res.status = false;
+        }
+      })
+
+      if (reg.test(user.email) === false) {
+              let err = {
+                message: "email invalido",
+                ubic: "email",
+              };
+              errs.push(err);
+              res.status = false;
+          }
+
+      if (user.password.length < 6 || user.password.length > 30) {
+        let err = {
+          message: "contraseña invalida",
+          ubic: "password",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+      
+      res.err = errs;
+      return res
+    },
     agregarContacto: (con) => {
       let res = { status: true };
       let errs = [];
@@ -60,7 +108,7 @@ const tools = {
           }
           break;
         default: {
-          let values = ["presencial", "booking", "pagina"];
+          let values = ["presencial", "booking", "pagina", "otro"];
           if (values.includes(con.value) === false && values.includes(con.type) === false ) {
             let err = {
               message: "contacto invalido",
@@ -149,8 +197,7 @@ const tools = {
       resX.push(checkS);
       res.res = resX;
       res.errs = resX.map((p) => {
-        if (p.status === false)
-        {
+        if (p.status === false){
           res.status = false;
           return p.err;
         } 
@@ -175,19 +222,8 @@ const tools = {
             res.status = false;
           }
           break;
-        case "name":
-          if (typeof p.target.value !== "string"|| p.target.value.length === 0) {
-            let err = {
-              message: "ingrese un nombre valido",
-              ubic: "name",
-            };
-            errs.push(err);
-            res.status = false;
-          }
-          break;
         case "sId":
           if (p.target.value.length > 2 ||!servicesIds.includes(parseInt(p.target.value))) {
-            console.log(p.target.value.length>2, servicesIds)
             let err = {
               message: "ingrese un servicio correcto",
               ubic: "sId",
@@ -279,21 +315,23 @@ const tools = {
       res.err = errs;
       return res;
     },
-    clientForm_field: (evento) => {
+    clientForm_field: (evento, servicesIds) => {
       let errs = [];
       let res = { status: true, ubic: evento.target.name };
       let nameR = new RegExp(/[a-zA-Z ]$/);
-      console.log("clienteformfield", evento.target.name, evento.target.value)
+      let dateR = new RegExp(
+        /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/
+      );
       switch (evento.target.name) {
         case "name":
           if (nameR.test(evento.target.value) === false) {
             let err = {
               message: "ingrese un nombre valido",
               ubic: "name",
-            };
-            res.status = false;
-            errs.push(err);
-          }
+          };
+          res.status = false;
+          errs.push(err);
+        }
           break;
         case "contact":
           if (typeof evento.target.value !== "object") {
@@ -305,16 +343,40 @@ const tools = {
             errs.push(err);
           }
           break;
+        case "date":
+          let x = evento.target.value.split("-").reverse().join("-");
+          if ( dateR.test(x) === false || parseInt(x.split("-")[x.split("-").length - 1]) < 2000) {
+            let err = {
+              message: "ingrese una fecha valida",
+              ubic: "date",
+            };
+            errs.push(err);
+            res.status = false;
+          }
+        break;
+        case "sId":
+          if (evento.target.value.length > 2 ||!servicesIds.includes(parseInt(evento.target.value))) {
+            let err = {
+              message: "ingrese un servicio correcto",
+              ubic: "sId",
+            };
+            errs.push(err);
+            res.status = false;
+            res.ubic = "service";
+          }
+        break;
         default: {
         }
       }
       res.err = errs;
       return res;
     },
-    clientForm: (client) => {
+    clientForm: (client, servicesIds) => {
+      let {act} = client;
       let errs = [];
-      let res = { status: true };
+      let res = { status: true, ubic: "clientForm" };
       let nameR = new RegExp(/[a-zA-Z ]$/);
+      let dateR = new RegExp(/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/);
       if (nameR.test(client.name) === false) {
         let err = {
           message: "ingrese un nombre valido",
@@ -323,6 +385,7 @@ const tools = {
         res.status = false;
         errs.push(err);
       }
+      console.log(client.contact)
       if (typeof client.contact !== "object" || client.contact.length < 1) {
         let err = {
           message: "revise los contactos, no deberia cambiar de array",
@@ -331,6 +394,32 @@ const tools = {
         res.status = false;
         errs.push(err);
       }
+      if (typeof act.persons !== "object"|| act.persons.length < 1) {
+        let err = {
+          message: "revise el campo personas, no deberia cambiar de array",
+          ubic: "persons",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+      let x = act.date.split("-").reverse().join("-");
+      if (dateR.test(x) === false || parseInt(x.split("-")[x.split("-").length - 1]) < 2000) {
+        let err = {
+          message: "ingrese una fecha valida",
+          ubic: "date",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+      if (act.sId.length > 2 ||!servicesIds.includes(parseInt(act.sId))) {
+        let err = {
+          message: "ingrese un servicio correcto",
+          ubic: "sId",
+        };
+        errs.push(err);
+        res.status = false;
+        res.ubic = "service";
+      }
       res.err = errs;
       return res;
     },
@@ -338,6 +427,7 @@ const tools = {
       let errs = [];
       let res = { status: true, ubic: evento.target.name };
       let nameR = new RegExp(/[a-zA-Z ]$/);
+      let timeR = new RegExp("([01]?[0-9]|2[0-3]):[0-5][0-9]?");
       switch (evento.target.name) {
         case "name":
           if (nameR.test(evento.target.value) === false) {
@@ -350,15 +440,25 @@ const tools = {
           }
           break;
         case "tR":
-          // if(evento.target.value.length < 5||nameR.test(evento.target.value) === false){
-          //     let err = {
-          //         message: "ingrese un nombre valido",
-          //         ubic: "cName"
-          //     }
-          //     res.status = false;
-          //     errs.push(err);
-          // }
+          if(timeR.test(evento.target.value) === false){
+              let err = {
+                  message: "ingrese un horario valido",
+                  ubic: "tR"
+              }
+              res.status = false;
+              errs.push(err);
+          }
           break;
+        case "tR_":
+          if(timeR.test(evento.target.value) === false){
+            let err = {
+                message: "ingrese un horario valido",
+                ubic: "tR_"
+            }
+            res.status = false;
+            errs.push(err);
+        }
+        break;
         case "description":
           if (typeof evento.target.value !== "string") {
             let err = {
@@ -385,14 +485,7 @@ const tools = {
     serviceForm: (service) => {
       let errs = [];
       let res = { status: true, ubic: "" };
-      let medios = [
-        "telefono",
-        "email",
-        "presencial",
-        "pagina",
-        "booking",
-        "otro",
-      ];
+      let timeR = new RegExp("([01]?[0-9]|2[0-3]):[0-5][0-9]?");
       let nameR = new RegExp(/[a-zA-Z ]$/);
       if (service.name.length < 5 || nameR.test(service.name) === false) {
         let err = {
@@ -417,16 +510,22 @@ const tools = {
         res.status = false;
         errs.push(err);
       }
-      // hacer tR
-      // if(medios.includes(review.thg) === false){
-      //     console.log("review entera");
-      //     let err = {
-      //     message:"rango de edad invalido",
-      //     ubic: "thg"
-      //     }
-      //     errs.push(err);
-      //     res.status = false;
-      // }
+      if (timeR.test(service.tR) === false) {
+        let err = {
+          message: "ingrese un horario valido",
+          ubic: "tR",
+        };
+        res.status = false;
+        errs.push(err);
+      }
+      if (timeR.test(service.tR_) === false) {
+        let err = {
+          message: "ingrese un horario valido",
+          ubic: "tR_",
+        };
+        res.status = false;
+        errs.push(err);
+      }
       res.err = errs;
       return res;
     },
@@ -485,7 +584,7 @@ const tools = {
         case "thg":
           if (medios.includes(evento.target.value) === false) {
             let err = {
-              message: "rango de edad invalido",
+              message: "ingrese un medio valido",
               ubic: "thg",
             };
             errs.push(err);
@@ -494,7 +593,6 @@ const tools = {
           break;
         case "sId":
             if (evento.target.value.length > 2 ||!servicesIds.includes(parseInt(evento.target.value))) {
-              console.log(evento.target.value.length>2, servicesIds)
               let err = {
                 message: "ingrese un servicio correcto",
                 ubic: "sId",
@@ -543,7 +641,6 @@ const tools = {
         res.status = false;
       }
       if (!clientsNames.includes(review.cName)) {
-        console.log(review.cName)
         let err = {
           message: "ingrese un nombre valido",
           ubic: "cName",
@@ -568,7 +665,7 @@ const tools = {
       }
       if (medios.includes(review.thg) === false) {
         let err = {
-          message: "rango de edad invalido",
+          message: "ingrese un medio valido",
           ubic: "thg",
         };
         errs.push(err);
@@ -590,6 +687,7 @@ const tools = {
       let errs = [];
       let res = { status: true, ubic: "" };
       let dateR = new RegExp(/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/);
+      let nameR = new RegExp(/[a-zA-Z]$/);
       switch (evento.target.name) {
         case "dateR":
           let x = evento.target.value.split("-").reverse().join("-");
@@ -614,7 +712,7 @@ const tools = {
           }
           break;
           case "sId":
-            if (evento.target.value.length > 2 ||!servicesIds.includes(parseInt(evento.target.value))) {
+            if (evento.target.value.length > 2 ||!servicesIds.includes(parseInt(evento.target.value))||evento.target.value.length > 50) {
               let err = {
                 message: "ingrese un servicio correcto",
                 ubic: "sId",
@@ -624,6 +722,16 @@ const tools = {
               res.ubic = "service";
             }
             break;
+          case "solicitante":
+          if (evento.target.length > 0 && nameR.test(evento.target.value) === false) {
+            let err = {
+              message: "ingrese un nombre de solicitantevalido",
+              ubic: evento.target.name,
+            };
+            errs.push(err);
+            res.status = false;
+          }
+          break;
         default: {
         }
       }
@@ -633,6 +741,7 @@ const tools = {
     requestForm: (review, servicesIds) => {
       let errs = [];
       let res = { status: true, ubic: "" };
+      let nameR = new RegExp(/[a-zA-Z ]$/);
       let dateR = new RegExp(
         /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/
       );
@@ -650,6 +759,14 @@ const tools = {
         let err = {
           message: "ingrese una fecha valida",
           ubic: "dateP",
+        };
+        errs.push(err);
+        res.status = false;
+      }
+      if (nameR.test(review.solicitante) === false) {
+        let err = {
+          message: "ingrese un nombre de solicitante valido",
+          ubic: "solicitante",
         };
         errs.push(err);
         res.status = false;
@@ -675,7 +792,6 @@ const tools = {
       res.err = errs;
       return res;
     },
-    field: () => {},
   },
   formActions:{
     subL: {
@@ -720,19 +836,25 @@ const tools = {
       },
     },
   },
-  alert: (art, url, cb, cb2, cb3, cb4, cb5) => {
+  alert: (art, url, cb, cb2, cb3, v3, cb4, cb5) => {
     let fem = ["reseña", "solicitud", "actividad"];
     let f = fem.includes(art) ? "a" : "o";
     let sign = prompt(
       `su ${art} fue cread${f} exitosamente, desea quedarse en la lista o ser redirigidx al detalle`
     );
-    if (sign.length > 0) {
+    if(!sign || sign.length < 1){
+      cb2(cb3(v3));
+      cb2(cb5());
+    } else {
       cb.push(`${url}`);
       cb4(false);
-    } else {
-      cb2(cb3());
-      cb2(cb5());
     }
+  },
+  alert_notFound: ( model, cb, url) => {
+    alert(
+      `el id del ${model} es invalido`
+    );
+    cb.push(url)
   },
   build: async (cb, actions) => {
     let hacer = actions.map(async p =>{
@@ -747,7 +869,12 @@ const tools = {
     stats.push(stat);
     return {data, stats};
   },
-  
+  getSetter_: (stat, state) => {
+    console.log(stat, state)
+    let stats =  state.all.stats.filter(p=> p.name !== stat.name)
+    stats.push(stat);
+    return stats;
+  },
 };
 
 export default tools;

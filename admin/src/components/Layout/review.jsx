@@ -1,87 +1,66 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getReviews, setActual } from "../../redux/actions";
+import { getNot, deleteModel, setDeleted, setActualG, clearActualG } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
-import NavBar from "../bars/navBar";
-import SideBar from "../bars/sideBar";
 import Spinner from "../Spinner.jsx";
+import DashDisplay from "./DashDisplay";
 import Dash from "../Dashes/Review";
 import ReviewR from "../create/review";
+import Paginado from "./paginado";
 
 const ReviewLayout = () => {
-  let todas = useSelector((state) => state.reviews);
+  let todas = useSelector((state) => state.actualG);
+  let deleted = useSelector((state) => state.deleted);
   let dispatch = useDispatch();
-  let [cards, setCards] = useState([]);
-  let [loading, setLoading] = useState(true);
   let [pressed, setPressed] = useState(false);
+  let [cards, setCards] = useState([]);
 
   useEffect(() => {
-    dispatch(getReviews());
+    dispatch(setActualG("review"));
+    dispatch(getNot());
+    return () => dispatch(clearActualG());
   }, [dispatch]);
 
   useEffect(() => {
-    if (todas.length > 0) {
-      setCards(todas);
-    }
-    if (cards && cards.length > 0) setLoading(false);
-  }, [todas, cards]);
+    if(todas.data && todas.model === "review")setCards(todas.data)
+  }, [todas]);
 
   useEffect(() => {
-    return () => dispatch(setActual());
-  }, []);
+    if(deleted === true){
+      alert("deleted");
+      dispatch(setDeleted()); 
+      dispatch(setActualG("review"));
+    }
+  }, [deleted]);
+
+  let handleClick = (e, id)=>{
+    e.preventDefault();
+    dispatch(deleteModel("review", id));
+  }
 
   return (
-    <div>
-      <NavBar />
-      <div className="client_l">
-        <SideBar />
         <div className="content_cli_l">
           <div>
+            <BarraFiltros />
             {pressed === false ? (
-              <button onClick={() => setPressed(true)}>agregar</button>
+              <div>
+                <button onClick={() => setPressed(true)}>agregar</button>
+              </div>
             ) : (
               <div>
                 <ReviewR setP={setPressed} />
-                <BarraFiltros />
               </div>
             )}
           </div>
-          {loading === false ? (
+          {cards.length === 0 ? 
+            <Spinner/> : 
             <div className="cont">
-              <div className="cards">
-                {cards &&
-                  cards?.map((p) => {
-                    return (
-                      <Dash
-                        key={p.id}
-                        id={p.id}
-                        back={
-                          p.back
-                            ? p.back
-                            : "https://e7.pngegg.com/pngimages/779/957/png-clipart-video-games-video-game-consoles-red-dead-redemption-video-game-developer-cool-gaming-logos-blue-game-logo.png"
-                        }
-                        stat={p.stat}
-                        dateR={p.dateR}
-                        dateP={p.dateP}
-                        thg={p.thg}
-                        clients={p.clients?.length > 0 ? p.clients?.length : 0}
-                        services={
-                          p.services?.length > 0 ? p.services?.length : 0
-                        }
-                      />
-                    );
-                  })}
-              </div>
+              <Paginado values={todas}/>
+              <DashDisplay all={cards} Dash={Dash} model={"Reseñas"} handleClick={handleClick}/>
             </div>
-          ) : (
-            <div>
-              <Spinner />
-            </div>
-          )}
+          }
         </div>
-      </div>
-    </div>
   );
 };
 
-export default ReviewLayout;
+export default React.memo(ReviewLayout);

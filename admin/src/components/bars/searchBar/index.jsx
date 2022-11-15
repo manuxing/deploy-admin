@@ -1,20 +1,23 @@
 import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
-//traer, hacer search, ademas hacer la ruta para que traiga del back
+import { useDispatch, useSelector } from "react-redux";
+import { search } from "../../../redux/actions";
 import "../searchBar/searchBar.css";
 
 const SearchBar = () => {
-
-  // const dispatch = useDispatch();
+  let actual = useSelector(state => state.actualG);
+  
+  const dispatch = useDispatch();
   let [name, setName] = useState("");
 
   let handleChange = (evento) => {
     let { value } = evento.target;
     setName(value);
   };
+  
   let handleSubmit = (evento) => {
     evento.preventDefault();
-    // dispatch(search(name));
+    setName("")
+    dispatch(search(name, actual.model, actual.currentPage));
   };
 
   return (
@@ -30,7 +33,6 @@ const SearchBar = () => {
             onChange={(e) => handleChange(e)}
           />
           <button className="button" type="submit">
-            {/* <img src={searchIcon} alt="icon"/> */}
           </button>
         </div>
       </form>

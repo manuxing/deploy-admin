@@ -1,9 +1,37 @@
 import { type } from "./types";
 import axios from "axios";
+import firebase from "../../firebase"
+
+export function search(querys, to, page, ord) {
+  return function (dispatch) {
+    axios
+      .get(`http://localhost:3001/${to}/search/?query=${querys}&page=${page}&ord=${ord}`)
+      .then((res) => {
+        dispatch({ type: type.SERCH, payload: res });
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: type.ERROR_FORM, payload: e });
+      });
+  };
+}
+
+export function changePage(page, to){
+  return function changePage(dispatch) {
+    axios
+      .get(`http://localhost:3001/${to}/?page=${page}`)
+      .then((res) => {
+        dispatch({ type: type.SET_ACTUALG, payload: res });
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: type.ERROR, payload: e });
+      });
+  };
+}
 
 export function createClient(data) {
   return function (dispatch) {
-    console.log(data);
     axios
       .post("http://localhost:3001/client/", data)
       .then((res) => {
@@ -12,10 +40,10 @@ export function createClient(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
-}
+} 
 
 export function getClient(id) {
   if (id) {
@@ -59,6 +87,47 @@ export function getNot(id) {
   };
 }
 
+export function deleteModel(model ,id) {
+  return function (dispatch) {
+    axios
+      .delete(`http://localhost:3001/${model}/${id}`)
+      .then((res) => {
+        dispatch({ type: type.DELETE, payload: res });
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: "ERROR", payload: e });
+      });
+  };
+}
+
+export function getAbout() {
+  return function (dispatch) {
+    axios
+      .get(`http://localhost:3001/about/`)
+      .then((res) => {
+        dispatch({ type: type.GET_ABOUT, payload: res });
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: "ERROR", payload: e });
+      });
+  };
+}
+
+export function putAbout(data) {
+  return function (dispatch) {
+    axios
+      .put(`http://localhost:3001/about/`, data)
+      .then((res) => {
+        dispatch({ type: type.GET_ABOUT, payload: res });
+      })
+      .catch((e) => {
+        dispatch({ type: type.ERROR_FORM, payload: e });
+      });
+  };
+}
+
 export function createSolicitud(data) {
   return function (dispatch) {
     axios
@@ -71,7 +140,7 @@ export function createSolicitud(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
@@ -107,11 +176,9 @@ export function getSolicitudes(id) {
 
 export function createActividades(data) {
   return function (dispatch) {
-    console.log("por enviar", data);
     axios
       .post("http://localhost:3001/activity/", data)
       .then((res) => {
-        console.log(res);
         return { type: type.SET_ACTUAL, payload: res };
       })
       .then((p) => {
@@ -119,13 +186,14 @@ export function createActividades(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
 
 export function getActividades(id) {
   if (id) {
+    console.log(id)
     return function (dispatch) {
       axios
         .get(`http://localhost:3001/activity/${id}`)
@@ -165,7 +233,7 @@ export function createReviews(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
@@ -199,7 +267,6 @@ export function getReviews(id) {
 }
 
 export function createServicio(data) {
-  console.log("antes de enviar", data);
   return function (dispatch) {
     axios
       .post("http://localhost:3001/service/", data)
@@ -211,7 +278,24 @@ export function createServicio(data) {
       })
       .catch((e) => {
         console.log(e);
-        dispatch({ type: "ERROR", payload: e });
+        dispatch({ type: type.ERROR_FORM, payload: e });
+      });
+  };
+}
+
+export function updateServicio(data) {
+  return function (dispatch) {
+    axios
+      .put("http://localhost:3001/service/", data)
+      .then((res) => {
+        return { type: type.SET_ACTUAL, payload: {...res, data:{...res.data, updated:true}}};
+      })
+      .then((p) => {
+        dispatch(p);
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: type.ERROR_FORM, payload: e });
       });
   };
 }
@@ -251,6 +335,7 @@ export function statChange(x) {
         .put(`http://localhost:3001/review/`, x.pack)
         .then((res) => {
           console.log(res);
+          dispatch({ type: type.ADD_NOT, payload: res });
         })
         .catch((e) => {
           console.log(e);
@@ -290,22 +375,46 @@ export function setActual() {
   return { type: type.SET_ACTUAL, payload: 1 };
 }
 
+export function setActualG(to) {
+  return function (dispatch) {
+    axios
+      .get(`http://localhost:3001/${to}/`)
+      .then((res) => {
+        dispatch({ type: type.SET_ACTUALG, payload: res });
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: type.ERROR_FORM, payload: e });
+      });
+  };
+}
+
+export function setCurrentUser(user) {
+  return { type: type.SET_CURRENTUSER, payload: user };
+}
+
+export function clearActualG(to) {
+  return { type: type.CLEAR_ACTUALG, payload: null };
+}
+
+export function setDeleted() {
+  return { type: type.DELETE, payload: false };
+}
+
+export function error() {
+  return { type: type.ERROR, payload: null };
+}
+
+export function errorForm() {
+  return { type: type.ERROR_FORM, payload: null };
+}
+
 export function clearAll() {
   return { type: type.CLEAR_ALL };
 }
 
 export function orderByN(n) {
-  //logica
   return { type: type.ORDER_N, payload: n };
-}
-
-export function orderByV(n) {
-  //logica
-  return { type: type.ORDER_A, payload: n };
-}
-
-export function search(payload) {
-  return { type: "SEARCH", payload };
 }
 
 export function all() {

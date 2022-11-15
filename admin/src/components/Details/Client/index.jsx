@@ -1,105 +1,46 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useParams, NavLink } from "react-router-dom"
-import { getClient, getActividades, setActual } from '../../../redux/actions'
+import { useSelector, useDispatch  } from 'react-redux'
+import { useParams, NavLink, useHistory} from "react-router-dom"
+import { getClient, getActividades, setActual, getNot } from '../../../redux/actions'
+import tools from '../../../tools'
 import Spinner from '../../Spinner'
-import NavBar from "../../bars/navBar";
-import SideBar from "../../bars/sideBar";
-import ReviewC from "../../lO/reviewC"
-import ActivityC from "../../lO/activityC"
 import "./client.css"
+import DetalleCliente from './DetalleCliente'
 
 const Cliente = () => {
-
   const {id} = useParams();
   let dispatch = useDispatch();
-  let [loading, setLoading] = useState(true);
+  let history = useHistory();
   let actual = useSelector((state) => state.actual);
+  let error = useSelector((state) => state.error);
 
   useEffect(()=>{
-    dispatch(getClient(id))
-    dispatch(getActividades())
-  },[dispatch])
-
-  useEffect(()=>{
-    if(typeof actual !== "number"){
-      setLoading(false)
-    }else{
-      setLoading(true)
+    if(error){
+      history.push("/err");
+    } else{
+      dispatch(getNot());
+      if(parseInt(id) === Number(id)){
+        dispatch(getClient(parseInt(id)))
+        dispatch(getActividades())
+        dispatch(getNot());
+      }else{
+        tools.alert_notFound( "Cliente", history, "/clients/")
+      }
     }
-  },[loading,actual])
-
-  useEffect(() => {
     return () => dispatch(setActual())
-  }, []);
+  },[dispatch, error]);
 
   return (
-    loading === true ?
+    typeof actual !== "object" ?
       <div>
         <Spinner/>
       </div> 
       :
-      <div>
-        <NavBar/>
-        <div className="client_d">
-          <SideBar/>
           <div className="content_cli">
-            <div className="div_cli">
-              <span className="span_cli">
-                {actual?.name ? actual?.name : "name"}
-              </span>
-            </div>
-            <div className="div_cli">
-              <span className="span_cli">
-                Contactos
-              </span>
-              <div>
-                {
-                  actual?.contact ? actual?.contact.map(p => { 
-                    return (
-                      <span key={p}>{p}</span> 
-                    ) 
-                  }) : "contacto"
-                }
-              </div>
-            </div>
-            <div className="div_cli">
-              <span className="span_cli">
-                Actividades realizadas
-              </span>
-              <div>
-                {
-                  actual?.activities ? actual?.activities.map(p => { 
-                    return (
-                      <NavLink key={`${p.id}`} className="link" to={`/activity/${p.id}`}>
-                        <ActivityC key={p.id} activity={p}/>
-                      </NavLink>
-                    ) 
-                  }) : "actividades realizadas"
-                }
-              </div>
-            </div>
-            <div className="div_cli">
-              <span className="span_cli">
-                Reviews
-              </span>
-              <div>
-                {
-                  actual?.reviews ? actual?.reviews.map(p => { 
-                    return (
-                      <NavLink key={`${p.id}`} className="link" to={`/review/${p.id}`}>
-                        <ReviewC key={p} review = {p}/>
-                      </NavLink>
-                    ) 
-                  }) : "Reviews"
-                }
-              </div>
-            </div>
+            <DetalleCliente actual={actual}/>
           </div>
-        </div>
-      </div>
     );
 };
 
-export default Cliente;
+export default React.memo(Cliente);
 

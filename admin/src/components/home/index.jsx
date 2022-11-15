@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearAll, getActividades, getClient, getReviews, getServicio, getSolicitudes, setAll } from "../../redux/actions";
-import NavBar from "../bars/navBar";
-import SideBar from "../bars/sideBar";
+import { getActividades, getClient, getNot, getReviews, getServicio, getSolicitudes, setAll } from "../../redux/actions";
 import Stat from "../stats/Activity.jsx";
 import tools from "../../tools";
 import "./home.css";
+import Spinner from "../Spinner";
 
 const Home = () => {
   let all = useSelector((state) => state.all);
@@ -15,6 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     let actions = [getActividades, getClient, getServicio, getSolicitudes, getReviews];
+    dispatch(getNot());
     if (all.display.length === 0){
       dispatch(setAll());
     }
@@ -22,33 +22,25 @@ const Home = () => {
   }, [dispatch]);
   
   useEffect(() => {
-    if(all.stats && all.stats.length === all.display.length){
+    if(all.stats && all.stats.length > 0 ){
       setLoading(false);
     } else {
       setLoading(true);
     }
   }, [all]);
 
-  useEffect(() => {
-    return () => dispatch(clearAll())
-  }, []);
-
   return (
-    <div>
-      <NavBar />
       <div className="home">
-        <SideBar />
         <div className="content">
         {loading === false ? 
             all?.stats.map((p) => {
               return <Stat key={p.url} p={p} />;
             }) :
-            <></>
-        }
+          <Spinner/>
+          }
         </div>
       </div>
-    </div>
   );
 };
 
-export default Home;
+export default React.memo(Home);

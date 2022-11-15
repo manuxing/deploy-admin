@@ -1,87 +1,65 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getActividades, setActual } from "../../redux/actions";
+import { setActualG, getNot, clearActualG, deleteModel, setDeleted } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
-import NavBar from "../bars/navBar";
-import SideBar from "../bars/sideBar";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Activity.jsx";
 import ActivityR from "../create/activity";
+import DashDisplay from "./DashDisplay";
+import Paginado from "./paginado";
 
 const ActivityLayout = () => {
-  let todas = useSelector((state) => state.actividades);
+  let todas = useSelector((state) => state.actualG);
+  let deleted = useSelector((state) => state.deleted);
   let dispatch = useDispatch();
-  let [cards, setCards] = useState([]);
   let [pressed, setPressed] = useState(false);
-  let [loading, setLoading] = useState(true);
+  let [cards, setCards] = useState([]);
 
   useEffect(() => {
-    dispatch(getActividades());
+    dispatch(setActualG("activity"));
+    dispatch(getNot());
+    return () => dispatch(clearActualG());
   }, [dispatch]);
+  
+  useEffect(() => {
+    if(todas.data && todas.model === "activity")setCards(todas.data)
+  }, [todas]);
 
   useEffect(() => {
-    if (todas.length > 0) {
-      setCards(todas);
+    if(deleted === true){
+      alert("deleted");
+      dispatch(setDeleted()); 
+      dispatch(setActualG("activity"));
     }
-    if (cards && cards.length > 0) setLoading(false);
-  }, [todas, cards]);
+  }, [deleted]);
 
-  useEffect(() => {
-    return () => dispatch(setActual());
-  }, []);
-
+  let handleClick = (e, id)=>{
+    e.preventDefault();
+    dispatch(deleteModel("activity", id));
+  }
+  
   return (
-    <div>
-      <NavBar />
-      <div className="client_d">
-        <SideBar />
-        <div className="content_cli">
+    <div className="content_cli">
           <div>
             <div>
+              <BarraFiltros />
               {pressed === false ? (
                 <button onClick={() => setPressed(true)}>agregar</button>
               ) : (
                 <div>
-                  <BarraFiltros />
                   <ActivityR setP={setPressed} />
                 </div>
               )}
             </div>
           </div>
-          {loading === false ? (
+          {cards.length === 0 ? 
+            <Spinner/> :
             <div className="cont">
-              <div className="cards">
-                {cards &&
-                  cards?.map((p) => {
-                    return (
-                      <Dash
-                        key={p.id}
-                        id={p.id}
-                        back={
-                          p.back
-                            ? p.back
-                            : "https://e7.pngegg.com/pngimages/779/957/png-clipart-video-games-video-game-consoles-red-dead-redemption-video-game-developer-cool-gaming-logos-blue-game-logo.png"
-                        }
-                        client={
-                          p.client === null ? { name: "peter pan" } : p.client
-                        }
-                        services={p.services}
-                        persons={p.persons}
-                        date={p.date}
-                      />
-                    );
-                  })}
-              </div>
-            </div>
-          ) : (
-            <div>
-              <Spinner />
-            </div>
-          )}
+                  <Paginado values={todas}/>
+                  <DashDisplay all={cards} Dash={Dash} model={"Actividades"} handleClick={handleClick}/>
+            </div>}
         </div>
-      </div>
-    </div>
   );
 };
 
-export default ActivityLayout;
+export default React.memo(ActivityLayout);

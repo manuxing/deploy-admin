@@ -1,13 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Drop = ({not, l}) => {
+const Drop = ({not}) => {
   return (
       <div className="notification">
         {not.map(p=>{
-            console.log(p)
             return(
-                <NavLink to={"/"} className="LinkNot">
+                <NavLink key={p.id} to={p.description ? `/review/${p.id}`:`/request/${p.id}`} className="LinkNot">
                      <p>
                         {
                             p.description ? "Review" : "Request"

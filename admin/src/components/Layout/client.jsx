@@ -1,86 +1,63 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getClient, setActual } from "../../redux/actions";
-import NavBar from "../bars/navBar";
-import SideBar from "../bars/sideBar";
+import { clearActualG, getNot, setActualG, deleteModel, setDeleted } from "../../redux/actions";
 import BarraFiltros from "./barraFiltros";
+import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Client";
-import Form from "../create/client/prueba";
+import CreateClient from "../create/client/prueba";
+import Paginado from "./paginado";
 
 const ClientLayout = () => {
   let dispatch = useDispatch();
-  let todas = useSelector((state) => state.clientes);
+  let todas = useSelector((state) => state.actualG);
+  let deleted = useSelector((state) => state.deleted);
   let [pressed, setPressed] = useState(false);
   let [cards, setCards] = useState([]);
-  let [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getClient());
+    dispatch(setActualG("client"));
+    dispatch(getNot());
+    return () => dispatch(clearActualG());
   }, [dispatch]);
 
   useEffect(() => {
-    if (todas.length > 0) {
-      setCards(todas);
-    }
-    if (cards && cards.length > 0) setLoading(false);
-  }, [todas, cards]);
+    if(todas.data && todas.model === "client")setCards(todas.data)
+  }, [todas]);
 
   useEffect(() => {
-    return () => dispatch(setActual());
-  }, []);
+    if(deleted === true){
+      alert("deleted");
+      dispatch(setDeleted()); 
+      dispatch(setActualG("client"));
+    }
+  }, [deleted]);
+
+  let handleClick = (e, id)=>{
+    e.preventDefault();
+    dispatch(deleteModel("client", id));
+  }
 
   return (
-    <div>
-      <NavBar />
-      <div className="client_l">
-        <SideBar />
         <div className="content_cli_l">
           <div>
+            <BarraFiltros />
             {pressed === false ? (
               <button onClick={() => setPressed(true)}>agregar</button>
             ) : (
               <div>
-                <Form setP={setPressed} />
-                <BarraFiltros />
+                <CreateClient setP={setPressed} />
               </div>
             )}
           </div>
-          {loading === false ? (
+          {cards.length ===  0 ? 
+          <Spinner/> :
             <div className="cont">
-              <div className="cards">
-                {cards &&
-                  cards?.map((p) => {
-                    //borrar
-                    if(p.id !== undefined){
-                      return (
-                        <Dash
-                          key={p.id}
-                          id={p.id}
-                          back={
-                            p.back
-                              ? p.back
-                              : "https://e7.pngegg.com/pngimages/779/957/png-clipart-video-games-video-game-consoles-red-dead-redemption-video-game-developer-cool-gaming-logos-blue-game-logo.png"
-                          }
-                          name={p.name}
-                          contact={p.contact}
-                          act={p.activities}
-                          rev={p.reviews}
-                        />
-                      );
-                    }
-                  })}
-              </div>
-            </div>
-          ) : (
-            <div>
-              <Spinner />
-            </div>
-          )}
+              <Paginado values={todas}/>
+              <DashDisplay all={cards} Dash={Dash} model={"Clientes"} handleClick={handleClick}/>
+            </div>}
         </div>
-      </div>
-    </div>
   );
 };
 
-export default ClientLayout;
+export default React.memo(ClientLayout);

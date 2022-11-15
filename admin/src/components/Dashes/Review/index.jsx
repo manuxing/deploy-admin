@@ -4,10 +4,10 @@ import { NavLink } from "react-router-dom";
 import tools from "../../../tools";
 // import  icon  from "../../../img/star.png"; 
 
-
-
-const Dash = ({ id, back, stat, dateR, dateP, thg, clients, services})=> { 
+const Dash = ({data, handleClick})=> { 
+    let { id, back, stat, dateR, description, dateP, thg, services} = data;
     return (
+        id === undefined ? <></> :
         <div className="dash_act"> 
                 <NavLink className="link" to={`/review/${id}`}>
                     <div className="container img_act_d">
@@ -19,13 +19,14 @@ const Dash = ({ id, back, stat, dateR, dateP, thg, clients, services})=> {
                         <h3>{id}</h3>
                     </div>
                     <div className="punto_fdato">
-                        <h2>Servicios</h2>
-                        {tools.display.review.dash(services)}
+                        <h2>descripcion</h2>
+                        <h3>{description}</h3>
                     </div>
                     <div className="punto_fdato">
-                        <h2>Cliente</h2>
-                        <h3>{clients.name}</h3>
+                        <h2>Servicios</h2>
                     </div>
+                        {services && services.length > 0 &&
+                        tools.display.review.dash(services)}
                     <div className="punto_fdato">
                         <h2>Fecha de la reseña</h2>
                         <h3>{dateR}</h3>
@@ -44,8 +45,9 @@ const Dash = ({ id, back, stat, dateR, dateP, thg, clients, services})=> {
                     </div>
                 </div>
                 </NavLink>
+                <button onClick={(e)=>handleClick(e, id)}>borrar</button>
         </div>
     )
 };
 
-export default Dash;
+export default React.memo(Dash);

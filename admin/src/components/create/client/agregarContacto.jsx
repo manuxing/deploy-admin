@@ -8,14 +8,14 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   let validate = tools.validate;
 
   let handleSelect = (evento) => {
-    setContact({ ...contact, type: evento.target.value });
+    setContact({ type: evento.target.value, value: "" });
     setWarning({ contacto: "" });
   };
 
   let chooseType = (t) => {
     if (t === "telefono") return "number";
-    if (t === "presencial" || t === "otro") return "text";
     if (t === "email") return "email";
+    return "text";
   };
 
   let handleChange = (p, data) => {
@@ -38,6 +38,8 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
     setContacts({ ..._contacts, contact: [..._contacts.contact, contact] });
     setWarning({ contact: "" });
     setContact({ type: "", value: "" });
+    let x = document.getElementById("id");
+    x.selected = true;
   };
 
   let handleSubmit = (p, data) => {
@@ -55,7 +57,7 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
           name={"contact"}
           onChange={(e) => handleSelect(e)}
         >
-          <option hidden>medio de contacto</option>
+          <option id={"id"}hidden>medio de contacto</option>
           {contactsThg.map((p) => {
             return (
               <option value={p} key={p}>
@@ -87,4 +89,4 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   );
 };
 
-export default AgregarContacto;
+export default React.memo(AgregarContacto);

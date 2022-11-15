@@ -3,42 +3,36 @@ import './Client.css';
 import { NavLink } from "react-router-dom";
 // import  icon  from "../../../img/star.png"; 
 
-
-
-const Dash = ({id, back, name, contact, act, rev})=> { 
+const Dash = ({data, handleClick})=> { 
+    let { id, back, name, contact } = data;
     return (
-        <div className="dash_act"> 
+        id === undefined ? <></> :
+        <div className="dash_act">
+            <h1>{id}</h1> 
                 <NavLink className="link" to={`/client/${id}`}>
                     <div className="container img_act_d">
                         <img src={back} alt='Activity icon'/>
                     </div>
                     <div className="info_act_d"> 
-                    <div className="punto_fdato">
-                        <h2> Nombre</h2>
-                        <h3>{name}</h3>
-                    </div>
-                    <div className="punto_fdato">
-                        <h2>Contacto</h2>
-                        {
-                            contact.map(p =>{
-                                return(
-                                    <h3 key={p}> {p} </h3>
-                                )
-                            })
-                        }
-                    </div>
-                    <div className="punto_fdato">
-                        <h2>Actividades realizadas</h2>
-                        <h3> {act.length} </h3>
-                    </div>
-                    <div className="punto_fdato">
-                        <h2>Reseñas</h2>
-                        <h3> {rev.length} </h3>
-                    </div>
+                        <div className="punto_fdato">
+                            <h2> Nombre</h2>
+                            <h3>{name}</h3>
+                        </div>
+                        <div className="punto_fdato">
+                            <h2>Contacto</h2>
+                            {contact && contact.length > 0 &&
+                                contact.map(p =>{
+                                    return(
+                                        <h3 key={p}> {p} </h3>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
                 </NavLink>
+                <button onClick={(e)=> handleClick(e, id)}>borrar</button>
         </div>
     )
 };
 
-export default Dash;
+export default React.memo(Dash);

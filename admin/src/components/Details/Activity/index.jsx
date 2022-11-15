@@ -1,100 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink, useParams } from "react-router-dom"
-import { getActividades,setActual } from '../../../redux/actions'
+import { useParams, useHistory } from "react-router-dom"
+import { getActividades, setActual, getNot } from '../../../redux/actions'
 import Spinner from '../../Spinner'
-import NavBar from "../../bars/navBar";
-import SideBar from "../../bars/sideBar";
+import tools from "../../../tools";
 import "./Activity_d.css"
+import Detalle from './DetalleActividad'
 
 const Activity = () => {
-
   const {id} = useParams();
   let dispatch = useDispatch();
-  let [loading, setLoading] = useState(true);
+  const history = useHistory();
   let actual = useSelector((state) => state.actual);
+  let error = useSelector((state) => state.error);
 
   useEffect(()=>{
-    dispatch(getActividades(id))
-  },[dispatch]);
-
-  useEffect(()=>{
-    if(typeof actual !== "number"){
-      setLoading(false);
-    }else{
-      setLoading(true)
+    if(error){
+      history.push("/err");
+    } else{
+      if(parseInt(id) === Number(id)){
+        dispatch(getActividades(parseInt(id)))
+        dispatch(getNot());
+      }else{
+        tools.alert_notFound( "Actividad", history, "/activitys/")
+      }
     }
-  },[loading,actual]);
-
-  useEffect(() => {
     return () => dispatch(setActual())
-  }, []);
+  },[dispatch, error]);
 
   return (
-    loading === true ?
-      <div>
-        <Spinner/>
-        </div> 
+      typeof actual !== "object" ?
+          <Spinner/>
         :
-        <div>
-          <NavBar/>
-          <div className="Activity_d">
-            <SideBar/>
-            <div className="content_act">
-              <div  className="div_act">
-                <span className="_span_act">
-                  Cliente:
-                </span>
-                <NavLink  className="link" to={`/client/${actual?.client?.id}`}>
-                  {actual?.client?.name ? actual?.client?.name : "name"}
-                </NavLink>
-              </div>
-              <div  className="div_act">
-                <span className="_span_act">
-                  Servicios
-                </span>
-                <div>
-                  {
-                    actual?.services ? actual.services.map(p => { 
-                      return (
-                        <NavLink key={p.name} className="link" to={`/service/${p.id}`}>
-                          <span >{p.name}</span>
-                        </NavLink>
-                      ) 
-                    }) : "services"
-                  }
-                </div>
-              </div>  
-              <div  className="div_act">
-                <span className="_span_act">
-                  fecha de actividad
-                </span>
-                  {actual?.date ? actual?.date : "date"}
-              </div>
-              <div  className="div_act">
-                <span className="_span_act">
-                  Personas:
-                </span>
-                {actual?.persons ? actual?.persons.length : "0"}
-                <div>
-                  <ul>
-                    {
-                    actual?.persons ? actual?.persons.map(p => { 
-                      return (
-                        <li key={p}>
-                          <span>-  {p}</span> 
-                        </li>
-                      ) 
-                    }) : "persons"
-                    }
-                  </ul>
-                </div>
-              </div>
-            </div>
+          <div className="content_act">
+              <Detalle actual={actual}/>
           </div>
-        </div>
     );
 };
 
-export default Activity;
+export default React.memo(Activity);
 
