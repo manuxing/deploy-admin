@@ -24,7 +24,6 @@ const Service = () => {
       history.push("/err");
     } else{
       if(parseInt(id) === Number(id)){
-        dispatch(getReviews())
         dispatch(getServicio(parseInt(id)));
         dispatch(getNot());
       }else{
@@ -91,7 +90,10 @@ const Service = () => {
             <Form/>
           </actuallContext.Provider>
       }
-        <button onClick={(e)=>editS(e)}> edit </button>
+      <br></br>
+      <div className='buttons'>
+        <button onClick={(e)=>editS(e)}> Edit </button>
+      </div>
       </div>
   );
 };

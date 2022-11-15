@@ -1,0 +1,106 @@
+
+.dash {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 0.6rem;
+    justify-content: flex-start;
+    color: #fff;
+    box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
+    height: 12%;
+    width: 98%;
+    margin: 0.5rem 0.2rem 0rem 0.7rem;
+    border-radius: 18px;
+    transition: all 500ms;
+    overflow: hidden;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+ }
+ .dashdata{
+     display: flex;
+     justify-content: space-between;
+     padding: 0.2rem 1rem 0.1rem 1.9rem;
+    width: 40%;
+    text-decoration: none;
+ }
+  
+ .dashdata h2{ 
+    margin: 0.5rem;
+}
+
+.divdash{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.56rem;
+}
+
+
+.divdash h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+}
+
+ .dash button{
+    border-style: solid;
+    border-color: hsla(271, 24%, 65%, 0.041);
+    border-radius: 0.7rem;
+    background-color: transparent;
+    border-width: 0.1rem;
+    padding: 0.2rem;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+} 
+
+.contd{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.topdash{
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.2rem 1rem 0.2rem 2.6rem;
+    width: 22%;
+}
+
+.delete{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 3rem;
+    width:18%;
+}
+
+.dash:hover {
+    box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+    transform: translateY(-2px) scale(1);
+ }
+
+ @media (max-width: 950px){
+    .dash {
+        font-size: 0.4rem;
+        justify-content: flex-start;
+        color: #fff;
+        box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
+        height: 123%;
+        width: 98%;
+        margin: 0.5rem 0.2rem 0rem 0.7rem;
+        border-radius: 18px;
+    }
+    .dash button{
+        padding: 0.2rem;
+        margin-right: 1rem;
+    } 
+    .divdash{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.4rem;
+    }
+
+}

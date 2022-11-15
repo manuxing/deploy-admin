@@ -6,3 +6,4 @@ conn.sync({ force: false }).then(() => {
     console.log('escuchan2'); 
   });
 });
+   

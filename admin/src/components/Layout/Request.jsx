@@ -5,14 +5,17 @@ import BarraFiltros from "./barraFiltros";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Request";
 import DashDisplay from "./DashDisplay";
-import RequestR from "../create/requeset";
 import Paginado from "./paginado";
+import RequestGraph from "../Graphs/RequestsGraphs";
+import DetalleLay from "../DetalleLay";
+import AddIcon from '@mui/icons-material/Add';
+import { useHistory } from "react-router-dom";
 
 const RequestLayout = () => {
   let todas = useSelector((state) => state.actualG);
   let deleted = useSelector((state) => state.deleted);
   let dispatch = useDispatch();
-  let [pressed, setPressed] = useState(false);
+  let history = useHistory();
   let [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -40,23 +43,25 @@ const RequestLayout = () => {
 
   return (
         <div className="content_cli_l">
-          <div>
-            <BarraFiltros />
-            {pressed === false ? (
-              <div>
-                <button onClick={() => setPressed(true)}>agregar</button>
-              </div>
-            ) : (
-              <RequestR setP={setPressed} />
-            )}
-          </div>
-          {cards.length === 0 ? 
-            <Spinner/> : 
+            {cards.length ===  0 ? 
+          <Spinner/> :
             <div className="cont">
-              <Paginado values={todas}/>
+              <div className="stats">
+                <RequestGraph/>
+                <DetalleLay/>
+              </div>
+            
+                <div className="barraL">
+                <div className="item">
+                <button onClick={() => history.push("/create/request")}>
+                <AddIcon fontSize="small"/>
+                    </button>
+                </div>
+                  <BarraFiltros />
+              </div>
               <DashDisplay all={cards} Dash={Dash} model={"Solicitudes"} handleClick={handleClick}/>
-            </div>
-          }
+              <Paginado values={todas}/>
+            </div>}
         </div>
   );
 };

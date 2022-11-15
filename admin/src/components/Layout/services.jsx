@@ -5,14 +5,16 @@ import BarraFiltros from "./barraFiltros";
 import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
 import Dash from "../Dashes/Service";
-import AgregarServicio from "../create/service/prueba";
 import Paginado from "./paginado";
+import DetalleLay from "../DetalleLay";
+import AddIcon from '@mui/icons-material/Add';
+import { useHistory } from "react-router-dom";
 
 const ServiceLayout = () => {
   let todas = useSelector((state) => state.actualG);
   let deleted = useSelector((state) => state.deleted);
+  let history= useHistory();
   let dispatch = useDispatch();
-  let [pressed, setPressed] = useState(false);
   let [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -40,23 +42,23 @@ const ServiceLayout = () => {
 
   return (
         <div className="content_cli_l">
-          <div>
-            <BarraFiltros />
-            {pressed === false ? (
-              <button onClick={() => setPressed(true)}>agregar</button>
-            ) : (
-              <div>
-                <AgregarServicio setP={setPressed} />
+              {cards.length ===  0 ? 
+          <Spinner/> :
+          <div className="cont">
+              <div className="stats">
+                <DetalleLay/>
               </div>
-            )}
-          </div>
-          {cards.length === 0 ? 
-            <Spinner/> : 
-            <div className="cont">
-              <Paginado values={todas}/>
+              <div className="barraL">
+                <div className="item">
+                <button onClick={() => history.push("/create/service")}>
+                <AddIcon fontSize="small"/>
+                    </button>
+                </div>
+                  <BarraFiltros />
+              </div>
               <DashDisplay all={cards} Dash={Dash} model={"Servicios"} handleClick={handleClick}/>
-            </div>
-          }
+              <Paginado values={todas}/>
+            </div>}
         </div>
   );
 };

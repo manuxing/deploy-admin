@@ -1,36 +1,32 @@
 import React from "react";
 import './Activiti.css';
 import { NavLink } from "react-router-dom";
-import tools from "../../../tools";
-// import  icon  from "../../../img/star.png"; 
+import "../../Layout/base.css"
+import GolfCourseIcon from '@mui/icons-material/GolfCourse';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Dash = ({data, handleClick})=> { 
-    let {id, back, services, persons, date}= data;
-    console.log(id)
+    let {id, persons, date}= data;
     return (
         id === undefined ? <></> :
-        <div key={id} className="dash_act"> 
-        <h1>{id}</h1>
-                <NavLink className="link" to={`/activity/${id}`}>
-                    <div className="container img_act_d">
-                        <img src={back} alt='Activity icon'/>
+        <div className="dash">
+                <div className="topdash">
+                        <GolfCourseIcon className="icon"fontSize="medium"/>
+                </div>
+                <NavLink className="dashdata" to={`/activity/${id}`}>
+                    <div>
+                        <h2>Fecha: <span>{date}</span>
+                        </h2>
                     </div>
-                    <div className="info_act_d"> 
-                    <div className="punto_fdato">
-                        <h2>Fecha</h2>
-                        <h3> {date} </h3>
+                    <div>
+                        <h2>Participantes: <span></span>
+                         {persons &&persons.length} 
+                        </h2>
                     </div>
-                    <div className="punto_fdato">
-                        <h2>Participantes</h2>
-                        <h3> {persons &&persons.length} </h3>
-                    </div>
-                    <div className="punto_fdato">
-                        <h2>Servicios</h2>
-                        <h3> {services && tools.display.activity.dash(services)} </h3>
-                    </div>
-                    </div>
-                    <button onClick={(e)=>handleClick(e, id)}>borrar</button>
                 </NavLink>
+                <div className="delete">
+                    <button onClick={(e)=>handleClick(e, id)}><DeleteForeverIcon fontSize="small"/></button>
+                </div>
         </div>
     )
 };

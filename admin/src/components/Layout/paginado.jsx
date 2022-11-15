@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { changePage } from '../../redux/actions'
+import "./base.css"
 
 const Paginado = ({values}) =>{
     let dispatch = useDispatch();
@@ -19,11 +20,11 @@ const Paginado = ({values}) =>{
     }
     
   return (
-      <div>
-      <span>sosppaap</span>
+      <div className="paginado">
           {cas.map(p => {
             return(
-                <button key={p} onClick={(e)=>handleClick(e, p)}>{p}</button>
+                <button key={p} onClick={(e)=>handleClick(e, p)}><span>{p}
+                    </span></button>
             )
           })}
       </div>

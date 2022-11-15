@@ -48,10 +48,11 @@ const Form = ()=>{
       };
 
   return (
-    <div>
-           <form className="form" onSubmit={(e) => handleSubmit(e, input)}>
-          <div>
-            <label>Nombre</label>
+    <form  onSubmit={(e) => handleSubmit(e, input)}>
+      <div className="form">
+        <div className='topf'>
+          <div className='node'>
+            <h3>Nombre</h3>
             <input
               className="input"
               type={"text"}
@@ -62,8 +63,8 @@ const Form = ()=>{
             />
             <div className="warning">{warning.name}</div>
           </div>
-          <div>
-            <label>Descripcion</label>
+          <div className='node'>
+            <h3>Descripcion</h3>
             <textarea
               className="input"
               type={"text"}
@@ -74,30 +75,37 @@ const Form = ()=>{
             />
             <div className="warning">{warning.description}</div>
           </div>
-          <div>
-            <label>Horarios</label>
-            <input
+        </div>
+         <h3>Horarios</h3>
+        <div className='topf'>
+            <div className='node'>
+              <input
               className="input"
               type={"time"}
               placeholder="Desde"
               name={"tR"}
               value={input.tR}
               onChange={(p) => handleChange(p)}
-            />
+              />
+              </div>
             <div className="warning">{warning.tR}</div>
-            <input
-              className="input"
-              type={"time"}
-              placeholder="Hasta"
-              name={"tR_"}
-              value={input.tR_}
-              onChange={(p) => handleChange(p)}
-            />
+            <div className='node'>
+              <input
+                className="input"
+                type={"time"}
+                placeholder="Hasta"
+                name={"tR_"}
+                value={input.tR_}
+                onChange={(p) => handleChange(p)}
+              />
+            </div>
             <div className="warning">{warning.tR_}</div>
           </div>
-          <input className="input" type={"submit"} name={"submit"} />
-        </form>
-    </div>
+          <div className='enviar'>
+          <button  type={"submit"} name={"submit"}> Enviar</button>
+        </div>
+        </div>
+      </form>
   )
 }
 

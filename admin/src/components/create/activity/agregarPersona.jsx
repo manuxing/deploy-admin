@@ -46,51 +46,60 @@ const AgregarPersona = ({ setPersons, _persons }) => {
   };
 
   return (
-    <div className="addperson">
-      <div className="addpersonR_form">
-        <label>Grupo de edad</label>
-        <select
-          className="selectageR"
-          name={"ageR"}
-          onChange={(e) => {
-            handleSelect(e);
-          }}
-        >
-          <option id="def1" hidden>
-            seleccione
-          </option>
-          {ageR.map((p) => {
-            return (
-              <option value={p} key={p}>
-                {p}
+    <div className="agregarpersona">
+      <h3>Agregar Personas</h3>
+      <br></br>
+      <div className='top'>
+          <div className="node_add_per">
+            <h4>Sexo</h4>
+            <br></br>
+            <select
+              className="selectsexo"
+              name={"sexo"}
+              onChange={(e) => {
+                handleSelect(e);
+              }}
+            >
+              <option id="def2" hidden>
+                sexo
               </option>
-            );
-          })}
-        </select>
-        <div className="warning">{warning.ageR}</div>
-        <label>Sexo</label>
-        <select
-          className="selectsexo"
-          name={"sexo"}
-          onChange={(e) => {
-            handleSelect(e);
-          }}
-        >
-          <option id="def2" hidden>
-            sexo
-          </option>
-          {sexos.map((p) => {
-            return (
-              <option value={p} key={p}>
-                {p}
+              {sexos.map((p) => {
+                return (
+                  <option value={p} key={p}>
+                    {p}
+                  </option>
+                );
+              })}
+            </select>
+            <div className="warning">{warning.sexo}</div>
+          </div>
+          <div className="nodec">
+            <h4>Grupo de edad</h4>
+            <select
+              className="selectageR"
+              name={"ageR"}
+              onChange={(e) => {
+                handleSelect(e);
+              }}
+            >
+              <option id="def1" hidden>
+                seleccione
               </option>
-            );
-          })}
-        </select>
-        <div className="warning">{warning.sexo}</div>
-        <button onClick={(p) => handleSubmit(p)} />
+              {ageR.map((p) => {
+                return (
+                  <option value={p} key={p}>
+                    {p}
+                  </option>
+                );
+              })}
+            </select>
+            <div className="warning">{warning.ageR}</div>
+          </div>
       </div>
-      <div className="warning">{warning.general}</div>
+            <div className="warning">{warning.general}</div>
+            <div className="agregar">
+              <button onClick={(p) => handleSubmit(p)} >+ </button>
+            </div>
     </div>
   );
 };

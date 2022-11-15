@@ -21,7 +21,7 @@ const Cliente = () => {
       dispatch(getNot());
       if(parseInt(id) === Number(id)){
         dispatch(getClient(parseInt(id)))
-        dispatch(getActividades())
+        // dispatch(getActividades())
         dispatch(getNot());
       }else{
         tools.alert_notFound( "Cliente", history, "/clients/")
@@ -36,9 +36,7 @@ const Cliente = () => {
         <Spinner/>
       </div> 
       :
-          <div className="content_cli">
             <DetalleCliente actual={actual}/>
-          </div>
     );
 };
 

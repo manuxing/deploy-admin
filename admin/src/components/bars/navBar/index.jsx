@@ -31,7 +31,7 @@ const NavBar = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if(searchAdresses.includes(navigate)){
+  if(searchAdresses.includes(navigate) || navigate === "/about"){
       setSearch(true)
     }else{
       setSearch(false)
@@ -42,38 +42,27 @@ const NavBar = () => {
     setPressed(false);
   }, [not]);
 
-  // const { profile } = useSeslector((state) => state.authReducer);
-  // const logout = () => {
-  //   localStorage.removeItem("profile");
-  //   dispatch(logoutUser());
-  //   navigate.push("");
-  // };
-
   return (
-    <div className="topbar">
-      <NavLink to={"/home"} className="LinkSideB">
-        <div className="logo">Administrador</div>
-      </NavLink>
-      <LogOut/>
-        <div className="topWrapper">
-          <div className="topRight">
-              {
-              not && not.length > 0  ?
-                <button onClick={()=>setPressed(!pressed)}>
-                  <NotificationsActiveIcon/>
-                </button>:
-              <NotificationsIcon/> 
-              }
+    <div className="top-section">
+      {/* <NavLink to={"/home"} className="LinkSideB">
+        <div className="logo">Bodega RP</div>
+      </NavLink> */}
+      {/* <LogOut/> */}
             {pressed === true ? 
               <Drop not={not} /> 
               : <></>}
-          </div>
+              {
+              not && not.length > 0  ?
+                <button onClick={()=>setPressed(!pressed)}>
+                  <NotificationsActiveIcon fontSize="small"/>
+                </button>:
+              <NotificationsIcon/> 
+              }
             {search === true ?
             <SearchBar /> :
           <></>
           }
         </div>
-      </div>
   );
 };
 

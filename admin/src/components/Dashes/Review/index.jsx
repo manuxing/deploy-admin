@@ -1,51 +1,31 @@
 import React from "react";
-// import './Request.css';
+import './Review.css';
 import { NavLink } from "react-router-dom";
-import tools from "../../../tools";
-// import  icon  from "../../../img/star.png"; 
+import RateReviewIcon from '@mui/icons-material/RateReview';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Dash = ({data, handleClick})=> { 
-    let { id, back, stat, dateR, description, dateP, thg, services} = data;
+    let { id, stat, dateP, thg} = data;
+    console.log(stat)
     return (
         id === undefined ? <></> :
-        <div className="dash_act"> 
-                <NavLink className="link" to={`/review/${id}`}>
-                    <div className="container img_act_d">
-                        <img src={back} alt='Activity icon'/>
+        <div className="dash"> 
+                    <div className="topdash">
+                        <RateReviewIcon color="secondary" fontSize="small"/>
                     </div>
-                    <div className="info_act_d"> 
-                    <div className="punto_fdato">
-                        <h2>Numero</h2>
-                        <h3>{id}</h3>
-                    </div>
-                    <div className="punto_fdato">
-                        <h2>descripcion</h2>
-                        <h3>{description}</h3>
-                    </div>
-                    <div className="punto_fdato">
-                        <h2>Servicios</h2>
-                    </div>
-                        {services && services.length > 0 &&
-                        tools.display.review.dash(services)}
-                    <div className="punto_fdato">
+                <NavLink className="dashdata" to={`/review/${id}`}>
+                <div className="divdash">
                         <h2>Fecha de la reseña</h2>
-                        <h3>{dateR}</h3>
-                    </div>
-                    <div className="punto_fdato">
-                        <h2>Fecha sobre la reseña</h2>
                         <h3>{dateP}</h3>
                     </div>
-                    <div className="punto_fdato">
-                        <h2>Medio</h2>
-                        <h3>{thg}</h3>
-                    </div>
-                    <div className="punto_fdato">
+                <div className="divdash">
                         <h2>Estado</h2>
-                        <h3>{stat}</h3>
-                    </div>
+                        <h3>{stat === true ? "Leida" : "Por ver"}</h3>
                 </div>
                 </NavLink>
-                <button onClick={(e)=>handleClick(e, id)}>borrar</button>
+                <div className="delete">
+                    <button onClick={(e)=>handleClick(e, id)}><DeleteForeverIcon fontSize="small"/></button>
+                </div>
         </div>
     )
 };

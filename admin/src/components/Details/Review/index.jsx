@@ -16,6 +16,7 @@ const Review = () => {
   const [_stat, setStat] = useState(false);
 
   useEffect(()=>{
+    console.log(actual.stat)
     if(error){
       history.push("/err");
     } else{
@@ -30,21 +31,22 @@ const Review = () => {
   },[dispatch, error]);
 
   useEffect(()=>{
+    console.log(actual.stat)
     if(actual && actual !== 1 && actual?.stat !== null){
       if(actual.stat === false){
-          handleChange();
+          handleChange(true);
       } else {
         setStat(actual?.stat);
       }
     }
   },[actual])
 
-  const handleChange = () => {  
+  const handleChange = (val) => {  
     let x = {
       type : "Review",
       pack: {
         id: parseInt(id),
-        stat: !_stat,
+        stat: val,
       }
     }
     setStat(!_stat);
@@ -57,9 +59,7 @@ const Review = () => {
         <Spinner/>
       </div> 
       :
-    <div className="content_Review">
       <DetalleReview actual={actual} handleChange={handleChange} _stat={_stat}/>
-    </div>
   );
 };
 

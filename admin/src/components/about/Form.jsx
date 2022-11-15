@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import { actuallContext } from '../create/ActualContext'
-import AgregarContacto from "./agregarContacto"
+import "./About.css"
+import AgregarContacto from "../create/client/agregarContacto"
 import ContactCard from "./contactCard"
 
 const Form =()=> {
@@ -44,10 +45,9 @@ const Form =()=> {
   let id= 0; 
 
   return (
-    <div>
-        <form className="form" onSubmit={(e)=>sub(e)} >
+    <form className="form" onSubmit={(e)=>sub(e)} >
+          <div className='about'>
           <div>
-            <label>Info</label>
             <textarea
               id='id'
               className="input"
@@ -65,10 +65,13 @@ const Form =()=> {
             contactsThg={thg}
           />}
           <div className="warning">{warning.contact}</div>
-          {typeof input.contact === 'object' && input.contact.length > 0 &&
+          <div className='title-'>
+            <h3>Contactos</h3>
+          {edit === true && typeof input.contact === 'object' && input.contact.length > 0 &&
                     <button onClick={(e)=>popC(e)}>-
                     </button>}
-          <div>
+          </div>
+          <div className='persons'>
             {typeof input.contact === 'object' && input?.contact.map((p) => {
               id++
               return (
@@ -78,10 +81,12 @@ const Form =()=> {
               )
             })}
           </div>
-          <input type={"submit"}/>
+            <div className='buttons'>
+            <button  type={"submit"} name={"submit"}> Enviar</button>
+              <button onClick={(e)=>editS(e)}> Edit </button>
+            </div>
+        </div>
         </form>
-        <button onClick={(e)=>editS(e)}> edit </button>
-    </div>
   )
 }
 

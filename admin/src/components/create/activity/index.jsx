@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { actuallContext } from "../ActualContext";
 import Form from "./Form";
+import "./Form.css";
 import {
   getServicio,
   createActividades,
@@ -68,10 +69,7 @@ const ActivityR = ({ setP }) => {
   useEffect(() => {
     if (actual !== 1 && input.date === actual.date) {
       tools.alert("actividad",
-        `/activity/${actual.id}`,
-        history, dispatch,
-        setActualG, "activity",
-        setP, setActual);
+        `/activity/${actual.id}`, history);
       setInputA({ name: "", date: "", persons: [], sId: 1000 });
       setWarningA({ name: "", date: "", persons: "", sId: "" });
       let x = document.getElementById("service");
@@ -81,12 +79,15 @@ const ActivityR = ({ setP }) => {
 
   return (
     <div>
-      <div className="content_act">
-        Actividad:
-        <actuallContext.Provider value={send}>
-          <Form/>
-        </actuallContext.Provider>
-        <button onClick={() => setP(false)}>cerrar</button>
+      <div className="preform">
+        <div className="titlef">
+          <h2>Crear Actividad</h2>
+        </div>
+        <div>
+          <actuallContext.Provider value={send}>
+            <Form/>
+          </actuallContext.Provider>
+        </div>
       </div>
     </div>
   );

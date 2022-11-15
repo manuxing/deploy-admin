@@ -5,14 +5,17 @@ import BarraFiltros from "./barraFiltros";
 import Spinner from "../Spinner.jsx";
 import DashDisplay from "./DashDisplay";
 import Dash from "../Dashes/Review";
-import ReviewR from "../create/review";
+import RequestGraph from "../Graphs/RequestsGraphs";
 import Paginado from "./paginado";
+import AddIcon from '@mui/icons-material/Add';
+import DetalleLay from "../DetalleLay";
+import { useHistory } from "react-router-dom";
 
 const ReviewLayout = () => {
   let todas = useSelector((state) => state.actualG);
   let deleted = useSelector((state) => state.deleted);
   let dispatch = useDispatch();
-  let [pressed, setPressed] = useState(false);
+  let history = useHistory();
   let [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -40,25 +43,24 @@ const ReviewLayout = () => {
 
   return (
         <div className="content_cli_l">
-          <div>
-            <BarraFiltros />
-            {pressed === false ? (
-              <div>
-                <button onClick={() => setPressed(true)}>agregar</button>
-              </div>
-            ) : (
-              <div>
-                <ReviewR setP={setPressed} />
-              </div>
-            )}
-          </div>
-          {cards.length === 0 ? 
-            <Spinner/> : 
+             {cards.length ===  0 ? 
+          <Spinner/> :
             <div className="cont">
-              <Paginado values={todas}/>
+              <div className="stats">
+                <RequestGraph/>
+                <DetalleLay/>
+              </div>
+              <div className="barraL">
+                <div className="item">
+                <button onClick={() => history.push("/create/review")}>
+                <AddIcon fontSize="small"/>
+                    </button>
+                </div>
+                  <BarraFiltros />
+              </div>
               <DashDisplay all={cards} Dash={Dash} model={"Reseñas"} handleClick={handleClick}/>
-            </div>
-          }
+              <Paginado values={todas}/>
+            </div>}
         </div>
   );
 };

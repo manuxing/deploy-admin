@@ -97,7 +97,6 @@ const postReview = async(body, res, next, model, Service, Client) => {
 
         await client.addReview(review)
             .catch(err => next({status: 500, message: 'could not relate Client to Review'}));
-
         res.json(review);
     } catch (e){
         return next({status: 500, message: 'Error en router Review Post'});
@@ -111,7 +110,7 @@ const deleteReview = async(res, next, model, id) => {
 
         return res.json("succesfully deleted");
     }catch(e){
-        return next({status: 500, message: 'Error en router Activity delete'});
+        return next({status: 500, message: 'Error en router Review delete'});
     }
 };
 

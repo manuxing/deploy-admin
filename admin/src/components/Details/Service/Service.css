@@ -3,7 +3,113 @@
     height: 600px;
 }
 
+.content_srv button{
+    width: 5%;
+    height: 1rem;
+    font-size: 0.7rem;
+    border-radius: 0.42rem;
+    border-width: 0.02rem;
+    border-color: hsla(240, 29%, 66%, 0.297);
+}
+
 .div_srv{
     margin: 20px;
     font-size: 24px;
+}
+
+.servicertop{
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.servicerbot{
+    display: flex;
+    width: 100%;
+}
+
+.node{
+    display: flex;
+    flex-direction: column;
+    margin: 0.3rem 7rem 0.3rem 0rem;
+    width: 32%;
+    border-style:solid;
+    border-color: hsla(150, 2%, 80%, 0.06);
+    border-width: 0.2rem;
+    border-radius: 0.6rem;
+    border-right: 0rem;
+    padding: 0.6rem;
+}
+
+.nodeh{
+    display: flex;
+    flex-direction: column;
+    margin: 0.3rem 7rem 0.3rem 0rem;
+    width: 39%;
+    border-style:solid;
+    border-color: hsla(150, 2%, 80%, 0.06);
+    border-width: 0.2rem;
+    border-radius: 0.6rem;
+    border-right: 0rem;
+    padding: 0.6rem;
+}
+
+.nodebot{
+    display: flex;
+    flex-direction: column;
+    margin: 0.3rem 7rem  2rem 0rem;
+    width: 99%;
+}
+
+.node input{
+    width: 95%;
+    border-radius: 0.4rem;
+    padding: 0.19rem 0.4rem;
+    border: none;
+}
+
+.node select{
+    width: 99%;
+    border-radius: 0.36rem;
+    padding: 0.19rem 0.3rem;
+    border: none;
+}
+
+.nodebot textarea{
+    margin: 1rem 1rem  0rem 0rem;
+    border-radius: 0.4rem;
+    padding: 0.1rem 0.3rem;
+    font-size: 0.9rem;
+    font-family: "Poppins";
+    width: 100%;
+    height: 12rem;
+}
+
+.node h3{
+    margin: 0rem 0rem 1rem 0rem;
+}
+
+.horarios{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.horario{
+    display: flex;
+    flex-direction: row;
+    margin-right: 1rem;
+}
+.horario input{
+    margin: 0rem 1.5rem;
+    height: 1.1rem;
+}
+
+@media (max-width: 950px){
+    .nodeh{
+        margin: 0.3rem 10rem 0.3rem 0rem;
+    }
+    .horario{
+        margin-right: 0.3rem;
+    }
 }
