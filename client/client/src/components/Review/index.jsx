@@ -74,8 +74,7 @@ const ReviewR = () => {
         <p>gracias por su solicitud boton</p> 
         <NavLink to={"/home"}>home</NavLink>
         </div>:
-      <div className="content_act">
-        Reseña:
+      <div className="conten_act">
         <actuallContext.Provider value={send}>
           <Form/>
         </actuallContext.Provider>

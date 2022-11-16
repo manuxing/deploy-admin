@@ -1,0 +1,107 @@
+.conten_act{
+    margin-left: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    width: 65%;
+    background-color: azure;
+    height: 28rem;
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+    border-radius: 0.3rem;
+}
+
+.content_act select{
+    width: 97%;
+    height: 2.3rem;
+}
+
+.content_act textarea{
+    width: 97%;
+    height: 8.3rem;
+    width: 100%;
+}
+
+.field input{
+    width: 15rem;
+    height: 2rem;
+    margin: 0.9rem 0rem;
+}
+
+.inp input{
+    width: 14rem;
+    height: 2.17rem;
+}
+
+
+.rf{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.field{
+    margin: 0.2rem 3rem;
+    width: 13rem
+}
+
+.field h4{
+    margin: 0.6rem 0rem 2rem 0rem;
+}
+
+.row{
+    margin: 1rem 0rem;
+    display: flex;
+    flex-direction: row;
+    width: 96%;
+}
+
+.enviar{
+    display: flex;
+    justify-content: center;
+    margin-top: 0.8rem;
+}
+
+.enviar button{
+    height: 2rem;
+    width: 8rem;
+    font-size: 1rem;
+    background-color: rgba(177, 85, 140, 0.676);
+    color: rgb(182, 231, 231);
+    border-style: none;
+    border-radius: 0.2rem;
+    cursor: pointer;
+}
+
+.botcon{
+    display: flex;
+}
+
+.adc{
+    display: flex;
+    justify-content: flex-end;
+    width: 90%;
+}
+
+.adc button {
+    border-radius: 0.3rem;
+    border-style: none;
+    padding: 0.25rem 0.6rem;
+    background-color: hsla(180, 21%, 83%, 0.473);
+    margin: 1rem 0.3rem 0rem 0.3rem;
+    height: 2rem;
+}
+
+.restar button{
+    border-radius: 0.3rem;
+    border-style: none;
+    padding: 0.25rem 0.6rem;
+    background-color: hsla(180, 21%, 83%, 0.473);
+    margin: 0rem 0.3rem;
+    width: 9rem;
+}
+
+.card{
+    margin-bottom: 2rem;
+}

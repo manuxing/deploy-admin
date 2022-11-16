@@ -4,7 +4,7 @@ import { actuallContext } from "../ActualContext";
 import tools from "../../tools";
 import axios from "axios";
 import Form from "./Form";
-
+import "./index.css"
 const RequestR = ({ setP }) => {
   let [submitted, setSubmitted] = useState(false);
   let [services, setServices] = useState([]);
@@ -79,15 +79,13 @@ const RequestR = ({ setP }) => {
     <div>
       {submitted === true ?
       <div>
-        <p>gracias por su solicitud boton</p> 
+        <p>gracias por su solicitud</p> 
         <NavLink to={"/home"}>home</NavLink>
         </div>:
-      <div className="content_act">
-        solicitud:
+      <div className="conten_act">
         <actuallContext.Provider value={send}>
           <Form/>
         </actuallContext.Provider>
-        <button onClick={() => setP(false)}>cerrar</button>
       </div>}
       </div>
   );

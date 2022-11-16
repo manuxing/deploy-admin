@@ -68,75 +68,88 @@ const Form = ()=>{
 
   return (
     <div>
+      <div className='rf'>
+        <h3>Hace tu Solicitud:</h3>
+      </div>
       <form className="form" onSubmit={(e) => handleSubmit(e, input)}>
-        <div>
-          <label>Fecha solicitada</label>
-          <input
-            className="input"
-            type={"date"}
-            placeholder="date"
-            name={"dateR"}
-            value={input.dateR}
-            onChange={(p) => handleChange(p)}
-          />
-          <div className="warning">{warning.dateR}</div>
+        <div className='row'>
+          <div className='field'>
+            <h4>Tu Nombre </h4>
+            <input
+              className="input"
+              type={"text"}
+              placeholder="Nombre.."
+              name={"solicitante"}
+              value={input.solicitante}
+              onChange={(p) => handleChange(p)}
+            />
+            <div className="warning">{warning.solicitante}</div>
+          </div>
+          <div className='field'>
+            <h4>Fecha solicitada</h4>
+            <div className='inp'>
+              <input
+                className="input"
+                type={"date"}
+                placeholder="date"
+                name={"dateR"}
+                value={input.dateR}
+                onChange={(p) => handleChange(p)}
+              />
+            </div>
+            <div className="warning">{warning.dateR}</div>
+          </div>
         </div>
-        <div>
-          <label>Solicitante </label>
-          <input
-            className="input"
-            type={"text"}
-            placeholder="Solicitante"
-            name={"solicitante"}
-            value={input.solicitante}
-            onChange={(p) => handleChange(p)}
-          />
-          <div className="warning">{warning.solicitante}</div>
+        <div className='row'>
+        <div className='field'>
+            <AgregarContacto
+              contactsThg={thg}
+              setContacts={setInput}
+              _contacts={input}
+            />
+          <div className='card'>
+            {input.contact &&
+              typeof input.contact === "object" &&
+              input.contact.map((p) => {
+                return <ContactCard key={input.contact.length} contact={p} />;
+              })}
+          </div>
+          <div className='restar'>
+            {typeof input.contact === 'object' && input.contact.length > 0 &&
+                        <button onClick={(e)=>popC(e)}>-
+                        </button>}
+          </div>
+          </div>
+          <div className="warning">
+            {input.contact && input.contact.length > 0 ? "" : warning.contact}
+          </div>
+          <div className='field'>
+            <h4>Servicio</h4>
+            <select
+              className="selectageR"
+              name={"sId"}
+              onChange={(e) => {
+                handleChange(e);
+              }}
+            >
+              <option id="service" hidden>
+                seleccione
+              </option>
+              {services.map((p) => {
+                return (
+                  <option value={parseInt(p.id)} key={p.id}>
+                    {p.name}
+                  </option>
+                );
+              })}
+            </select>
+            <div className="warning">{warning.sId}</div>
+          </div>
+          <div className="warning">{warning.general}</div>
         </div>
-        <div>
-          <AgregarContacto
-            contactsThg={thg}
-            setContacts={setInput}
-            _contacts={input}
-          />
+        <div className='enviar'>
+          <button className="input" type={"submit"} name={"submit"}>Enviar</button>
         </div>
-        {typeof input.contact === 'object' && input.contact.length > 0 &&
-                    <button onClick={(e)=>popC(e)}>-
-                    </button>}
-        <div>
-          {input.contact &&
-            typeof input.contact === "object" &&
-            input.contact.map((p) => {
-              return <ContactCard key={input.contact.length} contact={p} />;
-            })}
-        </div>
-        <div className="warning">
-          {input.contact && input.contact.length > 0 ? "" : warning.contact}
-        </div>
-        <div>
-          <label>Servicios</label>
-          <select
-            className="selectageR"
-            name={"sId"}
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          >
-            <option id="service" hidden>
-              seleccione
-            </option>
-            {services.map((p) => {
-              return (
-                <option value={parseInt(p.id)} key={p.id}>
-                  {p.name}
-                </option>
-              );
-            })}
-          </select>
-          <div className="warning">{warning.sId}</div>
-        </div>
-        <div className="warning">{warning.general}</div>
-        <input className="input" type={"submit"} name={"submit"} />
       </form>
     </div>
   );
