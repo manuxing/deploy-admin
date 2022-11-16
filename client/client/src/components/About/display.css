@@ -1,0 +1,82 @@
+.about{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(231, 239, 246, 0.854);
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.title-cont{
+    background-image: url("../asserts/fondo.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem 1rem 0rem 1rem ;
+    /* margin-left: 2.2rem; */
+    height: 18.4rem;
+    width: 100%;
+    color:rgb(209, 226, 219);
+}
+
+.infocont{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1rem;
+    margin-left: 1rem;
+    padding: 0rem 2rem;
+    height: 14rem;
+    width: 80%;
+}
+
+.services{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 98%;
+}
+
+.barras{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* background-color: yellow; */
+    width: 100%;
+    height: 2rem;
+    margin: 2.5rem 0rem;
+}
+
+.points{
+    background-color: hsla(93, 47%, 50%, 0.365);
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 1rem;
+}
+
+.barra{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* background-color: yellow; */
+    width: 100%;
+    height: 2rem;
+    margin: 2.5rem 0rem 2rem;
+}
+
+.point{
+    background-color: hsla(54, 51%, 58%, 0.528);
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 1rem;
+}

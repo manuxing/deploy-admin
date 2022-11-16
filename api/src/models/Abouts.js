@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
             allowNull: false 
         },
         servicios: {
-            type: DataTypes.STRING, 
+            type: DataTypes.TEXT, 
         set: function(val) {
             return this.setDataValue('servicios', JSON.stringify(val));
         }

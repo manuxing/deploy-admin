@@ -24,6 +24,7 @@ const validatePut = async(body, model) => {
     if (typeof body.info !== "string")return {status: 400, message:"info invalida"}
 
     if(typeof body.contact !== "object") return {status: 400, message:"los valores ingresados en el campo Contacto son invalidos, modifiquelos"};
+    if(typeof body.servicios !== "object") return {status: 400, message:"los valores ingresados en el campo Contacto son invalidos, modifiquelos"};
 
     return {status: 200}
 };

@@ -5,11 +5,9 @@ const LinkWIcon = (p) => {
   let {url, to} = p.p;
               
   return (
-    <div className="sideBI">
       <NavLink to={`${url}`} className="LinkSideB">
         <span>{to}</span>
       </NavLink>
-    </div>
   );
 };
 

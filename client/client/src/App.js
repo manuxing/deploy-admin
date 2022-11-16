@@ -14,15 +14,17 @@ function App() {
       hacer un lat bar que tenga para hacer solicitudes y reviews
       tambien un coso de contactos que lleve a contactos */}
       <BrowserRouter>
-        <SideBar/>
-        <Switch>
-        <Route path="/inicio" exact component={About} />
-            <Route path="/solicitud" >
-              <SendRequest/>
-            </Route >
-            <Route path={"/reseña"} component={SendReview}/>
-            <Route path={"/error"} component={Error}/>
-        </Switch>
+        <SideBar/>  
+        <div className='content'>
+          <Switch>
+          <Route path="/inicio" exact component={About} />
+              <Route path="/solicitud" >
+                <SendRequest/>
+              </Route >
+              <Route path={"/reseña"} component={SendReview}/>
+              <Route path={"/error"} component={Error}/>
+          </Switch>
+        </div>
       </BrowserRouter>
     </div>
   );

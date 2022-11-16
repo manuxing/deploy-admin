@@ -22,7 +22,6 @@ const About = ()=> {
           {about === null ? 
         <p>cargando</p> :
         <div className="content_act">
-          Informacion
           <actuallContext.Provider value={about}>
               <Display/>
           </actuallContext.Provider>
