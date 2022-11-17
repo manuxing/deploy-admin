@@ -4,11 +4,11 @@ import {useSelector} from "react-redux"
 
 function DetalleLay() {
   let actual = useSelector(state => state.actualG);
-
+  let name = actual.model[0].toUpperCase() + actual.model.substring(1)
   return (
     <div className='detailaycard'>
       <div className='titulo'>
-        <h2>{actual.model}</h2>
+        <h2>{name}</h2>
       </div>
       <div className='content'>
         <div>

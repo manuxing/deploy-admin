@@ -68,12 +68,17 @@ const ReviewR = () => {
   }, []);
 
   return (
-    <div>
+    <div className="re">
        {submitted === true ?
-      <div>
-        <p>gracias por su solicitud boton</p> 
-        <NavLink to={"/"}>home</NavLink>
-        </div>:
+    <div className="post">
+    <h1>Gracias por su solicitud</h1> 
+    <br></br>
+    <NavLink className={"linkpost"} to={"/"}>
+      <h2>
+        Inicio
+      </h2>
+    </NavLink>
+    </div>:
       <div className="conten_act">
         <actuallContext.Provider value={send}>
           <Form/>

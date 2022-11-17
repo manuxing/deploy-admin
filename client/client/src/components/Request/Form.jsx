@@ -23,7 +23,6 @@ const Form = ()=>{
         let date =new Date();
         senr.dateP  = `${date.getUTCFullYear()}-${date.getUTCMonth()}-${date.getUTCDate()}`
         let x = validate.requestForm(senr, servicesIds);
-        senr.sId = "rjd";
         if (x.status === false) {
           errHan(x);
         } else {
@@ -120,9 +119,9 @@ const Form = ()=>{
                         <button onClick={(e)=>popC(e)}>-
                         </button>}
           </div>
-          </div>
           <div className="warning">
             {input.contact && input.contact.length > 0 ? "" : warning.contact}
+          </div>
           </div>
           <div className='field'>
             <h4>Servicio</h4>

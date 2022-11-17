@@ -1,16 +1,12 @@
 .top-section{
-    margin-left: 12rem;
     display: flex;
     justify-content: flex-end;
     box-sizing: border-box;
-    box-shadow: 3px 0px 5px 1px rgba(0, 0, 0, 0.1);
-    background-color: aliceblue;
+    width: 96%;
     height: 100%;   
-    padding: 0.9rem 0.7rem 0.9rem 0.9rem;
+    padding: 0.9rem 0.7rem 0.9rem 0rem;
     transition: 400ms margin-left;
 }
-
-
 
 .display_not{
     display: grid;
@@ -32,7 +28,6 @@
     align-items: center;
     margin: 0px;
     height: 80%;
-    width: 20%;
 }
 
 .logo{
@@ -55,7 +50,7 @@
 }
 @media (max-width: 950px){
     .top-section {
-        margin-left: 6rem;
+        margin-left: 0rem;
     }
     .display_not{
         height: 4rem;

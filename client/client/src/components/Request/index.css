@@ -1,17 +1,27 @@
 .conten_act{
-    margin-left: 18%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5rem;
-    width: 65%;
-    background-color: azure;
+    margin-top: 1rem;
+    width: 50rem;
     height: 28rem;
     padding-top: 1.5rem;
     padding-bottom: 2rem;
     border-radius: 0.3rem;
+    border-style: solid;
+    border-color:hsla(91, 56%, 92%, 0.697);
+    border-width: 0.001rem;
+    border-radius: 0.2rem;
+    border-bottom:0rem;
+    border-right:0rem;
+    border-left:0rem;
+    box-shadow: rgba(190, 206, 119, 0.1) 6px 1.5rem 10.5rem, rgba(5, 94, 133, 0.1) 0px 0.075rem 2.175rem;
 }
-
+.re{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .post{
     display: flex;
     flex-direction: column;

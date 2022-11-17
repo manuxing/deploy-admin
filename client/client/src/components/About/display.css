@@ -2,16 +2,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgba(231, 239, 246, 0.854);
 }
 
 .title{
+    background-image: url("../asserts/fondo.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 2.2rem;
+    box-shadow: rgba(3, 8, 20, 0.1) 6px 0.5rem 10.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
 }
 
 .title-cont{
@@ -22,9 +26,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0rem 1rem 0rem 1rem ;
     /* margin-left: 2.2rem; */
-    height: 18.4rem;
+    margin-top: 0.3rem;
+    height: 19.8rem;
     width: 100%;
     color:rgb(209, 226, 219);
 }
@@ -44,6 +48,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 0.7rem;
     width: 98%;
 }
 
@@ -69,7 +74,7 @@
     justify-content: space-evenly;
     align-items: center;
     /* background-color: yellow; */
-    width: 100%;
+    width: 90%;
     height: 2rem;
     margin: 2.5rem 0rem 2rem;
 }
@@ -80,3 +85,16 @@
     height: 0.4rem;
     border-radius: 1rem;
 }
+
+@media (max-width: 950px){
+    .about{
+        font-size: 1rem;
+    }
+    .info {
+        margin-bottom: 2rem;
+    }
+    .services{
+        justify-content: center;
+        margin-top: 1.4rem;
+    }
+    }

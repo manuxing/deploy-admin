@@ -11,7 +11,7 @@ const Display = ()=> {
       <div className="title-cont">
         <div className="title">
           {/* foto fondo */}
-          <h2>Bodega Romano Pin</h2>
+          <span>Bodega Romano Pin</span>
         </div>
       </div>
       <div className='barra'>

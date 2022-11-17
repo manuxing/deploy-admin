@@ -12,7 +12,7 @@ function Detalle ({actual}) {
             </div>
             <div>
               <NavLink  to={`/client/${actual?.client?.id}`}>
-                {actual?.client?.name ? actual?.client?.name : "name"}
+                {actual?.client?.name ? actual.client.name[0].toUpperCase() + actual.client.name.substring(1) : "name"}
               </NavLink>
             </div>
         </div>

@@ -16,7 +16,7 @@ const Dash = ({data, handleClick})=> {
                 <NavLink className="dashdata" to={`/client/${id}`}>
                         <div >
                             <h2>
-                                {name}
+                                {name[0].toUpperCase() + name.substring(1)}
                             </h2>
                         </div>
                             {contact && contact.length > 0 &&

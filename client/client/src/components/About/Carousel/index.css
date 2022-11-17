@@ -4,6 +4,9 @@
     padding: 0.7em;
     margin: 1rem;
 }
+.caroulsel img{
+    border-radius: 0.2rem;
+}
 ul{
     display: none;
 }
