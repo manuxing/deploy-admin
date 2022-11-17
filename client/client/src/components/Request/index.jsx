@@ -34,7 +34,7 @@ const RequestR = ({ setP }) => {
   let createSolicitud = (data)=>{
     console.log(data)
     axios
-    .post(`REACT_APP_API_URLrequest`, data)
+    .post(` ${process.env.REACT_APP_API_URL}request`, data)
           .then((res) =>  {
               setSubmitted(true);
               
@@ -63,7 +63,7 @@ const RequestR = ({ setP }) => {
 
   useEffect(() => {
     axios
-        .get(`REACT_APP_API_URLdata/service`)
+        .get(` ${process.env.REACT_APP_API_URL}data/service`)
           .then((res) =>  {
               setServices(res.data.actual.data);
               let ids = res.data.actual.data.map(p => p.id)
@@ -80,7 +80,7 @@ const RequestR = ({ setP }) => {
       {submitted === true ?
       <div>
         <p>gracias por su solicitud</p> 
-        <NavLink to={"/home"}>home</NavLink>
+        <NavLink to={"/"}>home</NavLink>
         </div>:
       <div className="conten_act">
         <actuallContext.Provider value={send}>

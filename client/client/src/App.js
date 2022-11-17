@@ -4,6 +4,7 @@ import About from './components/About';
 import './App.css';
 import SendRequest from './components/Request';
 import SendReview from './components/Review';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
@@ -17,12 +18,13 @@ function App() {
         <SideBar/>  
         <div className='content'>
           <Switch>
-          <Route path="/inicio" exact component={About} />
+          <Route  path="/" component={About} />
               <Route path="/solicitud" >
                 <SendRequest/>
               </Route >
               <Route path={"/reseña"} component={SendReview}/>
               <Route path={"/error"} component={Error}/>
+              <Route  path="*" component={NotFound}/>
           </Switch>
         </div>
       </BrowserRouter>

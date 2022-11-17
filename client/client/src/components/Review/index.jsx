@@ -26,7 +26,7 @@ const ReviewR = () => {
 
   let createReviews = (data)=>{
     axios
-    .post(`REACT_APP_API_URLreview`, data)
+    .post(` ${process.env.REACT_APP_API_URL}review`, data)
     .then((res) =>  {
       setSubmitted(true);
       
@@ -55,7 +55,7 @@ const ReviewR = () => {
   
   useEffect(() => {
     axios
-        .get(`REACT_APP_API_URLdata/service`)
+        .get(` ${process.env.REACT_APP_API_URL}data/service`)
           .then((res) =>  {
               setServices(res.data.actual.data);
               let ids = res.data.actual.data.map(p => p.id)
@@ -72,7 +72,7 @@ const ReviewR = () => {
        {submitted === true ?
       <div>
         <p>gracias por su solicitud boton</p> 
-        <NavLink to={"/home"}>home</NavLink>
+        <NavLink to={"/"}>home</NavLink>
         </div>:
       <div className="conten_act">
         <actuallContext.Provider value={send}>
