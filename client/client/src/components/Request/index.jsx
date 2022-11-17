@@ -34,19 +34,21 @@ const RequestR = ({ setP }) => {
   let createSolicitud = (data)=>{
     console.log(data)
     axios
-    .post(`REACT_APP_API_URLrequest`, data)
+    .post(` ${process.env.REACT_APP_API_URL}request`, data)
           .then((res) =>  {
               setSubmitted(true);
               
           })
+        .then(res => {
+            setInput({ dateP: "", thg: "", contact: [], sId: 0, solicitante:""});
+            setWarning({ dateP: "", thg: "", solicitante:"", contact: "", sId: "" });
+            let x = document.getElementById("service");
+            x.selected = true;
+          }
+        )
         .catch((e) => {
-          console.log(e)
-            alert(e.data)
+            alert(e.response.data)
           });
-          setInput({ dateP: "", thg: "", contact: [], sId: 0, solicitante:""});
-          setWarning({ dateP: "", thg: "", solicitante:"", contact: "", sId: "" });
-          let x = document.getElementById("service");
-          x.selected = true;
         }
 
         let send = {
@@ -63,13 +65,14 @@ const RequestR = ({ setP }) => {
 
   useEffect(() => {
     axios
-        .get(`REACT_APP_API_URLdata/service`)
+        .get(` ${process.env.REACT_APP_API_URL}data/service`)
           .then((res) =>  {
               setServices(res.data.actual.data);
               let ids = res.data.actual.data.map(p => p.id)
               setServicesIds(ids);
           })
         .catch((e) => {
+          console.log(e.data)
           alert(e.data)
         });
         return ()=>setSubmitted(false)
@@ -78,15 +81,21 @@ const RequestR = ({ setP }) => {
   return (
     <div>
       {submitted === true ?
-      <div>
-        <p>gracias por su solicitud</p> 
-        <NavLink to={"/home"}>home</NavLink>
+      <div className="post">
+        <h1>Gracias por su solicitud</h1> 
+        <br></br>
+        <NavLink className={"linkpost"} to={"/"}>
+          <h2>
+            Inicio
+          </h2>
+        </NavLink>
         </div>:
       <div className="conten_act">
         <actuallContext.Provider value={send}>
           <Form/>
         </actuallContext.Provider>
-      </div>}
+        </div>
+      }
       </div>
   );
 };

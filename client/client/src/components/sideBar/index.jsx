@@ -1,14 +1,11 @@
 import React from "react";
 import LinkWIcon from "./LinkW";
 import "./sideBar.css"
-// import HomeIcon from '../../@mui/icons-material/Home';
-// import RateReviewIcon from '@mui/icons-material/RateReview';
-// import AddReactionIcon from '@mui/icons-material/AddReaction';
 
 const SideBar = () => {
   let  solicitud = {to:"Solicitud", url:"/solicitud"}
   let  reseña = {to:"Reseña", url:"/reseña"}
-  let  home = {to:"Inicio", url:"/inicio"}
+  let  home = {to:"Inicio", url:"/"}
   
   return (
     <div className="side">

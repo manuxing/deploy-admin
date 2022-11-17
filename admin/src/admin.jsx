@@ -35,7 +35,7 @@ function Admin() {
             <div className="App">
             <Switch>
 
-            <Route exact path="/home" component={Home} />
+            <Route exact path="/" component={About} />
             <Route path="/about/">
                 <About />
             </Route>
@@ -81,6 +81,7 @@ function Admin() {
             <Route path="/create/service">
                 <AgregarServicio />
             </Route>
+            <Route path="*" component={ActivityLayout} />
 
             <Route path="/err">
                 <Error />
