@@ -2,16 +2,12 @@ import React from "react";
 import "./About.css"
 
 const ContactCard = ({ contact }) => {
-  console.log(   typeof contact === 'object')
+  console.log(contact)
   return (
-    typeof contact === 'object' ?
-    <div className="contactcard_ab">
-      <span>{contact.type}: {contact.value}</span>
-    </div>: 
-    <div className="contactcard_ab">
-      <span>{contact}</span>
-    </div>
-  );
+      <div className="contactcard_ab">
+        <span>{contact.type}</span>
+      </div>
+    );
 };
 
 export default React.memo(ContactCard);

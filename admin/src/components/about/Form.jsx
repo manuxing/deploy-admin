@@ -28,6 +28,7 @@ const Form =()=> {
   let sub = (e) => {
       e.preventDefault();
       let res = input;
+      console.log(res)
       dispatch(putAbout(res));
       inpt.disabled = edit;
       setEdit(!edit);

@@ -14,7 +14,7 @@ const validatePost = async(body, model) => {
 
 const validatePut = async(body, model) => {
     if(Object.values(body).includes(null))return{status: 400, message:"Hay Campos incompletos, todos los campos son obliigatorios"}
-
+console.log(body)
     
     if(parseInt(body.id) !== Number(body.id))return {status: 400, message:"el id es invalido"};
     let about = await model.findOne({ where:{ id:parseInt(body.id)}})

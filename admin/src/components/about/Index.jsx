@@ -42,8 +42,10 @@ const About = () => {
         if(typeof about.servicios === "string"){
           let serv = JSON.stringify(about.servicios);
           serv = JSON.parse(serv)
+          let cont = JSON.stringify(about.contact);
+          cont = JSON.parse(cont)
           setInput({id: about.id, info:about.info,  servicios:JSON.parse(serv),
-          contact:about.contact});
+          contact:JSON.parse(cont)});
         }else{
           setInput({id: about.id, info:about.info,  servicios:about.servicios,
             contact:about.contact});
