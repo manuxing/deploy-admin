@@ -79,7 +79,7 @@ const RequestR = ({ setP }) => {
   }, []);
 
   return (
-    <div>
+    <div className="re">
       {submitted === true ?
       <div className="post">
         <h1>Gracias por su solicitud</h1> 

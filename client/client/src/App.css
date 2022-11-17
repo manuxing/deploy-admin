@@ -1,16 +1,14 @@
 .App {
   box-sizing: border-box;
-  background-color: rgba(210, 226, 240, 0.854);
+  background-color: hsla(185, 52%, 56%, 0.002);
   height: 40rem;   
   width: 100%;
-  padding: 0.3rem 0rem;
   transition: 400ms margin-left;
 }
 
 .content{
   /* margin-left: 7.5rem; */
-  margin-top: 4.17rem;
-  width: 100%;
+  width: 99%;
 }
 
 .notfound{
@@ -22,13 +20,15 @@
   margin-left: 2rem;
 }
 
+.warning{
+  color: red;
+}
+
 @media (max-width: 950px){
 .App {
-margin-left: 6rem;
 box-sizing: border-box;
-background-color: hsla(208, 87%, 18%, 0.85);
 height: 100%;   
-padding: 0.3rem 15px;
+padding: 0.3rem 0.4rem;
 transition: 400ms margin-left;
 }
 }

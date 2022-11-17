@@ -120,9 +120,9 @@ const Form = ()=>{
                         <button onClick={(e)=>popC(e)}>-
                         </button>}
           </div>
-          </div>
           <div className="warning">
             {input.contact && input.contact.length > 0 ? "" : warning.contact}
+          </div>
           </div>
           <div className='field'>
             <h4>Servicio</h4>

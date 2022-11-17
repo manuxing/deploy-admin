@@ -68,7 +68,7 @@ const ReviewR = () => {
   }, []);
 
   return (
-    <div>
+    <div className="re">
        {submitted === true ?
       <div>
         <p>gracias por su solicitud boton</p> 
