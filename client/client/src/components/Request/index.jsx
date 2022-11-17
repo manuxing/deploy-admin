@@ -34,7 +34,7 @@ const RequestR = ({ setP }) => {
   let createSolicitud = (data)=>{
     console.log(data)
     axios
-    .post(`http://localhost:3001/request`, data)
+    .post(`REACT_APP_API_URLrequest`, data)
           .then((res) =>  {
               setSubmitted(true);
               
@@ -63,7 +63,7 @@ const RequestR = ({ setP }) => {
 
   useEffect(() => {
     axios
-        .get(`http://localhost:3001/data/service`)
+        .get(`REACT_APP_API_URLdata/service`)
           .then((res) =>  {
               setServices(res.data.actual.data);
               let ids = res.data.actual.data.map(p => p.id)

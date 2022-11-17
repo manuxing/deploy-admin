@@ -9,7 +9,7 @@ const About = ()=> {
     let history = useHistory();
     useEffect(()=>{
         axios
-            .get(`http://localhost:3001/about`)
+            .get(`REACT_APP_API_URLabout`)
             .then((res) =>  {
               let cont = JSON.stringify(res.data.contact);
               res.data.contact = JSON.parse(cont)

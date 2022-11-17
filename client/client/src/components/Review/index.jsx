@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { actuallContext } from "../ActualContext";
 import {NavLink} from "react-router-dom"
 import axios from "axios"
@@ -26,7 +26,7 @@ const ReviewR = () => {
 
   let createReviews = (data)=>{
     axios
-    .post(`http://localhost:3001/review`, data)
+    .post(`REACT_APP_API_URLreview`, data)
     .then((res) =>  {
       setSubmitted(true);
       
@@ -55,7 +55,7 @@ const ReviewR = () => {
   
   useEffect(() => {
     axios
-        .get(`http://localhost:3001/data/service`)
+        .get(`REACT_APP_API_URLdata/service`)
           .then((res) =>  {
               setServices(res.data.actual.data);
               let ids = res.data.actual.data.map(p => p.id)
