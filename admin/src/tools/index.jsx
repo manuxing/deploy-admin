@@ -107,6 +107,11 @@ const tools = {
             }
           }
           break;
+          case "url":
+            {
+              console.log("url")
+            }
+            break;
         default: {
           let values = ["presencial", "booking", "pagina", "otro"];
           if (values.includes(con.value) === false && values.includes(con.type) === false ) {

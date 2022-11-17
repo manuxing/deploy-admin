@@ -11,8 +11,16 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false 
         },
-        contact: {
-            type: DataTypes.ARRAY(DataTypes.TEXT),
+        servicios: {
+            type: DataTypes.TEXT, 
+        set: function(val) {
+            return this.setDataValue('servicios', JSON.stringify(val));
+        }
+        },
+        contact:  {type: DataTypes.TEXT, 
+        set: function(val) {
+            return this.setDataValue('contact', JSON.stringify(val));
+        }
         },
         changed: {
             type: DataTypes.BOOLEAN,

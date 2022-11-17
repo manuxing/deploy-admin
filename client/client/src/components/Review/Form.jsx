@@ -69,9 +69,13 @@ const Form = ()=>{
 
   return (
     <div>
+            <div className='rf'>
+                <h3>Deja tu Reseña:</h3>
+            </div>
         <form className="form" onSubmit={(e) => handleSubmit(e, input)}>
-          <div>
-            <label>Fecha de la actividad</label>
+        <div className='row'>
+          <div className='field'>
+            <h4>Fecha de la actividad</h4>
             <input
               className="input"
               type={"date"}
@@ -81,21 +85,23 @@ const Form = ()=>{
               onChange={(p) => handleChange(p)}
             />
             <div className="warning">{warning.dateP}</div>
+            </div>
+            <div className='field'>
+              <h4>Su Nombre</h4>
+                <input 
+                  className="input"
+                  type={"text"}
+                  placeholder="Nombre"
+                  name={"cName"}
+                  value={input.cName}
+                  onChange={(p) => handleChange(p)}
+                />
+              <div className="warning">{warning.cName}</div>
+            </div>
           </div>
-          <div>
-          <label>Su Nombre</label>
-              <input 
-                className="input"
-                type={"text"}
-                placeholder="Nombre"
-                name={"cName"}
-                value={input.cName}
-                onChange={(p) => handleChange(p)}
-              />
-            <div className="warning">{warning.cName}</div>
-          </div>
-          <div>
-            <label>Descripcion</label>
+          <div className='row'>
+          <div className='field'>
+            <h3>Descripcion</h3>
             <textarea
               className="input"
               type={"text"}
@@ -106,8 +112,8 @@ const Form = ()=>{
             />
             <div className="warning">{warning.description}</div>
           </div>
-          <div>
-            <label>Servicios</label>
+          <div className='field'>
+            <h3>Servicios</h3>
             <select
               className="selectageR"
               name={"sId"}
@@ -128,8 +134,11 @@ const Form = ()=>{
             </select>
             <div className="warning">{warning.sId}</div>
           </div>
+          </div>
           <div className="warning">{warning.general}</div>
-          <input className="input" type={"submit"} name={"submit"} />
+          <div className='enviar'>
+            <button className="input" type={"submit"} name={"submit"}>Enviar</button>
+        </div>
         </form>
     </div>
   )

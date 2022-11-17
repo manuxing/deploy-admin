@@ -63,7 +63,7 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   ) : (
     <div className="addcontact">
       <div className="addcontact_form">
-        <label>Contacto</label>
+        <h3>Contacto</h3>
         <select
           className="selectcontact"
           name={"contact"}
@@ -78,24 +78,30 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
             );
           })}
         </select>
-        {contact.type === "pagina" ||
-        contact.type === "booking" ||
-        contact.type === "" ||
-        contact.type === "presencial" ? (
-          <></>
-        ) : (
-          <input
-            className="inputcontact"
-            type={chooseType(contact.type)}
-            name={"value"}
-            value={contact.value}
-            onChange={(p) => {
-              handleChange(p);
-            }}
-          />
-        )}
-        <div className="warning">{warning.contacto}</div>
-        <button onClick={(p) => handleSubmit(p, contact)} />
+        <div className="botcon">
+          <div>
+            {contact.type === "pagina" ||
+            contact.type === "booking" ||
+            contact.type === "" ||
+            contact.type === "presencial" ? (
+              <></>
+            ) : (
+              <input
+                className="inputcontact"
+                type={chooseType(contact.type)}
+                name={"value"}
+                value={contact.value}
+                onChange={(p) => {
+                  handleChange(p);
+                }}
+              />
+            )}
+            <div className="warning">{warning.contacto}</div>
+            </div>
+          <div className="adc">
+            <button onClick={(p) => handleSubmit(p, contact)}>+</button>
+          </div>
+        </div>
       </div>
     </div>
   );

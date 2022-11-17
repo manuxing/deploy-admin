@@ -1,8 +1,10 @@
 import React, {useContext, useState} from 'react'
 import { actuallContext } from '../create/ActualContext'
 import "./About.css"
-import AgregarContacto from "../create/client/agregarContacto"
+import AgregarContacto from "./agregarContacto"
 import ContactCard from "./contactCard"
+import AgregarServicio from "./agregarServicio."
+import ServiceCard from "./serviceCard" 
 
 const Form =()=> {
   let send = useContext(actuallContext);
@@ -26,6 +28,7 @@ const Form =()=> {
   let sub = (e) => {
       e.preventDefault();
       let res = input;
+      console.log(res)
       dispatch(putAbout(res));
       inpt.disabled = edit;
       setEdit(!edit);
@@ -34,6 +37,11 @@ const Form =()=> {
   let popC = (e) =>{
     e.preventDefault();
     setInput({...input, contact:input.contact.slice(1)});
+  }
+
+  let popS = (e) =>{
+    e.preventDefault();
+    setInput({...input, servicios:input.servicios.slice(1)});
   }
 
   let editS = (e) =>{
@@ -58,28 +66,53 @@ const Form =()=> {
               disabled
             />
           </div>
-          {edit === false ? <></>:
-          <AgregarContacto
-            setContacts={setInput}
-            _contacts={input}
-            contactsThg={thg}
-          />}
-          <div className="warning">{warning.contact}</div>
-          <div className='title-'>
-            <h3>Contactos</h3>
-          {edit === true && typeof input.contact === 'object' && input.contact.length > 0 &&
-                    <button onClick={(e)=>popC(e)}>-
-                    </button>}
+          <div>
+            {edit === false ? <></>:
+            <AgregarServicio
+              setContacts={setInput}
+              _contacts={input}
+            />}
+            <div className="warning">{warning.servicio}</div>
+            <div className='title-'>
+              <h3>Servicios</h3>
+            {edit === true && typeof input.servicios === 'object' && input.servicios.length > 0 &&
+                      <button onClick={(e)=>popS(e)}>-
+                      </button>}
+            </div>
+            <div className='persons'>
+              {typeof input.servicios === 'object' && input?.servicios.map((p) => {
+                return (
+                  <div key={`${p.name}`}>
+                    <ServiceCard service={p} />
+                  </div>
+                )
+              })}
+            </div>
           </div>
-          <div className='persons'>
-            {typeof input.contact === 'object' && input?.contact.map((p) => {
-              id++
-              return (
-                <div key={`${id}`}>
-                  <ContactCard contact={p} />
-                </div>
-              )
-            })}
+          <div>
+            {edit === false ? <></>:
+            <AgregarContacto
+              setContacts={setInput}
+              _contacts={input}
+              contactsThg={thg}
+            />}
+            <div className="warning">{warning.contact}</div>
+            <div className='title-'>
+              <h3>Contactos</h3>
+            {edit === true && typeof input.contact === 'object' && input.contact.length > 0 &&
+                      <button onClick={(e)=>popC(e)}>-
+                      </button>}
+            </div>
+            <div className='persons'>
+              {typeof input.contact === 'object' && input?.contact.map((p) => {
+                id++
+                return (
+                  <div key={`${id}`}>
+                    <ContactCard contact={p} />
+                  </div>
+                )
+              })}
+            </div>
           </div>
             <div className='buttons'>
             <button  type={"submit"} name={"submit"}> Enviar</button>

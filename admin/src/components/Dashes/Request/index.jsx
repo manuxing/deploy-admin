@@ -5,8 +5,7 @@ import PostAddIcon from '@mui/icons-material/PostAdd';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Dash = ({data, handleClick})=> { 
-    let {id,  stat,dateP, contact, solicitante} = data;
-    console.log(stat)
+    let {id,  stat,dateP, solicitante} = data;
     return (
         id === undefined ? <></> :
         <div className="dash"> 
@@ -18,7 +17,7 @@ const Dash = ({data, handleClick})=> {
                         <h2> Solicitante: {solicitante}</h2>
                     </div> : <></>}
                     <div className="divdash">
-                        <h2>Fecha solicitada:  {dateP.slice(0, 10)}
+                        <h2>Fecha solicitada:  {dateP}
                         </h2>
                     </div>
                     <div className="divdash">

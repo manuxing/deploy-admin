@@ -12,6 +12,7 @@ const getAbout = async(res, next, model) => {
 };
 
 const postAbout = async( res, next, model, body ) => {
+    console.log(body)
     try {
         let about = await model.create(body)
             .catch(err => next({status: 500, message: 'could not create model'}));
@@ -23,13 +24,19 @@ const postAbout = async( res, next, model, body ) => {
 
 const putAbout = async(res, next, model, body) => {
     try{   
+        console.log(body)
         let about = await model.update({
             info: body.info,
             contact: body.contact,
+            servicios: body.servicios,
             changed: true,
         }, {where: {id:body.id}})
-            .catch(err => next({status: 500, message: 'could not update model'}));
-        return res.json(body);
+            .then(va => {return res.json(body)})
+            .catch(err => {
+                console.log(err);
+                next({status: 500, message: 'could not update model'})
+            }
+    );
     } catch (e){
         return next({status: 500, message: 'Error en router About put'});
     };
