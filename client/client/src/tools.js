@@ -196,7 +196,6 @@ const tools = {
         res.ubic = "service";
       }
       res.err = errs;
-      console.log(res.err)
       return res;
     },
     requestForm_field: (evento, servicesIds) => {

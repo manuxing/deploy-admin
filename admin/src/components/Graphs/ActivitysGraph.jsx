@@ -1,13 +1,8 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo } from "react";
 import { XAxis, CartesianGrid, Line, LineChart } from "recharts";
-import { useSelector } from "react-redux";
 import "./index.css"
 
 function ActivitysGraph() {
-  let Requests = useSelector((state) => state.actualG.data)
-  useEffect(()=>{
-    console.log(Requests)
-  },[])
 
   let data = useMemo(() => {
     return [

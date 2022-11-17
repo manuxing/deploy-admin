@@ -2,17 +2,18 @@ const pre = require("../Tools");
 
 const getAbout = async(res, next, model) => {
     try {
-        let peticionDB = await model.findAll()
-            .catch(err => next({status: 500, message: 'could not find model values'}));
-        console.log(peticionDB)
-        return res.json(peticionDB[0].dataValues);
-    }catch(e){
-        return next({status: 500, message: 'Error en router About get'});
+      let peticionDB = await model
+        .findAll()
+        .catch((err) =>
+          next({ status: 500, message: "could not find model values" })
+        );
+      return res.json(peticionDB[0].dataValues);
+    } catch (e) {
+      return next({ status: 500, message: "Error en router About get" });
     }
 };
 
 const postAbout = async( res, next, model, body ) => {
-    console.log(body)
     try {
         let about = await model.create(body)
             .catch(err => next({status: 500, message: 'could not create model'}));
@@ -24,7 +25,6 @@ const postAbout = async( res, next, model, body ) => {
 
 const putAbout = async(res, next, model, body) => {
     try{   
-        console.log(body)
         let about = await model.update({
             info: body.info,
             contact: body.contact,

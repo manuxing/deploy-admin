@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import FaceIcon from '@mui/icons-material/Face';
-import "./Request.css"
+import "./Request.css";
 
 function DetalleRequest({ actual, handleChange, _stat }) {
   return (

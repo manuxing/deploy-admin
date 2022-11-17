@@ -3,12 +3,10 @@ import { getNot } from "../../../redux/actions";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "../searchBar/index";
-import { NavLink } from "react-router-dom";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import "../navBar/navbar.css";
 import Drop from "./drop";
-import LogOut from "../LogOut";
 
 const NavBar = () => {
   let navigate = useHistory()
@@ -44,10 +42,6 @@ const NavBar = () => {
 
   return (
     <div className="top-section">
-      {/* <NavLink to={"/"} className="LinkSideB">
-        <div className="logo">Bodega RP</div>
-      </NavLink> */}
-      {/* <LogOut/> */}
             {pressed === true ? 
               <Drop not={not} /> 
               : <></>}

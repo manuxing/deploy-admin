@@ -33,7 +33,6 @@ const tools = {
       let reg = new RegExp(/\b[\w.-]+@[\w.-]+\.\w{2,4}\b/);
       let vals = Object.values(user);
       
-      console.log(user)
       if(vals.length !== 2||vals.includes(undefined)|| vals.includes(null)){
         let err = {
           message: "complete los campos",
@@ -108,9 +107,7 @@ const tools = {
           }
           break;
           case "url":
-            {
-              console.log("url")
-            }
+              console.log("")
             break;
         default: {
           let values = ["presencial", "booking", "pagina", "otro"];
@@ -150,7 +147,7 @@ const tools = {
       return res;
     },
     agregarPersona_field: (field) => {
-      field.p ? field = field.p : console.log(field)
+      field.p ? field = field.p : console.log(1)
       let res = { status: true, ubic: field.target.name };
       let errs = [];
       let sexos = ["Femenino", "Masculino", "otro"];
@@ -202,10 +199,10 @@ const tools = {
       resX.push(checkS);
       res.res = resX;
       res.errs = resX.map((p) => {
-        if (p.status === false){
+        if (p.status === false) {
           res.status = false;
           return p.err;
-        } 
+        }
       });
       return res;
     },
@@ -390,7 +387,6 @@ const tools = {
         res.status = false;
         errs.push(err);
       }
-      console.log(client.contact)
       if (typeof client.contact !== "object" || client.contact.length < 1) {
         let err = {
           message: "revise los contactos, no deberia cambiar de array",

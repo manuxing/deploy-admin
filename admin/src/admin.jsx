@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Bars from "./components/bars";
-import Home from "./components/home";
-import "./App.css"
+import "./App.css";
 import About from "../src/components/about/Index";
 
 import Activity from "./components/Details/Activity";

@@ -32,7 +32,6 @@ const RequestR = ({ setP }) => {
   
   
   let createSolicitud = (data)=>{
-    console.log(data)
     axios
     .post(` ${process.env.REACT_APP_API_URL}request`, data)
           .then((res) =>  {
@@ -72,7 +71,6 @@ const RequestR = ({ setP }) => {
               setServicesIds(ids);
           })
         .catch((e) => {
-          console.log(e.data)
           alert(e.data)
         });
         return ()=>setSubmitted(false)

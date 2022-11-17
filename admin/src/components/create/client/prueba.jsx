@@ -4,9 +4,7 @@ import { useHistory } from "react-router-dom";
 import {
   createClient,
   getServicio,
-  setActual,
   errorForm,
-  setActualG,
 } from "../../../redux/actions/index.js";
 import { actuallContext } from "../ActualContext";
 import Form from "./Form";

@@ -3,7 +3,7 @@ const { conn } = require('./src/db.js');
 
 conn.sync({ force: false }).then(() => {
   server.listen(3001, () => {
-    console.log('escuchan2'); 
+    console.log('escuchando'); 
   });
 });
    

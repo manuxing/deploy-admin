@@ -16,7 +16,6 @@ const Review = () => {
   const [_stat, setStat] = useState(false);
 
   useEffect(()=>{
-    console.log(actual)
     if(error){
       history.push("/err");
     } else{
@@ -31,7 +30,6 @@ const Review = () => {
   },[dispatch, error]);
 
   useEffect(()=>{
-    console.log(actual.stat)
     if(actual && actual !== 1 && actual?.stat !== null){
       if(actual.stat === false){
           handleChange(true);

@@ -8,14 +8,7 @@ import ServiceCard from "./serviceCard"
 
 const Form =()=> {
   let send = useContext(actuallContext);
-  let  {
-    input,
-    warning,
-    dispatch,
-    putAbout,
-    setInput,
-    thg
-  } = send;
+  let { input, warning, dispatch, putAbout, setInput, thg } = send;
 
   let [edit, setEdit] = useState(false);
 
@@ -28,7 +21,6 @@ const Form =()=> {
   let sub = (e) => {
       e.preventDefault();
       let res = input;
-      console.log(res)
       dispatch(putAbout(res));
       inpt.disabled = edit;
       setEdit(!edit);

@@ -5,8 +5,7 @@ import RateReviewIcon from '@mui/icons-material/RateReview';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Dash = ({data, handleClick})=> { 
-    let { id, stat, dateP, thg} = data;
-    console.log(stat)
+    let { id, stat, dateP} = data;
     return (
         id === undefined ? <></> :
         <div className="dash"> 

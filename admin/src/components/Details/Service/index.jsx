@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from "react-router-dom"
-import { getServicio, errorForm, updateServicio, getReviews, getNot, setActual } from '../../../redux/actions'
+import { getServicio, errorForm, updateServicio, getNot, setActual } from '../../../redux/actions'
 import Form from './Form'
 import DetalleService from './DetalleService'
 import tools from '../../../tools'

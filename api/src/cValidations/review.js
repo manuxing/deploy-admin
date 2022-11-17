@@ -1,9 +1,4 @@
 const validatePost = async(body, next, Service, Client) => {
-    if(body.de){
-        console.log(body.de)
-    } else {
-        console.log("wu")
-    }
     if(Object.values(body).includes(null))return {status: 400, message:"Hay Campos incompletos, todos los campos son obliigatorios"}
 
     let medios = [

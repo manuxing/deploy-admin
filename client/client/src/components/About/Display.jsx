@@ -10,7 +10,6 @@ const Display = ()=> {
     <div className="about">
       <div className="title-cont">
         <div className="title">
-          {/* foto fondo */}
           <span>Bodega Romano Pin</span>
         </div>
       </div>

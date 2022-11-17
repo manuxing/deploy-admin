@@ -28,7 +28,6 @@ const initialState = {
 };
 
 export default function rootReducer(state=initialState, action){
-    console.log("mira",action.type,action.payload)
     switch (action.type) {
 
         case type.CLEAR_ACTUALG: {
@@ -64,7 +63,6 @@ export default function rootReducer(state=initialState, action){
             }
         }
         case type.ADD_NOT: {
-            console.log(action.payload.data)
             return {
                 ...state,
                 not: [...state.not, action.payload.data]
@@ -72,7 +70,6 @@ export default function rootReducer(state=initialState, action){
         }
         
         case type.SET_CURRENTUSER: {
-            console.log(action.payload)
             return {
                 ...state,
                 currentUser:action.payload
@@ -89,7 +86,6 @@ export default function rootReducer(state=initialState, action){
             };
         }
         case type.SET_ACTUALG: {
-            console.log(action.payload)
             action.payload.data.stat.url = Array.from(action.payload.data.stat.url).slice(0,-1).join("");
             return {
                 ...state,
@@ -173,7 +169,6 @@ export default function rootReducer(state=initialState, action){
 
             //error
         case type.ERROR:
-            console.log(action.payload)
             return {
               ...state,
               error: action.payload.response,

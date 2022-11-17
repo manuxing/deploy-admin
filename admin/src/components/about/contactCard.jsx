@@ -2,7 +2,6 @@ import React from "react";
 import "./About.css"
 
 const ContactCard = ({ contact }) => {
-  console.log(contact)
   return (
       <div className="contactcard_ab">
         <span>{contact.type}</span>

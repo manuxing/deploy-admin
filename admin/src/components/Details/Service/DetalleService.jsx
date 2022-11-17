@@ -1,30 +1,26 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
-import ReviewC from '../../lO/reviewC';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import ReviewC from "../../lO/reviewC";
 
-function DetalleService({actual}) {
+function DetalleService({ actual }) {
   return (
-<div className='actdetail'>
+    <div className="actdetail">
       <div className="div_act">
-        <div className='div_info'>
+        <div className="div_info">
           <div>
             <h3>{actual?.name ? actual?.name : "name"}</h3>
           </div>
         </div>
-        <div className='div_info'>
+        <div className="div_info">
           <div>
             <h3>Horarios</h3>
           </div>
-          <div>
-            {actual?.tR ? actual?.tR : "Desde"}
-          </div>
-          <div>
-            {actual?.tR_ ? actual?.tR_ : "Hasta"}
-          </div>
+          <div>{actual?.tR ? actual?.tR : "Desde"}</div>
+          <div>{actual?.tR_ ? actual?.tR_ : "Hasta"}</div>
         </div>
       </div>
       <div className="div_act">
-        <div className='div_info'>
+        <div className="div_info">
           <div>
             <h3>Descripcion</h3>
           </div>
@@ -32,36 +28,34 @@ function DetalleService({actual}) {
         </div>
       </div>
       <div className="div_act">
-        <div className='div_info'>
+        <div className="div_info">
           <div>
-            <h3>Reseñas  {actual?.reviews && actual?.reviews.length}
-            </h3>
-          <br></br>
+            <h3>Reseñas {actual?.reviews && actual?.reviews.length}</h3>
+            <br></br>
           </div>
           <br></br>
           <div className="display_info">
-          {actual?.reviews
-            ? actual?.reviews.map((p) => {
-                return (
-                  <NavLink
-                    key={`${p.id}`}
-                    className="link"
-                    to={`/review/${p.id}`}
-                  >
-                    <ReviewC key={p} review={p} />
-                  </NavLink>
-                );
-              })
-            : "Reviews"}
+            {actual?.reviews
+              ? actual?.reviews.map((p) => {
+                  return (
+                    <NavLink
+                      key={`${p.id}`}
+                      className="link"
+                      to={`/review/${p.id}`}
+                    >
+                      <ReviewC key={p} review={p} />
+                    </NavLink>
+                  );
+                })
+              : "Reviews"}
+          </div>
         </div>
-        </div>
-        <div className='div_info'>
+        <div className="div_info">
           <div>
-            <h3>Request  {actual?.requests && actual?.requests.length}
-            </h3>
+            <h3>Request {actual?.requests && actual?.requests.length}</h3>
           </div>
           <div className="display_info">
-          {actual?.requests?.length > 0
+            {actual?.requests?.length > 0
               ? actual.requests.map((p) => {
                   return (
                     <NavLink
@@ -74,11 +68,11 @@ function DetalleService({actual}) {
                   );
                 })
               : ""}
-              </div>
+          </div>
         </div>
       </div>
-      </div>
+    </div>
   );
 }
 
-export default React.memo(DetalleService)
+export default React.memo(DetalleService);
