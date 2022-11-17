@@ -44,7 +44,7 @@ const NavBar = () => {
 
   return (
     <div className="top-section">
-      {/* <NavLink to={"/home"} className="LinkSideB">
+      {/* <NavLink to={"/"} className="LinkSideB">
         <div className="logo">Bodega RP</div>
       </NavLink> */}
       {/* <LogOut/> */}

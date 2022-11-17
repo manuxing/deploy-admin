@@ -39,14 +39,16 @@ const RequestR = ({ setP }) => {
               setSubmitted(true);
               
           })
+        .then(res => {
+            setInput({ dateP: "", thg: "", contact: [], sId: 0, solicitante:""});
+            setWarning({ dateP: "", thg: "", solicitante:"", contact: "", sId: "" });
+            let x = document.getElementById("service");
+            x.selected = true;
+          }
+        )
         .catch((e) => {
-          console.log(e)
-            alert(e.data)
+            alert(e.response.data)
           });
-          setInput({ dateP: "", thg: "", contact: [], sId: 0, solicitante:""});
-          setWarning({ dateP: "", thg: "", solicitante:"", contact: "", sId: "" });
-          let x = document.getElementById("service");
-          x.selected = true;
         }
 
         let send = {
@@ -70,6 +72,7 @@ const RequestR = ({ setP }) => {
               setServicesIds(ids);
           })
         .catch((e) => {
+          console.log(e.data)
           alert(e.data)
         });
         return ()=>setSubmitted(false)
@@ -78,15 +81,21 @@ const RequestR = ({ setP }) => {
   return (
     <div>
       {submitted === true ?
-      <div>
-        <p>gracias por su solicitud</p> 
-        <NavLink to={"/"}>home</NavLink>
+      <div className="post">
+        <h1>Gracias por su solicitud</h1> 
+        <br></br>
+        <NavLink className={"linkpost"} to={"/"}>
+          <h2>
+            Inicio
+          </h2>
+        </NavLink>
         </div>:
       <div className="conten_act">
         <actuallContext.Provider value={send}>
           <Form/>
         </actuallContext.Provider>
-      </div>}
+        </div>
+      }
       </div>
   );
 };

@@ -13,6 +13,15 @@
   width: 100%;
 }
 
+.notfound{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1.4rem;
+  height: 30rem;
+  margin-left: 2rem;
+}
+
 @media (max-width: 950px){
 .App {
 margin-left: 6rem;

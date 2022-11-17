@@ -27,7 +27,7 @@ const SingUp = ()=> {
         try {
             setLoading(true);
             await firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-            history.push("/home");
+            history.push("/");
         }catch(e){
             console.log(e)
             alert("e.message:e.message", e);
@@ -53,7 +53,7 @@ const SingUp = ()=> {
       },[])
 
     if(currentUser){
-        return <Redirect to={"/home"}/>
+        return <Redirect to={"/"}/>
     }
 
     return (

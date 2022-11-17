@@ -18,7 +18,7 @@ function App() {
         <SideBar/>  
         <div className='content'>
           <Switch>
-          <Route  path="/" component={About} />
+          <Route  exact path="/" component={About} />
               <Route path="/solicitud" >
                 <SendRequest/>
               </Route >

@@ -23,6 +23,7 @@ const Form = ()=>{
         let date =new Date();
         senr.dateP  = `${date.getUTCFullYear()}-${date.getUTCMonth()}-${date.getUTCDate()}`
         let x = validate.requestForm(senr, servicesIds);
+        senr.sId = "rjd";
         if (x.status === false) {
           errHan(x);
         } else {

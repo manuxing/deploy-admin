@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom"
 import { actuallContext } from '../ActualContext';
 import Display from './Display';
 import axios from "axios"
+import Spinner from '../Spinner/Spinner';
 
 const About = ()=> {
     let [about, setAbout] = useState(null)
@@ -22,7 +23,7 @@ const About = ()=> {
   return (
     <div>
           {about === null ? 
-        <p>cargando</p> :
+        <Spinner/> :
         <div className="content_act">
           <actuallContext.Provider value={about}>
               <Display/>
