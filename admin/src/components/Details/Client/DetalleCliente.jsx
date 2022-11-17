@@ -9,7 +9,7 @@ function DetalleCliente({actual}) {
       <div className="div_act">
         <div className="div_info">
           <div>
-            <h3>{actual?.name ? actual?.name : "name"}</h3>
+            <h3>{actual?.name ? actual.name[0].toUpperCase() + actual.name.substring(1) : "name"}</h3>
           </div>
         </div>
         <div className="div_info">

@@ -10,11 +10,11 @@ function DetalleReview({actual, handleChange, _stat}) {
               <h3>Cliente:</h3>
               {actual?.de ? 
               <NavLink className="link" to={`/client/${actual?.client.id}`}>
-                {actual?.de}
+                {actual.de[0].toUpperCase() + actual.de.substring(1) }
               </NavLink>
               :
               <NavLink className="link" to={`/client/${actual?.client.id}`}>
-                {actual?.client.name}
+                {actual.client.name[0].toUpperCase() + actual.client.name.substring(1) }
               </NavLink>}
             </div>
         </div>
