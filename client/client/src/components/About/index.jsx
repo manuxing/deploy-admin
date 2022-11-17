@@ -11,6 +11,8 @@ const About = ()=> {
         axios
             .get(`http://localhost:3001/about`)
             .then((res) =>  {
+              let cont = JSON.stringify(res.data.contact);
+              res.data.contact = JSON.parse(cont)
                 setAbout(res.data);
             })
             .catch((e) => {

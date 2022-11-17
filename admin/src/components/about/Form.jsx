@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'
 import { actuallContext } from '../create/ActualContext'
 import "./About.css"
-import AgregarContacto from "../create/client/agregarContacto"
+import AgregarContacto from "./agregarContacto"
 import ContactCard from "./contactCard"
 import AgregarServicio from "./agregarServicio."
 import ServiceCard from "./serviceCard" 

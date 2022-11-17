@@ -14,13 +14,14 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
 
   let chooseType = (t) => {
     if (t === "telefono") return "number";
-    if (t === "email") return "email";
+    if (t === "email") return t;
+    if (t === "url") return t;
     return "text";
   };
 
   let handleChange = (p, data) => {
     p.preventDefault();
-    setContact({ ...contact, value: p.target.value });
+    setContact({ ...contact, [p.target.name]: p.target.value });
   };
 
   let errHan = (err) => {
@@ -49,11 +50,9 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   };
 
   return (
-    <div className="contacts_ab">
-      <div>
+    <div className="agregarvontacto">
         <h3>Agregar Contacto</h3>
-      </div>
-      <div className="addcontact_form">
+        <div className="top-url">
         <select
           className="selectcontact"
           name={"contact"}
@@ -75,6 +74,38 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
         contact.type === "" ? (
           <></>
         ) : (
+          contact.type === "url" ?
+          <div className="bi">
+            <div>
+              <h4> Nombre del Enlace</h4>
+            <input
+              className="inputcontact"
+              type={"text"}
+              name={"a"}
+              value={contact.a}
+              onChange={(p) => {
+                handleChange(p);
+              }}
+            />
+            </div>
+            <div>
+            <h4>Enlace</h4>
+              <input
+                className="inputcontact"
+                type={()=>chooseType(contact.type)}
+                name={"value"}
+                value={contact.value}
+                onChange={(p) => {
+                  handleChange(p);
+                }}
+              />
+              <div className="acs">{warning.contacto}</div>
+              </div>
+              <div className="buttonab">
+                <button   onClick={(p) => handleSubmit(p, contact)}>+</button>
+              </div>
+            </div> 
+            :
           <div>
             <div>
             <input
@@ -89,7 +120,7 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
             </div>
               <div className="acs">{warning.contacto}</div>
               <div className="buttonab">
-                <button   onClick={(p) => handleSubmit(p, contact)} />
+                <button   onClick={(p) => handleSubmit(p, contact)}>+</button>
               </div>
             </div>
           )}

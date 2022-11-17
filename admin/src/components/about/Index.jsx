@@ -16,6 +16,7 @@ const About = () => {
       "presencial",
       "pagina",
       "booking",
+      "url",
       "otro",
     ];
   
@@ -55,7 +56,7 @@ const About = () => {
 
         
     useEffect(() => {
-      console.log(input.servicios);
+      console.log(input.contact);
       }, [input]);
 
 

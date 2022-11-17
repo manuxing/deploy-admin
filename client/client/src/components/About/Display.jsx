@@ -37,7 +37,7 @@ const Display = ()=> {
         <div className='points'></div>
         <div className='points'></div>
       </div>
-      <Bottom contact={about.contact}/>
+      <Bottom contact={JSON.parse(about.contact)}/>
     </div>
   );
 }
