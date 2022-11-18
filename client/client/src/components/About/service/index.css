@@ -1,0 +1,42 @@
+.servicecard{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: rgba(237, 246, 232, 0.31);
+    padding: 0.1rem;
+    margin:0.7rem ;
+    border-style: solid;
+    border-color:hsla(91, 56%, 92%, 0.697);
+    border-width: 0.001rem;
+    border-radius: 0.2rem;
+    border-bottom:0rem;
+    border-right:0rem;
+    border-left:0rem;
+    box-shadow: rgba(190, 206, 119, 0.1) 6px 0.5rem 10.5rem, rgba(5, 94, 133, 0.1) 0px 0.075rem 0.175rem;
+}
+
+.servi {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0.2rem 1rem 1.6rem 1rem;
+}
+.servi span{
+    font-size: 0.8rem;
+}
+.servicen{
+    padding-bottom: 2rem;
+}
+
+.img img{
+height: 13rem;
+width: 16rem;
+}
+
+@media (max-width: 950px){
+    .img{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    }

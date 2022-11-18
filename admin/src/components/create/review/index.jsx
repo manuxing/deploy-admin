@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import RemoveIcon from '@mui/icons-material/Remove';
 import {
   getServicio,
   createReviews,
@@ -82,10 +83,6 @@ const ReviewR = ({ setP }) => {
         "reseña",
         `/review/${actual.id}`,
         history,
-        dispatch,
-        setActualG, "review",
-        setP,
-        setActual
       );
       let x = document.getElementById("service");
       x.selected = true;
@@ -101,12 +98,15 @@ const ReviewR = ({ setP }) => {
 
   return (
     <div>
-      <div className="content_act">
-        Reseña:
-        <actuallContext.Provider value={send}>
-          <Form/>
-        </actuallContext.Provider>
-        <button onClick={() => setP(false)}>cerrar</button>
+      <div className="preform">
+        <div className="titlef">
+          <h2>Crear Reseña:</h2>
+        </div>
+        <div>
+          <actuallContext.Provider value={send}>
+            <Form/>
+          </actuallContext.Provider>
+        </div>
       </div>
     </div>
   );

@@ -1,11 +1,10 @@
 import { type } from "./types";
 import axios from "axios";
-import firebase from "../../firebase"
 
 export function search(querys, to, page, ord) {
   return function (dispatch) {
     axios
-      .get(`http://localhost:3001/${to}/search/?query=${querys}&page=${page}&ord=${ord}`)
+      .get(` ${process.env.REACT_APP_API_URL}${to}/search/?query=${querys}&page=${page}&ord=${ord}`)
       .then((res) => {
         dispatch({ type: type.SERCH, payload: res });
       })
@@ -19,7 +18,7 @@ export function search(querys, to, page, ord) {
 export function changePage(page, to){
   return function changePage(dispatch) {
     axios
-      .get(`http://localhost:3001/${to}/?page=${page}`)
+      .get(` ${process.env.REACT_APP_API_URL}${to}/?page=${page}`)
       .then((res) => {
         dispatch({ type: type.SET_ACTUALG, payload: res });
       })
@@ -33,9 +32,8 @@ export function changePage(page, to){
 export function createClient(data) {
   return function (dispatch) {
     axios
-      .post("http://localhost:3001/client/", data)
+      .post(`${process.env.REACT_APP_API_URL}client/`, data)
       .then((res) => {
-        console.log(res);
         dispatch({ type: type.SET_ACTUAL, payload: res });
       })
       .catch((e) => {
@@ -49,7 +47,7 @@ export function getClient(id) {
   if (id) {
     return function (dispatch) {
       axios
-        .get(`http://localhost:3001/client/${id}`)
+        .get(` ${process.env.REACT_APP_API_URL}client/${id}`)
         .then((res) => {
           dispatch({ type: type.SET_ACTUAL, payload: res });
         })
@@ -61,7 +59,7 @@ export function getClient(id) {
   } else {
     return function (dispatch) {
       axios
-        .get(`http://localhost:3001/client/`)
+        .get(` ${process.env.REACT_APP_API_URL}data/client/`)
         .then((res) => {
           dispatch({ type: type.GET_CLIENTES, payload: res });
         })
@@ -76,7 +74,7 @@ export function getClient(id) {
 export function getNot(id) {
   return function (dispatch) {
     axios
-      .get(`http://localhost:3001/notif/`)
+      .get(` ${process.env.REACT_APP_API_URL}notif/`)
       .then((res) => {
         dispatch({ type: type.GET_NOT, payload: res });
       })
@@ -90,7 +88,7 @@ export function getNot(id) {
 export function deleteModel(model ,id) {
   return function (dispatch) {
     axios
-      .delete(`http://localhost:3001/${model}/${id}`)
+      .delete(` ${process.env.REACT_APP_API_URL}${model}/${id}`)
       .then((res) => {
         dispatch({ type: type.DELETE, payload: res });
       })
@@ -104,7 +102,7 @@ export function deleteModel(model ,id) {
 export function getAbout() {
   return function (dispatch) {
     axios
-      .get(`http://localhost:3001/about/`)
+      .get(` ${process.env.REACT_APP_API_URL}about/`)
       .then((res) => {
         dispatch({ type: type.GET_ABOUT, payload: res });
       })
@@ -118,7 +116,7 @@ export function getAbout() {
 export function putAbout(data) {
   return function (dispatch) {
     axios
-      .put(`http://localhost:3001/about/`, data)
+      .put(` ${process.env.REACT_APP_API_URL}about/`, data)
       .then((res) => {
         dispatch({ type: type.GET_ABOUT, payload: res });
       })
@@ -131,7 +129,7 @@ export function putAbout(data) {
 export function createSolicitud(data) {
   return function (dispatch) {
     axios
-      .post("http://localhost:3001/request/", data)
+      .post(` ${process.env.REACT_APP_API_URL}request/`, data)
       .then((res) => {
         return { type: type.SET_ACTUAL, payload: res };
       })
@@ -149,9 +147,8 @@ export function getSolicitudes(id) {
   if (id) {
     return function (dispatch) {
       axios
-        .get(`http://localhost:3001/request/${id}`)
+        .get(` ${process.env.REACT_APP_API_URL}request/${id}`)
         .then((res) => {
-          console.log("res", res);
           dispatch({ type: type.SET_ACTUAL, payload: res });
         })
         .catch((e) => {
@@ -162,7 +159,7 @@ export function getSolicitudes(id) {
   } else {
     return function (dispatch) {
       axios
-        .get(`http://localhost:3001/request/`)
+        .get(` ${process.env.REACT_APP_API_URL}request/`)
         .then((res) => {
           dispatch({ type: type.GET_SOLICITUDES, payload: res });
         })
@@ -177,7 +174,7 @@ export function getSolicitudes(id) {
 export function createActividades(data) {
   return function (dispatch) {
     axios
-      .post("http://localhost:3001/activity/", data)
+      .post(`${process.env.REACT_APP_API_URL}activity/`, data)
       .then((res) => {
         return { type: type.SET_ACTUAL, payload: res };
       })
@@ -193,10 +190,9 @@ export function createActividades(data) {
 
 export function getActividades(id) {
   if (id) {
-    console.log(id)
     return function (dispatch) {
       axios
-        .get(`http://localhost:3001/activity/${id}`)
+        .get(` ${process.env.REACT_APP_API_URL}activity/${id}`)
         .then((res) => {
           dispatch({ type: type.SET_ACTUAL, payload: res });
         })
@@ -208,7 +204,7 @@ export function getActividades(id) {
   } else {
     return function (dispatch) {
       axios
-        .get(`http://localhost:3001/activity/`)
+        .get(` ${process.env.REACT_APP_API_URL}activity/`)
         .then((res) => {
           dispatch({ type: type.GET_ACTIVIDADES, payload: res });
         })
@@ -223,9 +219,8 @@ export function getActividades(id) {
 export function createReviews(data) {
   return function (dispatch) {
     axios
-      .post("http://localhost:3001/review/", data)
+      .post(` ${process.env.REACT_APP_API_URL}review/`, data)
       .then((res) => {
-        console.log(res);
         return { type: type.SET_ACTUAL, payload: res };
       })
       .then((p) => {
@@ -242,7 +237,7 @@ export function getReviews(id) {
   if (id) {
     return function (dispatch) {
       axios
-        .get(`http://localhost:3001/review/${id}`)
+        .get(` ${process.env.REACT_APP_API_URL}review/${id}`)
         .then((res) => {
           dispatch({ type: type.SET_ACTUAL, payload: res });
         })
@@ -254,7 +249,7 @@ export function getReviews(id) {
   } else {
     return function (dispatch) {
       axios
-        .get(`http://localhost:3001/review/`)
+        .get(` ${process.env.REACT_APP_API_URL}review/`)
         .then((res) => {
           dispatch({ type: type.GET_REVIEWS, payload: res });
         })
@@ -269,7 +264,7 @@ export function getReviews(id) {
 export function createServicio(data) {
   return function (dispatch) {
     axios
-      .post("http://localhost:3001/service/", data)
+      .post(` ${process.env.REACT_APP_API_URL}service/`, data)
       .then((res) => {
         return { type: type.SET_ACTUAL, payload: res };
       })
@@ -286,7 +281,7 @@ export function createServicio(data) {
 export function updateServicio(data) {
   return function (dispatch) {
     axios
-      .put("http://localhost:3001/service/", data)
+      .put(`${process.env.REACT_APP_API_URL}service/`, data)
       .then((res) => {
         return { type: type.SET_ACTUAL, payload: {...res, data:{...res.data, updated:true}}};
       })
@@ -304,7 +299,7 @@ export function getServicio(id) {
   if (id) {
     return function (dispatch) {
       axios
-        .get(`http://localhost:3001/service/${id}`)
+        .get(` ${process.env.REACT_APP_API_URL}service/${id}`)
         .then((res) => {
           dispatch({ type: type.SET_ACTUAL, payload: res });
         })
@@ -316,7 +311,7 @@ export function getServicio(id) {
   } else {
     return function (dispatch) {
       axios
-        .get(`http://localhost:3001/service/`)
+        .get(` ${process.env.REACT_APP_API_URL}data/service/`)
         .then((res) => {
           dispatch({ type: type.GET_SERVICIOS, payload: res });
         })
@@ -332,9 +327,8 @@ export function statChange(x) {
   if (x.type === "Review") {
     return function (dispatch) {
       axios
-        .put(`http://localhost:3001/review/`, x.pack)
+        .put(` ${process.env.REACT_APP_API_URL}review/`, x.pack)
         .then((res) => {
-          console.log(res);
           dispatch({ type: type.ADD_NOT, payload: res });
         })
         .catch((e) => {
@@ -345,10 +339,7 @@ export function statChange(x) {
   } else {
     return function (dispatch) {
       axios
-        .put(`http://localhost:3001/request/`, x.pack)
-        .then((res) => {
-          console.log(res);
-        })
+        .put(` ${process.env.REACT_APP_API_URL}request/`, x.pack)
         .catch((e) => {
           console.log(e);
           dispatch({ type: "ERROR", payload: e });
@@ -360,7 +351,7 @@ export function statChange(x) {
 export function setAll() {
   return function (dispatch) {
     axios
-      .get(`http://localhost:3001/all/`)
+      .get(` ${process.env.REACT_APP_API_URL}all/`)
       .then((res) => {
         dispatch({ type: type.SET_ALL, payload: res });
       })
@@ -378,7 +369,7 @@ export function setActual() {
 export function setActualG(to) {
   return function (dispatch) {
     axios
-      .get(`http://localhost:3001/${to}/`)
+      .get(` ${process.env.REACT_APP_API_URL}${to}/`)
       .then((res) => {
         dispatch({ type: type.SET_ACTUALG, payload: res });
       })

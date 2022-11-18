@@ -62,87 +62,96 @@ const {
   }
 
   return (
-    <div>
-      <form className="form" onSubmit={(e) => handleSubmit(e, input)}>
-        <div>
-          <label>Fecha de la actividad</label>
-          <input
-            className="input"
-            type={"date"}
-            placeholder="date"
-            name={"date"}
-            value={input.date}
-            onChange={(p) => handleChange(p)}
-          />
-          <div className="warning">{warningA.date}</div>
+    <form  onSubmit={(e) => handleSubmit(e, input)}>
+        <div className="form">
+        <div className='topf'>
+          <div className='node'>
+            <h4>Fecha de la actividad</h4>
+            <input
+              className="input"
+              type={"date"}
+              placeholder="date"
+              name={"date"}
+              value={input.date}
+              onChange={(p) => handleChange(p)}
+            />
+            <div className="warning">{warningA.date}</div>
+          </div>
+          <div className='node'>
+            <h3>Cliente</h3>
+            <input
+              list="clients"
+              className="input"
+              type={"text"}
+              placeholder="Nombre"
+              name={"name"}
+              value={input.name}
+              onChange={(p) => handleChange(p)}
+            />
+            <datalist id="clients">
+              {clientsNames &&
+                clientsNames.map((p) => {
+                  return <option value={p} key={p} />;
+                })}
+            </datalist>
+            <div className="warning">{warningA.name}</div>
+          </div>
         </div>
-        <div>
-          <label>Cliente</label>
-          <input
-            list="clients"
-            className="input"
-            type={"text"}
-            placeholder="Nombre"
-            name={"name"}
-            value={input.name}
-            onChange={(p) => handleChange(p)}
-          />
-          <datalist id="clients">
-            {clientsNames &&
-              clientsNames.map((p) => {
-                return <option value={p} key={p} />;
+        <div className="midf">
+          <div className='node'>
+            <h3>Servicios</h3>
+            <select
+              className="selectageR"
+              name={"sId"}
+              onChange={(e) => {
+                handleChange(e);
+              }}
+            >
+              <option id="service" hidden>
+                seleccione
+              </option>
+              {services.map((p) => {
+                return (
+                  <option key={`${p.id}`} value={p.id}>
+                    {p.name}
+                  </option>
+                );
               })}
-          </datalist>
-          <div className="warning">{warningA.name}</div>
+            </select>
+            <div className="warning">{warningA.sId}</div>
+          </div>
+          <AgregarPersona setPersons={setInputA} _persons={input} />
+          {typeof input.persons === "object" &&  input.persons.length > 0 &&
+            <div className="pop">
+                <button  onClick={()=>pop()}>-
+                </button>
+            </div>
+          }
         </div>
-        <AgregarPersona setPersons={setInputA} _persons={input} />
-        {typeof input.persons === "object" &&  input.persons.length > 0 &&
-          <button onClick={()=>pop()}>-
-          </button>
-        }
-        <div>
-          {typeof input.persons === "object" &&
-            input.persons.map((p) => {
-              let count =Math.random() * (Math.random() * 300);
-              return (
-                <div>
-                  <PersonCard
-                    key={
-                      input.persons.cant +
-                      `${count}`
-                    }
-                    person={p}
-                  />
-                </div>
-              );
-            })}
+        <div id='personss'>
+          <h3>Personas</h3>
         </div>
-        <div>
-          <label>Servicios</label>
-          <select
-            className="selectageR"
-            name={"sId"}
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          >
-            <option id="service" hidden>
-              seleccione
-            </option>
-            {services.map((p) => {
-              return (
-                <option key={`${p.id}`} value={p.id}>
-                  {p.name}
-                </option>
-              );
-            })}
-          </select>
-          <div className="warning">{warningA.sId}</div>
-        </div>
+        <div className='persons'>
+            {typeof input.persons === "object" &&
+              input.persons.map((p) => {
+                let count =Math.random() * (Math.random() * 300);
+                return (
+                   <PersonCard
+                      key={
+                        input.persons.cant +
+                        `${count}`
+                      }
+                      person={p}
+                    />
+                );
+              })}
+          </div>
         <div className="warning">{warningA.general}</div>
-        <input className="input" type={"submit"} name={"submit"} />
+        <div className='enviar'>
+          <button  type={"submit"} name={"submit"}> Enviar</button>
+        </div>
+      </div>
       </form>
-    </div>
   );
 }
 

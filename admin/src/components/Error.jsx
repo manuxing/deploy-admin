@@ -36,7 +36,7 @@ const Error = ( ) => {
                     </div>
                     }
                     <Link
-                        to="/home">
+                        to="/">
                       home
                     </Link>
                 </div>

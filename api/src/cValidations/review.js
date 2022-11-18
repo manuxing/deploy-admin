@@ -17,6 +17,7 @@ const validatePost = async(body, next, Service, Client) => {
     if(service === null) return {status: 400, message:"El mServicio seleccionado no existe"};
 
     if(!nameReg.test(body.cName.split(' ').join('')))return {status: 400, message:"El nombre de cliente no es Valido, modifiquelo"};
+    if(body.de && !nameReg.test(body.de.split(' ').join('')))return {status: 400, message:"El nombre de cliente no es Valido, modifiquelo"};
     
     let client = await Client.findOne({where:{name:body.cName}})
         .catch(err => next({status:400, message:"no se encontro el cliente validando"}));

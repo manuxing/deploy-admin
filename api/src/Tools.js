@@ -9,19 +9,17 @@ let pre = {};
 pre.setDisplayModels = (p) => {
     let res = p === "About" ? {
                 url:`/${p.toLowerCase()}/`,
-                src:`../icons/${p}.png`,
                 to:p
             } :
             {
                 url:`/${p.toLowerCase()}s/`,
-                src:`../icons/${p}.png`,
                 to:p
             }
     return res;
 }
 
 pre.getPagination = (page, size) => {
-    const limit = size ? +size : 1;
+    const limit = size ? +size : 5;
     const offset = page ? page * limit : 0;
     return { limit, offset };
   };
@@ -41,6 +39,7 @@ pre.getDateXDaysAgo =(numOfDays, date = new Date()) =>{
 }
 
 pre.setStat = (name, url, size) =>{
+    console.log("aca", name, url, size)
     let stat = {
         name,
         url,

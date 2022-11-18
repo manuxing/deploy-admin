@@ -7,7 +7,6 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   let validate = tools.validate;
 
   let handleSelect = (evento) => {
-    console.log(evento.target.value);
     setContact({ ...contact, type: evento.target.value });
     setWarning({ contacto: "" });
   };
@@ -24,7 +23,6 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
   };
 
   let errHan = (err) => {
-    console.log(err);
     err.err.map((p) => setWarning({ ...warning, [p.ubic]: p.message }));
   };
 
@@ -81,7 +79,7 @@ const AgregarContacto = ({ contactsThg, setContacts, _contacts }) => {
             }}
           />
         )}
-        <div className="warning_acs">{warning.contacto}</div>
+        <div className="warning">{warning.contacto}</div>
         <button onClick={(p) => handleSubmit(p, contact)} />
       </div>
     </div>

@@ -1,0 +1,40 @@
+.detailaycard{
+    display: flex;
+    flex-direction: column;
+    height: 10rem;
+    width: 100%;
+    padding:  0.7rem 0.7rem 0rem 0.7rem;
+    margin: 0.4rem 0.5rem 0.2rem 0.3rem;
+    border-radius: 0.4rem;
+    border-style: solid;
+    border-right:  0.1rem;
+    border-bottom:  0.1rem;
+    border-color: hsla(207, 38%, 57%, 0.062);
+}
+
+.titulo{
+    display: inline;
+    height: 3rem;
+    padding: 0;
+    margin: 0;
+}
+
+.content{
+    display: flex;
+    justify-content: flex-start;
+    flex-shrink: 1rem;
+    margin-top: 0.7rem;
+    height: 4rem;
+    width:100%;
+    font-size: 0.9rem;
+}
+
+
+.content div{
+    margin: 0.1rem  0.9rem 0.1rem 0.2rem;
+    width: 100%;
+}
+
+.content h3{
+    margin-bottom: 0.7rem;
+}

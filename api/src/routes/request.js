@@ -23,10 +23,11 @@ router.get('/', async(req, res, next) =>{
 
 router.post('/', async(req, res, next) => {
     let body = req.body.senr;
+    console.log(body)
     await validatePost(body, next, Service)
         .then(val => {
         if(val.status === 200){
-                body.thg = body.contact[0].type;
+                if(body.thg && (!body.thg === "pagina"))body.thg = body.contact[0].type;
                 body.contact = typeof body.contact === "object" ? body.contact.map(p => `${p.type}: ${p.value}`) : 0
                 postRequest(body, res, next, Request, Service);
             } else {

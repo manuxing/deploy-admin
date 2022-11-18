@@ -3,17 +3,13 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createServicio,
-  setActual,
-  getServicio,
   errorForm,
-  setActualG
 } from "../../../redux/actions/index.js";
 import { actuallContext } from "../ActualContext";
 import Form from "./Form.jsx";
 import tools from "../../../tools";
-// import "./Form.css";
 
-const AgregarServicio = ({ setP }) => {
+const AgregarServicio = () => {
   let validate = tools.validate;
   let dispatch = useDispatch();
   const history = useHistory();
@@ -42,15 +38,11 @@ const AgregarServicio = ({ setP }) => {
   }, [errForm]);
 
   useEffect(() => {
-      if (typeof actual !== "number") {
+      if (typeof actual !== "number" && actual.description === input.description) {
         tools.alert(
           "servicio",
           `/service/${actual.id}`,
           history,
-          dispatch,
-          setActualG, "service",
-          setP,
-          setActual
         );
         setInput({ name: "", description: "", tR: "", tR_: "" });
         setWarning({ name: "", description: "", tR: "", tR_: "" });
@@ -59,12 +51,13 @@ const AgregarServicio = ({ setP }) => {
 
   return (
     <div>
-      <div className="content_act">
-        Servicio:
+      <div className="preform">
+        <div className="titlef">
+          <h2>Crear Servicio</h2>
+        </div>
         <actuallContext.Provider value={send}>
           <Form/>
         </actuallContext.Provider>
-        <button onClick={() => setP(false)}>cerrar</button>
       </div>
     </div>
   );

@@ -12,11 +12,11 @@ module.exports = (sequelize) => {
             defaultValue: false
         },
         dateR:{
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false 
         },
         dateP:{
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false 
         },
         contact: {

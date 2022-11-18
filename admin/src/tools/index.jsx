@@ -33,7 +33,6 @@ const tools = {
       let reg = new RegExp(/\b[\w.-]+@[\w.-]+\.\w{2,4}\b/);
       let vals = Object.values(user);
       
-      console.log(user)
       if(vals.length !== 2||vals.includes(undefined)|| vals.includes(null)){
         let err = {
           message: "complete los campos",
@@ -107,6 +106,9 @@ const tools = {
             }
           }
           break;
+          case "url":
+              console.log("")
+            break;
         default: {
           let values = ["presencial", "booking", "pagina", "otro"];
           if (values.includes(con.value) === false && values.includes(con.type) === false ) {
@@ -145,7 +147,7 @@ const tools = {
       return res;
     },
     agregarPersona_field: (field) => {
-      field.p ? field = field.p : console.log(field)
+      field.p ? field = field.p : console.log(1)
       let res = { status: true, ubic: field.target.name };
       let errs = [];
       let sexos = ["Femenino", "Masculino", "otro"];
@@ -197,10 +199,10 @@ const tools = {
       resX.push(checkS);
       res.res = resX;
       res.errs = resX.map((p) => {
-        if (p.status === false){
+        if (p.status === false) {
           res.status = false;
           return p.err;
-        } 
+        }
       });
       return res;
     },
@@ -385,7 +387,6 @@ const tools = {
         res.status = false;
         errs.push(err);
       }
-      console.log(client.contact)
       if (typeof client.contact !== "object" || client.contact.length < 1) {
         let err = {
           message: "revise los contactos, no deberia cambiar de array",
@@ -836,18 +837,15 @@ const tools = {
       },
     },
   },
-  alert: (art, url, cb, cb2, cb3, v3, cb4, cb5) => {
+  alert: (art, url, cb) => {
     let fem = ["reseña", "solicitud", "actividad"];
     let f = fem.includes(art) ? "a" : "o";
     let sign = prompt(
       `su ${art} fue cread${f} exitosamente, desea quedarse en la lista o ser redirigidx al detalle`
     );
     if(!sign || sign.length < 1){
-      cb2(cb3(v3));
-      cb2(cb5());
     } else {
       cb.push(`${url}`);
-      cb4(false);
     }
   },
   alert_notFound: ( model, cb, url) => {
@@ -870,7 +868,6 @@ const tools = {
     return {data, stats};
   },
   getSetter_: (stat, state) => {
-    console.log(stat, state)
     let stats =  state.all.stats.filter(p=> p.name !== stat.name)
     stats.push(stat);
     return stats;

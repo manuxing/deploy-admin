@@ -4,15 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getServicio,
   createSolicitud,
-  setActualG,
-  setActual,
   errorForm
 } from "../../../redux/actions";
 import { actuallContext } from "../ActualContext";
 import Form from "./Form";
 import tools from "../../../tools";
 
-const RequestR = ({ setP }) => {
+const RequestR = () => {
   const history = useHistory();
   let dispatch = useDispatch();
   let validate = tools.validate;
@@ -72,15 +70,11 @@ const RequestR = ({ setP }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (actual !== 1) {
+    if (actual !== 1 && input.dateR === actual.dateR) {
       tools.alert(
         "solicitud",
         `/request/${actual.id}`,
         history,
-        dispatch,
-        setActualG, "request",
-        setP,
-        setActual
       );
       setInput({ dateR: "", dateP: "", thg: "", contact: [], sId: 0, solicitante:""});
       setWarning({ dateR: "", dateP: "", thg: "", solicitante:"", contact: "", sId: "" });
@@ -88,15 +82,17 @@ const RequestR = ({ setP }) => {
       x.selected = true;
     }
   }, [actual, input]);
-
   return (
     <div>
-      <div className="content_act">
-        solicitud:
-        <actuallContext.Provider value={send}>
-          <Form/>
-        </actuallContext.Provider>
-        <button onClick={() => setP(false)}>cerrar</button>
+      <div className="preform">
+      <div className="titlef">
+          <h2>Crear Solicitud</h2>
+        </div>
+        <div>
+          <actuallContext.Provider value={send}>
+            <Form/>
+          </actuallContext.Provider>
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,21 @@
+.App {
+    margin-left: 12rem;
+    margin-right: 0rem;
+    background-color: aliceblue;
+    height: 100%;   
+    width: 80%;
+    padding: 0.3rem 0.2rem;
+    transition: 400ms margin-left;
+  }
+
+  
+@media (max-width: 950px){
+  .App {
+  margin-left: 6rem;
+  box-sizing: border-box;
+  background-color: aliceblue;
+  height: 100%;   
+  padding: 0.3rem 15px;
+  transition: 400ms margin-left;
+  }
+}

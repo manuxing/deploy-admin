@@ -4,16 +4,13 @@ import { useHistory } from "react-router-dom";
 import {
   createClient,
   getServicio,
-  setActual,
   errorForm,
-  setActualG,
 } from "../../../redux/actions/index.js";
 import { actuallContext } from "../ActualContext";
 import Form from "./Form";
 import tools from "../../../tools";
-// import "./Form.css";
 
-const CreateClient = ({ setP }) => {
+const CreateClient = (  ) => {
   let validate = tools.validate;
   let dispatch = useDispatch();
   const history = useHistory();
@@ -63,10 +60,9 @@ const CreateClient = ({ setP }) => {
   }, [dispatch]);
 
   useEffect(() => {
-      if (typeof actual !== "number") {
-        tools.alert("cliente",`/client/${actual.id}`,
-          history, dispatch, setActualG, "client", setP, setActual
-        );
+      if (typeof actual !== "number" && actual.name.toLowerCase() === input.name.toLowerCase()) {
+        tools.alert("cliente",
+        `/client/${actual.id}`, history);
         setInput({ name: "", contact: [],  date: "", persons: [], sId: 1000 });
         setWarning({ name: "", contact: "", date: "", persons: "", sId: "", general: "" });
         let x = document.getElementById("service");
@@ -77,11 +73,14 @@ const CreateClient = ({ setP }) => {
   return (
     <div>
       <div className="content_act">
-        Cliente:
+        <div className="titlef">
+          <h2>
+            Cliente:
+          </h2>
+        </div>
         <actuallContext.Provider value={send}>
           <Form/>
         </actuallContext.Provider>
-        <button onClick={() => setP(false)}>cerrar</button>
       </div>
     </div>
   );

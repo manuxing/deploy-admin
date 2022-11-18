@@ -16,8 +16,7 @@ const Agregar = (Component, type) => {
     <div>
       {pressed === false ? (
         <button onClick={() => setP(true)}>
-          {/* <img src={icon} alt="agregar"></img> */}
-          agregar
+          Agregar
         </button>
       ) : (
         <Component setP />

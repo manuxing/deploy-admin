@@ -4,16 +4,20 @@ import { clearActualG, getNot, setActualG, deleteModel, setDeleted } from "../..
 import BarraFiltros from "./barraFiltros";
 import DashDisplay from "./DashDisplay";
 import Spinner from "../Spinner.jsx";
+import "./Layout.css"
 import Dash from "../Dashes/Client";
-import CreateClient from "../create/client/prueba";
 import Paginado from "./paginado";
+import ActivitysGraph from "../Graphs/ActivitysGraph";
+import DetalleLay from "../DetalleLay";
+import AddIcon from '@mui/icons-material/Add';
+import { useHistory } from "react-router-dom";
 
 const ClientLayout = () => {
   let dispatch = useDispatch();
   let todas = useSelector((state) => state.actualG);
   let deleted = useSelector((state) => state.deleted);
-  let [pressed, setPressed] = useState(false);
   let [cards, setCards] = useState([]);
+  let history = useHistory();
 
   useEffect(() => {
     dispatch(setActualG("client"));
@@ -39,22 +43,24 @@ const ClientLayout = () => {
   }
 
   return (
-        <div className="content_cli_l">
-          <div>
-            <BarraFiltros />
-            {pressed === false ? (
-              <button onClick={() => setPressed(true)}>agregar</button>
-            ) : (
-              <div>
-                <CreateClient setP={setPressed} />
-              </div>
-            )}
-          </div>
+        <div className="content_cli">
           {cards.length ===  0 ? 
           <Spinner/> :
             <div className="cont">
-              <Paginado values={todas}/>
+              <div className="stats">
+                <ActivitysGraph/>
+                <DetalleLay/>
+              </div>
+              <div className="barraL">
+                <div className="item">
+                <button onClick={() => history.push("/create/client")}>
+                  <AddIcon fontSize="small"/>
+                    </button>
+                </div>
+                  <BarraFiltros />
+              </div>
               <DashDisplay all={cards} Dash={Dash} model={"Clientes"} handleClick={handleClick}/>
+              <Paginado values={todas}/>
             </div>}
         </div>
   );

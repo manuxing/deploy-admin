@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Redirect, useHistory, withRouter } from 'react-router-dom';
-import Spinner from '../components/SpinnerApp';
+import Spinner from '../components/Spinner';
 import firebase from '../firebase';
 import tools from '../tools';
+import "./singup.css"
 
 const SingUp = ()=> {
     let currentUser = useSelector(state => state.currentUser);
@@ -26,7 +27,7 @@ const SingUp = ()=> {
         try {
             setLoading(true);
             await firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-            history.push("/home");
+            history.push("/");
         }catch(e){
             console.log(e)
             alert("e.message:e.message", e);
@@ -52,24 +53,34 @@ const SingUp = ()=> {
       },[])
 
     if(currentUser){
-        return <Redirect to={"/home"}/>
+        return <Redirect to={"/"}/>
     }
 
     return (
         loading === true ? 
         <Spinner/>:
-        <div>
+                <div className='page'>
             <form onSubmit={handleSub}>
-            <label> Email</label>
-            <input name="email" type={"email"} placeholder="email"/>
-            <div>{warning.email}</div>
-            <label> password</label>
-            <input name="password" type={"password"} placeholder="password"/>
-            <div>{warning.password}</div>
-            <button type="submit">submit</button>
+                    <div className='singup'>
+                        <div className='nodesu'>
+                            <h3> Email</h3>
+                        <input name="email" type={"email"} placeholder="email"/>
+                        <div className='warning'>{warning.email}</div>
+                        </div>
+                        <div className='nodesu'>
+                            <h3> password</h3>
+                            <input name="password" type={"password"} placeholder="password"/>
+                            <div className='warnig'>{warning.password}</div>
+                        </div>
+                    <div className='entrar'>
+                        <button type="submit">
+                            Entrar
+                        </button>
+                    </div>
+                    <div className='warning'>{warning.gral}</div>
+                        </div>
             </form>
-            <div>{warning.gral}</div>
-        </div>
+                </div>
     )
 }
 

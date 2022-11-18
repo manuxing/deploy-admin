@@ -66,10 +66,11 @@ const Form = ()=>{
       };
 
   return (
-    <div>
-        <form className="form" onSubmit={(e) => handleSubmit(e, input)}>
-          <div>
-            <label>Fecha de la reseña</label>
+    <form onSubmit={(e) => handleSubmit(e, input)}>
+      <div className="form">
+        <div className="topf">
+          <div className="node">
+            <h3>Fecha de la reseña</h3>
             <input
               className="input"
               type={"date"}
@@ -80,8 +81,8 @@ const Form = ()=>{
             />
             <div className="warning">{warning.dateR}</div>
           </div>
-          <div>
-            <label>Fecha de la actividad</label>
+          <div className="node">
+            <h3>Fecha de la actividad</h3>
             <input
               className="input"
               type={"date"}
@@ -92,29 +93,29 @@ const Form = ()=>{
             />
             <div className="warning">{warning.dateP}</div>
           </div>
-          <div>
-          <label>Cliente</label>
-              <input list="clients"
-                className="input"
-                type={"text"}
-                placeholder="Nombre"
-                name={"cName"}
-                value={input.cName}
-                onChange={(p) => handleChange(p)}
-              />
-                <datalist id="clients">
-                  {
-                    clientsNames && clientsNames.map(p=>{
-                      return(
-                        <option key={p}value={p}/>
-                      )
-                    })
-                  }
-                </datalist>
+        </div>
+        <div className="topf">
+          <div className="node">
+            <h3>Cliente</h3>
+            <input
+              list="clients"
+              className="input"
+              type={"text"}
+              placeholder="Nombre"
+              name={"cName"}
+              value={input.cName}
+              onChange={(p) => handleChange(p)}
+            />
+            <datalist id="clients">
+              {clientsNames &&
+                clientsNames.map((p) => {
+                  return <option key={p} value={p} />;
+                })}
+            </datalist>
             <div className="warning">{warning.cName}</div>
           </div>
-          <div>
-            <label>Descripcion</label>
+          <div className="node">
+            <h3>Descripcion</h3>
             <textarea
               className="input"
               type={"text"}
@@ -125,7 +126,10 @@ const Form = ()=>{
             />
             <div className="warning">{warning.description}</div>
           </div>
-          <div>
+        </div>
+        <div className='topf'>
+          <div className='node'>
+            <h3>Medio de contacto</h3>
             <select
               className="selectcontact"
               name={"thg"}
@@ -133,21 +137,21 @@ const Form = ()=>{
                 handleSelect(e);
               }}
             >
-              <option id="s" hidden>
-                medio de contacto
-              </option>
-              {thg.map((p) => {
-                return (
-                  <option value={p} key={p}>
-                    {p}
-                  </option>
-                );
-              })}
-            </select>
-            <div className="warning">{warning.thg}</div>
+            <option id="s" hidden>
+              Medio de contacto
+            </option>
+            {thg.map((p) => {
+              return (
+                <option value={p} key={p}>
+                  {p}
+                </option>
+              );
+            })}
+          </select>
+          <div className="warning">{warning.thg}</div>
           </div>
-          <div>
-            <label>Servicios</label>
+          <div className='node'>
+            <h3>Servicios</h3>
             <select
               className="selectageR"
               name={"sId"}
@@ -168,11 +172,14 @@ const Form = ()=>{
             </select>
             <div className="warning">{warning.sId}</div>
           </div>
-          <div className="warning">{warning.general}</div>
-          <input className="input" type={"submit"} name={"submit"} />
-        </form>
-    </div>
-  )
+        </div>
+        <div className="warning">{warning.general}</div>
+        <div className='enviar'>
+          <button  type={"submit"} name={"submit"}> Enviar</button>
+        </div>
+      </div>
+    </form>
+  );
 }
 
 export default React.memo(Form);

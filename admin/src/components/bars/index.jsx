@@ -4,11 +4,9 @@ import SideBar from "./sideBar";
 
 const Bars = () => {
   return (
-    <div>
+    <div className="bars">
         <NavBar/>
-        <div>
             <SideBar/>
-        </div>
     </div>
   );
 };

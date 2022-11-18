@@ -7,7 +7,6 @@ const LinkWIcon = (p) => {
   return (
     <div className="sideBI">
       <NavLink to={`${url}`} className="LinkSideB">
-        {/* <img src={src} alt="iconLinkSideB"/> */}
         <span>{to}</span>
       </NavLink>
     </div>

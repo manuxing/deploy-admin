@@ -17,7 +17,7 @@ function App() {
   },[dispatch, currentUser])
 
   return (
-    <div className="App">
+    <div>
         <BrowserRouter> 
             <Route path="/" >
               <PrivateComponents component={Admin}/>

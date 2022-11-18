@@ -2,12 +2,14 @@ const pre = require("../Tools");
 
 const getAbout = async(res, next, model) => {
     try {
-        let peticionDB = await model.findAll()
-            .catch(err => next({status: 500, message: 'could not find model values'}));
-        console.log(peticionDB)
-        return res.json(peticionDB[0].dataValues);
-    }catch(e){
-        return next({status: 500, message: 'Error en router About get'});
+      let peticionDB = await model
+        .findAll()
+        .catch((err) =>
+          next({ status: 500, message: "could not find model values" })
+        );
+      return res.json(peticionDB[0].dataValues);
+    } catch (e) {
+      return next({ status: 500, message: "Error en router About get" });
     }
 };
 
@@ -26,10 +28,15 @@ const putAbout = async(res, next, model, body) => {
         let about = await model.update({
             info: body.info,
             contact: body.contact,
+            servicios: body.servicios,
             changed: true,
         }, {where: {id:body.id}})
-            .catch(err => next({status: 500, message: 'could not update model'}));
-        return res.json(body);
+            .then(va => {return res.json(body)})
+            .catch(err => {
+                console.log(err);
+                next({status: 500, message: 'could not update model'})
+            }
+    );
     } catch (e){
         return next({status: 500, message: 'Error en router About put'});
     };

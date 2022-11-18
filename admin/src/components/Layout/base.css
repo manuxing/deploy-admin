@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
+
+.card {
+    display: flex;
+    flex-direction: row;
+    background: #a28585;
+    font-size: 0.8rem;
+    color: #fff;
+    box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
+    height: 12rem;
+    width: 15.6rem;
+    border-radius: 2.9px;
+    transition: all 500ms;
+    overflow: hidden;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+ }
+ .top{
+    display: flex;
+    justify-content: space-around;
+ }
+ .paginado{
+    margin: 0rem 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.2rem;
+ }
+  
+ .paginado button{
+   background-color: rgba(168, 146, 146, 0.146);
+   height: 1.8rem;
+   width:1.82rem;
+   padding: 0.4rem 0.5rem;
+   border-radius: 0.4rem;
+   text-align: center;
+   text-decoration: none;
+   cursor: pointer;
+   border-style: none;
+   margin: 0.4rem;
+}
+
+.paginado button:focus {     
+   background-color: rgba(163, 67, 67, 0.146);
+}
+
+
+.card:hover {
+    box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+    transform: translateY(-3px) scale(1.1);
+ }
+
+ @media (max-width: 950px){
+   .paginado{
+      margin: 0.5rem 0.8rem;
+   }
+   
+   .paginado button{
+      font-size: 0.6rem;
+      height: 1.2rem;
+      width:1.2rem;
+      padding: 0.1rem;
+      border-radius: 0.4rem;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border-style: none;
+      margin: 0.2rem;
+   }
+}
+  

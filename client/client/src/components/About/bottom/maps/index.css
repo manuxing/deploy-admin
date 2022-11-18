@@ -1,0 +1,11 @@
+.map{
+    background-color: blueviolet;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+    margin: 0.8rem 1.1rem;
+    padding: 0.7rem 1.2rem;
+
+}
