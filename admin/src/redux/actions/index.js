@@ -34,7 +34,6 @@ export function createClient(data) {
     axios
       .post(`${process.env.REACT_APP_API_URL}client/`, data)
       .then((res) => {
-        console.log(res);
         dispatch({ type: type.SET_ACTUAL, payload: res });
       })
       .catch((e) => {
@@ -150,7 +149,6 @@ export function getSolicitudes(id) {
       axios
         .get(` ${process.env.REACT_APP_API_URL}request/${id}`)
         .then((res) => {
-          console.log("res", res);
           dispatch({ type: type.SET_ACTUAL, payload: res });
         })
         .catch((e) => {
@@ -192,7 +190,6 @@ export function createActividades(data) {
 
 export function getActividades(id) {
   if (id) {
-    console.log(id)
     return function (dispatch) {
       axios
         .get(` ${process.env.REACT_APP_API_URL}activity/${id}`)
@@ -224,7 +221,6 @@ export function createReviews(data) {
     axios
       .post(` ${process.env.REACT_APP_API_URL}review/`, data)
       .then((res) => {
-        console.log(res);
         return { type: type.SET_ACTUAL, payload: res };
       })
       .then((p) => {
@@ -333,7 +329,6 @@ export function statChange(x) {
       axios
         .put(` ${process.env.REACT_APP_API_URL}review/`, x.pack)
         .then((res) => {
-          console.log(res);
           dispatch({ type: type.ADD_NOT, payload: res });
         })
         .catch((e) => {
@@ -345,9 +340,6 @@ export function statChange(x) {
     return function (dispatch) {
       axios
         .put(` ${process.env.REACT_APP_API_URL}request/`, x.pack)
-        .then((res) => {
-          console.log(res);
-        })
         .catch((e) => {
           console.log(e);
           dispatch({ type: "ERROR", payload: e });

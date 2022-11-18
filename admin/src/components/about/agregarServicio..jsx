@@ -1,19 +1,13 @@
 import React, { useState } from "react";
-import tools from "../../tools";
 
 const AgregarService = ({  setContacts, _contacts }) => {
   
   let [service, setService] = useState({ name: "", description: "" });
   let [warning, setWarning] = useState({ service: "" });
-  let validate = tools.validate;
 
   let handleChange = (p, data) => {
     p.preventDefault();
     setService({ ...service, [p.target.name]: p.target.value });
-  };
-
-  let errHan = (err) => {
-    err.err.map((p) => setWarning({ ...warning, [p.ubic]: p.message }));
   };
 
   let notErrHan = (evento) => {
@@ -29,8 +23,8 @@ const AgregarService = ({  setContacts, _contacts }) => {
 
   let handleSubmit = (p, data) => {
     p.preventDefault();
+    notErrHan(p);
     // let val = validate.agregarContacto(data);
-    notErrHan(p)
     // val.status === false ? errHan(val) : notErrHan(p);
   };
 

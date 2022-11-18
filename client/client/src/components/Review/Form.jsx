@@ -62,7 +62,6 @@ const Form = ()=>{
       
       let handleSubmit = (e, inp) => {
         e.preventDefault();
-        console.log("aca")
         let x = validate.reviewForm(inp, servicesIds);
         x.status === false ? errHan(x) : sub();
       };

@@ -32,7 +32,6 @@ const ReviewR = () => {
       
     })
     .catch((e) => {
-      console.log(e)
       alert(e.data)
     });
     let x = document.getElementById("service");

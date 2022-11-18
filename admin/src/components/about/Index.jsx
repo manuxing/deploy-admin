@@ -54,12 +54,6 @@ const About = () => {
         }
       }}, [about]);
 
-        
-    useEffect(() => {
-      console.log(input.contact);
-      }, [input]);
-
-
     useEffect(() => {
       dispatch(getAbout())
     }, [dispatch]);

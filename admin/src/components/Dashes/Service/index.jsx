@@ -5,7 +5,7 @@ import RoofingIcon from '@mui/icons-material/Roofing';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Dash = ({data, handleClick})=> { 
-    let {id, name, description, tR} = data;
+    let { id, name, tR } = data;
     
     return (
         id === undefined ? <></> :

@@ -73,7 +73,7 @@ const getRequest = async( res, next, model, related, id) => {
 const postRequest = async(body, res, next, model, Service) => {
     try{
         let request = await model.create(body)
-            .catch(err => {console.log(err);next({status: 500, message: 'could not create Request model'})}); 
+            .catch(err => next({status: 500, message: 'could not create Request model'})); 
 
         let service = await Service.findOne({
             where :{

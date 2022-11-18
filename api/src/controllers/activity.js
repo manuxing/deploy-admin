@@ -22,11 +22,10 @@ const searchActivity = async(req, res, next, model, related) => {
             order:[['date', ord === "DESC" ? ord : 'ASC']]
         }).catch(err => next({status: 500, message: 'could not find model searched'}));
         
-        console.log(peticionDB)
-        peticionDB.rows = peticionDB.rows.filter(p=> {
-            if(p.dataValues.client && p.dataValues.client.dataValues){
-                if(p.dataValues.client.dataValues.name.includes(sValue))return p
-            }
+        peticionDB.rows = peticionDB.rows.filter((p) => {
+          if (p.dataValues.client && p.dataValues.client.dataValues) {
+            if (p.dataValues.client.dataValues.name.includes(sValue)) return p;
+          }
         });
         peticionDB.count = peticionDB.rows.length
 
