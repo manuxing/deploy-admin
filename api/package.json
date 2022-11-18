@@ -7,12 +7,6 @@
     "start": "node index.js",
     "test": "mocha -w ./tests/**/*.spec.js"
   },
-  "builds": [
-    {
-      "src": "package.json", // as stated here in `vercel.json`
-      "use": "vercel-sapper"
-    }
-  ],
   "author": "PR",
   "license": "ISC",
   "engines": {
