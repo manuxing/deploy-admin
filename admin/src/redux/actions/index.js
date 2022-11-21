@@ -298,8 +298,9 @@ export function updateServicio(data) {
 export function getServicio(id) {
   if (id) {
     return function (dispatch) {
+      console.log(` ${process.env.REACT_APP_API_URL}service/${id}/`)
       axios
-        .get(` ${process.env.REACT_APP_API_URL}service/${id}`)
+        .get(` ${process.env.REACT_APP_API_URL}service/${id}/`)
         .then((res) => {
           dispatch({ type: type.SET_ACTUAL, payload: res });
         })
