@@ -3,6 +3,7 @@ import Carousell from '../Carousel';
 import "./index.css"
 
 function ServiceCard({service}) {
+  console.log(service)
   return (
     <div className='servicecard'>
       <div className='servi'>
@@ -14,7 +15,7 @@ function ServiceCard({service}) {
         </div>
       </div>
         <div className='img'>
-            <Carousell/>
+            <Carousell serv={service.name.toLowerCase()}/>
         </div>
     </div>
   )

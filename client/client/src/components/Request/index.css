@@ -84,18 +84,28 @@
     display: flex;
     justify-content: center;
     margin-top: 0.8rem;
+    width: fit-content;
+    margin-left: 3rem;
 }
 
 .enviar button{
     height: 2rem;
     width: 8rem;
     font-size: 1rem;
-    background-color: rgba(177, 85, 140, 0.676);
-    color: rgb(182, 231, 231);
+    background-color: rgba(248, 248, 248, 0.676);
+    color:hsla(54, 82%, 60%, 0.96);
     border-style: none;
     border-radius: 0.2rem;
     cursor: pointer;
 }
+
+
+  .enviar:hover{
+    border-radius: 0.8rem;
+    background-color: hsla(54, 81%, 61%, 0.245) ;
+    box-shadow: hsla(54, 83%, 73%, 0.446) 0px 0.35em 1.175em, hsla(54, 78%, 71%, 0.619) 0px 0.175em 0.5em;
+    transform: translateY(-1px) scale(1.02);
+  }
 
 .botcon{
     display: flex;
@@ -128,3 +138,25 @@
 .card{
     margin-bottom: 2rem;
 }
+
+
+@media (max-width: 950px){
+    .conten_act{
+        flex-direction: row;
+        margin-top: 1rem;
+        width: 29rem;
+        height: fit-content;
+    }
+    .row{
+        flex-direction: column;
+    }
+    .field{
+        margin: 0.2rem 1rem;
+        width: 13rem
+    }
+    
+    .field h4{
+        margin: 0.6rem 0rem 0.3rem 0rem;
+    }
+    
+  }

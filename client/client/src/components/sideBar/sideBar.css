@@ -4,7 +4,7 @@
     justify-content: center;
     background-color: hsla(0, 0%, 100%, 0.726);
     border-style: solid;
-    border-color:  hsla(54, 50%, 71%, 0.646);
+    border-color:  hsla(54, 76%, 70%, 0.847);
     border-width: 0.09rem;
     border-left: 0rem;
     border-top: 0rem;
@@ -13,19 +13,18 @@
     height: 4rem;
     top: 0; 
     left: 0;
-    box-shadow: 3px 0px 5px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 0px 5px 1px rgba(0, 0, 0, 0.06);
     transition: 200ms width;
     font-size: 1.2rem;
     margin-bottom: 0.09rem;
-    color:hsla(51, 81%, 47%, 0.871)
   }
-
+  
   .bodega{
     position: absolute;
     left: 0;
     margin: 0.8rem 1.6rem;
   }
-
+  
   .cont{
     display: flex;
     flex-direction: row;
@@ -33,17 +32,43 @@
     /* background-color: aquamarine; */
     width:40%;
   }
-
+  
   .links-container {
-    padding: 0px 0.4rem;
+    padding: 0px 0.8rem;
     margin: 1rem 0.1rem;
+    transition: all 500ms;
+    width: fit-content;
   }
+
+.links-container:hover{
+  border-radius: 0.4rem;
+  background-color: hsla(66, 81%, 61%, 0.603) ;
+  padding-top: 0.2rem;
+  box-shadow: hsla(54, 83%, 73%, 0.446) 0px 0.35em 1.175em, hsla(54, 78%, 71%, 0.619) 0px 0.175em 0.5em;
+  transform: translateY(-1px) scale(1.02);
+}
+
   .links {
     display: flex;
     align-items: center;
   }
   
 .LinkSideB{
+  color:hsla(54, 82%, 60%, 0.96);
     text-decoration: none;
-    color:hsla(51, 81%, 47%, 0.871)    
+}
+
+.LinkSideB:hover{
+  color: hsl(0, 0%, 100%);
+  border-radius: 0.8rem;
+  /* background-color: hsla(54, 81%, 61%, 0.245) ; */
+  /* box-shadow: hsla(54, 83%, 73%, 0.446) 0px 0.35em 1.175em, hsla(54, 78%, 71%, 0.619) 0px 0.175em 0.5em; */
+  transform: translateY(-1px) scale(1.02);
+}
+
+
+@media (max-width: 950px){
+  .side{
+      font-size: 1rem;
+  }
 }

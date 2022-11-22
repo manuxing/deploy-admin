@@ -10,7 +10,7 @@ const SideBar = () => {
   return (
     <div className="side">
       <div className="bodega">
-        bodega
+        <img src="../asserts/logo.png" alt="logo"/>
           </div>
       <div className="cont">
           <div className="links-container">
