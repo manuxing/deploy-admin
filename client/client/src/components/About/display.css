@@ -45,10 +45,10 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-left: 1rem;
     padding: 0rem 2rem;
-    height: 14rem;
+    height: fit-content;
     width: 80%;
 }
 
