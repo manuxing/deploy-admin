@@ -71,7 +71,7 @@
 }
 
 .points{
-    background-color: hsla(93, 47%, 50%, 0.365);
+    background-color: #FFD07B;
     width: 0.4rem;
     height: 0.4rem;
     border-radius: 1rem;
@@ -88,7 +88,7 @@
 }
 
 .point{
-    background-color: hsla(54, 51%, 58%, 0.528);
+    background-color: #FFD07B;
     width: 0.4rem;
     height: 0.4rem;
     border-radius: 1rem;
