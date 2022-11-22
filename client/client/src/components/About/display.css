@@ -31,7 +31,7 @@
 
 @media (max-width: 950px){
     .title-cont{
-        background-size: 110% 25rem;
+        background-size: 110% 28rem;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
