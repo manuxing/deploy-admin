@@ -1,5 +1,6 @@
 import React from "react";
 import LinkWIcon from "./LinkW";
+import no from "../asserts/logo.png"
 import "./sideBar.css"
 
 const SideBar = () => {
@@ -10,7 +11,7 @@ const SideBar = () => {
   return (
     <div className="side">
       <div className="bodega">
-        <img src="../asserts/logo.png" alt="logo"/>
+        <img width="80" height="65"src={no}alt="logo"/>
           </div>
       <div className="cont">
           <div className="links-container">
