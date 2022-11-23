@@ -14,8 +14,10 @@ function ServiceCard({service}) {
             <span>{service.description}</span>
         </div>
       </div>
-        <div className='img'>
-            <Carousell serv={service.name.toLowerCase()}/>
+      <div className='containeri'>
+          <div className='img'>
+              <Carousell serv={service.name.toLowerCase()}/>
+          </div>
         </div>
     </div>
   )

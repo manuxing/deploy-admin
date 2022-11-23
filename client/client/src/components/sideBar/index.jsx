@@ -9,20 +9,23 @@ const SideBar = () => {
   let  home = {to:"Inicio", url:"/"}
   
   return (
+    // bodegacontainer
     <div className="side">
-      <div className="bodega">
-        <img width="80" height="65"src={no}alt="logo"/>
-          </div>
+      <div className="bodegacontainer">
+        <div className="bodega">
+          <img width="87" height="110" src={no} alt="logo" />
+        </div>
+      </div>
       <div className="cont">
-          <div className="links-container">
-                  <LinkWIcon p={home}/>
-          </div>
-          <div className="links-container">
-                    <LinkWIcon p={solicitud}/>
-          </div>
-          <div className="links-container">
-                   <LinkWIcon p={reseña}/>
-          </div>
+        <div className="links-container">
+          <LinkWIcon p={home} />
+        </div>
+        <div className="links-container">
+          <LinkWIcon p={solicitud} />
+        </div>
+        <div className="links-container">
+          <LinkWIcon p={reseña} />
+        </div>
       </div>
     </div>
   );
