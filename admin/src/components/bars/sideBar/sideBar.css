@@ -65,7 +65,7 @@
 
 .side button{
   height: 1.7rem;
-  width: 45%;
+  width: fit-content;
   font-size: 0.86rem;
   border-radius: 0.5rem;
   border-width: 0rem;
