@@ -47,7 +47,7 @@ const ReviewLayout = () => {
           <Spinner/> :
             <div className="cont">
               <div className="stats">
-                <RequestGraph/>
+              <RequestGraph val="re"/>
                 <DetalleLay/>
               </div>
               <div className="barraL">

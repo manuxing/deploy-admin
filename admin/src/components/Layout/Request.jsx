@@ -47,7 +47,7 @@ const RequestLayout = () => {
           <Spinner/> :
             <div className="cont">
               <div className="stats">
-                <RequestGraph/>
+                <RequestGraph val="act"/>
                 <DetalleLay/>
               </div>
             

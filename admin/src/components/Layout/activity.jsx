@@ -55,7 +55,7 @@ const ActivityLayout = () => {
       ) : (
         <div className="cont">
           <div className="stats">
-            <ActivitysGraph />
+            <ActivitysGraph val="re"/>
             <DetalleLay />
           </div>
           <div className="barraL">

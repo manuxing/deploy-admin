@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { XAxis, CartesianGrid, Line, LineChart } from "recharts";
 import { useSelector } from "react-redux";
 
-function RequestGraph() {
+function RequestGraph({val}) {
   let Requests = useSelector((state) => state.actualG.data)
   useEffect(()=>{
     console.log(Requests)
@@ -11,13 +11,13 @@ function RequestGraph() {
 
   let data = useMemo(() => {
     return [
-      {name: "julio", Solicitudes :20},
-      {name: "agosto", Solicitudes :3},
-      {name: "septiembre", Solicitudes :10},
-      {name: "octubre", Solicitudes :15},
-      {name: "noviembre", Solicitudes :2},
+      {mes: "julio", Solicitudes :val === "act" ? 20:3},
+      {mes: "agosto", Solicitudes :val === "act" ? 32:7},
+      {mes: "septiembre",  Solicitudes :val === "act" ? 11:37},
+      {mes: "octubre", Solicitudes :val === "act" ? 22:12},
+      {mes: "noviembre", Solicitudes :val === "act" ? 4:11},
       ]; 
-  }, []);
+  }, [val]);
   return (
     <LineChart width={440} height={210} data={data}>
         <Line type="monotone" dataKey="Solicitudes" stroke="#2196F3" strokeWidth={1.5} />;

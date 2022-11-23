@@ -16,7 +16,7 @@ function DetalleRequest({ actual, handleChange, _stat }) {
         </div>
         <div className='div_info'>
           <div>
-            <h3>Servicios</h3>
+            <h3>Servicio</h3>
           </div>
           <div>
           {actual?.service &&

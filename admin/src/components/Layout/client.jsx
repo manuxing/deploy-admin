@@ -48,7 +48,7 @@ const ClientLayout = () => {
           <Spinner/> :
             <div className="cont">
               <div className="stats">
-                <ActivitysGraph/>
+                <ActivitysGraph val="act"/>
                 <DetalleLay/>
               </div>
               <div className="barraL">
