@@ -11,11 +11,11 @@ function RequestGraph({val}) {
 
   let data = useMemo(() => {
     return [
-      {mes: "julio", Solicitudes :val === "act" ? 20:3},
-      {mes: "agosto", Solicitudes :val === "act" ? 32:7},
-      {mes: "septiembre",  Solicitudes :val === "act" ? 11:37},
-      {mes: "octubre", Solicitudes :val === "act" ? 22:12},
-      {mes: "noviembre", Solicitudes :val === "act" ? 4:11},
+      {name: "julio", Solicitudes :val === "act" ? 20:3},
+      {name: "agosto", Solicitudes :val === "act" ? 32:7},
+      {name: "septiembre",  Solicitudes :val === "act" ? 11:37},
+      {name: "octubre", Solicitudes :val === "act" ? 22:12},
+      {name: "noviembre", Solicitudes :val === "act" ? 4:11},
       ]; 
   }, [val]);
   return (
