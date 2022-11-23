@@ -21,10 +21,10 @@ function DetalleService({ actual }) {
       </div>
       <div className="div_act">
         <div className="div_info">
-          <div>
+          <div id="desk">
             <h3>Descripcion</h3>
           </div>
-          <div>{actual?.description ? actual?.description : "descripcion"}</div>
+          <div id="deskb">{actual?.description ? actual?.description : "descripcion"}</div>
         </div>
       </div>
       <div className="div_act">

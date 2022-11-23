@@ -239,6 +239,7 @@ export function getReviews(id) {
       axios
         .get(` ${process.env.REACT_APP_API_URL}review/${id}`)
         .then((res) => {
+          console.log(res.data)
           dispatch({ type: type.SET_ACTUAL, payload: res });
         })
         .catch((e) => {

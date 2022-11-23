@@ -7,7 +7,7 @@
     height: fit-content;  
     width: 96.8%;
     border-radius: 0.5rem;
-    font-size: 1.13rem;
+    font-size: 1rem;
 }
 
 .div_act{
@@ -43,6 +43,14 @@
     width: 20%;
 }
 
+#desk {
+    margin-bottom: 1rem;
+}
+
+ #deskb{
+    margin-bottom: 1rem;
+}
+
 .display_info{
     display: grid;
     height: 6rem;
@@ -59,9 +67,6 @@
 
 .div_info li{
     list-style-type: none;
-}
-
-.div_info li{
     font-size: 1rem;
     padding: 0.5rem;
 }

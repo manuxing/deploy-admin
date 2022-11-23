@@ -20,20 +20,13 @@ function DetalleReview({actual, handleChange, _stat}) {
         </div>
         <div className='div_info'>
           <div>
-            <h3>Servicios</h3>
+            <h3>Servicio</h3>
           </div>
           <div>
-          {actual?.services && actual?.services.map((p) => {
-                return (
-                  <NavLink
-                    key={`${p.id}`}
-                    className="link"
-                    to={`/service/${p.id}`}
-                  >
-                    <span key={p.name}>{p.name}</span>
-                  </NavLink>
-              );
-            })}
+          <span >{
+           actual?.service && 
+           <span >{actual.service.name}</span> 
+            }</span>
             </div>
         </div>
       </div>
@@ -71,7 +64,6 @@ function DetalleReview({actual, handleChange, _stat}) {
           <div>
           {_stat === true ? "Leida" : "Por ver"}
           </div>
-        {/* <button onClick={() => handleChange()}>change</button> */}
         </div>
       </div>
       <div className='des'>

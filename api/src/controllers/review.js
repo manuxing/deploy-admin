@@ -3,7 +3,6 @@ const { Op } = require("sequelize");
 
 const searchReviews = async(req, res, next, model) => {
     try {
-
         const { page, size, ord } = req.query;
         const sValue = req.query.query;
         const { limit, offset } = pre.getPagination(page, size);

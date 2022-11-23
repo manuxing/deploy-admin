@@ -14,6 +14,7 @@ const Review = () => {
   const actual = useSelector((state) => state.actual);
   const error = useSelector((state) => state.error);
   const [_stat, setStat] = useState(false);
+  const [serv, setServ] = useState({});
 
   useEffect(()=>{
     if(error){
@@ -36,6 +37,7 @@ const Review = () => {
       } else {
         setStat(actual?.stat);
       }
+      
     }
   },[actual])
 
