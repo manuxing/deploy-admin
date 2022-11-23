@@ -13,7 +13,7 @@ const SideBar = () => {
     <div className="side">
       <div className="bodegacontainer">
         <div className="bodega">
-          <img width="87" height="110" src={no} alt="logo" />
+          <img width="86" height="79" src={no} alt="logo" />
         </div>
       </div>
       <div className="cont">
