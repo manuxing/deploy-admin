@@ -3,7 +3,7 @@
 El proyecto que incluye:
 
 
- - Una pagina de cliente con:
+ - Una pagina de cliente responsive con:
  ~~~
   informacion
   contactos
@@ -11,21 +11,21 @@ El proyecto que incluye:
   formulario de solicitud 
 ~~~
   
- - Un panel de administrador con:
+ - Un panel de administrador responsive con:
  
  ~~~
  
 🔸 edicion de la informacion que se muestra en el cliente
-🔸 visualizar estadisticas de todos los datos
-
+🔸 visualizar estadisticas de todos los datos(
+~~~
 ```bash
-  Actividades
-  Clientes
-  Reseñas
-  Solicitudes
-  Servicios que se ofrecen
-```
-
+    Actividades
+    Clientes
+    Reseñas
+    Solicitudes
+    Servicios que se ofrecen)
+  ```
+~~~
 🔸 creacion
 🔸 eliminado
 🔸 actualizacion
@@ -35,13 +35,27 @@ El proyecto que incluye:
 
 ~~~
  
-# Tecnologias
+## Tecnologias
 
 
 ```bash
-.Reactjs
-.Redux
-.CSS purp
+🔺Reactjs
+🔺Redux
+🔺Recharts
+🔺Expres.js
+🔺Sequelize
+🔺PostgreSQL
+🔺firebaseAuth
+🔺Node.js
+🔺CSS puro
+```
+
+##Cliente 
+
+~~~
+
+~~~
+
 
 
 
