@@ -10,7 +10,11 @@ El proyecto que incluye:
   fotos
   formulario de solicitud 
 ~~~
-  
+
+<a href="https://deploy-admin-mgno.vercel.app" target="blank">
+ 👉👉👉Visita el Cliente👈👈👈
+</a>
+  <br></br>
  - Un panel de administrador responsive con:
  
  ~~~
@@ -50,19 +54,46 @@ El proyecto que incluye:
 🔺CSS puro
 ```
 
+
+____________________
+
+
 ## Cliente 
 
+<a href="https://deploy-admin-mgno.vercel.app" target="blank">
+ 👉👉👉Visita el Cliente👈👈👈
+</a>
+<br></br>
+
 <p align="center">
- <img align="center" width="400px" src="../imgs/cli min.jpg"/>
- <img align="center" width="400px" src="../imgs/inicio cli.jpg" />
- <img align="center" width="400px" src="../imgs/cards cli min.jpg" />
- <img align="center" width="400px" src="../imgs/cards cli.jpg" />
-</p>
-<p align="center">
-<img align="center" width="400px" src="./PI-Images/3 - form.jpg" />
-<img align="center" width="400px" src="./PI-Images/4 - detail.jpg" />
+ <img align="center" width="300px"  src="./imgs/cli min.png"/>
+ <img align="center" width="300px"  src="./imgs/cards cli min.png" />
+ <img align="center" width="300px"  src="./imgs/reseña min.png" />
+ <br><br>
+ <img align="center" width="500px" src="./imgs/inicio cli.png" />
+ <img align="center" width="500px" src="./imgs/cards cli.png" />
+ <img align="center" width="500px"  src="./imgs/hacer soli.png"/>
+ <br><br>
 </p>
 
 
+
+____________________
+
+
+## Panel de Adminn
+
+
+<p align="center">
+<img align="center" width="400px" src="./imgs/client det.png" />
+<img align="center" width="400px" src="./imgs/edit about.png" />
+ <img align="center" width="400px" src="./imgs/edit serv.png" />
+ <img align="center" width="400px" src="./imgs/edit serv.png" />
+</p>
+<br><br>
+<p align="center">
+<img align="center" width="300px" src="./imgs/serv lay min.png" />
+<img align="center" width="300px" src="./imgs/crear sol min.png" />
+</p>
 
 
