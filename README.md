@@ -50,11 +50,18 @@ El proyecto que incluye:
 🔺CSS puro
 ```
 
-##Cliente 
+## Cliente 
 
-~~~
-
-~~~
+<p align="center">
+ <img align="center" width="400px" src="../imgs/cli min.jpg"/>
+ <img align="center" width="400px" src="../imgs/inicio cli.jpg" />
+ <img align="center" width="400px" src="../imgs/cards cli min.jpg" />
+ <img align="center" width="400px" src="../imgs/cards cli.jpg" />
+</p>
+<p align="center">
+<img align="center" width="400px" src="./PI-Images/3 - form.jpg" />
+<img align="center" width="400px" src="./PI-Images/4 - detail.jpg" />
+</p>
 
 
 
